@@ -1,31 +1,16 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
+import Button from "./Button";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/work", label: "Work" },
-  { href: "/contact", label: "Contact" },
-  // { href: "/about", label: "About" }, // 필요 시
-];
-
-export default function Nav() {
+export default function Nav({ open, onToggle, links }) {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="nav">
-      <button
-        className="nav-toggle"
-        aria-expanded={open}
-        aria-controls="nav-menu"
-        onClick={() => setOpen((v) => !v)}
-      >
-        Menu
-      </button>
-
-      <ul id="nav-menu" className={`nav-list ${open ? "open" : ""}`}>
+    <nav className="xl:w-full nav flex items-center justify-end xl:justify-between">
+      {/* 데스크톱(xl↑) 인라인 메뉴 */}
+      <ul id="nav-menu" className="hidden xl:flex items-center gap-[47px] text-[18px] nav-list">
         {links.map((l) => {
           const active = pathname === l.href || (l.href !== "/" && pathname.startsWith(l.href));
           return (
@@ -33,7 +18,6 @@ export default function Nav() {
               <Link
                 href={l.href}
                 className={`nav-link ${active ? "active" : ""}`}
-                onClick={() => setOpen(false)}
               >
                 {l.label}
               </Link>
@@ -41,6 +25,22 @@ export default function Nav() {
           );
         })}
       </ul>
+
+      <div id="util-menu" className="flex item-center gap-[30px] md:gap-[40px]">
+        <Button href="/contact" variant="outlineDark" size="md">
+          CONTACT
+        </Button>
+
+        {/* 모바일/태블릿: GNB 오버레이 토글 */}
+        <button
+          className="nav-toggle cursor-pointer "
+          aria-expanded={open}
+          aria-controls="gnb-overlay"
+          onClick={onToggle}
+        >
+          <Image src="/common/menu.svg" alt="전체 메뉴" className="w-[52px] h-[38px] md:w-[48px] md:h-[35px]" width={52} height={38} priority />
+        </button>
+      </div>
     </nav>
   );
 }

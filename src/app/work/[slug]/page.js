@@ -12,11 +12,11 @@ export default function WorkDetail({ params }) {
   if (!work) return notFound();
 
   return (
-    <article style={{padding:24}}>
+    <article >
       <h1>{work.title}</h1>
       <p>{work.client} · {work.year}</p>
       {work.cover && (
-        <Image src={work.cover} alt={work.title} sizes="(max-width:900px) 100vw 900px" />
+        <Image src={work.cover} alt={work.title} width={1920} height={500} sizes="(max-width:900px) 100vw 900px" />
       )}
       <p>{work.summary}</p>
       <div>{work.content}</div>

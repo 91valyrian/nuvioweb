@@ -1,5 +1,4 @@
 // src/app/layout.js
-import 'normalize.css';
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -19,13 +18,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ko">
-      <body>
+    <html lang="ko" className="">
+      <body className='text-white'>
         <a href="#main" className="skip">Skip to content</a>
         <Header />
-        <main id="main" className="container">
-          {children}
-        </main>
+
+        <div className="content">
+            {children}
+        </div>
         <Footer />
       </body>
     </html>

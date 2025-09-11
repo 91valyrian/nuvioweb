@@ -1,5 +1,18 @@
 "use client";
 import { useState } from "react";
+import Input from "./_components/Input";
+import Textarea from "./_components/Textarea";
+import Checkbox from "./_components/Checkbox";
+
+const SERVICE_OPTIONS = [
+  "브랜딩 홈페이지",
+  "랜딩 페이지",
+  "온라인 쇼핑몰",
+  "홈페이지 리뉴얼",
+  "검색엔진 최적화",
+  "웹 접근성 최적화",
+  "사이트 유지 관리",
+];
 
 export default function ContactPage() {
   const [ok, setOk] = useState(false);
@@ -15,12 +28,10 @@ export default function ContactPage() {
     const form = e.currentTarget;
     const fd = new FormData(form);
 
-    // collect checked services
     const services = Array.from(
       form.querySelectorAll('input[name="services"]:checked')
     ).map((el) => el.value);
 
-    // phone: keep digits only (no hyphen)
     const rawPhone = (fd.get("phone") || "").toString();
     const phone = rawPhone.replace(/\D/g, "");
 
@@ -57,7 +68,7 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="container" style={{ padding: "48px 16px", maxWidth: 960 }}>
+    <main className="container" >
       <h1 style={{ fontSize: 32, marginBottom: 16 }}>Contact</h1>
       <p style={{ color: "#aaa", margin: "0 0 24px" }}>
         필요한 서비스를 선택하고 정보를 입력해 주세요. 빠르게 연락드리겠습니다.
@@ -68,61 +79,32 @@ export default function ContactPage() {
         <fieldset style={{ border: "1px solid #333", padding: 16, borderRadius: 8 }}>
           <legend style={{ padding: "0 8px" }}>필요한 서비스 선택 (복수 선택 가능)</legend>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
-            {[
-              "브랜딩 홈페이지",
-              "랜딩 페이지",
-              "온라인 쇼핑몰",
-              "홈페이지 리뉴얼",
-              "검색엔진 최적화",
-              "웹 접근성 최적화",
-              "사이트 유지 관리",
-            ].map((label) => (
-              <label key={label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <input type="checkbox" name="services" value={label} />
-                <span>{label}</span>
-              </label>
+            {SERVICE_OPTIONS.map((label) => (
+              <Checkbox key={label} name="services" value={label} label={label} />
             ))}
           </div>
         </fieldset>
 
         {/* Two-column grid for basics */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          <div>
-            <label className="sr-only" htmlFor="name">Full name</label>
-            <input id="name" name="name" required placeholder="Full name *" className="field" />
-          </div>
-          <div>
-            <label className="sr-only" htmlFor="company">Company</label>
-            <input id="company" name="company" placeholder="Company" className="field" />
-          </div>
+          <Input name="name" label="Full name" required placeholder="Full name *" />
+          <Input name="company" label="Company" placeholder="Company" />
 
-          <div>
-            <label className="sr-only" htmlFor="position">Position</label>
-            <input id="position" name="position" placeholder="Position (직급)" className="field" />
-          </div>
-          <div>
-            <label className="sr-only" htmlFor="phone">Phone Number</label>
-            <input
-              id="phone"
-              name="phone"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              placeholder="Phone Number (숫자만)"
-              className="field"
-            />
-          </div>
+          <Input name="position" label="Position" placeholder="Position (직급)" />
+          <Input
+            name="phone"
+            label="Phone Number"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            placeholder="숫자만 입력"
+            onChange={(e)=>{ e.target.value = e.target.value.replace(/\D/g,''); }}
+          />
 
-          <div>
-            <label className="sr-only" htmlFor="email">E-mail</label>
-            <input id="email" name="email" type="email" required placeholder="E-mail *" className="field" />
-          </div>
-          <div>
-            <label className="sr-only" htmlFor="url">Url</label>
-            <input id="url" name="url" type="url" placeholder="Url (홈페이지 주소)" className="field" />
-          </div>
+          <Input name="email" type="email" label="E-mail" required placeholder="E-mail *" />
+          <Input name="url" type="url" label="Url" placeholder="https://..." />
         </div>
 
-        <textarea name="message" placeholder="Message (문의내용)" rows={6} className="field" />
+        <Textarea name="message" label="Message" placeholder="문의내용" rows={6} />
 
         <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <input type="checkbox" name="consent" required /> 개인정보 처리방침에 동의합니다.

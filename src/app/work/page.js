@@ -6,7 +6,7 @@ export const revalidate = 60; // ISR도 가능(파일 변경 후 재빌드 권�
 export default function WorkList() {
   const works = getAllWorks();
   return (
-    <main style={{padding:24}}>
+    <main className="container">
       <h1>Work</h1>
       <ul>
         {works.map((w) => (

@@ -1,1 +1,55 @@
-:root { --container: 1600px; --radius: 12px; }
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --base-size: 16px;
+}
+
+@layer utilities {
+  .container {
+    margin-inline: auto;
+    max-width: 1600px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@theme inline {
+  /* Line */
+  --color-line-light: #E6E8EE;
+  --color-line-dark:  #5A6270;
+  --color-line-medium:#C0C4CC;
+
+  /* Main */
+  --color-main:       #1F4FFF;   /* DEFAULT */
+  --color-main-dark:  #0A1A3D;
+  --color-main-light: #E6ECFF;
+
+  /* Neutral */
+  /* --color-neutral-100:#FFFFFF;
+  --color-neutral-200:#F5F6FA;
+  --color-neutral-300:#E6E8EE;
+  --color-neutral-400:#C0C4CC;
+  --color-neutral-500:#5A6270;
+  --color-neutral-600:#000000; */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-size: var(--base-size);
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 2.0833vw; /* md 사이즈 이하일 때 base-size 변경 */
+  }
+}
