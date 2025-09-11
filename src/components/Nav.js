@@ -10,7 +10,7 @@ export default function Nav({ open, onToggle, links }) {
   return (
     <nav className="xl:w-full nav flex items-center justify-end xl:justify-between">
       {/* 데스크톱(xl↑) 인라인 메뉴 */}
-      <ul id="nav-menu" className="hidden xl:flex items-center gap-[47px] text-[18px] nav-list">
+      <ul id="nav-menu" className="hidden xl:flex items-center gap-[47px] text-[18px] nav-list text-white">
         {links.map((l) => {
           const active = pathname === l.href || (l.href !== "/" && pathname.startsWith(l.href));
           return (

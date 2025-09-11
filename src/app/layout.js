@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko" className="">
       <body className='text-white'>
-        <a href="#main" className="skip">Skip to content</a>
+        <a href="#main" className="skip sr-only">Skip to content</a>
         <Header />
 
         <div className="content">

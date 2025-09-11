@@ -15,6 +15,10 @@ const links = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // GNB 열릴 때 스크롤 잠금
   useEffect(() => {
@@ -29,7 +33,12 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full h-16 z-50 flex items-center h-[125px] md:h-[110px]">
+      <header
+        className={`fixed top-0 left-0 z-50 w-full flex items-center h-[125px] md:h-[110px]
+          transform transition-all duration-500 ease-out
+          ${mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
+        `}
+      >
       <div className="container flex items-center justify-between xl:gap-[120px]">
 
         <Link href="/" className="">
@@ -38,7 +47,7 @@ export default function Header() {
             alt="NUVIO"
             width={180}
             height={47} // 원본 비율에 맞는 값 (예시)
-            className="w-[180px] md:w-[120px] h-auto"
+            className="w-[180px] md:w-[120px] h-auto "
             priority
           />
         </Link>
