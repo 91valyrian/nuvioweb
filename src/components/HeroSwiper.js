@@ -3,15 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation, A11y } from "swiper/modules";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-// 슬라이드 데이터 (이미지 경로는 /public 기준)
+// 슬라이드 데이터 (첫 슬라이드는 비디오 배경, 나머지는 이미지)
 const slides = [
   {
-    src: "/hero/heroSlide1.jpg",
+    src: "/hero/heroSlide1.mp4",
     alt: "Branding Website",
     title: "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
     subtitle: "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
@@ -20,24 +20,63 @@ const slides = [
   },
   {
     src: "/hero/heroSlide2.jpg",
-    alt: "E‑Commerce",
-    title: "Faster to Market",
-    subtitle: "Modern e‑commerce, built for growth",
-    ctaLabel: "View Work",
-    ctaHref: "/work",
+    alt: "Branding Website",
+    title: "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
+    subtitle: "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
+    ctaLabel: "Contact",
+    ctaHref: "/contact",
   },
   {
     src: "/hero/heroSlide3.jpg",
     alt: "Landing Page",
-    title: "Convert with Clarity",
-    subtitle: "Focused one‑page experiences that perform",
-    ctaLabel: "Our Services",
-    ctaHref: "/service",
+    title: "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
+    subtitle: "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
+    ctaLabel: "Contact",
+    ctaHref: "/contact",
   },
 ];
 
 export default function HeroSwiper() {
   const [active, setActive] = useState(0);
+  const swiperRef = useRef(null);
+  const videoRef = useRef(null);
+  const isVideoActiveRef = useRef(false);
+  const playTimerRef = useRef(null);
+
+  const startVideo = (sw) => {
+    if (!videoRef.current) return;
+    // Stop Swiper autoplay while video plays
+    try { sw?.autoplay?.stop?.(); } catch {}
+    isVideoActiveRef.current = true;
+    // Clear any pending timers
+    if (playTimerRef.current) clearTimeout(playTimerRef.current);
+    // Nudge play after transition ends/DOM ready
+    playTimerRef.current = setTimeout(() => {
+      try {
+        videoRef.current.currentTime = 0;
+        const p = videoRef.current.play?.();
+        if (p && typeof p.then === "function") {
+          p.catch(() => {/* ignore autoplay blocking */});
+        }
+      } catch {}
+    }, 50);
+  };
+
+  const stopVideo = () => {
+    if (!videoRef.current) return;
+    isVideoActiveRef.current = false;
+    if (playTimerRef.current) clearTimeout(playTimerRef.current);
+    try { videoRef.current.pause?.(); } catch {}
+  };
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const sw = swiperRef.current;
+      if (sw && sw.realIndex === 0) startVideo(sw);
+    }, 0);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <section className="relative">
       <Swiper
@@ -45,10 +84,11 @@ export default function HeroSwiper() {
         modules={[Autoplay, Pagination, Navigation, A11y]}
         slidesPerView={1}
         loop
-        autoplay={{ delay: 40000, disableOnInteraction: false }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         pagination={{ clickable: true }}
         navigation={{ nextEl: ".hero-next", prevEl: ".hero-prev" }}
         a11y={{ enabled: true }}
+        onSwiper={(sw) => { swiperRef.current = sw; }}
         onBeforeInit={(swiper) => {
           // Ensure Swiper binds to external nav buttons rendered outside Swiper
           swiper.params.navigation = {
@@ -65,24 +105,68 @@ export default function HeroSwiper() {
         onSlideChange={(sw) => {
           if (typeof sw?.realIndex === "number") setActive(sw.realIndex);
         }}
+        onSlideChangeTransitionEnd={(sw) => {
+          const idx = sw?.realIndex ?? 0;
+          if (idx === 0) {
+            // Entered video slide: play video and stop autoplay
+            startVideo(sw);
+          } else {
+            // Left video slide: stop video and enable autoplay every 5s
+            stopVideo();
+            try {
+              sw.params.autoplay = { ...(sw.params.autoplay || {}), delay: 5000, disableOnInteraction: false };
+              sw.autoplay?.start?.();
+            } catch {}
+          }
+        }}
       >
         {slides.map((slides, idx) => (
           <SwiperSlide key={idx}>
             <div className="relative h-full w-full">
-              {/* 배경 이미지 */}
+              {/* 배경 이미지 또는 비디오 */}
               <div className="absolute inset-0">
-                <Image
-                  src={slides.src}
-                  alt={slides.alt}
-                  fill
-                  priority={idx === 0}
-                  fetchPriority={idx === 0 ? "high" : "auto"}
-                  loading={idx === 0 ? "eager" : "lazy"}
-                  sizes="100vw"
-                  quality={90}
-                  style={{ objectFit: "cover" }}
-                />
+                {idx === 0 ? (
+                  <video
+                    ref={videoRef}
+                    id="hero-video"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    playsInline
+                    muted
+                    // iOS 사파리 자동재생 호환을 위해 muted 필요
+                    preload="auto"
+                    poster={slides.src.replace(/\.mp4$/i, ".jpg")}
+                    onEnded={() => {
+                      // 비디오가 끝나면 다음 슬라이드로 이동, 이후 슬라이드는 5초 autoplay
+                      try {
+                        const sw = swiperRef.current;
+                        sw?.slideNext();
+                        if (sw) {
+                          sw.params.autoplay = { ...(sw.params.autoplay || {}), delay: 5000, disableOnInteraction: false };
+                          sw.autoplay?.start();
+                        }
+                      } catch {}
+                    }}
+                    onPlay={() => { isVideoActiveRef.current = true; }}
+                    onPause={() => { isVideoActiveRef.current = false; }}
+                  >
+                    {/* 비디오 소스: /public/hero/heroSlide1.mp4 로 가정 */}
+                    <source src="/hero/heroSlide1.mp4" type="video/mp4" />
+                  </video>
+                ) : (
+                  <Image
+                    src={slides.src}
+                    alt={slides.alt}
+                    fill
+                    priority={idx === 0}
+                    fetchPriority={idx === 0 ? "high" : "auto"}
+                    loading={idx === 0 ? "eager" : "lazy"}
+                    sizes="100vw"
+                    quality={90}
+                    style={{ objectFit: "cover" }}
+                  />
+                )}
                 {/* 상단→하단 그라데이션 오버레이 */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50" />
               </div>
 
               {/* 텍스트 레이어 */}
@@ -94,15 +178,7 @@ export default function HeroSwiper() {
                   >
                     <h2 className="text-[78px] md:text-[61px] leading-[88px] md:leading-[71px] font-bold" dangerouslySetInnerHTML={{ __html: slides.title }} />
                     <p className="mt-[50px] text-[34px] md:text-[24px] text-neutral-400" dangerouslySetInnerHTML={{ __html: slides.subtitle }} />
-                    <div className="mt-6">
-                      <Link
-                        href={slides.ctaHref}
-                        className="inline-flex items-center gap-2 rounded-[9999px] border-2 border-neutral-100/80 px-5 py-2 text-[16px] font-medium text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-300"
-                      >
-                        {slides.ctaLabel}
-                        <span aria-hidden>→</span>
-                      </Link>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
