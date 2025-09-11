@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
@@ -8,9 +10,8 @@ export default function Footer() {
           <p className="muted">Branding Websites that elevate value.</p>
         </div>
         <div className="footer-right">
-          <a href="/work">Work</a>
-          <a href="/contact">Contact</a>
-          {/* <a href="/privacy">Privacy</a> */}
+          <Link href="/work">Work</Link>
+          <Link href="/contact">Contact</Link>
         </div>
       </div>
       <div className="footer-bottom">

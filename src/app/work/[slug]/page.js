@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getAllWorks, getWorkBySlug } from "@/lib/works";
 import { notFound } from "next/navigation";
 
@@ -14,7 +15,9 @@ export default function WorkDetail({ params }) {
     <article style={{padding:24}}>
       <h1>{work.title}</h1>
       <p>{work.client} · {work.year}</p>
-      {work.cover && <img src={work.cover} alt={work.title} />}
+      {work.cover && (
+        <Image src={work.cover} alt={work.title} sizes="(max-width:900px) 100vw 900px" />
+      )}
       <p>{work.summary}</p>
       <div>{work.content}</div>
     </article>
