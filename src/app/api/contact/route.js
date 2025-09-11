@@ -39,18 +39,22 @@ async function sendViaSMTP(payload) {
   }
 
   const port = Number(process.env.SMTP_PORT);
-  const secure = false; // force STARTTLS when using port 587
+  const secure = port === 465; // 465: SSL, 587: STARTTLS
 
   console.log('[MAIL:SMTP] host:', process.env.SMTP_HOST, 'port:', port, 'secure:', secure ? 'ssl' : 'starttls');
 
   const transporter = nodemailer.createTransport({
-    // Using both service + host increases compatibility on some providers
-    service: process.env.SMTP_SERVICE || undefined, // e.g., 'gmail' (optional)
-    host: process.env.SMTP_HOST,
+    host: process.env.SMTP_HOST,           // e.g., smtp.gmail.com
     port,
-    secure,
+    secure,                                // true for 465, false for 587
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-    requireTLS: true,
+    ...(port === 587 ? { requireTLS: true } : {}),
+    // Harden + compatibility:
+    tls: { minVersion: 'TLSv1.2' },
+    family: 4,                             // prefer IPv4 (some providers break on IPv6)
+    connectionTimeout: 15000,
+    greetingTimeout: 10000,
+    socketTimeout: 20000,
     pool: true,
   });
 
