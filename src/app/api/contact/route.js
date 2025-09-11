@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-export const runtime = 'nodejs'; // ensure Node runtime on Vercel (not Edge)
+export const runtime = 'nodejs';
 
-// Helpers
+// ----- helpers -----
 function sanitizeHtml(s = '') {
   return String(s)
     .replace(/&/g, '&amp;')
@@ -16,42 +16,66 @@ function buildSubject(name, company) {
   return `[Contact] ${name || 'No name'}${company ? ` - ${company}` : ''}`;
 }
 
-function buildMailBodies({ name, email, company, message }) {
-  const text = `${message || ''}
+function buildMailBodies({ services = [], name, email, company, position, phone, url, message }) {
+  // Plain-text version (for clients that don't render HTML)
+  const text = `Contact Form Submission\n\n` +
+    `Services: ${Array.isArray(services) && services.length ? services.join(', ') : '-'}\n` +
+    `Name: ${name || '-'}\n` +
+    `Company: ${company || '-'}\n` +
+    `Position: ${position || '-'}\n` +
+    `Phone: ${phone || '-'}\n` +
+    `Email: ${email || '-'}\n` +
+    `Url: ${url || '-'}\n` +
+    `\nMessage:\n${message || ''}`;
 
-From: ${name || '-'} <${email || '-'}>
-Company: ${company || '-'}`;
+  // HTML version with an email-safe table layout
+  const row = (label, value) => `
+    <tr>
+      <th style="text-align:left;padding:8px 10px;width:160px;background:#f6f6f6;border:1px solid #eaeaea;">${sanitizeHtml(label)}</th>
+      <td style="padding:8px 10px;border:1px solid #eaeaea;">${value}</td>
+    </tr>`;
+
+  const servicesHtml = Array.isArray(services) && services.length
+    ? services.map(sanitizeHtml).join(', ')
+    : '-';
+
   const html = `
-    <p><b>Name:</b> ${name || '-'}</p>
-    <p><b>Company:</b> ${company || '-'}</p>
-    <p><b>Email:</b> ${email || '-'}</p>
-    <p><b>Message:</b><br>${sanitizeHtml(message || '')}</p>
-  `;
+  <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:14px;color:#111;">
+    <h2 style="margin:0 0 12px 0;font-size:16px;">Contact Form Submission</h2>
+    <table role="presentation" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;max-width:720px;border:1px solid #eaeaea;background:#fff;">
+      ${row('Services', servicesHtml)}
+      ${row('Name', sanitizeHtml(name || '-'))}
+      ${row('Company', sanitizeHtml(company || '-'))}
+      ${row('Position', sanitizeHtml(position || '-'))}
+      ${row('Phone', sanitizeHtml(phone || '-'))}
+      ${row('Email', sanitizeHtml(email || '-'))}
+      ${row('Url', sanitizeHtml(url || '-'))}
+      ${row('Message', sanitizeHtml(message || ''))}
+    </table>
+  </div>`;
+
   return { text, html };
 }
 
-// Transport 1: SMTP (Gmail etc.)
+// ----- SMTP sender -----
 async function sendViaSMTP(payload) {
   const required = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'MAIL_TO'];
   const missing = required.filter((k) => !process.env[k]);
-  if (missing.length) {
-    throw new Error(`SMTP missing env: ${missing.join(', ')}`);
-  }
+  if (missing.length) throw new Error(`SMTP missing env: ${missing.join(', ')}`);
 
   const port = Number(process.env.SMTP_PORT);
-  const secure = port === 465; // 465: SSL, 587: STARTTLS
+  const secure = port === 465; // 465 = SSL, 587 = STARTTLS
 
-  console.log('[MAIL:SMTP] host:', process.env.SMTP_HOST, 'port:', port, 'secure:', secure ? 'ssl' : 'starttls');
+  console.log('[MAIL:SMTP]', { host: process.env.SMTP_HOST, port, secure: secure ? 'ssl' : 'starttls' });
 
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,           // e.g., smtp.gmail.com
+    host: process.env.SMTP_HOST,
     port,
-    secure,                                // true for 465, false for 587
+    secure,
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
     ...(port === 587 ? { requireTLS: true } : {}),
-    // Harden + compatibility:
     tls: { minVersion: 'TLSv1.2' },
-    family: 4,                             // prefer IPv4 (some providers break on IPv6)
+    family: 4,
     connectionTimeout: 15000,
     greetingTimeout: 10000,
     socketTimeout: 20000,
@@ -62,8 +86,8 @@ async function sendViaSMTP(payload) {
 
   const { text, html } = buildMailBodies(payload);
   const info = await transporter.sendMail({
-    from: process.env.SMTP_USER,            // must match authenticated account for Gmail
-    sender: process.env.MAIL_FROM || process.env.SMTP_USER, // branded display name (optional)
+    from: process.env.SMTP_USER, // must match Gmail account
+    sender: process.env.MAIL_FROM || process.env.SMTP_USER,
     to: process.env.MAIL_TO,
     replyTo: payload.email ? `${payload.name || 'Website Visitor'} <${payload.email}>` : (process.env.MAIL_FROM || process.env.SMTP_USER),
     subject: buildSubject(payload.name, payload.company),
@@ -74,8 +98,7 @@ async function sendViaSMTP(payload) {
   return { provider: 'smtp', messageId: info.messageId };
 }
 
-// Transport 2: Resend (fallback or primary if configured)
-// https://resend.com
+// ----- Resend fallback -----
 async function sendViaResend(payload) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) throw new Error('RESEND_API_KEY not set');
@@ -110,7 +133,7 @@ async function sendViaResend(payload) {
   return { provider: 'resend', id: data?.id || null };
 }
 
-// GET: health check for the route
+// ----- route handlers -----
 export async function GET() {
   return NextResponse.json({ ok: true, route: 'contact' });
 }
@@ -118,12 +141,28 @@ export async function GET() {
 export async function POST(req) {
   let stage = 'start';
   try {
-    const { name = '', email = '', company = '', message = '' } = await req.json();
-    const payload = { name, email, company, message };
+    const {
+      services = [],
+      name = '',
+      email = '',
+      company = '',
+      position = '',
+      phone = '',
+      url = '',
+      message = '',
+    } = await req.json();
 
-    // Strategy:
-    // 1) If USE_RESEND === 'true' use Resend first.
-    // 2) Else try SMTP. If SMTP fails and RESEND_API_KEY exists, fallback to Resend.
+    const payload = {
+      services: Array.isArray(services) ? services : [],
+      name,
+      email,
+      company,
+      position,
+      phone,
+      url,
+      message,
+    };
+
     const useResendFirst = String(process.env.USE_RESEND || '').toLowerCase() === 'true';
 
     if (useResendFirst) {
@@ -148,18 +187,14 @@ export async function POST(req) {
         port: smtpErr?.port,
       });
 
-      // Fallback to Resend if available
       if (process.env.RESEND_API_KEY) {
         stage = 'resend-fallback';
         const out = await sendViaResend(payload);
         return NextResponse.json({ ok: true, ...out });
       }
-
-      // No fallback configured
       throw smtpErr;
     }
   } catch (e) {
-    // Log more structured info to Vercel function logs
     console.error('MAIL ERROR (FINAL):', {
       stage,
       message: e?.message,
@@ -171,12 +206,7 @@ export async function POST(req) {
       port: e?.port,
     });
     return NextResponse.json(
-      {
-        ok: false,
-        stage,
-        error: e?.message || String(e),
-        code: e?.code || null,
-      },
+      { ok: false, stage, error: e?.message || String(e), code: e?.code || null },
       { status: 500 }
     );
   }
