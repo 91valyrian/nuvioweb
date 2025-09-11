@@ -39,7 +39,7 @@ async function sendViaSMTP(payload) {
   }
 
   const port = Number(process.env.SMTP_PORT);
-  const secure = port === 465; // 465: SSL, 587: STARTTLS
+  const secure = false; // force STARTTLS when using port 587
 
   console.log('[MAIL:SMTP] host:', process.env.SMTP_HOST, 'port:', port, 'secure:', secure ? 'ssl' : 'starttls');
 
@@ -50,7 +50,7 @@ async function sendViaSMTP(payload) {
     port,
     secure,
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-    ...(port === 587 ? { requireTLS: true } : {}),
+    requireTLS: true,
     pool: true,
   });
 
