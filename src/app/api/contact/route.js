@@ -9,6 +9,7 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  let stage = 'start';
   try {
     const { name = '', email = '', company = '', message = '' } = await req.json();
 
@@ -38,6 +39,7 @@ export async function POST(req) {
       // connectionTimeout: 10000,
     });
 
+    stage = 'verify';
     // Verify connection (fail fast if misconfigured)
     await transporter.verify();
 
@@ -49,6 +51,7 @@ export async function POST(req) {
       .replace(/>/g, '&gt;')
       .replace(/\n/g, '<br>');
 
+    stage = 'send';
     const info = await transporter.sendMail({
       // Gmail policy: from should match authenticated account
       from: process.env.SMTP_USER,
@@ -68,7 +71,25 @@ export async function POST(req) {
 
     return NextResponse.json({ ok: true, messageId: info.messageId });
   } catch (e) {
-    console.error('MAIL ERROR:', e);
-    return NextResponse.json({ ok: false, error: e?.message || String(e) }, { status: 500 });
+    // Log more structured info to Vercel function logs
+    console.error('MAIL ERROR:', {
+      stage,
+      message: e?.message,
+      code: e?.code,
+      errno: e?.errno,
+      response: e?.response,
+      command: e?.command,
+      address: e?.address,
+      port: e?.port,
+    });
+    return NextResponse.json(
+      {
+        ok: false,
+        stage,
+        error: e?.message || String(e),
+        code: e?.code || null,
+      },
+      { status: 500 }
+    );
   }
 }
