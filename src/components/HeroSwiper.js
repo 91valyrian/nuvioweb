@@ -190,39 +190,39 @@ export default function HeroSwiper() {
       {/* 네비게이션 버튼 */}
       <div className="container absolute left-1/2 translate-x-[-50%] -bottom-[-120px] z-50 flex justify-between">
         <div className="scroll flex items-center">
-            <div className="scroll-ico flex gap-[10px] items-center">
-                <div className="ico relative rounded-[9999px] w-[50px] h-[80px] border-[2px] border-white flex flex-col items-center justify-center overflow-hidden">
-                    <div className="line absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-5px] w-[3px] h-[35px] overflow-hidden rounded-[3px]">
+            <div className="scroll-ico flex gap-[20px] md:gap-[10px] items-center">
+                <div className="ico relative rounded-[9999px] w-[80px] h-[120px] md:w-[50px] md:h-[80px] border-[2px] border-white flex flex-col items-center justify-center overflow-hidden">
+                    <div className="line absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-5px] w-[6px] md:w-[3px] h-[35px] overflow-hidden rounded-[3px]">
                       <div className="absolute inset-0 line-track-bg"></div>
                       {/* moving gradient sheen */}
                       <div className="relative w-full h-full bg-gradient-to-t from-white/90 to-transparent animate-lineFlow"></div>
                     </div>
-                    <Image className="touch-ico mr-[-3px] animate-touchMove w-[24px] h-[auto]" src="/main/touch-ico.svg" alt="Touch Icon" width={24} height={24} />
+                    <Image className="touch-ico mr-[-5px] animate-touchMove w-[34px] md:w-[24px] h-[auto]" src="/main/touch-ico.svg" alt="Touch Icon" width={24} height={24} />
                 </div>
-                <span className="font-miller font-light italic text-[16px]">Scroll to explore</span>
+                <span className="font-miller font-light italic text-[24px] md:text-[16px] ">Scroll to explore</span>
             </div>
         </div>
-        <div className="flex gap-[10px] mr-[120px]">
+        <div className="flex items-center gap-[20px] md:gap-[10px] md:mr-[120px]">
             <button
-                className="hero-prev flex items-center justify-center cursor-pointer pointer-events-auto w-[80px] h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
+                className="hero-prev flex items-center justify-center cursor-pointer pointer-events-auto w-[100px] h-[100px] md:w-[80px] md:h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
                 aria-label="Previous slide"
             >
                 <Image src="/main/hero-prev.svg"
                     alt="Previous"
                     width={12}
                     height={24}
-                    className="w-[12px] h-auto "
+                    className="w-[20px] md:w-[12px] h-auto "
                 />
             </button>
             <button
-                className="hero-next flex items-center justify-center cursor-pointer pointer-events-auto w-[80px] h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
+                className="hero-next flex items-center justify-center cursor-pointer pointer-events-auto w-[100px] h-[100px] md:w-[80px] md:h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
                 aria-label="Next slide"
             >
                 <Image src="/main/hero-next.svg"
                     alt="Next"
                     width={12}
                     height={24}
-                    className="w-[12px] h-auto "
+                    className="w-[20px] md:w-[12px] h-auto "
                 />
             </button>
         </div>
