@@ -2,6 +2,7 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import QuickInquiry from "@/components/QuickInquiry";
 
 export const metadata = {
   title: "NUVIO — Branding Websites",
@@ -19,6 +20,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ko" className="">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+        />
+        <link rel="stylesheet" href="https://use.typekit.net/qql5rly.css" />
+      </head>
       <body className='text-white'>
         <a href="#main" className="skip sr-only">Skip to content</a>
         <Header />
@@ -26,6 +34,7 @@ export default function RootLayout({ children }) {
         <div className="content">
             {children}
         </div>
+        <QuickInquiry />
         <Footer />
       </body>
     </html>

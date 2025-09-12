@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #000;
+  --background: #000;
+  --foreground: #fff;
   --base-size: 16px;
 }
 
@@ -16,6 +16,9 @@
 }
 
 @theme inline {
+  /* Breakpoints */
+  --breakpoint-2xl: 1600px;
+
   /* Line */
   --color-line-light: #E6E8EE;
   --color-line-dark:  #5A6270;
@@ -34,13 +37,13 @@
   --color-neutral-500:#5A6270;
   --color-neutral-600:#000000; */
 }
-
+/* 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #000;
     --foreground: #fff;
   }
-}
+} */
 
 body {
   background: var(--background);
@@ -52,4 +55,56 @@ body {
   :root {
     font-size: 2.0833vw; /* md 사이즈 이하일 때 base-size 변경 */
   }
+}
+
+@keyframes rotateText {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+@keyframes touchMove {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    20% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  @keyframes lineFlow {
+    0% {
+      transform: translateY(-30px);
+    }
+    100% {
+      transform: translateY(10px);
+    }
+  }
+
+  .line-track-bg {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Touch line animation */
+  .animate-lineFlow {
+    animation: lineFlow 3s linear infinite;
+  }
+
+  .animate-touchMove {
+    animation: touchMove 3s ease-in-out infinite;
+  }
+
+/* Miller Banner 기본 */
+.font-miller {
+  font-family: "miller-banner", serif;
 }

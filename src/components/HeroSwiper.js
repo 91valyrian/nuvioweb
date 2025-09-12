@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 // 슬라이드 데이터 (첫 슬라이드는 비디오 배경, 나머지는 이미지)
 const slides = [
   {
-    src: "/hero/heroSlide1.mp4",
+    src: "/main/heroSlide1.mp4",
     alt: "Branding Website",
     title: "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
     subtitle: "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
@@ -19,7 +19,7 @@ const slides = [
     ctaHref: "/contact",
   },
   {
-    src: "/hero/heroSlide2.jpg",
+    src: "/main/heroSlide2.jpg",
     alt: "Branding Website",
     title: "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
     subtitle: "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
@@ -27,7 +27,7 @@ const slides = [
     ctaHref: "/contact",
   },
   {
-    src: "/hero/heroSlide3.jpg",
+    src: "/main/heroSlide3.jpg",
     alt: "Landing Page",
     title: "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
     subtitle: "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
@@ -85,7 +85,7 @@ export default function HeroSwiper() {
         slidesPerView={1}
         loop
         autoplay={{ delay: 5000, disableOnInteraction: false }}
-        pagination={{ clickable: true }}
+        pagination={{ clickable: false }}
         navigation={{ nextEl: ".hero-next", prevEl: ".hero-prev" }}
         a11y={{ enabled: true }}
         onSwiper={(sw) => { swiperRef.current = sw; }}
@@ -149,8 +149,8 @@ export default function HeroSwiper() {
                     onPlay={() => { isVideoActiveRef.current = true; }}
                     onPause={() => { isVideoActiveRef.current = false; }}
                   >
-                    {/* 비디오 소스: /public/hero/heroSlide1.mp4 로 가정 */}
-                    <source src="/hero/heroSlide1.mp4" type="video/mp4" />
+                    {/* 비디오 소스: /public/main/heroSlide1.mp4 로 가정 */}
+                    <source src="/main/heroSlide1.mp4" type="video/mp4" />
                   </video>
                 ) : (
                   <Image
@@ -189,22 +189,46 @@ export default function HeroSwiper() {
 
       {/* 네비게이션 버튼 */}
       <div className="container absolute left-1/2 translate-x-[-50%] -bottom-[-120px] z-50 flex justify-between">
-        <div className="scroll flex"></div>
-        <div className="flex gap-[">
+        <div className="scroll flex items-center">
+            <div className="scroll-ico flex gap-[10px] items-center">
+                <div className="ico relative rounded-[9999px] w-[50px] h-[80px] border-[2px] border-white flex flex-col items-center justify-center overflow-hidden">
+                    <div className="line absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-5px] w-[3px] h-[35px] overflow-hidden rounded-[3px]">
+                      <div className="absolute inset-0 line-track-bg"></div>
+                      {/* moving gradient sheen */}
+                      <div className="relative w-full h-full bg-gradient-to-t from-white/90 to-transparent animate-lineFlow"></div>
+                    </div>
+                    <Image className="touch-ico mr-[-3px] animate-touchMove w-[24px] h-[auto]" src="/main/touch-ico.svg" alt="Touch Icon" width={24} height={24} />
+                </div>
+                <span className="font-miller font-light italic text-[16px]">Scroll to explore</span>
+            </div>
+        </div>
+        <div className="flex gap-[10px] mr-[120px]">
             <button
-                className="cursor-pointer hero-prev pointer-events-auto w-[80px] h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-black/60 transition"
+                className="hero-prev flex items-center justify-center cursor-pointer pointer-events-auto w-[80px] h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
                 aria-label="Previous slide"
             >
-                ‹
+                <Image src="/main/hero-prev.svg"
+                    alt="Previous"
+                    width={12}
+                    height={24}
+                    className="w-[12px] h-auto "
+                />
             </button>
             <button
-                className="cursor-pointer hero-next pointer-events-auto w-[80px] h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-black/60 transition"
+                className="hero-next flex items-center justify-center cursor-pointer pointer-events-auto w-[80px] h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
                 aria-label="Next slide"
             >
-                ›
+                <Image src="/main/hero-next.svg"
+                    alt="Next"
+                    width={12}
+                    height={24}
+                    className="w-[12px] h-auto "
+                />
             </button>
         </div>
       </div>
+
+
       <style jsx global>{`
         @keyframes fadeInScale {
           0% {

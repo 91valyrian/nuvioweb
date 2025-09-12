@@ -45,9 +45,9 @@ export default function Header() {
           <Image
             src="/logo/logo.svg"
             alt="NUVIO"
-            width={180}
-            height={47} // 원본 비율에 맞는 값 (예시)
-            className="w-[180px] md:w-[120px] h-auto "
+            width={85.6}
+            height={26} // 원본 비율에 맞는 값 (예시)
+            className="w-[154px] md:w-[85px] h-auto "
             priority
           />
         </Link>
