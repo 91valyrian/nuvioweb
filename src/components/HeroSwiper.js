@@ -187,7 +187,7 @@ export default function HeroSwiper() {
       </Swiper>
 
       {/* 네비게이션 버튼 */}
-      <div className="container absolute left-1/2 translate-x-[-50%] -bottom-[-120px] z-50 flex justify-between">
+      <div className="container absolute left-1/2 translate-x-[-50%] -bottom-[-120px] z-50 flex justify-between" data-reveal="fade-up" data-reveal-delay="0.2" data-reveal-offset="1.5">
         <div className="scroll flex items-center">
             <div className="scroll-ico flex gap-[20px] md:gap-[10px] items-center">
                 <div className="ico relative rounded-[9999px] w-[80px] h-[120px] md:w-[50px] md:h-[80px] border-[2px] border-white flex flex-col items-center justify-center overflow-hidden">
