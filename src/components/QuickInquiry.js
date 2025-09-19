@@ -20,7 +20,7 @@ export default function QuickInquiry() {
   }, []);
 
   return (
-    <div className="fixed right-[20px] 2xl:left-1/2 2xl:-translate-x-1/2 bottom-[120px] w-[115px] 2xl:ml-[723px] z-50 flex justify-end">
+    <div className="fixed right-[20px] 2xl:left-1/2 2xl:-translate-x-1/2 bottom-[120px] w-[115px] 2xl:ml-[723px] z-50 flex justify-end" data-reveal="scale-in" data-reveal-delay="0.2" data-reveal-duration="3">
       <div className="relative group">
         <Link
           href="/quick"

@@ -177,3 +177,8 @@ body {
 .font-miller {
   font-family: "miller-banner", serif;
 }
+
+[data-reveal] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
