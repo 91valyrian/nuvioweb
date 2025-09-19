@@ -32,7 +32,8 @@ function initReveal(root = document) {
     const once = (el.getAttribute("data-reveal-once") || "true") === "true";
     const delay = parseFloat(el.getAttribute("data-reveal-delay") || "0") || 0;
     const duration = parseFloat(el.getAttribute("data-reveal-duration") || "0.6") || 0.6;
-    const offset = parseFloat(el.getAttribute("data-reveal-offset") || "0.85") || 0.85;
+    // "요소에 도달" 시점: 요소 top === 뷰포트 bottom
+    const startAt = "top bottom";
 
     const fromVars = getPreset(type);
     const toVars = { opacity: 1, x: 0, y: 0, scale: 1, duration, delay, ease: "power3.out" };
@@ -51,8 +52,9 @@ function initReveal(root = document) {
       stagger: stagger > 0 ? stagger : 0,
       scrollTrigger: {
         trigger: triggerTarget,
-        start: `top ${Math.round(offset * 100)}%`, // 예: top 85%
+        start: startAt, // 예: top 85%
         once,
+        immediateRender : false,
         // markers: true, // 디버그용
       },
       onStart: () => { el.__revealed = true; },

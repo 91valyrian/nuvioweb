@@ -41,6 +41,8 @@ export default function CardList({
             onMouseEnter={handleEnter}
             onMouseLeave={handleLeave}
             onMouseMove={handleMove}
+            data-reveal="fade-up"
+            data-reveal-delay="0.2"
           >
             {/* 썸네일 */}
             <div className="card-media">

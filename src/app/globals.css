@@ -110,6 +110,12 @@ body {
   font-size: var(--base-size);
 }
 
+@media (max-width: 1280px) {
+  :root {
+    font-size: 1.2500vw; /* md 사이즈 이하일 때 base-size 변경 */
+  }
+}
+
 @media (max-width: 768px) {
   :root {
     font-size: 2.0833vw; /* md 사이즈 이하일 때 base-size 변경 */
