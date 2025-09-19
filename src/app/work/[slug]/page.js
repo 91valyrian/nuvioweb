@@ -75,7 +75,7 @@ export default function WorkDetail({ params }) {
           </div>
         )}
 
-      <article className="container py-12 md:mt-[-150px]">
+      <article className="container py-12 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px] md:gap-0 text-center md:text-left">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[50px] md:gap-0 text-center md:text-left">
               <div className="">
@@ -100,8 +100,8 @@ export default function WorkDetail({ params }) {
           <div className="">
             <p className="text-[28px] md:text-[20px] rounded-[10px] py-[7px] px-[20px] mb-[10px] border border-solid border-neutral-400 text-neutral-400 inline-block">Overview</p>
             {/* 요약 */}
-            {work.summary && (
-              <p className="text-[32px] md:text-[24px]">{work.summary}</p>
+            {work.overview && (
+              <p className="text-[32px] md:text-[24px]">{work.overview}</p>
             )}
           </div>
         </div>

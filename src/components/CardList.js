@@ -47,11 +47,12 @@ export default function CardList({
             {/* 썸네일 */}
             <div className="card-media">
               <Image
-                src={item.cover}
+                src={item.thumbnail || "/images/work/placeholder-thum.png"}
                 alt={item.title}
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                style={{ objectFit: "cover" }}
+                sizes="(min-width:768px) 50vw, 100vw"
+                style={{ objectFit: 'cover' }}
+                quality={90}
                 priority={false}
               />
             </div>
@@ -59,7 +60,7 @@ export default function CardList({
             {/* 내용 */}
             <div className="card-body">
               <h3 className="card-title">{item.title}</h3>
-              <p className="card-desc">{item.summary}</p>
+              <p className="card-desc line-clamp-2">{item.summary}</p>
               <p className="card-meta">
                 {item.client} · {item.year}
               </p>
