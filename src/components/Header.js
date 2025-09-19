@@ -34,7 +34,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 z-50 w-full flex items-center h-[125px] md:h-[110px]
+        className={`fixed top-0 left-0 z-100 w-full flex items-center h-[125px] md:h-[110px]
           transform transition-all duration-500 ease-out
           ${mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
         `}

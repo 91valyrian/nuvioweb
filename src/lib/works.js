@@ -20,3 +20,6 @@ export function getWorkBySlug(slug) {
   const { data, content } = matter(fileContents);
   return { ...data, content, slug: data.slug };
 }
+
+// Alias for compatibility
+export const getWorks = getAllWorks;

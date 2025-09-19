@@ -15,6 +15,65 @@
   }
 }
 
+@layer components {
+  /* 컨테이너: 공통 그리드 */
+  .card-list {
+    @apply grid gap-6 md:gap-8;
+    /* 기본 1 → md:2 → lg:3 */
+    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* 바리에이션: 2/3/4열 강제 */
+  .card-list.cols-2 { @apply grid-cols-1 md:grid-cols-2; }
+  .card-list.cols-3 { @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3; }
+  .card-list.cols-4 { @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4; }
+
+  /* 간격 바리에이션 */
+  .card-list.gap-sm { @apply gap-4; }
+  .card-list.gap-lg { @apply gap-8 md:gap-10; }
+
+  /* 카드 기본 */
+  .card {
+    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/5
+           backdrop-blur-sm transition-all duration-300;
+    @apply hover:translate-y-[-2px] hover:shadow-xl hover:bg-white/10;
+    /* 다크/라이트 자동 가독 */
+    @apply text-white;
+  }
+
+  /* 카드 내부 여백 */
+  .card-body { @apply p-5 md:p-6; }
+
+  /* 카드 제목, 설명, 메타 */
+  .card-title   { @apply text-lg md:text-xl font-semibold leading-snug; }
+  .card-desc    { @apply mt-2 text-sm md:text-base text-white/70; }
+  .card-meta    { @apply mt-4 text-xs md:text-sm text-white/50; }
+
+  /* 썸네일 래퍼: 16:9 기본 (원하면 .ratio-square / .ratio-4-3 사용) */
+  .card-media { @apply relative w-full overflow-hidden bg-black/20; padding-top: 56.25%; }
+  .card-media > img,
+  .card-media > picture,
+  .card-media > video {
+    @apply absolute inset-0 w-full h-full object-cover;
+  }
+
+  /* 비율 유틸 (선택) */
+  .ratio-square { padding-top: 100%; }
+  .ratio-4-3    { padding-top: 75%; }
+
+  /* 링크 카드(전체 클릭 영역) */
+  .card-link {
+    @apply absolute inset-0;
+  }
+
+  /* 배지/태그 */
+  .card-badge {
+    @apply absolute left-4 top-4 rounded-full px-2.5 py-1 text-xs font-medium
+           bg-white/15 text-white/90 backdrop-blur;
+  }
+}
+
+
 @theme inline {
   /* Breakpoints */
   --breakpoint-2xl: 1600px;
@@ -66,11 +125,11 @@ body {
 @keyframes touchMove {
     0% {
       opacity: 0;
-      transform: translateY(-0);
+      transform: translateY(-10px);
     }
     20% {
       opacity: 1;
-      transform: translateY(-0);
+      transform: translateY(-10px);
     }
     80% {
       opacity: 1;

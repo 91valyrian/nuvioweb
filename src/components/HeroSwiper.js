@@ -85,7 +85,6 @@ export default function HeroSwiper() {
         slidesPerView={1}
         loop
         autoplay={{ delay: 5000, disableOnInteraction: false }}
-        pagination={{ clickable: false }}
         navigation={{ nextEl: ".hero-next", prevEl: ".hero-prev" }}
         a11y={{ enabled: true }}
         onSwiper={(sw) => { swiperRef.current = sw; }}

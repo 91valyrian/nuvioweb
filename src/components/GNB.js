@@ -25,7 +25,7 @@ export default function GNB({ open, onClose, links = [] }) {
       aria-modal="true"
       aria-label="Global Navigation"
       className={`
-        fixed inset-0 z-50 bg-black/70 text-white backdrop-blur-[10px]
+        fixed inset-0 z-100 bg-black/70 text-white backdrop-blur-[10px]
         transition-opacity duration-300
         ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
       `}

@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QuickInquiry from "@/components/QuickInquiry";
+import GlobalCursor from "@/components/GlobalCursor";
 
 export const metadata = {
   title: "NUVIO — Branding Websites",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://use.typekit.net/qql5rly.css" />
       </head>
       <body className='text-white'>
+        <GlobalCursor />
         <a href="#main" className="skip sr-only">Skip to content</a>
         <Header />
 
