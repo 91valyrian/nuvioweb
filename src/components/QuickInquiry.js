@@ -25,7 +25,7 @@ export default function QuickInquiry() {
         <Link
           href="/quick"
           className={
-            "flex items-center justify-center cursor-pointer pointer-events-auto rounded-[9999px] text-white relative before:content-[''] before:absolute before:inset-0 before:rounded-full before:bg-white before:backdrop-blur-[6px] before:transition-transform before:duration-300 group-hover:before:scale-180 " +
+            "flex items-center justify-center cursor-pointer pointer-events-auto rounded-[9999px] text-white relative before:content-[''] before:absolute before:inset-0 before:rounded-[9999px] before:bg-white before:backdrop-blur-[6px] before:transition-transform before:duration-300 group-hover:before:scale-180 " +
             (isScrolled
               ? "w-[60px] h-[60px] md:w-[80px] md:h-[80px]"
               : "w-[100px] h-[100px] md:w-[80px] md:h-[80px]")

@@ -101,7 +101,7 @@ export default function GlobalCursor() {
       aria-hidden="true"
       className={[
         "fixed left-0 top-0 z-[9999]",
-        "pointer-events-none select-none rounded-full",
+        "pointer-events-none select-none rounded-[9999px]",
         "mix-blend-difference bg-white",
       ].join(" ")}
       style={{ willChange: "transform,width,height" }}
