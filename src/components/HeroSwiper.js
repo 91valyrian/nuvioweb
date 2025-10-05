@@ -13,24 +13,30 @@ const slides = [
   {
     src: "/main/heroSlide1.mp4",
     alt: "Branding Website",
-    title: "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
-    subtitle: "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
+    title:
+      "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
+    subtitle:
+      "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
     ctaLabel: "Contact",
     ctaHref: "/contact",
   },
   {
     src: "/main/heroSlide2.jpg",
     alt: "Branding Website",
-    title: "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
-    subtitle: "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
+    title:
+      "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
+    subtitle:
+      "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
     ctaLabel: "Contact",
     ctaHref: "/contact",
   },
   {
     src: "/main/heroSlide3.jpg",
     alt: "Landing Page",
-    title: "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
-    subtitle: "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
+    title:
+      "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
+    subtitle:
+      "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
     ctaLabel: "Contact",
     ctaHref: "/contact",
   },
@@ -46,7 +52,9 @@ export default function HeroSwiper() {
   const startVideo = (sw) => {
     if (!videoRef.current) return;
     // Stop Swiper autoplay while video plays
-    try { sw?.autoplay?.stop?.(); } catch {}
+    try {
+      sw?.autoplay?.stop?.();
+    } catch {}
     isVideoActiveRef.current = true;
     // Clear any pending timers
     if (playTimerRef.current) clearTimeout(playTimerRef.current);
@@ -56,7 +64,9 @@ export default function HeroSwiper() {
         videoRef.current.currentTime = 0;
         const p = videoRef.current.play?.();
         if (p && typeof p.then === "function") {
-          p.catch(() => {/* ignore autoplay blocking */});
+          p.catch(() => {
+            /* ignore autoplay blocking */
+          });
         }
       } catch {}
     }, 50);
@@ -66,7 +76,9 @@ export default function HeroSwiper() {
     if (!videoRef.current) return;
     isVideoActiveRef.current = false;
     if (playTimerRef.current) clearTimeout(playTimerRef.current);
-    try { videoRef.current.pause?.(); } catch {}
+    try {
+      videoRef.current.pause?.();
+    } catch {}
   };
 
   useEffect(() => {
@@ -87,7 +99,9 @@ export default function HeroSwiper() {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         navigation={{ nextEl: ".hero-next", prevEl: ".hero-prev" }}
         a11y={{ enabled: true }}
-        onSwiper={(sw) => { swiperRef.current = sw; }}
+        onSwiper={(sw) => {
+          swiperRef.current = sw;
+        }}
         onBeforeInit={(swiper) => {
           // Ensure Swiper binds to external nav buttons rendered outside Swiper
           swiper.params.navigation = {
@@ -113,7 +127,11 @@ export default function HeroSwiper() {
             // Left video slide: stop video and enable autoplay every 5s
             stopVideo();
             try {
-              sw.params.autoplay = { ...(sw.params.autoplay || {}), delay: 5000, disableOnInteraction: false };
+              sw.params.autoplay = {
+                ...(sw.params.autoplay || {}),
+                delay: 5000,
+                disableOnInteraction: false,
+              };
               sw.autoplay?.start?.();
             } catch {}
           }
@@ -140,13 +158,21 @@ export default function HeroSwiper() {
                         const sw = swiperRef.current;
                         sw?.slideNext();
                         if (sw) {
-                          sw.params.autoplay = { ...(sw.params.autoplay || {}), delay: 5000, disableOnInteraction: false };
+                          sw.params.autoplay = {
+                            ...(sw.params.autoplay || {}),
+                            delay: 5000,
+                            disableOnInteraction: false,
+                          };
                           sw.autoplay?.start();
                         }
                       } catch {}
                     }}
-                    onPlay={() => { isVideoActiveRef.current = true; }}
-                    onPause={() => { isVideoActiveRef.current = false; }}
+                    onPlay={() => {
+                      isVideoActiveRef.current = true;
+                    }}
+                    onPause={() => {
+                      isVideoActiveRef.current = false;
+                    }}
                   >
                     {/* 비디오 소스: /public/main/heroSlide1.mp4 로 가정 */}
                     <source src="/main/heroSlide1.mp4" type="video/mp4" />
@@ -175,9 +201,14 @@ export default function HeroSwiper() {
                     className={`max-w-[840px] mx-auto text-center text-neutral-100 opacity-0 transition-transform transition-opacity duration-700 ease-out ${active === idx ? "animate-[fadeInScale_0.8s_ease-out_0.3s_forwards]" : ""}`}
                     key={`text-${idx}-${active === idx ? "active" : "idle"}`}
                   >
-                    <h2 className="text-[78px] md:text-[61px] leading-[88px] md:leading-[71px] font-bold" dangerouslySetInnerHTML={{ __html: slides.title }} />
-                    <p className="mt-[50px] text-[34px] md:text-[24px] text-neutral-400" dangerouslySetInnerHTML={{ __html: slides.subtitle }} />
-                    
+                    <h2
+                      className="text-[78px] md:text-[61px] leading-[88px] md:leading-[71px] font-bold"
+                      dangerouslySetInnerHTML={{ __html: slides.title }}
+                    />
+                    <p
+                      className="mt-[50px] text-[34px] md:text-[24px] text-neutral-400"
+                      dangerouslySetInnerHTML={{ __html: slides.subtitle }}
+                    />
                   </div>
                 </div>
               </div>
@@ -187,46 +218,60 @@ export default function HeroSwiper() {
       </Swiper>
 
       {/* 네비게이션 버튼 */}
-      <div className="container absolute left-1/2 translate-x-[-50%] -bottom-[-120px] z-50 flex justify-between" data-reveal="fade-up" data-reveal-delay="0.2" data-reveal-offset="1.5">
+      <div
+        className="container absolute left-1/2 translate-x-[-50%] -bottom-[-120px] md:-bottom-[-50px] z-50 flex justify-between"
+        data-reveal="fade-up"
+        data-reveal-delay="0.2"
+        data-reveal-offset="1.5"
+      >
         <div className="scroll flex items-center">
-            <div className="scroll-ico flex gap-[20px] md:gap-[10px] items-center">
-                <div className="ico relative rounded-[9999px] w-[80px] h-[120px] md:w-[50px] md:h-[80px] border-[2px] border-white flex flex-col items-center justify-center overflow-hidden">
-                    <div className="line absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-5px] w-[6px] md:w-[3px] h-[35px] overflow-hidden rounded-[3px]">
-                      <div className="absolute inset-0 line-track-bg"></div>
-                      {/* moving gradient sheen */}
-                      <div className="relative w-full h-full bg-gradient-to-t from-white/90 to-transparent animate-lineFlow"></div>
-                    </div>
-                    <Image className="touch-ico mr-[-5px] animate-touchMove w-[34px] md:w-[24px] h-[auto]" src="/main/touch-ico.svg" alt="Touch Icon" width={24} height={24} />
-                </div>
-                <span className="font-miller font-light italic text-[24px] md:text-[16px] ">Scroll to explore</span>
+          <div className="scroll-ico flex gap-[20px] md:gap-[10px] items-center">
+            <div className="ico relative rounded-[9999px] w-[80px] h-[120px] md:w-[50px] md:h-[80px] border-[2px] border-white flex flex-col items-center justify-center overflow-hidden">
+              <div className="line absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-5px] w-[6px] md:w-[3px] h-[35px] overflow-hidden rounded-[3px]">
+                <div className="absolute inset-0 line-track-bg"></div>
+                {/* moving gradient sheen */}
+                <div className="relative w-full h-full bg-gradient-to-t from-white/90 to-transparent animate-lineFlow"></div>
+              </div>
+              <Image
+                className="touch-ico mr-[-5px] animate-touchMove w-[34px] md:w-[24px] h-[auto]"
+                src="/main/touch-ico.svg"
+                alt="Touch Icon"
+                width={24}
+                height={24}
+              />
             </div>
+            <span className="font-miller font-light italic text-[24px] md:text-[16px] ">
+              Scroll to explore
+            </span>
+          </div>
         </div>
         <div className="flex items-center gap-[20px] md:gap-[10px] md:mr-[120px]">
-            <button
-                className="hero-prev flex items-center justify-center cursor-pointer pointer-events-auto w-[100px] h-[100px] md:w-[80px] md:h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
-                aria-label="Previous slide"
-            >
-                <Image src="/main/hero-prev.svg"
-                    alt="Previous"
-                    width={12}
-                    height={24}
-                    className="w-[20px] md:w-[12px] h-auto "
-                />
-            </button>
-            <button
-                className="hero-next flex items-center justify-center cursor-pointer pointer-events-auto w-[100px] h-[100px] md:w-[80px] md:h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
-                aria-label="Next slide"
-            >
-                <Image src="/main/hero-next.svg"
-                    alt="Next"
-                    width={12}
-                    height={24}
-                    className="w-[20px] md:w-[12px] h-auto "
-                />
-            </button>
+          <button
+            className="hero-prev flex items-center justify-center cursor-pointer pointer-events-auto w-[100px] h-[100px] md:w-[80px] md:h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
+            aria-label="Previous slide"
+          >
+            <Image
+              src="/main/hero-prev.svg"
+              alt="Previous"
+              width={12}
+              height={24}
+              className="w-[20px] md:w-[12px] h-auto "
+            />
+          </button>
+          <button
+            className="hero-next flex items-center justify-center cursor-pointer pointer-events-auto w-[100px] h-[100px] md:w-[80px] md:h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
+            aria-label="Next slide"
+          >
+            <Image
+              src="/main/hero-next.svg"
+              alt="Next"
+              width={12}
+              height={24}
+              className="w-[20px] md:w-[12px] h-auto "
+            />
+          </button>
         </div>
       </div>
-
 
       <style jsx global>{`
         @keyframes fadeInScale {

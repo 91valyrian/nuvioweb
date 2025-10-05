@@ -20,7 +20,12 @@ export default function QuickInquiry() {
   }, []);
 
   return (
-    <div className="fixed right-[20px] 2xl:left-1/2 2xl:-translate-x-1/2 bottom-[120px] w-[115px] 2xl:ml-[723px] z-50 flex justify-end" data-reveal="scale-in" data-reveal-delay="0.2" data-reveal-duration="3">
+    <div
+      className="fixed right-[30px] xl:right-[73px] bottom-[50px] z-50 flex justify-end hidden md:block"
+      data-reveal="scale-in"
+      data-reveal-delay="0.2"
+      data-reveal-duration="3"
+    >
       <div className="relative group">
         <Link
           href="/quick"
@@ -38,9 +43,7 @@ export default function QuickInquiry() {
             height={26}
             className={
               "h-auto relative z-10 transition-all duration-1000 " +
-              (isScrolled
-                ? "w-[30px] md:w-[26px]"
-                : "w-[40px] md:w-[26px]")
+              (isScrolled ? "w-[30px] md:w-[26px]" : "w-[40px] md:w-[26px]")
             }
           />
 

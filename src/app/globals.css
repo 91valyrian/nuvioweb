@@ -3,13 +3,13 @@
 :root {
   --background: #000;
   --foreground: #fff;
-  --base-size: 16px;
+  --base-size: 1.25vw;
 }
 
 @layer utilities {
   .container {
     margin-inline: auto;
-    max-width: 1600px;
+    max-width: 1800px;
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -24,13 +24,23 @@
   }
 
   /* 바리에이션: 2/3/4열 강제 */
-  .card-list.cols-2 { @apply grid-cols-1 md:grid-cols-2; }
-  .card-list.cols-3 { @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3; }
-  .card-list.cols-4 { @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4; }
+  .card-list.cols-2 {
+    @apply grid-cols-1 md:grid-cols-2;
+  }
+  .card-list.cols-3 {
+    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+  .card-list.cols-4 {
+    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4;
+  }
 
   /* 간격 바리에이션 */
-  .card-list.gap-sm { @apply gap-4; }
-  .card-list.gap-lg { @apply gap-8 md:gap-10; }
+  .card-list.gap-sm {
+    @apply gap-4;
+  }
+  .card-list.gap-lg {
+    @apply gap-8 md:gap-10;
+  }
 
   /* 카드 기본 */
   .card {
@@ -42,15 +52,26 @@
   }
 
   /* 카드 내부 여백 */
-  .card-body { @apply p-5 md:p-6; }
+  .card-body {
+    @apply p-5 md:p-6;
+  }
 
   /* 카드 제목, 설명, 메타 */
-  .card-title   { @apply text-[44px] md:text-[34px] font-semibold leading-snug; }
-  .card-desc    { @apply mt-2 text-[28px] md:text-[20px] text-white/70; }
-  .card-meta    { @apply mt-4 text-[24px] md:text-[16px] text-white/50; }
+  .card-title {
+    @apply text-[44px] md:text-[34px] font-semibold leading-snug;
+  }
+  .card-desc {
+    @apply mt-2 text-[28px] md:text-[20px] text-white/70;
+  }
+  .card-meta {
+    @apply mt-4 text-[24px] md:text-[16px] text-white/50;
+  }
 
   /* 썸네일 래퍼: 16:9 기본 (원하면 .ratio-square / .ratio-4-3 사용) */
-  .card-media { @apply relative w-full overflow-hidden bg-black/20; padding-top: 810px; }
+  .card-media {
+    @apply relative w-full overflow-hidden bg-black/20;
+    padding-top: 810px;
+  }
   .card-media > img,
   .card-media > picture,
   .card-media > video {
@@ -58,8 +79,12 @@
   }
 
   /* 비율 유틸 (선택) */
-  .ratio-square { padding-top: 100%; }
-  .ratio-4-3    { padding-top: 75%; }
+  .ratio-square {
+    padding-top: 100%;
+  }
+  .ratio-4-3 {
+    padding-top: 75%;
+  }
 
   /* 링크 카드(전체 클릭 영역) */
   .card-link {
@@ -71,22 +96,29 @@
     @apply absolute left-4 top-4 rounded-full px-2.5 py-1 text-xs font-medium
            bg-white/15 text-white/90 backdrop-blur;
   }
-}
 
+  .workFigure {
+    @apply overflow-hidden bg-neutral-50 rounded-[22px] p-[3px] bg-[linear-gradient(135deg,#f7f9fb_0%,#dfe4ea_20%,#c3cbd4_45%,#aeb7c1_60%,#dfe4ea_80%,#f7f9fb_100%)] shadow-[0_6px_18px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.6)];
+  }
+
+  .figureInner {
+    @apply rounded-[21px] overflow-hidden bg-neutral-900 shadow-[inset_0_0_30px_rgba(0,0,0,0.5)];
+  }
+}
 
 @theme inline {
   /* Breakpoints */
   --breakpoint-2xl: 1600px;
 
   /* Line */
-  --color-line-light: #E6E8EE;
-  --color-line-dark:  #5A6270;
-  --color-line-medium:#C0C4CC;
+  --color-line-light: #e6e8ee;
+  --color-line-dark: #5a6270;
+  --color-line-medium: #c0c4cc;
 
   /* Main */
-  --color-main:       #1F4FFF;   /* DEFAULT */
-  --color-main-dark:  #0A1A3D;
-  --color-main-light: #E6ECFF;
+  --color-main: #1f4fff; /* DEFAULT */
+  --color-main-dark: #0a1a3d;
+  --color-main-light: #e6ecff;
 
   /* Neutral */
   /* --color-neutral-100:#FFFFFF;
@@ -110,9 +142,15 @@ body {
   font-size: var(--base-size);
 }
 
+@media (min-width: 1281px) {
+  :root {
+    font-size: 0.8333vw; /* md 사이즈 이하일 때 base-size 변경 */
+  }
+}
+
 @media (max-width: 1280px) {
   :root {
-    font-size: 1.2500vw; /* md 사이즈 이하일 때 base-size 변경 */
+    font-size: 1.25vw; /* md 사이즈 이하일 때 base-size 변경 */
   }
 }
 
@@ -123,61 +161,64 @@ body {
 }
 
 @keyframes rotateText {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-
 @keyframes touchMove {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    20% {
-      opacity: 1;
-      transform: translateY(-10px);
-    }
-    80% {
-      opacity: 1;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
   }
+  20% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
 
-  @keyframes lineFlow {
-    0% {
-      opacity: 0;
-      transform: translateY(-25px);
-    }
-    20% {
-      opacity: 1;
-      transform: translateY(-25px);
-    }
-    80% {
-      opacity: 1;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
+@keyframes lineFlow {
+  0% {
+    opacity: 0;
+    transform: translateY(-25px);
   }
+  20% {
+    opacity: 1;
+    transform: translateY(-25px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
 
-  .line-track-bg {
-    background: rgba(255, 255, 255, 0.1);
-  }
+.line-track-bg {
+  background: rgba(255, 255, 255, 0.1);
+}
 
-  /* Touch line animation */
-  .animate-lineFlow {
-    animation: lineFlow 3s ease-in-out infinite;
-  }
+/* Touch line animation */
+.animate-lineFlow {
+  animation: lineFlow 3s ease-in-out infinite;
+}
 
-  .animate-touchMove {
-    animation: touchMove 3s ease-in-out infinite;
-  }
+.animate-touchMove {
+  animation: touchMove 3s ease-in-out infinite;
+}
 
 /* Miller Banner 기본 */
 .font-miller {
