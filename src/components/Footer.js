@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="footer">
+    <footer className="footer ">
       <div className="container footer-inner">
         <div className="footer-left">
           <b>NUVIO</b>
@@ -15,9 +15,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <div className="container">
-          © {year} NUVIO. All rights reserved.
-        </div>
+        <div className="container">© {year} NUVIO. All rights reserved.</div>
       </div>
     </footer>
   );

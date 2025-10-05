@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { getAllWorks, getWorkBySlug } from "@/lib/works";
 import { notFound } from "next/navigation";
+import WorkMainSection from "@/components/work/WorkMainSection";
+import WorkSubSection from "@/components/work/WorkSubSection";
+import WorkExtraSection from "@/components/work/WorkExtraSection";
 
 // 간단한 마크다운 이미지 추출: ![alt](src)
 function extractImages(markdown = "") {
@@ -96,8 +99,8 @@ export default function WorkDetail({ params }) {
       )}
 
       <article className="container py-12 ">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px] md:gap-0 text-center md:text-left md:pb-40">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[50px] md:gap-0 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px] md:gap-0 text-center md:text-left md:pb-40 text-left">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-[50px] md:gap-0 ">
             <div className="">
               <p className="text-[28px] md:text-[20px] rounded-[10px] py-[7px] px-[20px] mb-[10px] border border-solid border-neutral-400 text-neutral-400 inline-block">
                 Client
@@ -142,191 +145,21 @@ export default function WorkDetail({ params }) {
       </article>
 
       {/* 메인 페이지 섹션 */}
-      {groups.mainPc.length || groups.mainMobile.length ? (
-        <section className="py-40 bg-[#222]">
-          <div className="md:max-w-[1024px] xl:max-w-[1200px] mx-auto">
-            <h2 className="mb-6 text-[49px] md:text-[50px] font-semibold">
-              Main Page
-            </h2>
-            {groups.mainPc.map((src, i) => (
-              <figure key={`main-pc-${i}`} className="workFigure">
-                <div className="figureInner">
-                  <Image
-                    src={src}
-                    alt="메인 PC"
-                    width={1800}
-                    height={1000}
-                    className="w-full h-auto"
-                  />
-                </div>
-                <figcaption className="px-4 py-3 text-sm text-neutral-600 sr-only">
-                  Main · PC
-                </figcaption>
-              </figure>
-            ))}
-
-            <div className="flex">
-              {groups.mainMobile.map((src, i) => (
-                <figure key={`main-mo-${i}`} className="workFigure">
-                  <div className="figureInner">
-                    <Image
-                      src={src}
-                      alt="메인 Mobile"
-                      width={800}
-                      height={1600}
-                      className="w-full h-auto"
-                    />
-                  </div>
-
-                  <figcaption className="px-4 py-3 text-sm text-neutral-600 sr-only">
-                    Main · Mobile
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
+      <WorkMainSection groups={groups} title={work.title} />
 
       {/* 서브 페이지 섹션 */}
-      {groups.subPc.length || groups.subMobile.length ? (
-        <section className="mb-14">
-          <h2 className="mb-6 text-2xl md:text-3xl font-semibold">
-            서브 페이지
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {groups.subPc.map((src, i) => (
-              <figure
-                key={`sub-pc-${i}`}
-                className="rounded-xl overflow-hidden bg-neutral-50"
-              >
-                <Image
-                  src={src}
-                  alt="서브 PC"
-                  width={1600}
-                  height={1000}
-                  className="w-full h-auto"
-                />
-                <figcaption className="px-4 py-3 text-sm text-neutral-600">
-                  Sub · PC
-                </figcaption>
-              </figure>
-            ))}
-            {groups.subMobile.map((src, i) => (
-              <figure
-                key={`sub-mo-${i}`}
-                className="rounded-xl overflow-hidden bg-neutral-50"
-              >
-                <Image
-                  src={src}
-                  alt="서브 Mobile"
-                  width={800}
-                  height={1600}
-                  className="w-full h-auto"
-                />
-                <figcaption className="px-4 py-3 text-sm text-neutral-600">
-                  Sub · Mobile
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-      ) : null}
+      <WorkSubSection groups={groups} title={work.title} />
 
       {/* 부가 콘텐츠: 스타일/아이콘/관리자 */}
-      {groups.style.length || groups.icons.length || groups.admin.length ? (
-        <section className="mb-16">
-          <h2 className="mb-6 text-2xl md:text-3xl font-semibold">
-            부가 콘텐츠
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {groups.style.map((src, i) => (
-              <figure
-                key={`style-${i}`}
-                className="rounded-xl overflow-hidden bg-neutral-50"
-              >
-                <Image
-                  src={src}
-                  alt="스타일 가이드"
-                  width={1200}
-                  height={800}
-                  className="w-full h-auto"
-                />
-                <figcaption className="px-4 py-3 text-sm text-neutral-600">
-                  Style Guide
-                </figcaption>
-              </figure>
-            ))}
-            {groups.icons.map((src, i) => (
-              <figure
-                key={`icons-${i}`}
-                className="rounded-xl overflow-hidden bg-neutral-50"
-              >
-                <Image
-                  src={src}
-                  alt="아이콘 세트"
-                  width={1200}
-                  height={800}
-                  className="w-full h-auto"
-                />
-                <figcaption className="px-4 py-3 text-sm text-neutral-600">
-                  Icons
-                </figcaption>
-              </figure>
-            ))}
-            {groups.admin.map((src, i) => (
-              <figure
-                key={`admin-${i}`}
-                className="rounded-xl overflow-hidden bg-neutral-50"
-              >
-                <Image
-                  src={src}
-                  alt="관리자 페이지"
-                  width={1200}
-                  height={800}
-                  className="w-full h-auto"
-                />
-                <figcaption className="px-4 py-3 text-sm text-neutral-600">
-                  Admin
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* 나머지 이미지(분류 불가) */}
-      {groups.others.length ? (
-        <section className="mb-16">
-          <h2 className="mb-6 text-2xl md:text-3xl font-semibold">
-            기타 이미지
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {groups.others.map((src, i) => (
-              <figure
-                key={`others-${i}`}
-                className="rounded-xl overflow-hidden bg-neutral-50"
-              >
-                <Image
-                  src={src}
-                  alt="프로젝트 이미지"
-                  width={1400}
-                  height={900}
-                  className="w-full h-auto"
-                />
-              </figure>
-            ))}
-          </div>
-        </section>
-      ) : null}
+      <WorkExtraSection groups={groups} />
 
       {/* 원문 본문 (HTML로 이미 변환되어 있는 경우에만) */}
-      {work.content && (
+      {/* {work.content && (
         <div
           className="prose max-w-none mt-8"
           dangerouslySetInnerHTML={{ __html: work.content }}
         />
-      )}
+      )} */}
     </>
   );
 }
