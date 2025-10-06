@@ -25,7 +25,9 @@ export default function Header() {
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev || ""; };
+    return () => {
+      document.body.style.overflow = prev || "";
+    };
   }, [open]);
 
   const onToggle = () => setOpen((v) => !v);
@@ -39,30 +41,24 @@ export default function Header() {
           ${mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
         `}
       >
-      <div className="container flex items-center justify-between xl:gap-[120px]">
-
-        <Link href="/" className="">
-          <Image
-            src="/logo/logo.svg"
-            alt="NUVIO"
-            width={85.6}
-            height={26} // 원본 비율에 맞는 값 (예시)
-            className="w-[154px] md:w-[85px] h-auto "
-            priority
-          />
-        </Link>
-        {/* Nav에는 상태와 링크만 전달 */}
+        <h1 className="container flex items-center justify-between xl:gap-[120px]">
+          <Link href="/" className="">
+            <Image
+              src="/logo/logo.svg"
+              alt="NUVIO"
+              width={85.6}
+              height={26} // 원본 비율에 맞는 값 (예시)
+              className="w-[154px] md:w-[85px] h-auto "
+              priority
+            />
+          </Link>
+          {/* Nav에는 상태와 링크만 전달 */}
           <Nav open={open} onToggle={onToggle} links={links} />
-      </div>
-          
+        </h1>
       </header>
 
       {/* Header '밖'에서 오버레이 렌더 (DOM상 header 옆) */}
-      <GNB
-        open={open}
-        onClose={onClose}
-        links={links}
-      />
+      <GNB open={open} onClose={onClose} links={links} />
     </>
   );
 }

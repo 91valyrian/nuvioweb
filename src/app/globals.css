@@ -13,6 +13,16 @@
     padding-left: 20px;
     padding-right: 20px;
   }
+
+  .center-absolute {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+  .center-absolute-x {
+    @apply absolute left-1/2 -translate-x-1/2;
+  }
+  .center-absolute-y {
+    @apply absolute top-1/2 -translate-y-1/2;
+  }
 }
 
 @layer components {
@@ -103,6 +113,10 @@
 
   .figureInner {
     @apply rounded-[21px] overflow-hidden bg-neutral-900 shadow-[inset_0_0_30px_rgba(0,0,0,0.5)];
+  }
+
+  .footer-gradient {
+    @apply bg-[radial-gradient(50%_50%_at_50%_50%,_#1F4FFF_0%,_rgba(31,79,255,0.74)_27%,_rgba(31,79,255,0.37)_52%,_rgba(31,79,255,0)_78%,_rgba(31,79,255,0)_100%)] opacity-35;
   }
 }
 

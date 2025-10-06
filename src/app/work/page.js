@@ -15,7 +15,9 @@ export default function WorkList() {
         items={[...works].sort(
           (a, b) => new Date(b.inputDate) - new Date(a.inputDate)
         )}
-        cols="cols-2"
+        initialCount={6}
+        step={3}
+        cols="cols-3"
         gap="gap-lg"
         className="mt-[30px] md:mt-[50px]"
       />
