@@ -4,7 +4,7 @@ export default function WorkMainSection({ groups, title }) {
   if (!groups.mainPc.length && !groups.mainMobile.length) return null;
 
   return (
-    <section className="py-40 bg-[#222]">
+    <section className="py-40 bg-[#111]">
       <div className="md:max-w-[1024px] xl:max-w-[1200px] mx-auto px-[20px]">
         <h2 className="mb-6 text-[64px] md:text-[50px] font-semibold">
           Main Page

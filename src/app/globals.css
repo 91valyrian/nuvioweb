@@ -6,6 +6,14 @@
   --base-size: 1.25vw;
 }
 
+.interactive-cards:hover > div:not(:hover) .textBox p {
+  opacity: 0;
+}
+.interactive-cards:hover > div:not(:hover) .textBox h4 {
+  opacity: 0;
+  transition: all 0.1s ease;
+}
+
 @layer utilities {
   .container {
     margin-inline: auto;
@@ -165,6 +173,13 @@ body {
 @media (max-width: 1280px) {
   :root {
     font-size: 1.25vw; /* md 사이즈 이하일 때 base-size 변경 */
+  }
+
+  .interactive-cards:hover > div:not(:hover) .textBox p {
+    opacity: 1;
+  }
+  .interactive-cards:hover > div:not(:hover) .textBox h4 {
+    opacity: 1;
   }
 }
 
