@@ -2,10 +2,10 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import QuickInquiry from "@/components/QuickInquiry";
+// import QuickInquiry from "@/components/QuickInquiry";
 import GlobalCursor from "@/components/GlobalCursor";
 import GlobalReveal from "@/components/GlobalReveal";
-
+import InQuiry from "@/components/InQuiry";
 
 export const metadata = {
   title: "NUVIO — Branding Websites",
@@ -13,7 +13,8 @@ export const metadata = {
   metadataBase: new URL("https://example.com"), // 배포 도메인으로 교체
   openGraph: {
     title: "NUVIO — Branding Websites",
-    description: "Perfect first impressions. Websites that elevate brand value.",
+    description:
+      "Perfect first impressions. Websites that elevate brand value.",
     url: "https://example.com",
     siteName: "NUVIO",
     type: "website",
@@ -30,16 +31,17 @@ export default function RootLayout({ children }) {
         />
         <link rel="stylesheet" href="https://use.typekit.net/qql5rly.css" />
       </head>
-      <body className='text-white'>
+      <body className="text-white">
         <GlobalCursor />
-        <a href="#main" className="skip sr-only">Skip to content</a>
+        <a href="#main" className="skip sr-only">
+          Skip to content
+        </a>
         <Header />
 
-        <div className="content">
-            {children}
-        </div>
+        <div className="content">{children}</div>
         <GlobalReveal />
-        <QuickInquiry />
+        <InQuiry />
+        {/* <QuickInquiry /> */}
         <Footer />
       </body>
     </html>

@@ -140,7 +140,7 @@ export default function CardList({
 
           {/* 내용 */}
           <div className="card-body">
-            <h3 className="card-title">{item.title}</h3>
+            <h4 className="card-title">{item.title}</h4>
             <p className="card-desc line-clamp-2">{item.summary}</p>
             <p className="card-meta">
               {item.client} · {item.year}

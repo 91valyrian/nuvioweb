@@ -240,7 +240,7 @@ export default function HeroSwiper() {
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-[20px] md:gap-[10px] md:mr-[120px]">
+        <div className="flex items-center gap-[20px] md:gap-[10px] ">
           <button
             className="hero-prev flex items-center justify-center cursor-pointer pointer-events-auto w-[100px] h-[100px] md:w-[80px] md:h-[80px] rounded-[9999px] text-white backdrop-blur-[6px] bg-white/10 hover:bg-white/30 transition"
             aria-label="Previous slide"

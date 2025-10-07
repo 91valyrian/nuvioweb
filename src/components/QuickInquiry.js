@@ -21,7 +21,7 @@ export default function QuickInquiry() {
 
   return (
     <div
-      className="fixed right-[30px] xl:right-[73px] bottom-[50px] z-50 flex justify-end hidden md:block"
+      className="fixed right-[20px] hd:right-[-20px] hd:left-1/2 hd:-translate-x-1/2 bottom-[50px] w-[100px] hd:w-[115px] hd:ml-[863px] z-50 hidden md:flex justify-end"
       data-reveal="scale-in"
       data-reveal-delay="0.2"
       data-reveal-duration="3"

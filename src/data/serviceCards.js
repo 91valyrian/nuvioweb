@@ -3,7 +3,7 @@ export const serviceCards = [
   {
     id: 1,
     title: "맞춤형 홈페이지 기획",
-    desc: "비즈니스 목표에 정확히 맞춘 맞춤형 웹 기획합니다.",
+    desc: "비즈니스 목표에 맞춘 맞춤형 웹 기획합니다.",
     bg: "bg-[url('/images/service-01.png')]",
     href: "/service/branding-site",
   },
