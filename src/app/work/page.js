@@ -16,6 +16,9 @@ export default function WorkList() {
           (a, b) => new Date(b.inputDate) - new Date(a.inputDate)
         )}
         initialCount={6}
+        loadMode="button"
+        moreLabel="LOAD MORE"
+        moreHoverLabel="+"
         step={3}
         cols="cols-3"
         gap="gap-lg"

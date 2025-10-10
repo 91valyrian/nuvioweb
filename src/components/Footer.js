@@ -4,7 +4,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <>
-      <footer className="footer relative pt-[120px] md:pt-[150px]">
+      <footer className="footer relative pt-[120px] md:pt-[150px] overflow-hidden">
         <div className="container footer-inner md:flex justify-between">
           <div className="text-center md:text-left">
             <b className="text-[74px] md:text-[44px]">nuvio</b>
@@ -24,7 +24,7 @@ export default function Footer() {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col items-center md:items-end gap-[20px] justify-center text-[32px] md:text-[24px] md:pr-[150px] text-center md:text-right mt-[50px] md:mt-0">
+          <div className="flex flex-col items-center md:items-end gap-[20px] justify-center text-[30px] md:text-[20px] md:pr-[150px] text-center md:text-right mt-[50px] md:mt-0">
             <Link href="/about">회사소개</Link>
             <a href="https://blog.naver.com/nuvio" target="_blank">
               블로그
@@ -38,7 +38,7 @@ export default function Footer() {
           <div className="container">© {year} nuvio. All rights Reserved</div>
         </div>
 
-        <div className="w-[100%] h-[400px] center-absolute footer-gradient -z-1"></div>
+        <div className="w-[100%] h-[900px] md:h-[500px] center-absolute footer-gradient -z-1"></div>
       </footer>
     </>
   );

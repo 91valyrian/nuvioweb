@@ -12,6 +12,9 @@ export default function CardList({
   initialCount = 6, // 처음 보여줄 카드 개수
   step = 3, // 추가 로드 개수
   observeOffset = "200px", // 마지막 근처에서 미리 로드할 margin
+  loadMode = "auto", // 'auto' | 'button'
+  moreLabel = "더보기", // 버튼 모드 레이블
+  moreHoverLabel, // 버튼 hover 시 문구(미지정 시 moreLabel 사용)
 }) {
   const [cursor, setCursor] = useState({ x: 0, y: 0, show: false });
   const rafRef = useRef(null);
@@ -20,6 +23,7 @@ export default function CardList({
   );
   const sentinelRef = useRef(null);
   const listRef = useRef(null);
+  const resolvedHoverLabel = moreHoverLabel || moreLabel;
 
   useEffect(() => {
     setVisibleCount(Math.min(initialCount, items.length));
@@ -44,6 +48,7 @@ export default function CardList({
   }, []);
 
   useEffect(() => {
+    if (loadMode !== "auto" || step <= 0) return;
     if (!sentinelRef.current) return;
 
     const node = sentinelRef.current;
@@ -62,7 +67,7 @@ export default function CardList({
 
     observer.observe(node);
     return () => observer.unobserve(node);
-  }, [items.length, step, observeOffset]);
+  }, [items.length, step, observeOffset, loadMode]);
 
   useEffect(() => {
     const root = listRef.current;
@@ -156,12 +161,33 @@ export default function CardList({
         </li>
       ))}
       {/* 무한 스크롤 센티넬 */}
-      {visibleCount < items.length && (
+      {loadMode === "auto" && visibleCount < items.length && (
         <li
           ref={sentinelRef}
           className="card-sentinel h-[1px] w-full"
           aria-hidden="true"
         />
+      )}
+      {loadMode === "button" && visibleCount < items.length && (
+        <li className="col-span-full flex justify-center mt-[24px] mb-[30px]">
+          <button
+            type="button"
+            onClick={() =>
+              setVisibleCount((prev) => Math.min(prev + step, items.length))
+            }
+            className="relative group block w-[400px] md:w-[290px] h-[74px] md:h-[54px] cursor-pointer mx-auto bg-white text-[#090A0C] text-[14px] font-pretendard rounded-[9999px] shadow-[0_2px_4px_rgba(0,0,0,0.15)] transition-all duration-200 overflow-hidden before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-[calc(100%+15px)] before:h-[calc(100%+15px)] before:bg-[rgba(255,255,255,0.12)] before:rounded-[30px] before:shadow-[0_24px_90px_rgba(0,0,0,0.12)] before:-z-[1] z-[998] hover:bg-main hover:text-white"
+            aria-label={`${moreLabel} (${visibleCount}/${items.length})`}
+          >
+            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full overflow-hidden">
+              <span className="flex items-center justify-center text-[28px] md:text-[18px] font-semibold h-full transform translate-y-0 transition-transform duration-200 group-hover:-translate-y-[100%]">
+                {moreLabel}
+              </span>
+              <span className="flex items-center justify-center text-[34px] md:text-[24px] font-bold h-full text-white transform translate-y-0 transition-transform duration-200 group-hover:translate-y-[-100%]">
+                {resolvedHoverLabel}
+              </span>
+            </span>
+          </button>
+        </li>
       )}
     </ul>
   );

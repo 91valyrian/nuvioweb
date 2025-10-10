@@ -16,8 +16,18 @@ const links = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 1);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // GNB 열릴 때 스크롤 잠금
@@ -37,6 +47,7 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 z-100 w-full flex items-center h-[125px] md:h-[110px]
+            ${scrolled ? "backdrop-blur-sm" : ""}
           transform transition-all duration-500 ease-out
           ${mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
         `}
