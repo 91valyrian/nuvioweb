@@ -42,7 +42,7 @@ export default async function Home() {
                 role="button"
                 aria-label={card.title}
                 className={`
-    service-gradient group relative w-full md:w-[calc(50%_-_10px)] xl:w-1/4 h-[600px] md:h-[500px] rounded-[10px] 
+    service-gradient group relative w-full md:w-[calc(50%_-_10px)] xl:w-1/4 rounded-[10px] 
     p-[2px] bg-[linear-gradient(var(--gdeg,55deg),rgba(255,255,255,1)_5%,rgba(0,0,0,0)_61%)]
     overflow-hidden
   `}
@@ -62,7 +62,7 @@ export default async function Home() {
                     />
                   </div>
 
-                  <div className="imgBox w-full h-[275px] rounded-[10px] overflow-hidden">
+                  <div className="imgBox w-full h-[465px] md:h-[315px] rounded-[10px] overflow-hidden">
                     <Image
                       src={card.bg}
                       alt={card.title}
