@@ -22,10 +22,15 @@ const Input = forwardRef(function Input(
   const errId = error ? `${inputId}-error` : undefined;
 
   return (
-    <div className={`${styles.field} ${className}`}>
+    <div className={`${className}`}>
       {label && (
-        <label htmlFor={inputId} className={styles.label}>
-          {label} {required && <span aria-hidden="true" className={styles.req}>*</span>}
+        <label htmlFor={inputId} className="sr-only">
+          {label}{" "}
+          {required && (
+            <span aria-hidden="true" className={styles.req}>
+              *
+            </span>
+          )}
         </label>
       )}
       <input
@@ -36,14 +41,18 @@ const Input = forwardRef(function Input(
         required={required}
         aria-invalid={!!error}
         aria-describedby={error ? errId : help ? helpId : undefined}
-        className={`${styles.input} ${error ? styles.inputError : ""}`}
+        className={`text-[28px] md:text-[38px] leading-[31px] md:leading-[34px] py-[30px] border-b ${styles.input} ${error ? styles.inputError : ""}`}
         {...props}
       />
       {help && !error && (
-        <div id={helpId} className={styles.help}>{help}</div>
+        <div id={helpId} className={styles.help}>
+          {help}
+        </div>
       )}
       {error && (
-        <div id={errId} className={styles.error}>{error}</div>
+        <div id={errId} className={styles.error}>
+          {error}
+        </div>
       )}
     </div>
   );

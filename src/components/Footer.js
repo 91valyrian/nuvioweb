@@ -24,7 +24,7 @@ export default function Footer() {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col items-center md:items-end gap-[20px] justify-center text-[30px] md:text-[20px] md:pr-[150px] text-center md:text-right mt-[50px] md:mt-0">
+          <div className="flex flex-col items-center md:items-end gap-[20px] justify-center text-[30px] md:text-[20px] text-center md:text-right mt-[50px] md:mt-0">
             <Link href="/about">회사소개</Link>
             <a href="https://blog.naver.com/nuvio" target="_blank">
               블로그

@@ -76,10 +76,10 @@ export default function WorkDetail({ params }) {
       {/* 헤더 */}
       <div className="container mt-[200px] mb-[50px]">
         <header className="">
-          <h1 className="text-[70px] md:text-[100px] font-bold tracking-tight">
+          <h2 className="text-[70px] md:text-[100px] font-bold tracking-tight">
             {work.title}
-          </h1>
-          <p className="text-[28px] md:text-[20px] mt-2 text-neutral-500">
+          </h2>
+          <p className="text-[28px] md:text-[20px] mt-2 text-neutral-300">
             {work.client} · {work.year}
           </p>
         </header>

@@ -190,9 +190,9 @@ body {
   }
 }
 
-@media (min-width: 1281px) {
+@media (max-width: 1920px) {
   :root {
-    font-size: 0.8333vw; /* md 사이즈 이하일 때 base-size 변경 */
+    font-size: 0.8333vw; /* md 사이즈 이하일 때 base-size 변경 0.8333vw */
   }
 }
 

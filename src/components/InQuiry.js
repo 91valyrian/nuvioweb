@@ -6,7 +6,7 @@ export default function InQuiry() {
       <div className="container">
         <div className="flexBox flex gap-[20px] flex-col xl:flex-row">
           <Link
-            href="#;"
+            href="/contact"
             className="w-full relative group w-[calc(50%_-_10px)] block bg-[#111] pt-[60px] pb-[180px] md:py-[80px] px-[40px] rounded-[10px] text-center md:text-left"
           >
             <p className="desc text-[28px] md:text-[24px] text-[#5A6270] font-semibold mb-[20px]">
