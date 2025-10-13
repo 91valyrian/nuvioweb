@@ -89,7 +89,7 @@ export default function AboutSection() {
       <div className="aboutInner 2xl:pl-[435px]">
         <div
           ref={linesRef}
-          className="mt-[60px] text-[50px] leading-[90px] font-midume"
+          className="mt-[60px] text-[48px] leading-[90px] font-midume"
         >
           홈페이지는 기업의 첫인상이 가장 강력한 영업사원입니다.
           <br className="hidden md:block" />

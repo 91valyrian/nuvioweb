@@ -29,8 +29,14 @@ export default function GlobalCursor() {
     // 부드러운 이동/사이즈 변경
     qx.current = gsap.quickTo(el, "x", { duration: 0.15, ease: "power3.out" });
     qy.current = gsap.quickTo(el, "y", { duration: 0.15, ease: "power3.out" });
-    qw.current = gsap.quickTo(el, "width", { duration: 0.2, ease: "power3.out" });
-    qh.current = gsap.quickTo(el, "height", { duration: 0.2, ease: "power3.out" });
+    qw.current = gsap.quickTo(el, "width", {
+      duration: 0.2,
+      ease: "power3.out",
+    });
+    qh.current = gsap.quickTo(el, "height", {
+      duration: 0.2,
+      ease: "power3.out",
+    });
 
     const move = (e) => {
       qx.current?.(e.clientX);
@@ -41,8 +47,9 @@ export default function GlobalCursor() {
     const interactiveSelector = [
       "a",
       "button",
-      "input[type=button]",
-      "input[type=submit]",
+      "input",
+      "textarea",
+      "label",
       "[role=button]",
       ".cursor-boost",
     ].join(",");
