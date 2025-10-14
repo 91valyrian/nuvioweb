@@ -72,13 +72,13 @@ export default function ContactPage() {
     <main>
       <SubVisual value="Contact" image="/images/contact/visual.png" />
 
-      <section className="" data-reveal="fade-up" data-reveal-delay="0.8">
+      <section className="">
         <div className="container py-[150px]">
           <form onSubmit={onSubmit}>
             {/* Services (multiple) */}
             <fieldset className="flex flex-wrap md:flex-nowrap gap-[50px] md:gap-[20px]">
               <h3 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
-                <legend className="text-[52px] md:text-[39px] leading-[62px] md:leading-[49px] font-bold">
+                <legend className="text-[52px] md:text-[39px] leading-[62px] md:leading-[49px] font-bold rotate-x-up">
                   필요한 서비스를
                   <br />
                   선택해주세요.
@@ -94,7 +94,7 @@ export default function ContactPage() {
                     name="services"
                     value={label}
                     label={label}
-                    className="w-[calc(50%_-_10px)] md:w-[calc(33.3333%_-_13.4px)]"
+                    className="w-[calc(50%_-_10px)] md:w-[calc(33.3333%_-_13.4px)] rotate-x-up"
                   />
                 ))}
               </div>
@@ -103,7 +103,7 @@ export default function ContactPage() {
             {/* Two-column grid for basics */}
             <fieldset className="flex flex-wrap md:flex-nowrap gap-[50px] md:gap-[20px] mt-[150px]">
               <h3 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
-                <legend className="text-[52px] md:text-[39px] leading-[62px] md:leading-[49px] font-bold">
+                <legend className="text-[52px] md:text-[39px] leading-[62px] md:leading-[49px] font-bold rotate-x-up">
                   기본 정보를
                   <br />
                   입력해주세요.
@@ -117,14 +117,20 @@ export default function ContactPage() {
                     label="Full name"
                     required
                     placeholder="Full name"
+                    className="rotate-x-up"
                   />
-                  <Input name="company" label="Company" placeholder="Company" />
+                  <Input
+                    name="company"
+                    label="Company"
+                    placeholder="Company"
+                    className="rotate-x-up"
+                  />
 
                   <Input
                     name="position"
                     label="Position"
                     placeholder="Position"
-                    className="mt-[40px]"
+                    className="mt-[40px] rotate-x-up"
                   />
                   <Input
                     name="phone"
@@ -132,7 +138,7 @@ export default function ContactPage() {
                     inputMode="numeric"
                     pattern="[0-9]*"
                     placeholder="Phone Number"
-                    className="mt-[40px]"
+                    className="mt-[40px] rotate-x-up"
                     onChange={(e) => {
                       e.target.value = e.target.value.replace(/\D/g, "");
                     }}
@@ -144,14 +150,14 @@ export default function ContactPage() {
                     label="E-mail"
                     required
                     placeholder="E-mail"
-                    className="mt-[40px]"
+                    className="mt-[40px] rotate-x-up"
                   />
                   <Input
                     name="url"
                     type="url"
                     label="Url"
                     placeholder="Url"
-                    className="mt-[40px]"
+                    className="mt-[40px] rotate-x-up"
                   />
                 </div>
 
@@ -159,12 +165,12 @@ export default function ContactPage() {
                   name="message"
                   label="Message"
                   placeholder="Message"
-                  className="mt-[40px]"
+                  className="mt-[40px] rotate-x-up"
                   rows={6}
                 />
 
                 <div className="mt-[50px] mb-[10px]">
-                  <label className="inline-flex items-center gap-2 cursor-pointer select-none">
+                  <label className="inline-flex items-center gap-2 cursor-pointer select-none rotate-x-up">
                     {/* ✅ peer는 반드시 먼저 와야 함 */}
                     <input
                       type="checkbox"
@@ -214,7 +220,7 @@ export default function ContactPage() {
                   </p>
                 )}
 
-                <div className="flex justify-end mt-[50px]">
+                <div className="flex justify-end mt-[50px] rotate-x-up">
                   <button
                     type="submit"
                     disabled={loading}

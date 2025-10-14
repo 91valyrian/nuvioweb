@@ -1,84 +1,98 @@
 "use client";
 
 import { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePathname } from "next/navigation";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-
-// data-reveal 값에 따른 from 상태 프리셋
-function getPreset(type) {
-  switch (type) {
-    case "fade-up":    return { y: 24,  opacity: 0 };
-    case "fade-down":  return { y: -24, opacity: 0 };
-    case "fade-left":  return { x: 24,  opacity: 0 };
-    case "fade-right": return { x: -24, opacity: 0 };
-    case "scale-in":   return { scale: 0.8, opacity: 0 };
-    case "fade-in":
-    default:           return { opacity: 0 };
-  }
-}
-
-function initReveal(root = document) {
-  const nodes = Array.from(root.querySelectorAll("[data-reveal]"));
-  if (!nodes.length) return;
-
-  nodes.forEach((el) => {
-    // 이미 세팅된 요소는 중복 방지
-    if (el.__revealed) return;
-
-    const type = (el.getAttribute("data-reveal") || "fade-in").trim();
-    const once = (el.getAttribute("data-reveal-once") || "true") === "true";
-    const delay = parseFloat(el.getAttribute("data-reveal-delay") || "0") || 0;
-    const duration = parseFloat(el.getAttribute("data-reveal-duration") || "0.6") || 0.6;
-    // "요소에 도달" 시점: 요소 top === 뷰포트 bottom
-    const startAt = "top bottom";
-
-    const fromVars = getPreset(type);
-    const toVars = { opacity: 1, x: 0, y: 0, scale: 1, duration, delay, ease: "power3.out" };
-
-    // 컨테이너에 stagger 지정 시, 자식들을 순차 노출
-    const stagger = parseFloat(el.getAttribute("data-reveal-stagger") || "0") || 0;
-    const targets = stagger > 0 ? Array.from(el.children) : [el];
-
-    // 초기값 세팅
-    gsap.set(targets, fromVars);
-
-    // 트리거
-    const triggerTarget = stagger > 0 ? el : el;
-    gsap.to(targets, {
-      ...toVars,
-      stagger: stagger > 0 ? stagger : 0,
-      scrollTrigger: {
-        trigger: triggerTarget,
-        start: startAt, // 예: top 85%
-        once,
-        immediateRender : false,
-        // markers: true, // 디버그용
-      },
-      onStart: () => { el.__revealed = true; },
-    });
-  });
-}
 
 export default function GlobalReveal() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // 라우트 변경 시마다 재스캔
-    setTimeout(() => {
-      initReveal(document);
-      ScrollTrigger.refresh();
-    }, 0);
+    // 기존 트리거 모두 제거
+    ScrollTrigger.getAll().forEach((st) => st.kill());
 
-    // SPA 전환/동적 콘텐츠 대응 - 이미지 로딩 후 갱신
-    const onLoad = () => ScrollTrigger.refresh();
-    window.addEventListener("load", onLoad);
+    // 새 페이지의 fade-up 요소들 재등록
+    const fadeElements = gsap.utils.toArray(".fade-up");
+    const rotateElements = gsap.utils.toArray(".rotate-x-up");
+
+    fadeElements.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    rotateElements.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { y: 40, rotateX: "90deg" },
+        {
+          y: 0,
+          duration: 0.8,
+          rotateX: "0deg",
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 95%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    ScrollTrigger.matchMedia({
+      // ✅ PC (768px 이상)
+      "(min-width: 769px)": function () {
+        gsap.to(".cover", {
+          y: -100,
+          width: "100%",
+          borderRadius: 0,
+          scrollTrigger: {
+            trigger: ".cover",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+            markers: false,
+          },
+        });
+      },
+
+      // ✅ 모바일 (768px 이하)
+      "(max-width: 768px)": function () {
+        gsap.to(".cover", {
+          y: -100,
+          width: "100%",
+          borderRadius: 0,
+          scrollTrigger: {
+            trigger: ".cover",
+            start: "top 20%", // ← 모바일용 다른 start 시점
+            end: "bottom top",
+            scrub: true,
+            markers: false,
+          },
+        });
+      },
+    });
+
+    // cleanup
     return () => {
-      window.removeEventListener("load", onLoad);
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
-  }, [pathname]);
+  }, [pathname]); // ✅ 페이지 전환 시마다 다시 실행
 
-  return null; // UI 렌더 없음
+  return null;
 }

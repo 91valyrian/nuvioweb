@@ -123,12 +123,10 @@ export default function CardList({
       {items.slice(0, visibleCount).map((item, idx) => (
         <li
           key={`${item.slug}-${idx}`}
-          className="card group overflow-hidden"
+          className="card group overflow-hidden fade-up"
           onMouseEnter={handleEnter}
           onMouseLeave={handleLeave}
           onMouseMove={handleMove}
-          data-reveal="fade-up"
-          data-reveal-delay="0.2"
         >
           {/* 썸네일 */}
           <div className="card-media">

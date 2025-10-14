@@ -1,96 +1,10 @@
 "use client";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SplitType from "split-type"; // 문장을 줄 단위로 쪼갤 때 필요하다면
 
 export default function AboutSection() {
-  const linesRef = useRef(null);
-
-  useEffect(() => {
-    if (!linesRef.current) return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Split the target element into lines (client-only)
-    const split = new SplitType(linesRef.current, { types: "lines" });
-
-    // 각 라인이 자신의 스크롤 위치에 도달할 때 개별적으로 노출되도록 설정
-    // 초기 상태를 0.3 투명도로 맞춰 놓고, 도달하면 1.0으로 자연스럽게 전환
-    const animations = [];
-
-    // 라인이 block처럼 쌓이도록 보장 (SplitType이 inline wrapping을 할 수 있음)
-    gsap.set(split.lines, { display: "block" });
-
-    split.lines.forEach((line) => {
-      const anim = gsap.fromTo(
-        line,
-        { opacity: 0.1, rotateX: -30, transformOrigin: "50% 50% -80px" },
-        {
-          opacity: 1,
-          rotateX: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: line,
-            start: "top 75%",
-            end: "top 55%",
-            markers: false,
-            scrub: true, // 스크롤 값과 연동되어 라인별로 읽히듯 전환
-            toggleActions: "play none none reverse",
-            // once: true,
-          },
-        }
-      );
-      animations.push(anim);
-    });
-
-    // roundList: 자식 3개를 타임라인으로 순차 등장
-    const roundList = document.querySelector(".roundList");
-    let roundTl;
-    if (roundList) {
-      const roundItems = roundList.querySelectorAll(":scope > div");
-      // 초기 상태 세팅
-      gsap.set(roundItems, {
-        y: 24,
-        opacity: 0,
-        scale: 0.3,
-        transformOrigin: "50% 50%",
-      });
-
-      // 타임라인 + ScrollTrigger
-      roundTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: roundList,
-          start: "top 75%", // 리스트 상단이 화면 75% 지점에 오면 시작
-          end: "bottom 55%", // 필요 시 조정 가능
-          toggleActions: "play none none reverse",
-          //   once: true,
-          //   scrub: true, // 스크롤 비례 진행 원하면 주석 해제
-          markers: false,
-        },
-        defaults: { duration: 0.6, ease: "power2.out" },
-      });
-
-      roundItems.forEach((el, i) => {
-        roundTl.to(el, { y: 0, opacity: 1, scale: 1 }, i * 0.25);
-      });
-    }
-
-    return () => {
-      animations.forEach((a) => a?.revert?.());
-      if (roundTl) {
-        roundTl.kill();
-      }
-      split?.revert?.();
-    };
-  }, []);
-
   return (
     <div className="container">
       <div className="aboutInner 2xl:pl-[435px]">
-        <div
-          ref={linesRef}
-          className="mt-[60px] text-[48px] leading-[90px] font-midume"
-        >
+        <div className="mt-[60px] text-[48px] leading-[90px] font-midume about-lines">
           홈페이지는 기업의 첫인상이 가장 강력한 영업사원입니다.
           <br className="hidden md:block" />
           고객은 기업을 알기 위해 가장 먼저 홈페이지를 찾습니다.

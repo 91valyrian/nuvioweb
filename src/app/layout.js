@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import GlobalCursor from "@/components/GlobalCursor";
 import GlobalReveal from "@/components/GlobalReveal";
 import InQuiry from "@/components/InQuiry";
+import FaqSection from "@/components/FaqSection";
 
 export const metadata = {
   title: "NUVIO — Branding Websites",
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
         <Header />
 
         <div className="content">{children}</div>
+        <FaqSection />
         <GlobalReveal />
         <InQuiry />
         {/* <QuickInquiry /> */}

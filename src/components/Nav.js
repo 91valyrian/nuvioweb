@@ -10,9 +10,14 @@ export default function Nav({ open, onToggle, links }) {
   return (
     <nav className="xl:w-full nav flex items-center justify-end xl:justify-between">
       {/* 데스크톱(xl↑) 인라인 메뉴 */}
-      <ul id="nav-menu" className="hidden xl:flex items-center gap-[47px] text-[18px] nav-list text-white">
+      <ul
+        id="nav-menu"
+        className="hidden xl:flex items-center gap-[47px] text-[18px] nav-list text-white"
+      >
         {links.map((l) => {
-          const active = pathname === l.href || (l.href !== "/" && pathname.startsWith(l.href));
+          const active =
+            pathname === l.href ||
+            (l.href !== "/" && pathname.startsWith(l.href));
           return (
             <li key={l.href}>
               <Link
@@ -38,7 +43,14 @@ export default function Nav({ open, onToggle, links }) {
           aria-controls="gnb-overlay"
           onClick={onToggle}
         >
-          <Image src="/common/menu.svg" alt="전체 메뉴" className="w-[52px] h-[38px] md:w-[48px] md:h-[35px]" width={52} height={38} priority />
+          <Image
+            src="/common/menu.svg"
+            alt="전체 메뉴"
+            className="w-[52px] h-[38px] md:w-[48px] md:h-[35px]"
+            width={52}
+            height={38}
+            priority
+          />
         </button>
       </div>
     </nav>

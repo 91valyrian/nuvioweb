@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SubVisual from "@/components/SubVisual";
@@ -35,29 +34,14 @@ const craftedList = [
 ];
 
 export default function AboutPage() {
-  useEffect(() => {
-    gsap.to(".cover", {
-      y: -100,
-      width: "100%",
-      borderRadius: 0,
-      scrollTrigger: {
-        trigger: ".cover",
-        start: "top top",
-        end: "bottom top",
-        markers: false,
-        scrub: true,
-      },
-    });
-  }, []);
-
   return (
     <main>
       <SubVisual value="About" image="/images/about/visual.png" />
 
       {/* vsiual Text */}
-      <section className="" data-reveal="fade-up" data-reveal-delay="0.8">
+      <section className="rotate-x-up">
         <div className="container md:py-[50px]">
-          <p className="text-[28px] md:text-[24px] pl-[50px] md:pl-0 text-left md:text-right">
+          <p className="text-[28px] md:text-[24px] pl-[150px] md:pl-0 text-left md:text-right">
             홈페이지는 기업의 얼굴이자 가장
             <br className="block md:hidden" /> 강력한 영업 도구입니다.
             <br />
@@ -73,11 +57,7 @@ export default function AboutPage() {
       </section>
 
       {/* Perfect Core Values */}
-      <section
-        className="pt-[180px]"
-        data-reveal="fade-up"
-        data-reveal-delay="0.6"
-      >
+      <section className="pt-[180px] rotate-x-up">
         <div className="container">
           <h3 className="text-[78px] md:text-[90px] font-bold">
             Perfect
@@ -88,16 +68,14 @@ export default function AboutPage() {
             {coreValues.map((item, index) => (
               <div
                 key={item.id}
-                className="valueItem w-[calc(50%_-_10px)] md:w-[calc(33.3333%_-_15px)] xl:w-[calc(25%_-_15px)] h-[300px] md:h-[200px] border-t border-[#5A6270] py-[20px]"
-                data-reveal="fade-up"
-                data-reveal-delay={`${0.2 + index * 0.2}`}
+                className="valueItem w-[calc(50%_-_10px)] md:w-[calc(33.3333%_-_15px)] xl:w-[calc(25%_-_15px)] h-[300px] md:h-[200px] border-t border-[#5A6270] py-[20px] fade-up"
               >
                 <h4
-                  className="h-[102px] md:h-[auto] text-[34px] md:text-[31px] font-bold mb-[20px] md:mb-[10px]"
+                  className="h-[102px] md:h-[auto] text-[34px] md:text-[31px] font-bold mb-[20px] md:mb-[10px] rotate-x-up"
                   dangerouslySetInnerHTML={{ __html: item.title }}
                 />
                 <p
-                  className="text-[28px] md:text-[20px] "
+                  className="text-[28px] md:text-[20px] rotate-x-up"
                   dangerouslySetInnerHTML={{ __html: item.desc }}
                 ></p>
               </div>
@@ -109,18 +87,18 @@ export default function AboutPage() {
       {/* What We Deliver. */}
       <section className="py-[180px] mt-[700px]">
         <h3 className="container text-[78px] md:text-[90px] leading-[88px] md:leading-[100px] font-bold relative z-[1]">
-          What
-          <br />
-          We
-          <br />
-          <span className="font-miller italic font-light">Deliver.</span>
+          <span className="rotate-x-up block">What</span>
+          <span className="rotate-x-up block">We</span>
+          <span className="font-miller italic font-light rotate-x-up block">
+            Deliver.
+          </span>
         </h3>
 
         <div className="cover w-[484px] md:w-[768px] mx-auto h-[930px] md:h-[100vh] bg-[url(/images/about/deliverCover.png)] bg-cover bg-center translate-y-[-930px] md:translate-y-[-100vh] rounded-[50px] relative z-[-1]"></div>
 
         <div className="container">
           <div className="pl-0 md:pl-[210px] xl:pl-[527px]">
-            <h4 className="text-[61px] leading-[71px] font-bold relative z-[1]">
+            <h4 className="text-[61px] leading-[71px] font-bold relative z-[1] rotate-x-up">
               Crafted for{" "}
               <span className="font-miller italic font-light">Excellence.</span>
             </h4>
@@ -129,9 +107,7 @@ export default function AboutPage() {
               {craftedList.map((item, index) => (
                 <div
                   key={item.id}
-                  className="valueItem w-[calc(50%_-_10px)] xl:w-[calc(50%_-_10px)]  border-t border-[#5A6270] py-[30px]"
-                  data-reveal="fade-up"
-                  data-reveal-delay={`${0.2 + index * 0.2}`}
+                  className="valueItem w-[calc(50%_-_10px)] xl:w-[calc(50%_-_10px)]  border-t border-[#5A6270] py-[30px] fade-up"
                 >
                   <p
                     className="text-[28px] md:text-[20px] font-light"
