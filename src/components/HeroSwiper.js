@@ -11,8 +11,8 @@ import "swiper/css/navigation";
 // 슬라이드 데이터 (첫 슬라이드는 비디오 배경, 나머지는 이미지)
 const slides = [
   {
-    src: "/main/heroSlide1.mp4",
-    alt: "Branding Website",
+    src: "/main/heroSlide4.jpg",
+    alt: "완벽한 홈페이지 제작",
     title:
       "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
     subtitle:
@@ -21,22 +21,20 @@ const slides = [
     ctaHref: "/contact",
   },
   {
-    src: "/main/heroSlide2.jpg",
-    alt: "Branding Website",
-    title:
-      "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
+    src: "/main/heroSlide111.jpg",
+    alt: "보여지는 것 이상의 홈페이지",
+    title: "보여지는 것<br /> 이상을 설계합니다.",
     subtitle:
-      "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
+      "보이는 것 이상의 완성도를 고민하며,<br /> 브랜드가 오래 기억될 디지털 경험을 만듭니다.",
     ctaLabel: "Contact",
     ctaHref: "/contact",
   },
   {
-    src: "/main/heroSlide3.jpg",
-    alt: "Landing Page",
-    title:
-      "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
+    src: "/main/heroSlide5.jpg",
+    alt: "전략적 브랜딩 홈페이지",
+    title: "전략과 감각이 만나는<br /> 브랜딩 웹사이트",
     subtitle:
-      "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
+      "단순히 예쁜 디자인이 아닌,<br /> 브랜드의 본질과 사용자의 여정을 함께 설계합니다.",
     ctaLabel: "Contact",
     ctaHref: "/contact",
   },
@@ -48,6 +46,7 @@ export default function HeroSwiper() {
   const videoRef = useRef(null);
   const isVideoActiveRef = useRef(false);
   const playTimerRef = useRef(null);
+  const [scaleReady, setScaleReady] = useState(false);
 
   const startVideo = (sw) => {
     if (!videoRef.current) return;
@@ -89,10 +88,16 @@ export default function HeroSwiper() {
     return () => clearTimeout(t);
   }, []);
 
+  useEffect(() => {
+    // Delay enabling scale animation so the first slide doesn't mount at 1.5
+    const t = setTimeout(() => setScaleReady(true), 120);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <section className="relative overflow-hidden">
       <Swiper
-        className="w-full h-[1280px] md:h-[100vh]"
+        className="w-full h-[1380px] md:h-[100vh]"
         modules={[Autoplay, Pagination, Navigation, A11y]}
         slidesPerView={1}
         loop
@@ -141,55 +146,24 @@ export default function HeroSwiper() {
           <SwiperSlide key={idx}>
             <div className="relative h-full w-full">
               {/* 배경 이미지 또는 비디오 */}
-              <div className="absolute inset-0">
-                {idx === 0 ? (
-                  <video
-                    ref={videoRef}
-                    id="hero-video"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    playsInline
-                    muted
-                    // iOS 사파리 자동재생 호환을 위해 muted 필요
-                    preload="auto"
-                    poster={slides.src.replace(/\.mp4$/i, ".jpg")}
-                    onEnded={() => {
-                      // 비디오가 끝나면 다음 슬라이드로 이동, 이후 슬라이드는 5초 autoplay
-                      try {
-                        const sw = swiperRef.current;
-                        sw?.slideNext();
-                        if (sw) {
-                          sw.params.autoplay = {
-                            ...(sw.params.autoplay || {}),
-                            delay: 5000,
-                            disableOnInteraction: false,
-                          };
-                          sw.autoplay?.start();
-                        }
-                      } catch {}
-                    }}
-                    onPlay={() => {
-                      isVideoActiveRef.current = true;
-                    }}
-                    onPause={() => {
-                      isVideoActiveRef.current = false;
-                    }}
-                  >
-                    {/* 비디오 소스: /public/main/heroSlide1.mp4 로 가정 */}
-                    <source src="/main/heroSlide1.mp4" type="video/mp4" />
-                  </video>
-                ) : (
-                  <Image
-                    src={slides.src}
-                    alt={slides.alt}
-                    fill
-                    priority={idx === 0}
-                    fetchPriority={idx === 0 ? "high" : "auto"}
-                    loading={idx === 0 ? "eager" : "lazy"}
-                    sizes="100vw"
-                    quality={90}
-                    style={{ objectFit: "cover" }}
-                  />
-                )}
+              <div
+                className={`slide-bg absolute inset-0 transform transition-transform duration-[5000ms] ease-linear ${
+                  active === idx && scaleReady
+                    ? "scale-[1.2] rotate-[5deg]"
+                    : "scale-[1] rotate-[0]"
+                }`}
+              >
+                <Image
+                  src={slides.src}
+                  alt={slides.alt}
+                  fill
+                  priority={idx === 0}
+                  fetchPriority={idx === 0 ? "high" : "auto"}
+                  loading={idx === 0 ? "eager" : "lazy"}
+                  sizes="100vw"
+                  quality={90}
+                  style={{ objectFit: "cover" }}
+                />
                 {/* 상단→하단 그라데이션 오버레이 */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50" />
               </div>

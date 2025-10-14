@@ -6,7 +6,6 @@ import Nav from "./Nav";
 import GNB from "./GNB";
 
 const links = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/service", label: "Service" },
   { href: "/work", label: "Work" },

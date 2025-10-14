@@ -203,7 +203,7 @@ export default function ServicePage() {
                 {/* STEP 배지 */}
                 <div
                   className="step-badge inline-flex items-center justify-center
-                          w-[80px] h-[80px] md:w-[52px] md:h-[52px] rounded-full bg-white/10
+                          w-[80px] h-[80px] md:w-[52px] md:h-[52px] rounded-[9999px] bg-white/10
                           text-[28px] md:text-[18px] font-bold tracking-wide"
                 >
                   {item.step}
