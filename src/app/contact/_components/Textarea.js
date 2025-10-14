@@ -41,7 +41,7 @@ const Textarea = forwardRef(function Textarea(
         required={required}
         aria-invalid={!!error}
         aria-describedby={error ? errId : help ? helpId : undefined}
-        className={`h-[94px] text-[28px] md:text-[38px] leading-[31px] md:leading-[48px] py-[30px] border-b overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${styles.textarea} ${error ? styles.inputError : ""}`}
+        className={`h-[94px] text-[24px] md:text-[34px] leading-[34px] md:leading-[44px] py-[20px] border-b overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${styles.textarea} ${error ? styles.inputError : ""}`}
         {...props}
       />
       {help && !error && (

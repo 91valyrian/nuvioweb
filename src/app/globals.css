@@ -32,6 +32,46 @@
   .center-fixed-x {
     @apply fixed left-1/2 -translate-x-1/2;
   }
+
+  /* 다크 테마용 커스텀 스크롤바 */
+  .scrollbar-dark {
+    /* Firefox */
+    scrollbar-width: thin; /* auto | thin | none */
+    scrollbar-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.06);
+    /* 레이아웃 점프 방지 */
+    scrollbar-gutter: stable both-edges; /* 지원 브라우저에서만 */
+  }
+
+  /* WebKit(Fallback: Chrome/Edge/Safari/Brave/Opera) */
+  .scrollbar-dark::-webkit-scrollbar {
+    width: 10px; /* 세로 스크롤 너비 */
+    height: 10px; /* 가로 스크롤 높이 */
+  }
+  .scrollbar-dark::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 9999px;
+  }
+  .scrollbar-dark::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.28);
+    border-radius: 9999px;
+    border: 2px solid transparent; /* thumb-outer 여백 */
+    background-clip: padding-box;
+  }
+  .scrollbar-dark::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+  .scrollbar-dark::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* 더 얇은 스타일이 필요하면 이 클래스를 추가로 조합 */
+  .scrollbar-dark--thin {
+    scrollbar-width: thin;
+  }
+  .scrollbar-dark--thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
 }
 
 @layer components {

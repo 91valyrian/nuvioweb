@@ -32,8 +32,8 @@ export default function Nav({ open, onToggle, links }) {
       </ul>
 
       <div id="util-menu" className="flex item-center gap-[30px] md:gap-[40px]">
-        <Button href="/contact" variant="outlineDark" size="md">
-          CONTACT
+        <Button href="/contact" size="md">
+          제작 문의하기
         </Button>
 
         {/* 모바일/태블릿: GNB 오버레이 토글 */}

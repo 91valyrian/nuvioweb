@@ -18,7 +18,7 @@ export default async function Home() {
       {/* Serice Section */}
       <section id="service" className="section-service py-[120px]">
         <div className="container">
-          <p className="section-title font-miller italic text-[34px] md:text-[24px] text-neutral-400 mb-[10px] rotate-x-up">
+          <p className="section-title font-miller italic text-[34px] md:text-[24px] text-main mb-[10px] rotate-x-up">
             Our Service
           </p>
           <h2 className="section-subtitle text-[60px] leading-[74px] md:text-[49px] md:leading-[59px] font-bold rotate-x-up">
@@ -105,7 +105,7 @@ export default async function Home() {
       {/* Work Section */}
       <section id="work" className="section-work py-[120px]">
         <div className="container">
-          <p className="section-title font-miller italic text-[34px] md:text-[24px] text-neutral-400 text-center mb-[10px] rotate-x-up">
+          <p className="section-title font-miller italic text-[34px] md:text-[24px] text-main text-center mb-[10px] rotate-x-up">
             Our Works
           </p>
           <h2 className="section-subtitle text-[60px] leading-[74px] md:text-[49px] md:leading-[59px] font-bold text-center rotate-x-up">

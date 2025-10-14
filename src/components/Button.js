@@ -14,8 +14,7 @@ export default function Button({
     "inline-flex items-center justify-center gap-[10px] font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-[9999px] ";
 
   const variants = {
-    primary:
-      "bg-indigo-600 text-neutral-100 hover:bg-indigo-700 focus:ring-indigo-500",
+    primary: "bg-main text-neutral-100 hover:bg-[#2C54F9] focus:bg-[#003CFF]",
     secondary:
       "bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-400",
     outlineDark:

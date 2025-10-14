@@ -24,7 +24,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ko" className="">
+    <html lang="ko" className="scrollbar-dark">
       <head>
         <link
           rel="stylesheet"

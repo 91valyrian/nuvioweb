@@ -229,9 +229,9 @@ export default function FaqSection() {
                   setOpenIndex(null);
                 }}
                 className={[
-                  "px-[30px] py-[15px] text-[28px] md:text-[18px] rounded-[9999px] border transition-all cursor-pointer font-semibold border-2 rotate-x-up",
+                  "px-[25px] md:px-[30px] py-[15px] text-[28px] md:text-[18px] rounded-[9999px] border transition-all cursor-pointer font-semibold border-2 rotate-x-up",
                   isActive
-                    ? "bg-white text-black border-white"
+                    ? "bg-main text-white border-main"
                     : "text-white/70 ",
                 ].join(" ")}
               >

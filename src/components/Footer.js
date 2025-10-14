@@ -4,7 +4,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <>
-      <footer className="footer relative pt-[120px] md:pt-[150px] overflow-hidden">
+      <footer className="footer relative pt-[120px] md:pt-[80px] overflow-hidden">
         <div className="container footer-inner md:flex justify-between">
           <div className="text-center md:text-left">
             <b className="text-[74px] md:text-[44px]">nuvio</b>

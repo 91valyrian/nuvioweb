@@ -14,7 +14,7 @@ export default function Checkbox({
   return (
     <label
       htmlFor={id}
-      className={`${styles.checkboxRow} ${checked ? "on bg-white text-black" : ""} ${className || ""} text-[32px] md:text-[24px] border border-1 rounded-[10px] py-[20px] px-[15px] justify-center cursor-pointer`}
+      className={`${styles.checkboxRow} ${checked ? "on bg-main border-main" : ""} ${className || ""} text-[32px] md:text-[24px] border border-1 rounded-[10px] py-[20px] px-[15px] justify-center cursor-pointer`}
     >
       <input
         id={id}

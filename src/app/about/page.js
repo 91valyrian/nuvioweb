@@ -60,7 +60,7 @@ export default function AboutPage() {
       <section className="pt-[180px] rotate-x-up">
         <div className="container">
           <h3 className="text-[78px] md:text-[90px] font-bold">
-            Perfect
+            Perfect{" "}
             <span className="font-miller italic font-light">Core Values.</span>
           </h3>
 
