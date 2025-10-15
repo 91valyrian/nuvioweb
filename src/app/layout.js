@@ -8,18 +8,88 @@ import GlobalReveal from "@/components/GlobalReveal";
 import InQuiry from "@/components/InQuiry";
 import FaqSection from "@/components/FaqSection";
 
+const siteName = "nuvio";
+const siteUrl = "https://www.nuvio.kr"; // 배포 도메인으로 교체
+const defaultTitle =
+  "홈페이지 제작 · 기업홈페이지 제작 · SEO 전문 웹사이트 제작업체 | nuvio";
+const defaultDesc =
+  "nuvio는 기업의 브랜드 신뢰와 전환율을 높이는 웹사이트를 제작합니다. 기획부터 디자인, SEO까지 한 번에 제공하는 웹 제작 스튜디오입니다.";
+
 export const metadata = {
-  title: "NUVIO — Branding Websites",
-  description: "Perfect first impressions. Websites that elevate brand value.",
-  metadataBase: new URL("https://example.com"), // 배포 도메인으로 교체
-  openGraph: {
-    title: "NUVIO — Branding Websites",
-    description:
-      "Perfect first impressions. Websites that elevate brand value.",
-    url: "https://example.com",
-    siteName: "NUVIO",
-    type: "website",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: defaultTitle,
+    template: `%s | ${siteName}`,
   },
+  description: defaultDesc,
+  keywords: [
+    "홈페이지 제작",
+    "기업 홈페이지 제작",
+    "웹사이트 제작",
+    "반응형 홈페이지",
+    "홈페이지 리뉴얼",
+    "브랜드 홈페이지 제작",
+    "학교 홈페이지 제작",
+    "교회 홈페이지 제작",
+    "병원 홈페이지 제작",
+    "SEO 홈페이지 제작",
+    "랜딩 페이지 제작",
+    "홈페이지 제작 견적",
+    "홈페이지 제작 비용",
+    "웹에이전시",
+  ],
+  applicationName: siteName,
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName,
+    title: defaultTitle,
+    description: defaultDesc,
+    locale: "ko_KR",
+    images: [
+      {
+        url: "/og/og-default.png", // 1200x630 권장
+        width: 1200,
+        height: 630,
+        alt: "nuvio — New Perspective",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDesc,
+    images: ["/og/og-default.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+  alternates: {
+    canonical: siteUrl, // 각 페이지에서 덮어씀
+  },
+  icons: {
+    icon: [
+      { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/favicon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
+  },
+  other: {
+    "naver-site-verification": "네이버서치콘솔_키_여기", // 있으면
+  },
+};
+
+export const viewport = {
+  themeColor: "#111827",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }) {
@@ -39,7 +109,9 @@ export default function RootLayout({ children }) {
         </a>
         <Header />
 
-        <div className="content">{children}</div>
+        <main id="main" className="content">
+          {children}
+        </main>
         <FaqSection />
         <GlobalReveal />
         <InQuiry />

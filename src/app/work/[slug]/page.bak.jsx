@@ -2,6 +2,8 @@ import Image from "next/image";
 import { getAllWorks, getWorkBySlug } from "@/lib/works";
 import { notFound } from "next/navigation";
 import WorkMainSection from "@/components/work/WorkMainSection";
+import WorkSubSection from "@/components/work/WorkSubSection";
+import WorkExtraSection from "@/components/work/WorkExtraSection";
 
 // 간단한 마크다운 이미지 추출: ![alt](src)
 function extractImages(markdown = "") {
@@ -12,6 +14,33 @@ function extractImages(markdown = "") {
     urls.push(m[1]);
   }
   return urls;
+}
+
+function groupByKeyword(urls = []) {
+  const groups = {
+    cover: [],
+    mainPc: [],
+    mainMobile: [],
+    subPc: [],
+    subMobile: [],
+    style: [],
+    icons: [],
+    admin: [],
+    others: [],
+  };
+  urls.forEach((u) => {
+    const path = u.toLowerCase();
+    if (path.includes("cover")) groups.cover.push(u);
+    else if (path.includes("main-pc")) groups.mainPc.push(u);
+    else if (path.includes("main-mobile")) groups.mainMobile.push(u);
+    else if (path.includes("sub-pc")) groups.subPc.push(u);
+    else if (path.includes("sub-mobile")) groups.subMobile.push(u);
+    else if (path.includes("style")) groups.style.push(u);
+    else if (path.includes("icon")) groups.icons.push(u);
+    else if (path.includes("admin")) groups.admin.push(u);
+    else groups.others.push(u);
+  });
+  return groups;
 }
 
 // SEO Meta Tags
@@ -39,7 +68,8 @@ export default function WorkDetail({ params }) {
   const work = getWorkBySlug(params.slug);
   if (!work) return notFound();
 
-  const images = extractImages(work.content || "");
+  const urls = extractImages(work.content || "");
+  const groups = groupByKeyword(urls);
 
   return (
     <>
@@ -54,15 +84,15 @@ export default function WorkDetail({ params }) {
           </p>
         </header>
       </div>
-      {/* 커버 이미지 (frontmatter 우선) */}
-      {work.cover && (
+      {/* 커버 이미지 (frontmatter 우선, 없으면 body에서 cover 키워드 매칭) */}
+      {(work.cover || groups.cover[0]) && (
         <div className="mb-12 overflow-hidden">
           <Image
-            src={work.cover}
+            src={work.cover || groups.cover[0]}
             alt={work.title}
             width={1920}
-            height={720}
-            className="object-cover mx-auto w-full h-[720px]"
+            height={1080}
+            className="w-full h-auto"
             priority
           />
         </div>
@@ -100,10 +130,7 @@ export default function WorkDetail({ params }) {
             </p>
             {/* 요약 */}
             {work.overview && (
-              <p
-                className="text-[32px] md:text-[24px]"
-                dangerouslySetInnerHTML={{ __html: work.overview }}
-              />
+              <p className="text-[32px] md:text-[24px]">{work.overview}</p>
             )}
 
             <a
@@ -117,53 +144,22 @@ export default function WorkDetail({ params }) {
         </div>
       </article>
 
-      {/* 디자인 이미지 섹션 */}
-      <WorkMainSection images={images} title={work.title} />
+      {/* 메인 페이지 섹션 */}
+      <WorkMainSection groups={groups} title={work.title} />
 
-      {/* 이전 / 다음 포폴 네비게이션 (inputDate 최신순 기준) */}
-      {(() => {
-        // 최신순(내림차순)으로 정렬한 목록 기준으로 prev/next 계산
-        const works = getAllWorks().sort(
-          (a, b) => new Date(b.inputDate) - new Date(a.inputDate)
-        );
-        const currentIndex = works.findIndex((w) => w.slug === work.slug);
-        if (currentIndex === -1) return null;
+      {/* 서브 페이지 섹션 */}
+      <WorkSubSection groups={groups} title={work.title} />
 
-        // 최신순 배열에서: prev(이전)는 더 오래된 것, next(다음)는 더 최신 것
-        const prevWork = works[currentIndex - 1];
-        const nextWork = works[currentIndex + 1];
+      {/* 부가 콘텐츠: 스타일/아이콘/관리자 */}
+      <WorkExtraSection groups={groups} />
 
-        // 둘 다 없으면 렌더링 생략
-        if (!prevWork && !nextWork) return null;
-
-        return (
-          <nav className="container py-[150px] flex justify-between items-center border-t border-neutral-800 mt-[120px]">
-            {/* 이전 포폴 (오래된) */}
-            {prevWork ? (
-              <a
-                href={`/work/${prevWork.slug}`}
-                className="text-[44px] md:text-[40px] text-neutral-400 hover:text-white transition-colors"
-              >
-                ← {prevWork.title}
-              </a>
-            ) : (
-              <div />
-            )}
-
-            {/* 다음 포폴 (더 최신) */}
-            {nextWork ? (
-              <a
-                href={`/work/${nextWork.slug}`}
-                className="text-[44px] md:text-[40px] text-neutral-400 hover:text-white transition-colors"
-              >
-                {nextWork.title} →
-              </a>
-            ) : (
-              <div />
-            )}
-          </nav>
-        );
-      })()}
+      {/* 원문 본문 (HTML로 이미 변환되어 있는 경우에만) */}
+      {/* {work.content && (
+        <div
+          className="prose max-w-none mt-8"
+          dangerouslySetInnerHTML={{ __html: work.content }}
+        />
+      )} */}
     </>
   );
 }

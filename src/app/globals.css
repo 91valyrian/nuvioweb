@@ -14,7 +14,7 @@
 @layer utilities {
   .container {
     margin-inline: auto;
-    max-width: 1920px;
+    max-width: 1800px;
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -156,10 +156,6 @@
            bg-white/15 text-white/90 backdrop-blur;
   }
 
-  .workFigure {
-    @apply overflow-hidden bg-neutral-50 rounded-[22px] p-[3px] bg-[linear-gradient(135deg,#f7f9fb_0%,#dfe4ea_20%,#c3cbd4_45%,#aeb7c1_60%,#dfe4ea_80%,#f7f9fb_100%)] shadow-[0_6px_18px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.6)];
-  }
-
   .figureInner {
     @apply rounded-[21px] overflow-hidden bg-neutral-900 shadow-[inset_0_0_30px_rgba(0,0,0,0.5)];
   }
@@ -230,9 +226,9 @@ body {
   }
 }
 
-@media (max-width: 1920px) {
+@media (max-width: 1800px) {
   :root {
-    font-size: 0.8333vw; /* md 사이즈 이하일 때 base-size 변경 0.8333vw */
+    font-size: 0.8889vw; /* md 사이즈 이하일 때 base-size 변경 0.8333vw */
   }
 }
 
