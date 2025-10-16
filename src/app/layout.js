@@ -7,6 +7,7 @@ import GlobalCursor from "@/components/GlobalCursor";
 import GlobalReveal from "@/components/GlobalReveal";
 import InQuiry from "@/components/InQuiry";
 import FaqSection from "@/components/FaqSection";
+import { Analytics } from "@vercel/analytics/next";
 
 const siteName = "nuvio";
 const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
@@ -111,6 +112,7 @@ export default function RootLayout({ children }) {
 
         <main id="main" className="content">
           {children}
+          <Analytics />
         </main>
         <FaqSection />
         <GlobalReveal />
