@@ -1,11 +1,31 @@
-"use client";
-import { useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SubVisual from "@/components/SubVisual";
 import { serviceCards } from "@/data/serviceCards";
 
-gsap.registerPlugin(ScrollTrigger);
+// SEO metadata for Service page (minimal override; inherits the rest from layout)
+export async function generateMetadata() {
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
+  return {
+    title:
+      "홈페이지 제작 서비스 — 기업·병원·프랜차이즈 맞춤 웹사이트 전문 제작사", // will become "홈페이지 제작 서비스 | nuvio" via layout template
+    description:
+      "기업·병원·프랜차이즈 맞춤 홈페이지 제작 서비스. nuvio는 웹사이트 구축, 리뉴얼, SEO 최적화까지 전문적으로 제공하며 다양한 산업의 제작 사례로 검증된 신뢰를 제공합니다.",
+    keywords: [
+      "홈페이지 제작",
+      "기업 홈페이지 제작",
+      "웹사이트 제작",
+      "반응형 홈페이지",
+      "홈페이지 리뉴얼",
+      "SEO 최적화",
+      "랜딩 페이지 제작",
+      "UI/UX",
+      "포트폴리오",
+      "nuvio",
+    ],
+    alternates: { canonical: `${base}/service` },
+    openGraph: { images: [{ url: "/og/og-default.png" }] },
+    twitter: { images: ["/og/og-default.png"] },
+  };
+}
 
 export default function ServicePage() {
   // page.js 내부
@@ -221,6 +241,45 @@ export default function ServicePage() {
           </div>
         </div>
       </section>
+
+      {/* JSON-LD: Service + HowTo (process) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              name: "nuvio 서비스 목록",
+              itemListElement: (serviceCards || []).map((s, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                item: {
+                  "@type": "Service",
+                  name: s.title || s.titleEn,
+                  alternateName: s.titleEn || s.title,
+                  serviceType: s.badge,
+                  provider: { "@type": "Organization", name: "nuvio" },
+                },
+              })),
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              name: "웹사이트 제작 프로세스",
+              provider: { "@type": "Organization", name: "nuvio" },
+              step: (typeof window === "undefined" ? [] : []).concat([
+                { "@type": "HowToStep", position: 1, name: "미팅" },
+                { "@type": "HowToStep", position: 2, name: "기획" },
+                { "@type": "HowToStep", position: 3, name: "디자인 시안 작업" },
+                { "@type": "HowToStep", position: 4, name: "퍼블리싱 & 개발" },
+                { "@type": "HowToStep", position: 5, name: "검수 & 수정" },
+                { "@type": "HowToStep", position: 6, name: "배포 & 런칭" },
+              ]),
+            },
+          ]),
+        }}
+      />
     </main>
   );
 }

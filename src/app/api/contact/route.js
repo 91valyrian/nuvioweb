@@ -13,7 +13,7 @@ function sanitizeHtml(s = "") {
 }
 
 function buildSubject(name, company) {
-  return `[Contact] ${name || "No name"}${company ? ` - ${company}` : ""}`;
+  return `[홈페이지 제작 문의] ${name || "No name"}${company ? ` - ${company}` : ""}`;
 }
 
 function buildMailBodies({

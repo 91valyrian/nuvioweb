@@ -1,10 +1,34 @@
-"use client";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+// SEO Metadata 설정
+export async function generateMetadata() {
+  return {
+    title: "회사 소개 — 홈페이지 제작 전문 웹사이트 개발사 | nuvio",
+    description:
+      "nuvio는 브랜드 전략과 디자인, 개발을 아우르는 홈페이지 제작 전문 스튜디오입니다. 기업, 병원, 프랜차이즈 등 다양한 산업군의 웹사이트를 차별화된 전략으로 제작합니다.",
+    keywords: [
+      "홈페이지 제작",
+      "기업홈페이지",
+      "웹사이트 개발",
+      "UIUX 디자인",
+      "nuvio",
+      "회사 소개",
+      "웹 제작 스튜디오",
+    ],
+    openGraph: {
+      title: "회사 소개 — 홈페이지 제작 전문 웹사이트 개발사 | nuvio",
+      description:
+        "nuvio는 브랜드 전략과 디자인, 개발을 아우르는 홈페이지 제작 전문 스튜디오입니다. 기업, 병원, 프랜차이즈 등 다양한 산업군의 웹사이트를 차별화된 전략으로 제작합니다.",
+      url: "https://nuvio-web.com/about",
+      siteName: "nuvio",
+      type: "website",
+    },
+    alternates: {
+      canonical: "https://nuvio-web.com/about",
+    },
+  };
+}
+
 import SubVisual from "@/components/SubVisual";
 import { coreValues } from "@/data/coreValues";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const craftedList = [
   {
@@ -119,6 +143,85 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* JSON-LD: Organization + WebSite + AboutPage + BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "nuvio",
+              url: process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com",
+              logo:
+                (process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com") +
+                "/icons/apple-touch-icon.png",
+              // "sameAs": ["https://www.instagram.com/...", "https://www.linkedin.com/company/..."]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "nuvio",
+              url: process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com",
+              inLanguage: "ko",
+              publisher: {
+                "@type": "Organization",
+                name: "nuvio",
+              },
+              // 검색창이 있다면 SearchAction 추가 가능
+              // "potentialAction": {
+              //   "@type": "SearchAction",
+              //   "target": (process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com") + "/search?q={query}",
+              //   "query-input": "required name=query"
+              // }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "AboutPage",
+              name: "회사 소개 — 홈페이지 제작 전문 웹사이트 개발사 | nuvio",
+              url:
+                (process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com") +
+                "/about",
+              inLanguage: "ko",
+              isPartOf: {
+                "@type": "WebSite",
+                url:
+                  process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com",
+              },
+              primaryImageOfPage: {
+                "@type": "ImageObject",
+                url:
+                  (process.env.NEXT_PUBLIC_SITE_URL ||
+                    "https://nuvio-web.com") + "/images/about/visual.png",
+              },
+              description:
+                "nuvio는 브랜드 전략과 디자인, 개발을 아우르는 홈페이지 제작 전문 스튜디오입니다. 다양한 산업군의 웹사이트를 차별화된 전략으로 제작합니다.",
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item:
+                    process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "About",
+                  item:
+                    (process.env.NEXT_PUBLIC_SITE_URL ||
+                      "https://nuvio-web.com") + "/about",
+                },
+              ],
+            },
+          ]),
+        }}
+      />
     </main>
   );
 }

@@ -1,7 +1,11 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
+import Modal from "./Modal";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
       <footer className="footer relative pt-[120px] md:pt-[80px] overflow-hidden">
@@ -29,9 +33,15 @@ export default function Footer() {
             <a href="https://blog.naver.com/nuvio" target="_blank">
               블로그
             </a>
-            <a href="/work" target="_blank">
+            {/* <button
+              onClick={() => setIsModalOpen(true)}
+              aria-haspopup="dialog"
+              aria-controls="policy-dialog"
+              aria-expanded={isModalOpen}
+              className="cursor-pointer"
+            >
               인스타그램
-            </a>
+            </button> */}
           </div>
         </div>
         <div className="footer-bottom text-center text-[28px] md:text-[18px] text-neutral-300 font-[200] py-[50px] md:py-[30px]">
@@ -39,6 +49,13 @@ export default function Footer() {
         </div>
 
         <div className="w-[100%] h-[900px] md:h-[500px] center-absolute footer-gradient -z-1"></div>
+        <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <div className="text-center py-10">
+            <p className="text-[26px] font-medium text-neutral-100">
+              인스타그램 준비중입니다.
+            </p>
+          </div>
+        </Modal>
       </footer>
     </>
   );

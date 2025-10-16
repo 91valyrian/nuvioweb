@@ -9,7 +9,7 @@ import InQuiry from "@/components/InQuiry";
 import FaqSection from "@/components/FaqSection";
 
 const siteName = "nuvio";
-const siteUrl = "https://www.nuvio.kr"; // 배포 도메인으로 교체
+const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
 const defaultTitle =
   "홈페이지 제작 · 기업홈페이지 제작 · SEO 전문 웹사이트 제작업체 | nuvio";
 const defaultDesc =

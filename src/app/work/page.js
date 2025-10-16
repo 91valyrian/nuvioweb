@@ -2,6 +2,32 @@ import CardList from "@/components/CardList";
 import SubVisual from "@/components/SubVisual";
 import { getAllWorks } from "@/lib/works";
 
+// SEO metadata for Work list page (minimal override; rest inherits from layout)
+export async function generateMetadata() {
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://www.nuvio.kr";
+  return {
+    title: "홈페이지 제작 사례로 보는 nuvio의 웹사이트 구축 노하우",
+    description:
+      "nuvio 프로젝트 사례 — 기업, 병원, 프랜차이즈 홈페이지 제작 포트폴리오 모음. 다양한 산업의 맞춤형 웹사이트 제작과 리뉴얼 사례를 확인하세요.",
+    keywords: [
+      "포트폴리오",
+      "웹사이트 제작",
+      "홈페이지 제작",
+      "기업 홈페이지 제작",
+      "브랜드 홈페이지",
+      "SEO 홈페이지 제작",
+      "사례",
+      "리뉴얼",
+      "UI/UX",
+      "nuvio",
+    ],
+    alternates: { canonical: `${base}/work` },
+    // 이미지 배열은 상속되지 않으므로(배열은 병합되지 않음) 페이지 전용 이미지만 지정
+    openGraph: { images: [{ url: "/og/og-default.png" }] },
+    twitter: { images: ["/og/og-default.png"] },
+  };
+}
+
 export const revalidate = 60; // ISR도 가능(파일 변경 후 재빌드 권장)
 
 export default function WorkList() {
@@ -29,6 +55,48 @@ export default function WorkList() {
           />
         </div>
       </section>
+      {/* JSON-LD: Breadcrumb + CollectionPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item:
+                    process.env.NEXT_PUBLIC_SITE_URL || "https://www.nuvio.kr",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Work",
+                  item: `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.nuvio.kr"}/work`,
+                },
+              ],
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "CollectionPage",
+              name: "Work 제작 사례 | nuvio",
+              url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.nuvio.kr"}/work`,
+              about:
+                "nuvio 프로젝트 사례 — 웹사이트 제작·기업 홈페이지·SEO 포트폴리오",
+              inLanguage: "ko",
+              hasPart: (works || []).slice(0, 20).map((w, i) => ({
+                "@type": "CreativeWork",
+                name: w.title,
+                url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.nuvio.kr"}/work/${w.slug}`,
+                position: i + 1,
+              })),
+            },
+          ]),
+        }}
+      />
     </main>
   );
 }

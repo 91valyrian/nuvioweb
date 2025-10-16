@@ -3,6 +3,24 @@ import { getAllWorks, getWorkBySlug } from "@/lib/works";
 import { notFound } from "next/navigation";
 import WorkMainSection from "@/components/work/WorkMainSection";
 
+// HTML 태그 제거 및 공백 정리
+function stripHtml(html = "") {
+  return html
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// OG 이미지 선택 우선순위: cover > 본문 첫 이미지 > 기본 OG
+function selectOgImage(work) {
+  if (work?.cover) return work.cover;
+  if (work?.content) {
+    const m = work.content.match(/!\[[^\]]*\]\(([^)]+)\)/);
+    if (m && m[1]) return m[1];
+  }
+  return "/og/og-default.png";
+}
+
 // 간단한 마크다운 이미지 추출: ![alt](src)
 function extractImages(markdown = "") {
   const re = /!\[[^\]]*\]\(([^)]+)\)/g; // 캡처: (src)
@@ -14,19 +32,131 @@ function extractImages(markdown = "") {
   return urls;
 }
 
-// SEO Meta Tags
+// SEO Meta Tags (상위 노출 최적화: 제목/설명/키워드/OG/Twitter/robots/canonical)
 export async function generateMetadata({ params }) {
   const slug = params?.slug;
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
+
+  // 공통 기본값
+  const fallbackTitle = "Work 제작 사례 | nuvio";
+  const fallbackDesc =
+    "nuvio 프로젝트 사례 — 웹사이트 제작·기업 홈페이지·SEO에 강한 포트폴리오 모음";
+  const fallbackUrl = `${base}/work`;
+  const fallbackImage = "/og/og-default.png";
+  const fallbackKeywords = [
+    "포트폴리오",
+    "웹사이트 제작",
+    "홈페이지 제작",
+    "기업 홈페이지 제작",
+    "브랜드 홈페이지",
+    "SEO 홈페이지 제작",
+    "사례",
+    "리뉴얼",
+    "UI/UX",
+    "nuvio",
+  ];
+
+  // ❶ slug가 없을 때
   if (!slug) {
-    return { title: "Work | NUVIO", description: "NUVIO 프로젝트 사례" };
+    return {
+      title: fallbackTitle,
+      description: fallbackDesc,
+      keywords: fallbackKeywords,
+      alternates: { canonical: fallbackUrl },
+      openGraph: {
+        type: "website",
+        siteName: "nuvio",
+        title: fallbackTitle,
+        description: fallbackDesc,
+        url: fallbackUrl,
+        images: [{ url: fallbackImage }],
+        locale: "ko_KR",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: fallbackTitle,
+        description: fallbackDesc,
+        images: [fallbackImage],
+      },
+      robots: { index: true, follow: true },
+    };
   }
+
   const work = getWorkBySlug(slug);
+
+  // ❷ slug 데이터가 없을 때
   if (!work) {
-    return { title: "Work | NUVIO", description: "NUVIO 프로젝트 사례" };
+    return {
+      title: fallbackTitle,
+      description: fallbackDesc,
+      keywords: fallbackKeywords,
+      alternates: { canonical: fallbackUrl },
+      openGraph: {
+        type: "website",
+        siteName: "nuvio",
+        title: fallbackTitle,
+        description: fallbackDesc,
+        url: fallbackUrl,
+        images: [{ url: fallbackImage }],
+        locale: "ko_KR",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: fallbackTitle,
+        description: fallbackDesc,
+        images: [fallbackImage],
+      },
+      robots: { index: true, follow: true },
+    };
   }
+
+  // ❸ 데이터가 있을 때 (페이지별 맞춤 메타)
+  const pageTitle = `${work.title} 홈페이지 제작 사례`;
+  // CTR형 설명: 문제→해결 + 핵심키워드 자연 삽입 (120자 내)
+  const rawDesc =
+    work.overview ||
+    work.excerpt ||
+    `${work.client || "브랜드"}의 웹사이트 제작 사례`;
+  const pageDesc = stripHtml(rawDesc).slice(0, 120);
+  const url = `${base}/work/${slug}`;
+  const ogImage = selectOgImage(work);
+  const svc = Array.isArray(work.service) ? work.service : [];
+  const pageKeywords = [
+    work.client,
+    ...svc,
+    "포트폴리오",
+    "웹사이트 제작",
+    "홈페이지 제작",
+    "브랜드 홈페이지",
+    "기업 홈페이지 제작",
+    "SEO",
+    "검색엔진",
+    "서치어드바이저",
+    "서치콘솔",
+    "nuvio",
+  ].filter(Boolean);
+
   return {
-    title: `${work.title} | NUVIO`,
-    description: work.overview || "NUVIO 프로젝트 사례",
+    title: pageTitle,
+    description: pageDesc,
+    keywords: pageKeywords,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      siteName: "nuvio",
+      title: pageTitle,
+      description: pageDesc,
+      url,
+      images: [{ url: ogImage }],
+      locale: "ko_KR",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: pageDesc,
+      images: [ogImage],
+    },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -119,6 +249,24 @@ export default function WorkDetail({ params }) {
 
       {/* 디자인 이미지 섹션 */}
       <WorkMainSection images={images} title={work.title} />
+
+      {/* 구조화 데이터(JSON-LD) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: work.title,
+            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com"}/work/${work.slug}`,
+            author: { "@type": "Organization", name: "nuvio" },
+            datePublished: work.inputDate || work.year,
+            description: stripHtml(work.overview || ""),
+            image: selectOgImage(work),
+            inLanguage: "ko",
+          }),
+        }}
+      />
 
       {/* 이전 / 다음 포폴 네비게이션 (inputDate 최신순 기준) */}
       {(() => {
