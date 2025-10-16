@@ -83,8 +83,8 @@ export const metadata = {
     ],
     apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
   },
-  verification: {
-    naver: "0876717f42ba0375798681e5ad837f1bbb7edce7", // ✅ 이 부분 추가
+  other: {
+    "naver-site-verification": "0876717f42ba0375798681e5ad837f1bbb7edce7", // 있으면
   },
 };
 
