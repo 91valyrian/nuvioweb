@@ -335,7 +335,7 @@ export default function ContactPage() {
             <button
               type="button"
               onClick={closeResult}
-              className="px-4 py-2 rounded-lg border border-emerald-400/30 text-emerald-300 hover:border-emerald-300 hover:bg-emerald-400/10 text-[16px]"
+              className="px-4 py-2 rounded-lg border border-main text-main hover:border-main text-[28px] md:text-[18px] cursor-pointer"
             >
               확인
             </button>
@@ -343,14 +343,14 @@ export default function ContactPage() {
             <button
               type="button"
               onClick={closeResult}
-              className="px-4 py-2 rounded-lg border border-white/20 hover:border-white/60 hover:bg-white/5 text-[16px]"
+              className="px-4 py-2 rounded-lg border border-white/20 hover:border-white/60 hover:bg-white/5 text-[28px] md:text-[18px] cursor-pointer"
             >
               닫기
             </button>
           )
         }
       >
-        <p>{result.message}</p>
+        <p className="text-[28px] md:text-[18px]">{result.message}</p>
       </Modal>
 
       {/* JSON-LD: ContactPage + Organization */}

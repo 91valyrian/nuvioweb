@@ -17,12 +17,12 @@ export default function Modal({
     size === "lg"
       ? "w-[min(920px,92vw)]"
       : size === "sm"
-        ? "w-[min(420px,92vw)]"
-        : "w[ min(560px,92vw) ]".replace(" ", "");
+        ? "w-[min(520px,92vw)]"
+        : "w[ min(660px,92vw) ]".replace(" ", "");
 
   const iconWrapClass =
     variant === "success"
-      ? "bg-emerald-600/20 text-emerald-400"
+      ? "bg-main/20 text-main"
       : variant === "error"
         ? "bg-rose-600/20 text-rose-400"
         : "bg-white/10 text-white/80";
@@ -48,7 +48,7 @@ export default function Modal({
         <div className="flex items-center gap-3 px-6 md:px-8 py-5 border-b border-white/10">
           {/* Variant Icon (optional) */}
           <div
-            className={`grid place-items-center w-10 h-10 rounded-full ${iconWrapClass}`}
+            className={`grid place-items-center w-10 h-10 rounded-[9999px] ${iconWrapClass}`}
             aria-hidden="true"
           >
             {variant === "success" && (
@@ -110,7 +110,7 @@ export default function Modal({
         </div>
 
         {/* Body */}
-        <div className="px-6 md:px-8 py-6 text-white/90 text-[18px] md:text-[16px] max-h-[70vh] overflow-y-auto">
+        <div className="px-6 md:px-8 py-6 text-white/90 text-[28px] md:text-[18px] max-h-[70vh] overflow-y-auto">
           {children}
         </div>
 
