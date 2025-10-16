@@ -52,7 +52,7 @@ export const metadata = {
         url: "/og/og-default.png", // 1200x630 권장
         width: 1200,
         height: 630,
-        alt: "nuvio — New Perspective",
+        alt: "홈페이지 제작 nuvio — 새로운 관점으로 디자인합니다.",
       },
     ],
   },
@@ -83,8 +83,8 @@ export const metadata = {
     ],
     apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
   },
-  other: {
-    "naver-site-verification": "네이버서치콘솔_키_여기", // 있으면
+  verification: {
+    naver: "0876717f42ba0375798681e5ad837f1bbb7edce7", // ✅ 이 부분 추가
   },
 };
 
