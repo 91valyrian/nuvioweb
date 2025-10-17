@@ -1,9 +1,9 @@
 // SEO Metadata 설정
 export async function generateMetadata() {
   return {
-    title: "회사 소개 — 홈페이지 제작 전문 웹사이트 개발사 | nuvio",
+    title: "회사 소개 | 브랜드 방향성과 경험을 설계하는 홈페이지 제작 스튜디오",
     description:
-      "nuvio는 브랜드 전략과 디자인, 개발을 아우르는 홈페이지 제작 전문 스튜디오입니다. 기업, 병원, 프랜차이즈 등 다양한 산업군의 웹사이트를 차별화된 전략으로 제작합니다.",
+      "nuvio는 브랜드 전략과 기획, 디자인, 개발, SEO를 하나의 시선으로 연결하는 홈페이지 제작 스튜디오입니다. 기업, 병원, 프랜차이즈 등 다양한 산업에서 브랜드의 방향성과 경험을 설계합니다.",
     keywords: [
       "홈페이지 제작",
       "기업홈페이지",
@@ -14,9 +14,10 @@ export async function generateMetadata() {
       "웹 제작 스튜디오",
     ],
     openGraph: {
-      title: "회사 소개 — 홈페이지 제작 전문 웹사이트 개발사 | nuvio",
+      title:
+        "회사 소개 | 브랜드 방향성과 경험을 설계하는 홈페이지 제작 스튜디오",
       description:
-        "nuvio는 브랜드 전략과 디자인, 개발을 아우르는 홈페이지 제작 전문 스튜디오입니다. 기업, 병원, 프랜차이즈 등 다양한 산업군의 웹사이트를 차별화된 전략으로 제작합니다.",
+        "nuvio는 브랜드 전략과 기획, 디자인, 개발, SEO를 하나의 시선으로 연결하는 홈페이지 제작 스튜디오입니다. 기업, 병원, 프랜차이즈 등 다양한 산업에서 브랜드의 방향성과 경험을 설계합니다.",
       url: "https://nuvio-web.com/about",
       siteName: "nuvio",
       type: "website",

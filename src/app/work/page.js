@@ -6,9 +6,9 @@ import { getAllWorks } from "@/lib/works";
 export async function generateMetadata() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://www.nuvio.kr";
   return {
-    title: "홈페이지 제작 사례로 보는 nuvio의 웹사이트 구축 노하우",
+    title: "홈페이지 제작 사례 | 기업·병원·프랜차이즈 웹사이트 포트폴리오",
     description:
-      "nuvio 프로젝트 사례 — 기업, 병원, 프랜차이즈 홈페이지 제작 포트폴리오 모음. 다양한 산업의 맞춤형 웹사이트 제작과 리뉴얼 사례를 확인하세요.",
+      "nuvio의 홈페이지 제작 사례를 통해 다양한 산업의 맞춤형 웹사이트 구축 전략을 확인하세요. 기획부터 디자인·SEO까지, 브랜드의 성장을 위한 실전 포트폴리오입니다.",
     keywords: [
       "포트폴리오",
       "웹사이트 제작",

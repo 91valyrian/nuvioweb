@@ -17,8 +17,8 @@ export default function Modal({
     size === "lg"
       ? "w-[min(920px,92vw)]"
       : size === "sm"
-        ? "w-[min(520px,92vw)]"
-        : "w[ min(660px,92vw) ]".replace(" ", "");
+        ? "w-[428px]"
+        : "w-[628px]".replace(" ", "");
 
   const iconWrapClass =
     variant === "success"
@@ -48,13 +48,13 @@ export default function Modal({
         <div className="flex items-center gap-3 px-6 md:px-8 py-5 border-b border-white/10">
           {/* Variant Icon (optional) */}
           <div
-            className={`grid place-items-center w-10 h-10 rounded-[9999px] ${iconWrapClass}`}
+            className={`grid place-items-center w-10 h-10 rounded-[9999px] w-[70px] h-[70px] md:w-[50px] md:h-[50px] ${iconWrapClass}`}
             aria-hidden="true"
           >
             {variant === "success" && (
               <svg
                 viewBox="0 0 20 20"
-                className="w-5 h-5"
+                className="w-[44px] h-[44px] md:w-[24px] md:h-[24px]"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
@@ -67,7 +67,7 @@ export default function Modal({
             {variant === "error" && (
               <svg
                 viewBox="0 0 20 20"
-                className="w-5 h-5"
+                className="w-[44px] h-[44px] md:w-[24px] md:h-[24px]"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
@@ -80,7 +80,7 @@ export default function Modal({
             {variant === "default" && (
               <svg
                 viewBox="0 0 20 20"
-                className="w-5 h-5"
+                className="w-[44px] h-[44px] md:w-[24px] md:h-[24px]"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
@@ -94,7 +94,7 @@ export default function Modal({
 
           <h4
             id={ariaLabelledby || "modal-title"}
-            className="text-[34px] md:text-[24px] font-bold"
+            className="text-[36px] md:text-[24px] font-bold"
           >
             {title}
           </h4>
@@ -102,7 +102,7 @@ export default function Modal({
           <button
             type="button"
             onClick={onClose}
-            className="ml-auto text-white/80 hover:text-white text-[50px] md:text-[28px] leading-none cursor-pointer"
+            className="ml-auto text-white/80 hover:text-white text-[50px] md:text-[34px] leading-none cursor-pointer"
             aria-label="닫기"
           >
             ×
@@ -110,7 +110,7 @@ export default function Modal({
         </div>
 
         {/* Body */}
-        <div className="px-6 md:px-8 py-6 text-white/90 text-[28px] md:text-[18px] max-h-[70vh] overflow-y-auto">
+        <div className="px-6 md:px-8 py-6 text-white/90 text-[30px] md:text-[18px] max-h-[70vh] overflow-y-auto">
           {children}
         </div>
 

@@ -11,16 +11,15 @@ import { Analytics } from "@vercel/analytics/next";
 
 const siteName = "nuvio";
 const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
-const defaultTitle =
-  "홈페이지 제작 · 기업홈페이지 제작 · SEO 전문 웹사이트 제작업체 | nuvio";
+const defaultTitle = "홈페이지 제작 | 브랜드가 성장하는 웹사이트 – nuvio";
 const defaultDesc =
-  "nuvio는 기업의 브랜드 신뢰와 전환율을 높이는 웹사이트를 제작합니다. 기획부터 디자인, SEO까지 한 번에 제공하는 웹 제작 스튜디오입니다.";
+  "단순한 홈페이지 제작이 아닌, 브랜드의 방향성을 설계합니다. nuvio는 기획과 디자인, 그리고 SEO까지 일관된 시선으로 연결해 감각과 성과가 공존하는 웹사이트를 만듭니다.";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: defaultTitle,
-    template: `%s | ${siteName}`,
+    template: `%s - ${siteName}`,
   },
   description: defaultDesc,
   keywords: [

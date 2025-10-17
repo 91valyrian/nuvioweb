@@ -5,10 +5,9 @@ import { serviceCards } from "@/data/serviceCards";
 export async function generateMetadata() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
   return {
-    title:
-      "홈페이지 제작 서비스 — 기업·병원·프랜차이즈 맞춤 웹사이트 전문 제작사", // will become "홈페이지 제작 서비스 | nuvio" via layout template
+    title: "홈페이지 제작 서비스 | 기획·디자인·SEO 전문 웹사이트 구축", // will become "홈페이지 제작 서비스 | nuvio" via layout template
     description:
-      "기업·병원·프랜차이즈 맞춤 홈페이지 제작 서비스. nuvio는 웹사이트 구축, 리뉴얼, SEO 최적화까지 전문적으로 제공하며 다양한 산업의 제작 사례로 검증된 신뢰를 제공합니다.",
+      "nuvio는 기업, 병원, 프랜차이즈 등 다양한 산업의 맞춤형 홈페이지를 설계합니다. 기획·디자인·SEO를 하나의 흐름으로 연결해, 브랜드의 방향성과 성과를 완성하는 홈페이지 제작 서비스를 제공합니다.",
     keywords: [
       "홈페이지 제작",
       "기업 홈페이지 제작",

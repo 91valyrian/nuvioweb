@@ -11,6 +11,39 @@ function stripHtml(html = "") {
     .trim();
 }
 
+// HTML 정리(특수공백 포함) + 문장 단위 트렁케이트
+function cleanText(html = "") {
+  return stripHtml(html)
+    .replace(/&nbsp;/g, " ")
+    .trim();
+}
+
+function truncateSentence(text = "", maxLength = 110) {
+  if (text.length <= maxLength) return text;
+  const trimmed = text.slice(0, maxLength);
+
+  // 한글 문장 마침(다.), 일반 마침표, 물음표, 느낌표 중 가장 마지막 위치를 찾는다.
+  const lastKoPeriod = trimmed.lastIndexOf("다.");
+  const lastPeriod = trimmed.lastIndexOf(".");
+  const lastQ = trimmed.lastIndexOf("?");
+  const lastE = trimmed.lastIndexOf("!");
+
+  let cut = Math.max(lastKoPeriod, lastPeriod, lastQ, lastE);
+
+  // "다."는 2글자이므로 길이 보정
+  if (cut === lastKoPeriod && cut !== -1) {
+    return trimmed.slice(0, cut + 2);
+  }
+
+  if (cut > 0) {
+    return trimmed.slice(0, cut + 1);
+  }
+
+  // 마침표류가 없으면 단어 경계에서 자르고 말줄임표 처리
+  const lastSpace = trimmed.lastIndexOf(" ");
+  return lastSpace > 0 ? trimmed.slice(0, lastSpace) + "…" : trimmed + "…";
+}
+
 // OG 이미지 선택 우선순위: cover > 본문 첫 이미지 > 기본 OG
 function selectOgImage(work) {
   if (work?.cover) return work.cover;
@@ -38,9 +71,10 @@ export async function generateMetadata({ params }) {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
 
   // 공통 기본값
-  const fallbackTitle = "Work 제작 사례 | nuvio";
+  const fallbackTitle =
+    "홈페이지 제작 사례 | 디자인과 SEO 성과로 증명하는 nuvio";
   const fallbackDesc =
-    "nuvio 프로젝트 사례 — 웹사이트 제작·기업 홈페이지·SEO에 강한 포트폴리오 모음";
+    "디자인 감각과 SEO 성과로 완성한 nuvio의 프로젝트 사례. 기획부터 운영까지, 브랜드의 성장 여정을 함께 설계했습니다.";
   const fallbackUrl = `${base}/work`;
   const fallbackImage = "/og/og-default.png";
   const fallbackKeywords = [
@@ -111,13 +145,14 @@ export async function generateMetadata({ params }) {
   }
 
   // ❸ 데이터가 있을 때 (페이지별 맞춤 메타)
-  const pageTitle = `${work.title} 홈페이지 제작 사례`;
+  const pageTitle = `${work.title} 홈페이지 제작 | 브랜드 감각과 사용자 경험을 담은 프로젝트 – nuvio`;
   // CTR형 설명: 문제→해결 + 핵심키워드 자연 삽입 (120자 내)
   const rawDesc =
     work.overview ||
     work.excerpt ||
-    `${work.client || "브랜드"}의 웹사이트 제작 사례`;
-  const pageDesc = stripHtml(rawDesc).slice(0, 120);
+    `${work.client || "브랜드"}의 웹사이트 제작 사례입니다.`;
+  const descLead = truncateSentence(cleanText(rawDesc), 110);
+  const pageDesc = `${descLead} nuvio는 브랜드의 방향성과 사용자 경험을 중심으로 설계했습니다.`;
   const url = `${base}/work/${slug}`;
   const ogImage = selectOgImage(work);
   const svc = Array.isArray(work.service) ? work.service : [];
