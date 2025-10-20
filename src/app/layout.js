@@ -126,7 +126,6 @@ export default function RootLayout({ children }) {
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-
         <GlobalCursor />
         <a href="#main" className="skip sr-only">
           Skip to content
