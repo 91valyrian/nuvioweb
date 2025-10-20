@@ -8,7 +8,6 @@ import GlobalReveal from "@/components/GlobalReveal";
 import InQuiry from "@/components/InQuiry";
 import FaqSection from "@/components/FaqSection";
 import { Analytics } from "@vercel/analytics/next";
-import Script from "next/script";
 
 const siteName = "nuvio";
 const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
@@ -101,17 +100,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko" className="scrollbar-dark">
       <head>
-        {/* ✅ Google Tag Manager */}
-        <Script id="gtm-script" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-TMXFDXP9');
-          `}
-        </Script>
-        {/* End Google Tag Manager */}
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
@@ -119,19 +107,9 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://use.typekit.net/qql5rly.css" />
       </head>
       <body className="text-white">
-        {/* ✅ noscript용 코드 (body 바로 아래에 위치해야 함) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-TMXFDXP9"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-
         <GlobalCursor />
         <a href="#main" className="skip sr-only">
-          Skip to content11
+          Skip to content
         </a>
         <Header />
 
