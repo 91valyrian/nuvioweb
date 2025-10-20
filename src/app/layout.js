@@ -9,7 +9,8 @@ import InQuiry from "@/components/InQuiry";
 import FaqSection from "@/components/FaqSection";
 import { Analytics } from "@vercel/analytics/next";
 
-import AnalyticsTracker from "./contact/_components/AnalyticsTracker";
+import Script from "next/script";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 
 const siteName = "nuvio";
 const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
@@ -102,6 +103,22 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko" className="scrollbar-dark">
       <head>
+        {/* ✅ Google Analytics (GA4) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XS0LDTNCMH"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XS0LDTNCMH', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
+        {/* End Google Analytics */}
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
