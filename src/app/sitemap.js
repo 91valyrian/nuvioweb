@@ -1,49 +1,44 @@
 // src/app/sitemap.js
+import { getAllColumns } from "@/lib/columns";
+import { getAllWorks } from "@/lib/work";
+
+/**
+ * 베이스 URL은 .env에서 NEXT_PUBLIC_SITE_URL 로 관리 (예: https://nuvio-web.com)
+ * 없으면 프로덕션 가정 값으로 fallback
+ */
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+  "https://nuvio-web.com";
+
 export default async function sitemap() {
-  const baseUrl = "https://nuvio-web.com";
+  // 고정 페이지
+  const staticPages = [
+    { url: `${SITE_URL}/`, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${SITE_URL}/work`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${SITE_URL}/columns`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.6 },
+  ].map((item) => ({
+    ...item,
+    lastModified: new Date(),
+  }));
 
-  // 워크/칼럼 등 슬러그 기반 페이지 가져오기
-  // (정적 콘텐츠가 MDX면 별도 lib 함수에서 불러올 수 있음)
-  const works = []; // ex) getAllWorks().map((w) => `${baseUrl}/work/${w.slug}`)
-  const columns = []; // ex) getAllColumns().map((c) => `${baseUrl}/columns/${c.slug}`)
-
-  return [
-    {
-      url: `${baseUrl}/`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/work`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/columns`,
-      lastModified: new Date(),
+  // Work(포트폴리오) 동적 페이지
+  const works =
+    getAllWorks()?.map((w) => ({
+      url: `${SITE_URL}/work/${w.slug}`,
+      lastModified: w.date ? new Date(w.date) : new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    // 동적 콘텐츠 병합
-    ...works.map((url) => ({
-      url,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    })),
-    ...columns.map((url) => ({
-      url,
-      lastModified: new Date(),
+    })) ?? [];
+
+  // Columns(칼럼) 동적 페이지
+  const columns =
+    getAllColumns()?.map((c) => ({
+      url: `${SITE_URL}/columns/${c.slug}`,
+      lastModified: c.date ? new Date(c.date) : new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
-    })),
-  ];
+    })) ?? [];
+
+  return [...staticPages, ...works, ...columns];
 }
