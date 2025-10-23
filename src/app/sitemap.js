@@ -12,9 +12,11 @@ export default async function sitemap() {
   // 고정 페이지
   const staticPages = [
     { url: `${SITE_URL}/`, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/service`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/work`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${SITE_URL}/columns`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/columns`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.9 },
   ].map((i) => ({ ...i, lastModified: now }));
 
   // Work(포트폴리오) 동적 페이지
@@ -22,7 +24,7 @@ export default async function sitemap() {
     url: `${SITE_URL}/work/${w.slug}`,
     lastModified: w.date ? new Date(w.date) : now,
     changeFrequency: "weekly",
-    priority: 0.8,
+    priority: 0.9,
   }));
 
   // Columns(칼럼) 동적 페이지
@@ -30,7 +32,7 @@ export default async function sitemap() {
     url: `${SITE_URL}/columns/${c.slug}`,
     lastModified: c.date ? new Date(c.date) : now,
     changeFrequency: "weekly",
-    priority: 0.7,
+    priority: 0.9,
   }));
 
   return [...staticPages, ...works, ...columns];
