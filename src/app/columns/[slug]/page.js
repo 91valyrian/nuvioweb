@@ -6,6 +6,10 @@ import Script from "next/script";
 import PrevNextColumns from "@/components/PrevNextColumns";
 import Link from "next/link";
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+  "https://nuvio-web.com"; // canonical 생성에 사용
+
 export async function generateStaticParams() {
   return getAllColumns().map((p) => ({ slug: p.slug }));
 }
@@ -16,6 +20,7 @@ export async function generateMetadata({ params }) {
   const siteName = "nuvio";
   const baseSection = "Columns"; // 다른 페이지들과 유사한 유형
   const seoTitle = `${post.categories} | ${post.title}`;
+  const canonical = `${SITE_URL}/columns/${post.slug}`;
 
   const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean) : [];
   const categories = Array.isArray(post.categories)
@@ -35,18 +40,29 @@ export async function generateMetadata({ params }) {
   return {
     title: seoTitle,
     description,
-    keywords: tags, // 메타 키워드로 tags 사용
+    keywords: tags,
+    alternates: {
+      canonical,
+    },
     openGraph: {
       type: "article",
+      siteName,
+      url: canonical,
       title: seoTitle,
       description,
-      images: post.cover ? [{ url: post.cover }] : [],
+      images: post.cover
+        ? [{ url: new URL(post.cover, SITE_URL).toString() }]
+        : [],
     },
     twitter: {
       card: "summary_large_image",
       title: seoTitle,
       description,
-      images: post.cover ? [post.cover] : [],
+      images: post.cover ? [new URL(post.cover, SITE_URL).toString()] : [],
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
@@ -136,6 +152,7 @@ export default function ColumnDetail({ params }) {
   if (!post) return notFound();
 
   // Article 구조화데이터
+  const siteName = "nuvio";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -144,9 +161,11 @@ export default function ColumnDetail({ params }) {
     datePublished: post.date,
     author: [{ "@type": "Organization", name: post.author || "nuvio" }],
     image: post.cover ? [post.cover] : undefined,
+    url: `${SITE_URL}/columns/${post.slug}`,
+    publisher: { "@type": "Organization", name: siteName },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://YOUR_DOMAIN/columns/${post.slug}`,
+      "@id": `${SITE_URL}/columns/${post.slug}`,
     },
   };
 
