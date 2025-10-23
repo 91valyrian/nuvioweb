@@ -46,7 +46,7 @@ export default function ColumnsPage() {
     <main className="overflow-x-hidden">
       <SubVisual value="Columns" image="/images/columns/visual.webp" />
 
-      <div className="container">
+      <div className="container test">
         {/* 필터 + 목록 (클라이언트) */}
         <ColumnsList posts={posts} categories={categories} />
       </div>
