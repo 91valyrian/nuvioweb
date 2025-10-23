@@ -15,6 +15,7 @@ export default function CardList({
   loadMode = "auto", // 'auto' | 'button'
   moreLabel = "더보기", // 버튼 모드 레이블
   moreHoverLabel, // 버튼 hover 시 문구(미지정 시 moreLabel 사용)
+  horizontalOnMobile = false, // 메인 전용: 모바일에서 가로 스크롤
 }) {
   const [cursor, setCursor] = useState({ x: 0, y: 0, show: false });
   const rafRef = useRef(null);
@@ -118,12 +119,30 @@ export default function CardList({
     return () => io.disconnect();
   }, [visibleCount]);
 
+  // 모바일(<=768px)에서만 가로 스크롤이 필요한 경우 (메인 전용)
+  const listWrapClasses = horizontalOnMobile
+    ? [
+        "card-list",
+        gap,
+        // 모바일: 가로 스크롤 + 스냅 + 래핑 방지
+        "flex flex-nowrap gap-[50px] overflow-x-auto overflow-y-visible snap-x snap-mandatory scrollbar-none -mx-5 px-5 touch-pan-x",
+        // 데스크톱: 기존 그리드 유지
+        `md:grid ${cols} md:gap-6 md:overflow-visible md:mx-0 md:px-0`,
+        className,
+      ].join(" ")
+    : ["card-list", cols, gap, className].join(" ");
+
   return (
-    <ul ref={listRef} className={`card-list ${cols} ${gap} ${className}`}>
+    <ul ref={listRef} className={listWrapClasses}>
       {items.slice(0, visibleCount).map((item, idx) => (
         <li
           key={`${item.slug}-${idx}`}
-          className="card group overflow-hidden"
+          className={
+            `card group overflow-hidden ` +
+            (horizontalOnMobile
+              ? "snap-start flex-none shrink-0 w-[85%] max-w-[620px] md:w-auto md:max-w-none"
+              : "")
+          }
           onMouseEnter={handleEnter}
           onMouseLeave={handleLeave}
           onMouseMove={handleMove}
@@ -142,9 +161,9 @@ export default function CardList({
           </div>
 
           {/* 내용 */}
-          <div className="card-body">
+          <div className="card-body flex items-center justify-between">
             <h3 className="card-title">{item.title}</h3>
-            <p className="card-desc line-clamp-2">{item.summary}</p>
+            {/* <p className="card-desc line-clamp-2">{item.summary}</p> */}
             <p className="card-meta">
               {item.client} · {item.year}
             </p>
@@ -162,7 +181,11 @@ export default function CardList({
       {loadMode === "auto" && visibleCount < items.length && (
         <li
           ref={sentinelRef}
-          className="card-sentinel h-[1px] w-full"
+          className={
+            horizontalOnMobile
+              ? "card-sentinel flex-none w-[1px] h-[1px]"
+              : "card-sentinel h-[1px] w-full"
+          }
           aria-hidden="true"
         />
       )}

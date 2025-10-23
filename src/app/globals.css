@@ -6,6 +6,14 @@
   --base-size: 16px;
 }
 
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .interactive-cards:hover > div:not(:hover) {
   opacity: 0.3;
   transition: all 0.1s ease;
@@ -14,7 +22,7 @@
 @layer utilities {
   .container {
     margin-inline: auto;
-    max-width: 1800px;
+    max-width: 1600px;
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -72,6 +80,60 @@
     width: 8px;
     height: 8px;
   }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .prose h2 {
+    @apply text-[38px] md:text-[28px] font-bold mb-[25px];
+  }
+  .prose > p {
+    @apply text-[30px] md:text-[20px] text-black/80 leading-relaxed;
+  }
+  .prose a {
+    @apply text-[30px] md:text-[20px] bg-main h-[74px] md:h-[54px] text-white rounded-lg px-6 inline-flex items-center
+           hover:bg-main/90 transition-colors duration-200 mt-[20px];
+  }
+  .prose blockquote {
+    @apply text-[30px] md:text-[20px] text-black/80 leading-relaxed bg-[#E7EBFC] p-[20px] rounded-xl;
+
+    h3 {
+      @apply text-[34px] md:text-[24px] font-semibold mb-[15px];
+    }
+  }
+
+  .prose table {
+    @apply table-auto w-full text-left mt-[20px] mb-[30px] text-[26px] md:text-[18px];
+
+    thead {
+      @apply bg-neutral-50 text-neutral-700 font-semibold;
+      th {
+        @apply py-4 px-4 border-l border-neutral-200 bg-[#E7EBFC];
+        &:first-child {
+          @apply border-l-0 rounded-tl-xl rounded-bl-xl;
+        }
+        &:last-child {
+          @apply rounded-tr-xl rounded-br-xl;
+        }
+      }
+    }
+    tbody {
+      @apply text-neutral-700;
+      td {
+        @apply py-4 px-4 border-b border-l border-neutral-200;
+        &:first-child {
+          @apply border-l-0;
+        }
+      }
+    }
+  }
+
+  .prose hr {
+    @apply w-full h-[2px] border-0 bg-gradient-to-r from-[#ddd]/0 via-[#999]/100 to-[#ddd]/0 my-[100px];
+  }
 }
 
 @layer components {
@@ -79,7 +141,7 @@
   .card-list {
     @apply grid gap-6 md:gap-8;
     /* 기본 1 → md:2 → lg:3 */
-    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+    @apply grid-cols-1 md:grid-cols-3;
   }
 
   /* 바리에이션: 2/3/4열 강제 */
@@ -87,7 +149,7 @@
     @apply grid-cols-1 md:grid-cols-2;
   }
   .card-list.cols-3 {
-    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+    @apply grid-cols-1 md:grid-cols-3;
   }
   .card-list.cols-4 {
     @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4;
@@ -103,33 +165,32 @@
 
   /* 카드 기본 */
   .card {
-    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/5
+    @apply relative overflow-hidden
            backdrop-blur-sm transition-all duration-300;
-    @apply hover:translate-y-[-2px] hover:shadow-xl hover:bg-white/10;
+    @apply hover:translate-y-[-2px] hover:shadow-xl;
     /* 다크/라이트 자동 가독 */
     @apply text-white;
   }
 
   /* 카드 내부 여백 */
   .card-body {
-    @apply p-5 md:p-6;
+    @apply py-[20px];
   }
 
   /* 카드 제목, 설명, 메타 */
   .card-title {
-    @apply text-[41px] md:text-[31px] font-semibold leading-snug;
+    @apply text-[34px] md:text-[24px] font-semibold leading-snug;
   }
-  .card-desc {
+  /* .card-desc {
     @apply mt-2 text-[28px] md:text-[20px] text-white/70;
-  }
+  } */
   .card-meta {
-    @apply mt-4 text-[24px] md:text-[16px] text-white/50;
+    @apply text-[26px] md:text-[16px] text-white/50;
   }
 
   /* 썸네일 래퍼: 16:9 기본 (원하면 .ratio-square / .ratio-4-3 사용) */
   .card-media {
-    @apply relative w-full overflow-hidden bg-black/20;
-    padding-top: 810px;
+    @apply relative w-full rounded-[20px] overflow-hidden bg-black/20 pt-[500px] md:pt-[300px] xl:pt-[385px];
   }
   .card-media > img,
   .card-media > picture,
@@ -226,9 +287,12 @@ body {
   }
 }
 
-@media (max-width: 1800px) {
+@media (max-width: 1600px) {
   :root {
     font-size: 0.8889vw; /* md 사이즈 이하일 때 base-size 변경 0.8333vw */
+  }
+  .container {
+    max-width: 100%;
   }
 }
 

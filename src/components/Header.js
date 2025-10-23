@@ -6,10 +6,11 @@ import Nav from "./Nav";
 import GNB from "./GNB";
 
 const links = [
-  { href: "/about", label: "About" },
-  { href: "/service", label: "Service" },
-  { href: "/work", label: "Work" },
-  { href: "/contact", label: "Contact" },
+  { href: "/about", label: "회사소개" },
+  { href: "/service", label: "서비스" },
+  { href: "/work", label: "포트폴리오" },
+  { href: "/columns", label: "칼럼" },
+  // { href: "/contact", label: "문의" },
 ];
 
 export default function Header() {

@@ -3,21 +3,24 @@ export async function generateMetadata() {
   return {
     title: "회사 소개 | 브랜드 방향성과 경험을 설계하는 홈페이지 제작 스튜디오",
     description:
-      "nuvio는 브랜드 전략과 기획, 디자인, 개발, SEO를 하나의 시선으로 연결하는 홈페이지 제작 스튜디오입니다. 기업, 병원, 프랜차이즈 등 다양한 산업에서 브랜드의 방향성과 경험을 설계합니다.",
+      "기획·디자인·SEO로 완성하는 홈페이지 제작, 기업과 브랜드를 위한 맞춤형 웹스튜디오",
     keywords: [
       "홈페이지 제작",
-      "기업홈페이지",
-      "웹사이트 개발",
-      "UIUX 디자인",
-      "nuvio",
-      "회사 소개",
-      "웹 제작 스튜디오",
+      "웹 디자인",
+      "SEO 최적화",
+      "기업 홈페이지",
+      "맞춤형 웹사이트",
+      "웹에이전시",
+      "브랜드 전략",
+      "UI/UX 디자인",
+      "웹 개발",
+      "반응형 웹",
     ],
     openGraph: {
       title:
         "회사 소개 | 브랜드 방향성과 경험을 설계하는 홈페이지 제작 스튜디오",
       description:
-        "nuvio는 브랜드 전략과 기획, 디자인, 개발, SEO를 하나의 시선으로 연결하는 홈페이지 제작 스튜디오입니다. 기업, 병원, 프랜차이즈 등 다양한 산업에서 브랜드의 방향성과 경험을 설계합니다.",
+        "기획·디자인·SEO로 완성하는 홈페이지 제작, 기업과 브랜드를 위한 맞춤형 웹스튜디오",
       url: "https://nuvio-web.com/about",
       siteName: "nuvio",
       type: "website",
@@ -61,7 +64,7 @@ const craftedList = [
 export default function AboutPage() {
   return (
     <main>
-      <SubVisual value="About" image="/images/about/visual.png" />
+      <SubVisual value="About" image="/images/about/visual.webp" />
 
       {/* vsiual Text */}
       <section className="rotate-x-up">
@@ -119,7 +122,7 @@ export default function AboutPage() {
           </span>
         </h3>
 
-        <div className="cover w-[484px] md:w-[768px] mx-auto h-[930px] md:h-[100vh] bg-[url(/images/about/deliverCover.png)] bg-cover bg-center translate-y-[-930px] md:translate-y-[-100vh] rounded-[50px] relative z-[-1]"></div>
+        <div className="cover w-[484px] md:w-[768px] mx-auto h-[930px] md:h-[100vh] bg-[url(/images/about/deliverCover.webp)] bg-cover bg-center translate-y-[-930px] md:translate-y-[-100vh] rounded-[50px] relative z-[-1]"></div>
 
         <div className="container">
           <div className="pl-0 md:pl-[210px] xl:pl-[527px]">

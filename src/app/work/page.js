@@ -4,11 +4,11 @@ import { getAllWorks } from "@/lib/works";
 
 // SEO metadata for Work list page (minimal override; rest inherits from layout)
 export async function generateMetadata() {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://www.nuvio.kr";
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
   return {
     title: "홈페이지 제작 사례 | 기업·병원·프랜차이즈 웹사이트 포트폴리오",
     description:
-      "nuvio의 홈페이지 제작 사례를 통해 다양한 산업의 맞춤형 웹사이트 구축 전략을 확인하세요. 기획부터 디자인·SEO까지, 브랜드의 성장을 위한 실전 포트폴리오입니다.",
+      "홈페이지 제작 사례로 보는 브랜딩과 SEO 전략, 산업별 맞춤형 웹사이트 포트폴리오를 확인하세요.",
     keywords: [
       "포트폴리오",
       "웹사이트 제작",
@@ -16,7 +16,7 @@ export async function generateMetadata() {
       "기업 홈페이지 제작",
       "브랜드 홈페이지",
       "SEO 홈페이지 제작",
-      "사례",
+      "홈페이지 제작 사례",
       "리뉴얼",
       "UI/UX",
       "nuvio",
@@ -37,7 +37,7 @@ export default function WorkList() {
 
   return (
     <main>
-      <SubVisual value="Work" image="/images/work/visual.png" />
+      <SubVisual value="Work" image="/images/work/visual.webp" />
       <section>
         <div className="container">
           <CardList

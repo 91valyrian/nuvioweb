@@ -7,7 +7,7 @@ export async function generateMetadata() {
   return {
     title: "홈페이지 제작 서비스 | 기획·디자인·SEO 전문 웹사이트 구축", // will become "홈페이지 제작 서비스 | nuvio" via layout template
     description:
-      "nuvio는 기업, 병원, 프랜차이즈 등 다양한 산업의 맞춤형 홈페이지를 설계합니다. 기획·디자인·SEO를 하나의 흐름으로 연결해, 브랜드의 방향성과 성과를 완성하는 홈페이지 제작 서비스를 제공합니다.",
+      "맞춤형 홈페이지 제작과 SEO 최적화, 브랜드 성장을 돕는 웹사이트 제작 서비스를 제공합니다.",
     keywords: [
       "홈페이지 제작",
       "기업 홈페이지 제작",
@@ -17,6 +17,7 @@ export async function generateMetadata() {
       "SEO 최적화",
       "랜딩 페이지 제작",
       "UI/UX",
+      "브랜딩",
       "포트폴리오",
       "nuvio",
     ],
@@ -101,10 +102,10 @@ export default function ServicePage() {
 
   return (
     <main className="overflow-x-hidden">
-      <SubVisual value="Service" image="/images/service/visual.png" />
+      <SubVisual value="Service" image="/images/service/visual.webp" />
 
       {/* Services List */}
-      <section className=" pb-[100px] md:pb-[150px] xl:pb-[350px] bg-[url('/images/service/listBg.png')] bg-[position:center_bottom] bg-[length:200%] md:bg-[length:80%] bg-no-repeat">
+      <section className=" pb-[100px] md:pb-[150px] xl:pb-[350px] bg-[url('/images/service/listBg.webp')] bg-[position:center_bottom] bg-[length:200%] md:bg-[length:80%] bg-no-repeat">
         <div className="container">
           <div className="serviceList grid grid-cols-1 md:grid-cols-3 md:grid-cols-1 gap-[24px] mt-[60px]">
             {serviceCards.map((s, i) => (

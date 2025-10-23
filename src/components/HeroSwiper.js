@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 // 슬라이드 데이터 (첫 슬라이드는 비디오 배경, 나머지는 이미지)
 const slides = [
   {
-    src: "/main/heroSlide4.jpg",
+    src: "/main/heroSlide4.webp",
     alt: "완벽한 홈페이지 제작",
     title:
       "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
@@ -21,7 +21,7 @@ const slides = [
     ctaHref: "/contact",
   },
   {
-    src: "/main/heroSlide111.jpg",
+    src: "/main/heroSlide111.webp",
     alt: "보여지는 것 이상의 홈페이지",
     title: "보여지는 것<br /> 이상을 설계합니다.",
     subtitle:
@@ -30,7 +30,7 @@ const slides = [
     ctaHref: "/contact",
   },
   {
-    src: "/main/heroSlide5.jpg",
+    src: "/main/heroSlide5.webp",
     alt: "전략적 브랜딩 홈페이지",
     title: "전략과 감각이 만나는<br /> 브랜딩 웹사이트",
     subtitle:

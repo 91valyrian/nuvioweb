@@ -211,7 +211,7 @@ export default function FaqSection() {
   }, [openIndex, mounted, activeCategory]);
 
   return (
-    <section className="py-[180px] bg-neutral-950 text-white">
+    <section className="py-[180px] bg-gradient-to-b from-[#141414] to-[#000000] text-white">
       <div className="container mx-auto px-4">
         <h3 className="section-subtitle text-[60px] leading-[74px] md:text-[49px] md:leading-[59px] font-bold text-center mb-[50px] rotate-x-up">
           자주 묻는 질문

@@ -30,7 +30,7 @@ export default function GlobalReveal() {
           scrollTrigger: {
             trigger: el,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         }
       );
@@ -48,7 +48,7 @@ export default function GlobalReveal() {
           scrollTrigger: {
             trigger: el,
             start: "top 95%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         }
       );

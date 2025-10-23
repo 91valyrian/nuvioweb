@@ -224,7 +224,7 @@ export default function WorkDetail({ params }) {
         <div className="mb-12 overflow-hidden">
           <Image
             src={work.cover}
-            alt={work.title}
+            alt={"Cover image for " + work.title}
             width={1920}
             height={720}
             className="object-cover mx-auto w-full h-[720px]"

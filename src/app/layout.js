@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 // import QuickInquiry from "@/components/QuickInquiry";
 import GlobalCursor from "@/components/GlobalCursor";
 import GlobalReveal from "@/components/GlobalReveal";
-import InQuiry from "@/components/InQuiry";
 import FaqSection from "@/components/FaqSection";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -16,7 +15,7 @@ const siteName = "nuvio";
 const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
 const defaultTitle = "홈페이지 제작 | 브랜드가 성장하는 웹사이트 – nuvio";
 const defaultDesc =
-  "단순한 홈페이지 제작이 아닌, 브랜드의 방향성을 설계합니다. nuvio는 기획과 디자인, 그리고 SEO까지 일관된 시선으로 연결해 감각과 성과가 공존하는 웹사이트를 만듭니다.";
+  "기업과 브랜드를 위한 홈페이지 제작, SEO와 브랜딩 전략으로 성과를 완성하는 누비오(nuvio)입니다.";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -27,16 +26,18 @@ export const metadata = {
   description: defaultDesc,
   keywords: [
     "홈페이지 제작",
-    "기업 홈페이지 제작",
-    "홈페이지 업체 추천",
     "웹사이트 제작",
     "반응형 홈페이지",
+    "SEO 최적화",
+    "모바일 홈페이지",
+    "모바일 웹사이트",
+    "홈페이지 업체 추천",
+    "홈페이지 제작 업체 추천",
     "홈페이지 리뉴얼",
-    "브랜드 홈페이지 제작",
+    "브랜딩 홈페이지 제작",
     "학교 홈페이지 제작",
     "교회 홈페이지 제작",
     "병원 홈페이지 제작",
-    "SEO 홈페이지 제작",
     "랜딩 페이지 제작",
     "홈페이지 제작 견적",
     "홈페이지 제작 비용",
@@ -140,7 +141,7 @@ export default function RootLayout({ children }) {
         </main>
         <FaqSection />
         <GlobalReveal />
-        <InQuiry />
+
         {/* <QuickInquiry /> */}
         <Footer />
       </body>

@@ -9,7 +9,7 @@ export default function SubVisual({ value, image }) {
           Let’s Talk Ideas,
           <span className="block pl-[150px] rotate-x-up">Build Together</span>
         </p>
-        <h2 className="subTitle text-[120px] md:text-[160px] leading-[130px] md:leading-[170px] font-bold rotate-x-up">
+        <h2 className="subTitle text-[120px] leading-[122px] font-bold rotate-x-up">
           {value}
         </h2>
       </div>

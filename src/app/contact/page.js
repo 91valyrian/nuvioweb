@@ -116,7 +116,7 @@ export default function ContactPage() {
 
   return (
     <main>
-      <SubVisual value="Contact" image="/images/contact/visual.png" />
+      <SubVisual value="Contact" image="/images/contact/visual.webp" />
 
       <section className="">
         <div className="container py-[150px]">
