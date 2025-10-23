@@ -38,7 +38,7 @@ export default function WorkList() {
   return (
     <main>
       <SubVisual value="Work" image="/images/work/visual.webp" />
-      <section>
+      <section className="pb-[80px] pb-[240px] md:pb-[200px]">
         <div className="container">
           <CardList
             items={[...works].sort(

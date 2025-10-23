@@ -213,7 +213,7 @@ export default function FaqSection() {
   return (
     <section className="py-[180px] bg-gradient-to-b from-[#141414] to-[#000000] text-white">
       <div className="container mx-auto px-4">
-        <h3 className="section-subtitle text-[60px] leading-[74px] md:text-[49px] md:leading-[59px] font-bold text-center mb-[50px] rotate-x-up">
+        <h3 className="section-subtitle text-[54px] leading-[60px] md:text-[44px] md:leading-[50px] font-bold rotate-x-up text-center mb-[50px]">
           자주 묻는 질문
         </h3>
 
@@ -229,7 +229,7 @@ export default function FaqSection() {
                   setOpenIndex(null);
                 }}
                 className={[
-                  "px-[25px] md:px-[30px] py-[15px] text-[28px] md:text-[18px] rounded-[9999px] border transition-all cursor-pointer font-semibold border-2 rotate-x-up",
+                  "px-[25px] md:px-[30px] py-[15px] text-[28px] md:text-[18px] rounded-[9999px] border border-white/20 transition-all cursor-pointer font-semibold rotate-x-up",
                   isActive
                     ? "bg-main text-white border-main"
                     : "text-white/70 ",
@@ -250,7 +250,7 @@ export default function FaqSection() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className={`w-full flex justify-between items-center text-left px-[20px] py-[25px] md:py-[18px] hover:bg-white/5 transition cursor-pointer rotate-x-up ${mounted && openIndex === i ? "bg-white/5" : ""}`}
+                className={`w-full flex justify-between items-center text-left px-[20px] py-[25px] md:py-[18px] hover:bg-white/5 transition cursor-pointer ${mounted && openIndex === i ? "bg-white/5" : ""}`}
                 aria-expanded={mounted ? openIndex === i : false}
                 aria-controls={`faq-panel-${i}`}
               >

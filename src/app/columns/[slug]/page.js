@@ -157,12 +157,17 @@ export default function ColumnDetail({ params }) {
   const next = all[idx - 1]; // 더 최신
 
   return (
-    <main className="bg-[url('/images/columns/visual.webp')] bg-top bg-no-repeat bg-contain pt-[300px] md:pt-[200px]">
+    <main className="bg-[url('/images/columns/visual.webp')] bg-top bg-no-repeat bg-contain pt-[300px] pb-[180px] md:py-[200px]">
+      {/* <SubVisual
+        value="Columns"
+        image="/images/columns/visual.webp"
+        className="!h-[500px] !pt-[200px]"
+      /> */}
       <div className="py-[50px] max-w-[1000px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
         <section className="visual mb-[60px] text-left">
-          <h1 className="text-[51px] md:text-[41px] leading-[61px] md:leading-[51px] font-bold">
+          <h2 className="text-[51px] md:text-[41px] leading-[61px] md:leading-[51px] font-bold">
             {post.title}
-          </h1>
+          </h2>
 
           <div className="flex items-center justify-between border-t border-[#ddd] pt-[20px] mt-[20px] text-[18px] md:text-[18px] text-black/60 ">
             {/* {post.author && <span>by {post.author}</span>} <span>·</span> */}

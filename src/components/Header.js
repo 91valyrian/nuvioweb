@@ -9,7 +9,7 @@ const links = [
   { href: "/about", label: "회사소개" },
   { href: "/service", label: "서비스" },
   { href: "/work", label: "포트폴리오" },
-  { href: "/columns", label: "칼럼" },
+  { href: "/columns", label: "홈페이지 컬럼" },
   // { href: "/contact", label: "문의" },
 ];
 

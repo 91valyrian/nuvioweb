@@ -10,36 +10,33 @@ export default function ColumnsPreview() {
 
   return (
     <section
-      className="py-[120px] md:py-[240px]"
+      className="py-[240px] md:py-[200px]"
       aria-labelledby="columns-heading"
     >
       <div className="container">
-        <div className="flex items-end justify-between mb-[28px]">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-[60px] md:mb-[50px] gap-[30px]">
           <div>
-            <h2 className="section-subtitle text-[50px] leading-[54px] md:text-[40px] md:leading-[44px] font-bold rotate-x-up">
-              우리가 만들어온 변화와
-              <br /> 성장을 확인하세요.
+            <h2 className="section-subtitle text-[54px] leading-[60px] md:text-[44px] md:leading-[50px] font-bold rotate-x-up">
+              {/* 성공적인 홈페이지 제작을 위한 실전 노하우와 SEO 전략 */}
+              홈페이지 제작,
+              <br />
+              성공한 기업들은 무엇이 달랐을까?
             </h2>
-            <h2
-              id="columns-heading"
-              className="text-[40px] md:text-[32px] font-bold"
-            >
-              Columns
-            </h2>
-            <p className="text-white/60 mt-2 text-[16px]">
-              홈페이지 제작, 브랜딩, SEO 인사이트
+            <p className="text-white/60 mt-[20px] text-[30px] md:text-[20px] rotate-x-up">
+              누비오는 브랜드의 목적에 맞춘 완성도 높은 홈페이지 제작 솔루션을
+              제공합니다.
             </p>
           </div>
 
           <Link
-            href="/columns"
-            className="inline-flex items-center gap-2 px-5 h-[44px] rounded-full border border-white/20 text-sm text-white/80 hover:bg-white hover:text-black transition"
+            href="/work"
+            className="inline-flex items-center gap-2 px-8 md:px-5 h-[74px] md:h-[54px] rounded-full border-1 border-white/20 text-[28px] md:text-[18px] text-white/80 hover:bg-white hover:text-black transition fade-up"
             aria-label="컬럼 목록 전체 보기"
           >
-            전체 보기
+            홈페이지 컬럼 보러가기
             <svg
               viewBox="0 0 24 24"
-              className="w-4 h-4"
+              className="w-7 h-7 md:w-4 md:h-4"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -53,7 +50,7 @@ export default function ColumnsPreview() {
           </Link>
         </div>
 
-        <ul className="grid md:grid-cols-3 gap-[32px] md:gap-[40px]">
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-[32px] md:gap-[40px] fade-up">
           {posts.map((col, i) => (
             <li key={`${col.slug}-${i}`} className="group relative">
               <Link
@@ -73,15 +70,21 @@ export default function ColumnsPreview() {
                   />
                 </div>
               )}
-              <h3 className="text-[20px] font-semibold leading-snug line-clamp-2">
+              <h3
+                href={`/columns/${col.slug}`}
+                className="block truncate text-[34px] md:text-[24px] font-semibold leading-snug hover:text-white transition-colors "
+              >
                 {col.title}
               </h3>
+
               {col.summary && (
-                <p className="text-white/60 text-[14px] mt-2 line-clamp-2">
+                <p className="text-neutral-400 text-[28px] md:text-[18px] mt-[10px] leading-relaxed line-clamp-2">
                   {col.summary}
                 </p>
               )}
-              <p className="text-white/40 text-[12px] mt-3">{col.date}</p>
+              <p className="text-neutral-500 text-[26px] md:text-[16px] mt-[15px]">
+                {col.date}
+              </p>
             </li>
           ))}
         </ul>
