@@ -10,9 +10,7 @@ export default function FaqSection() {
       category: "제작·견적",
       question: "제작 비용은 어느 정도인가요?",
       answer: `홈페이지 제작 비용은 프로젝트의 규모와 필요한 기능, 디자인 방향에 따라 달라집니다.
-      <br class="hidden md:block"/> nuvio에서는 기본형 홈페이지는 약 200만원부터,
-      <br class="hidden md:block"/> 브랜드 아이덴티티와 사용자 경험(UX)을 반영한 기업형 홈페이지는 400~800만원대에서 진행되는 경우가 많습니다.
-      <br/> <br/> 정확한 금액은 구성과 기능 범위에 따라 조정되며,
+      <br class="hidden md:block"/> 정확한 금액은 구성과 기능 범위에 따라 조정되며,
       <br class="hidden md:block"/> 예산이 확정되지 않았더라도 부담 없이 문의해 주세요.
       <br class="hidden md:block"/> 간단한 프로젝트 정보만 공유해 주시면, 합리적인 견적과 진행 방향을 빠르게 안내드리겠습니다.`,
     },
