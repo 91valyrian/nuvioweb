@@ -125,7 +125,7 @@ export default function CardList({
         "card-list",
         gap,
         // 모바일: 가로 스크롤 + 스냅 + 래핑 방지
-        "flex flex-nowrap gap-[50px] overflow-x-auto overflow-y-visible snap-x snap-mandatory scrollbar-none -mx-5 px-5 touch-pan-x",
+        "flex flex-nowrap gap-[50px] overflow-x-auto overflow-y-visible snap-x snap-mandatory scrollbar-none -mx-5 px-5 touch-auto",
         // 데스크톱: 기존 그리드 유지
         `md:grid ${cols} md:gap-6 md:overflow-visible md:mx-0 md:px-0`,
         className,

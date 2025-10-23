@@ -16,7 +16,7 @@ export default function ColumnsPreview() {
       <div className="container">
         <div className="flex items-end justify-between mb-[28px]">
           <div>
-            <h2 className="section-subtitle text-[60px] leading-[74px] md:text-[40px] md:leading-[44px] font-bold rotate-x-up">
+            <h2 className="section-subtitle text-[50px] leading-[54px] md:text-[40px] md:leading-[44px] font-bold rotate-x-up">
               우리가 만들어온 변화와
               <br /> 성장을 확인하세요.
             </h2>
