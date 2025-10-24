@@ -90,6 +90,9 @@
   .prose h3 {
     @apply text-[38px] md:text-[28px] font-bold mb-[25px];
   }
+  .prose h4 {
+    @apply text-[34px] md:text-[24px] font-semibold mb-[25px];
+  }
   .prose > p {
     @apply text-[30px] md:text-[20px] text-black/80 leading-relaxed;
   }
