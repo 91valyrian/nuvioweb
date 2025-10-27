@@ -100,6 +100,12 @@
     @apply text-[30px] md:text-[20px] bg-main h-[74px] md:h-[54px] text-white rounded-lg px-6 inline-flex items-center
            hover:bg-main/90 transition-colors duration-200 mt-[20px];
   }
+  .prose ul {
+    @apply list-disc list-inside mt-[20px] mb-[30px] text-[30px] md:text-[20px] text-black/80 leading-relaxed;
+    li {
+      @apply mb-1;
+    }
+  }
   .prose blockquote {
     @apply text-[30px] md:text-[20px] text-black/80 leading-relaxed bg-[#E7EBFC] p-[20px] rounded-xl;
 

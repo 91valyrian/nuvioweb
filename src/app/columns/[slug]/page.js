@@ -15,7 +15,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const post = getColumnBySlug(params.slug);
+  const { slug } = await params;
+  const post = getColumnBySlug(slug);
   if (!post) return {};
   const siteName = "nuvio";
   const baseSection = "Columns"; // 다른 페이지들과 유사한 유형
@@ -147,8 +148,9 @@ const mdxComponents = {
   ),
 };
 
-export default function ColumnDetail({ params }) {
-  const post = getColumnBySlug(params.slug);
+export default async function ColumnDetail({ params }) {
+  const { slug } = await params;
+  const post = getColumnBySlug(slug);
   if (!post) return notFound();
 
   // Article 구조화데이터
@@ -221,7 +223,7 @@ export default function ColumnDetail({ params }) {
             성장을 설계합니다.
           </p>
           <Link href="/contact" className="text-blue-500 hover:underline">
-            👉 홈페이지 제작, 누비오와 함께하기
+            👉 지금 바로 무료 상담받기
           </Link>
         </article>
 
