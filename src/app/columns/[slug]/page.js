@@ -199,7 +199,7 @@ export default async function ColumnDetail({ params }) {
       <div className="py-[50px] max-w-[1000px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
         <section className="visual mb-[60px] text-left">
           <h2 className="text-[51px] md:text-[41px] leading-[61px] md:leading-[51px] font-bold">
-            {post.title}
+            {post.title} {post.subTitle && <span> — {post.subTitle}</span>}
           </h2>
 
           <div className="flex items-center justify-between border-t border-[#ddd] pt-[20px] mt-[20px] text-[18px] md:text-[18px] text-black/60 ">
@@ -234,9 +234,22 @@ export default async function ColumnDetail({ params }) {
             지금 준비 중이라면, 기획부터 함께 점검하세요. 누비오는 비즈니스
             성장을 설계합니다.
           </p>
-          <Link href="/contact" className="text-blue-500 hover:underline">
-            👉 지금 바로 무료 상담받기
-          </Link>
+          <div className="flex gap-4">
+            <Link
+              href="/contact"
+              className="!bg-white border border-black !text-black"
+            >
+              👉 제작 상담 바로가기
+            </Link>
+            <a
+              href="https://pf.kakao.com/_Rhhcn/chat"
+              target="_blank"
+              aria-label="5분 안에 홈페이지 진단받기"
+              className="hover:underline "
+            >
+              👉 5분 안에 홈페이지 진단받기
+            </a>
+          </div>
         </article>
 
         {/* {Array.isArray(post.tags) && post.tags.length > 0 && (

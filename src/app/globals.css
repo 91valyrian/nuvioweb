@@ -87,10 +87,10 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .prose h3 {
+  .prose h2 {
     @apply text-[38px] md:text-[28px] font-bold mb-[25px];
   }
-  .prose h4 {
+  .prose h3 {
     @apply text-[34px] md:text-[24px] font-semibold mb-[25px];
   }
   .prose > p {
@@ -109,7 +109,7 @@
   .prose blockquote {
     @apply text-[30px] md:text-[20px] text-black/80 leading-relaxed bg-[#E7EBFC] p-[20px] rounded-xl;
 
-    h4 {
+    h3 {
       @apply text-[34px] md:text-[24px] font-semibold mb-[15px];
     }
   }
