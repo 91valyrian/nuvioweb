@@ -13,9 +13,10 @@ import AnalyticsTracker from "@/components/AnalyticsTracker";
 
 const siteName = "nuvio";
 const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
-const defaultTitle = "홈페이지 제작 | 브랜드가 성장하는 웹사이트 – nuvio";
+const defaultTitle =
+  "누비오(nuvio) | 홈페이지 제작 · 브랜딩 · SEO까지 완성하는 웹사이트 전문";
 const defaultDesc =
-  "기업과 브랜드를 위한 홈페이지 제작, SEO와 브랜딩 전략으로 성과를 완성하는 누비오(nuvio)입니다.";
+  "누비오에서는 브랜드에 꼭 맞는 반응형 홈페이지를 쉽고 빠르게 제작할 수 있습니다.";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),

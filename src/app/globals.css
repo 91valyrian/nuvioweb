@@ -141,7 +141,7 @@
   }
 
   .prose hr {
-    @apply w-full h-[2px] border-0 bg-gradient-to-r from-[#ddd]/0 via-[#999]/100 to-[#ddd]/0 my-[100px];
+    @apply w-full h-[2px] border-0 bg-gradient-to-r from-[#ddd]/0 via-[#999]/100 to-[#ddd]/0 my-[60px];
   }
 }
 

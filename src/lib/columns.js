@@ -4,6 +4,23 @@ import matter from "gray-matter";
 
 const COLUMNS_DIR = path.join(process.cwd(), "content/columns");
 
+function normalizeToArray(value) {
+  if (!value) return [];
+  if (Array.isArray(value))
+    return value.flatMap((item) =>
+      item
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean)
+    );
+  if (typeof value === "string")
+    return value
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+  return [];
+}
+
 export function getAllColumns() {
   const files = fs.readdirSync(COLUMNS_DIR).filter((f) => f.endsWith(".mdx"));
 
@@ -15,18 +32,27 @@ export function getAllColumns() {
     // slug 정규화 (frontmatter에 .mdx가 들어와도 제거)
     const slug = (data.slug || base).replace(/\.mdx$/i, "");
 
-    // categories/tags 정규화
-    const toArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
-    const categories = toArray(data.categories).map((s) => String(s).trim());
-    const tags = toArray(data.tags).map((s) => String(s).trim());
+    // categories/tags 정규화 및 쉼표 분리
+    const categories = normalizeToArray(data.categories);
+    const tags = normalizeToArray(data.tags);
 
-    return { ...data, slug, categories, tags };
+    return {
+      ...data,
+      slug,
+      categories,
+      tags,
+      summary: data.summary || "",
+      thumbnail: data.thumbnail || "",
+      thumbnailAlt: data.thumbnailAlt || "",
+    };
   });
 
-  // 최신순
-  return posts
-    .filter((p) => p.date)
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  // 최신순 (날짜가 없으면 뒤로)
+  return posts.sort((a, b) => {
+    const dateA = a.date ? new Date(a.date) : new Date(0);
+    const dateB = b.date ? new Date(b.date) : new Date(0);
+    return dateB - dateA;
+  });
 }
 
 export function getColumnBySlug(slug) {
@@ -35,9 +61,17 @@ export function getColumnBySlug(slug) {
   const raw = fs.readFileSync(file, "utf-8");
   const { data, content } = matter(raw);
 
-  const toArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
-  const categories = toArray(data.categories).map((s) => String(s).trim());
-  const tags = toArray(data.tags).map((s) => String(s).trim());
+  const categories = normalizeToArray(data.categories);
+  const tags = normalizeToArray(data.tags);
 
-  return { ...data, slug: normalized, categories, tags, content };
+  return {
+    ...data,
+    slug: normalized,
+    categories,
+    tags,
+    summary: data.summary || "",
+    thumbnail: data.thumbnail || "",
+    thumbnailAlt: data.thumbnailAlt || "",
+    content,
+  };
 }

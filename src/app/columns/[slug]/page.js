@@ -5,6 +5,7 @@ import Image from "next/image";
 import Script from "next/script";
 import PrevNextColumns from "@/components/PrevNextColumns";
 import Link from "next/link";
+import { getRelatedKeywords } from "@/lib/getRelatedKeywords";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -20,7 +21,8 @@ export async function generateMetadata({ params }) {
   if (!post) return {};
   const siteName = "nuvio";
   const baseSection = "Columns"; // 다른 페이지들과 유사한 유형
-  const seoTitle = `${post.categories} | ${post.title}`;
+  // const seoTitle = `${post.categories} | ${post.title}`;
+  const seoTitle = `홈페이지 제작 · ${post.categories[0]} | ${post.title}`;
   const canonical = `${SITE_URL}/columns/${post.slug}`;
 
   const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean) : [];
@@ -152,6 +154,16 @@ export default async function ColumnDetail({ params }) {
   const { slug } = await params;
   const post = getColumnBySlug(slug);
   if (!post) return notFound();
+  const relatedKeywordsBase = getRelatedKeywords(
+    post.title,
+    post.content || ""
+  );
+  const relatedKeywords = Array.from(
+    new Set([
+      ...(Array.isArray(post.tags) ? post.tags : []),
+      ...relatedKeywordsBase,
+    ])
+  );
 
   // Article 구조화데이터
   const siteName = "nuvio";
@@ -227,7 +239,7 @@ export default async function ColumnDetail({ params }) {
           </Link>
         </article>
 
-        {Array.isArray(post.tags) && post.tags.length > 0 && (
+        {/* {Array.isArray(post.tags) && post.tags.length > 0 && (
           <div className="mt-[100px]">
             <ul className="flex flex-wrap gap-2" aria-label="해시태그">
               {post.tags.map((t, i) => (
@@ -239,29 +251,100 @@ export default async function ColumnDetail({ params }) {
               ))}
             </ul>
           </div>
+        )} */}
+
+        {/* 🔖 관련 키워드 자동 표시 */}
+        {relatedKeywords.length > 0 && (
+          <div className="mt-[100px]">
+            <h3 className="text-[38px] md:text-[28px] font-bold mb-[25px]">
+              관련 키워드
+            </h3>
+            <ul className="flex flex-wrap gap-2">
+              {relatedKeywords.map((kw, i) => (
+                <li key={i}>
+                  <span className="inline-flex items-center px-5 md:px-4 h-[60px] md:h-[40px] rounded-full border border-neutral-300 bg-neutral-100 text-neutral-700 text-[28px] md:text-[18px] leading-none hover:bg-neutral-200 transition-colors select-none">
+                    #{kw}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
 
+        {/* 🔖 랜덤 추천 컬럼 섹션 */}
+        {Array.isArray(all) &&
+          all.length > 1 &&
+          (() => {
+            // 현재 글(slug) 제외하고 무작위 섞기
+            const shuffled = all
+              .filter((p) => p.slug !== post.slug)
+              .sort(() => Math.random() - 0.5)
+              .slice(0, 3);
+
+            if (shuffled.length === 0) return null;
+
+            return (
+              <section className="mt-[100px]">
+                <h3 className="text-[38px] md:text-[28px] font-bold mb-[25px]">
+                  이런 글도 함께 읽어보세요
+                </h3>
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-2">
+                  {shuffled.map((p) => (
+                    <li
+                      key={p.slug}
+                      className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all"
+                    >
+                      <Link href={`/columns/${p.slug}`} className="block group">
+                        {p.thumbnail && (
+                          <div className="relative w-full aspect-[16/9] overflow-hidden">
+                            <Image
+                              src={p.thumbnail}
+                              alt={p.thumbnailAlt || p.title}
+                              fill
+                              sizes="(min-width:1280px) 400px, 100vw"
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                        )}
+                        <div className="p-5">
+                          <h4 className="text-[30px] md:text-[20px] leading-tight font-semibold text-gray-900 group-hover:text-black transition-colors line-clamp-2 mb-2">
+                            {p.title}
+                          </h4>
+                          <p className="text-[26px] md:text-[16px] leading-tight text-gray-600 line-clamp-1">
+                            {p.summary || "nuvio의 다른 컬럼을 확인해보세요."}
+                          </p>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            );
+          })()}
+
         {/* 위/아래 네비 (썸네일+제목+화살표) */}
-        <PrevNextColumns
-          prev={
-            next
-              ? {
-                  href: `/columns/${next.slug}`,
-                  title: next.title,
-                  thumb: next.thumbnail || next.cover,
-                }
-              : null
-          }
-          next={
-            prev
-              ? {
-                  href: `/columns/${prev.slug}`,
-                  title: prev.title,
-                  thumb: prev.thumbnail || prev.cover,
-                }
-              : null
-          }
-        />
+        <div className="mt-[100px]">
+          <PrevNextColumns
+            prev={
+              next
+                ? {
+                    href: `/columns/${next.slug}`,
+                    title: next.title,
+                    thumb: next.thumbnail || next.cover,
+                  }
+                : null
+            }
+            next={
+              prev
+                ? {
+                    href: `/columns/${prev.slug}`,
+                    title: prev.title,
+                    thumb: prev.thumbnail || prev.cover,
+                  }
+                : null
+            }
+          />
+        </div>
 
         <div className="flex mt-[30px] mb-[20px]">
           <Link
