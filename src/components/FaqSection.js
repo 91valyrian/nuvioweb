@@ -240,7 +240,7 @@ export default function FaqSection() {
         </div>
 
         {/* FAQ List */}
-        <div className="max-w-[1000px] mx-auto space-y-4">
+        <div className="max-w-[1200px] mx-auto space-y-4">
           {filtered.map((item, i) => (
             <div
               key={`${activeCategory}-${i}`}

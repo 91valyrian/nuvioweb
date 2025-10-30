@@ -1,9 +1,9 @@
 export async function generateMetadata() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
   return {
-    title: "홈페이지 제작 상담 | 기업·병원·프랜차이즈 맞춤 견적 문의",
+    title: "홈페이지 제작 문의 - 맞춤 견적 상담",
     description:
-      "홈페이지 제작 상담과 견적 문의, 기획부터 디자인·SEO까지 전문 웹스튜디오",
+      "홈페이지 제작, 리뉴얼, SEO 컨설팅 등 다양한 프로젝트를 빠르고 정확하게 상담해드립니다. 지금 바로 문의하세요.",
     keywords: [
       "홈페이지 제작 비용",
       "홈페이지 비용",

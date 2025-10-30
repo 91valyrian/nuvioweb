@@ -145,7 +145,8 @@ export async function generateMetadata({ params }) {
   }
 
   // ❸ 데이터가 있을 때 (페이지별 맞춤 메타)
-  const pageTitle = `${work.title} 홈페이지 제작 | 브랜드 감각과 사용자 경험을 담은 프로젝트`;
+  const pageTitle = `${work.title} - 제작 사례
+`;
   // CTR형 설명: 문제→해결 + 핵심키워드 자연 삽입 (120자 내)
   const rawDesc =
     work.overview ||

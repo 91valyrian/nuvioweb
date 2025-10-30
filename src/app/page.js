@@ -51,7 +51,7 @@ export default async function Home() {
           <div className="text-center mt-[50px] md:mt-[80px]">
             <Link
               href="/work"
-              className="inline-flex items-center gap-2 px-8 md:px-5 h-[74px] md:h-[54px] rounded-full border-1 border-white/20 text-[28px] md:text-[18px] text-white/80 hover:bg-white hover:text-black transition fade-up"
+              className="inline-flex items-center gap-2 px-8 md:px-5 h-[74px] md:h-[54px] rounded-full bg-main text-[28px] md:text-[18px] text-white/80 hover:bg-[#1244F9] transition fade-up"
               aria-label="포트폴리오 바로가기"
             >
               포트폴리오 바로가기

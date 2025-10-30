@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
   const siteName = "nuvio";
   const baseSection = "Columns"; // 다른 페이지들과 유사한 유형
   // const seoTitle = `${post.categories} | ${post.title}`;
-  const seoTitle = `홈페이지 제작 · ${post.categories[0]} | ${post.title}`;
+  const seoTitle = `${post.title} - 홈페이지 컬럼`;
   const canonical = `${SITE_URL}/columns/${post.slug}`;
 
   const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean) : [];
@@ -196,7 +196,7 @@ export default async function ColumnDetail({ params }) {
         image="/images/columns/visual.webp"
         className="!h-[500px] !pt-[200px]"
       /> */}
-      <div className="py-[50px] max-w-[1000px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
+      <div className="py-[50px] max-w-[1200px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
         <section className="visual mb-[60px] text-left">
           <h2 className="text-[51px] md:text-[41px] leading-[61px] md:leading-[51px] font-bold">
             {post.title} {post.subTitle && <span> — {post.subTitle}</span>}
@@ -234,7 +234,7 @@ export default async function ColumnDetail({ params }) {
             지금 준비 중이라면, 기획부터 함께 점검하세요. 누비오는 비즈니스
             성장을 설계합니다.
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-col md:flex-row gap-0 md:gap-4">
             <Link
               href="/contact"
               className="!bg-white border border-black !text-black"
@@ -269,7 +269,7 @@ export default async function ColumnDetail({ params }) {
         {/* 🔖 관련 키워드 자동 표시 */}
         {relatedKeywords.length > 0 && (
           <div className="mt-[100px]">
-            <h3 className="text-[38px] md:text-[28px] font-bold mb-[25px]">
+            <h3 className="text-[38px] md:text-[28px] font-bold mb-[25px] sr-only">
               관련 키워드
             </h3>
             <ul className="flex flex-wrap gap-2">

@@ -30,7 +30,7 @@ export default function ColumnsPreview() {
 
           <Link
             href="/columns"
-            className="inline-flex items-center gap-2 px-8 md:px-5 h-[74px] md:h-[54px] rounded-full border-1 border-white/20 text-[28px] md:text-[18px] text-white/80 hover:bg-white hover:text-black transition fade-up"
+            className="inline-flex items-center gap-2 px-8 md:px-5 h-[74px] md:h-[54px] rounded-full bg-main text-[28px] md:text-[18px] text-white/80 hover:bg-[#1244F9] transition fade-up"
             aria-label="컬럼 목록 전체 보기"
           >
             홈페이지 컬럼 보러가기

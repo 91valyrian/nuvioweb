@@ -14,15 +14,15 @@ import AnalyticsTracker from "@/components/AnalyticsTracker";
 const siteName = "nuvio";
 const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
 const defaultTitle =
-  "누비오(nuvio) | 홈페이지 제작 · 브랜딩 · SEO까지 완성하는 웹사이트 전문";
+  "홈페이지 제작 · 기업·병원·프랜차이즈 맞춤형 웹사이트 | nuvio";
 const defaultDesc =
-  "누비오에서는 브랜드에 꼭 맞는 반응형 홈페이지를 쉽고 빠르게 제작할 수 있습니다.";
+  "브랜드 가치와 성과를 높이는 홈페이지 제작. nuvio는 기업·병원·프랜차이즈 맞춤형 웹사이트를 만듭니다";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: defaultTitle,
-    template: `%s - ${siteName}`,
+    template: `%s | ${siteName}`,
   },
   description: defaultDesc,
   keywords: [

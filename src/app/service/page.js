@@ -5,9 +5,9 @@ import { serviceCards } from "@/data/serviceCards";
 export async function generateMetadata() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
   return {
-    title: "홈페이지 제작 서비스 | 기획·디자인·SEO 전문 웹사이트 구축", // will become "홈페이지 제작 서비스 | nuvio" via layout template
+    title: "홈페이지 제작 서비스 - 기획·디자인·SEO 전문", // will become "홈페이지 제작 서비스 | nuvio" via layout template
     description:
-      "맞춤형 홈페이지 제작과 SEO 최적화, 브랜드 성장을 돕는 웹사이트 제작 서비스를 제공합니다.",
+      "기업·병원·프랜차이즈 맞춤형 홈페이지 제작. 기획, 디자인, 개발, SEO까지 완성도 높은 웹사이트를 제공합니다.",
     keywords: [
       "홈페이지 제작",
       "기업 홈페이지 제작",
