@@ -196,10 +196,11 @@ export default async function ColumnDetail({ params }) {
         image="/images/columns/visual.webp"
         className="!h-[500px] !pt-[200px]"
       /> */}
-      <div className="py-[50px] max-w-[1200px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
-        <section className="visual mb-[60px] text-left">
+      <div className="py-[50px] max-w-[1000px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
+        <section className="visual mb-[30px] text-left">
           <h2 className="text-[51px] md:text-[41px] leading-[61px] md:leading-[51px] font-bold">
-            {post.title} {post.subTitle && <span> — {post.subTitle}</span>}
+            {post.title}
+            {/* {post.subTitle && <span>, {post.subTitle}</span>} */}
           </h2>
 
           <div className="flex items-center justify-between border-t border-[#ddd] pt-[20px] mt-[20px] text-[18px] md:text-[18px] text-black/60 ">
@@ -217,7 +218,7 @@ export default async function ColumnDetail({ params }) {
               width={1600}
               height={900}
               className="w-full h-auto object-cover"
-              sizes="(min-width:1280px) 1200px, 100vw"
+              sizes="(min-width:1280px) 1000px, 100vw"
               priority
             />
           </div>

@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="footer relative pt-[120px] md:pt-[80px] overflow-hidden">
       <InQuiry />
 
-      <div className="container footer-inner md:flex justify-between">
+      <div className="container footer-inner md:flex justify-between items-center">
         <div className="text-center md:text-left">
           {/* <b className="text-[74px] md:text-[44px]">nuvio</b> */}
           <div className="flex flex-col items-center md:items-start gap-[5px] text-[32px] md:text-[22px] font-[300] text-neutral-300 mt-[30px]">
@@ -30,8 +30,11 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="flex flex-col items-center md:items-end gap-[20px] justify-center text-[30px] md:text-[20px] text-center md:text-right mt-[50px] md:mt-0">
+        <div className="flex flex-col md:flex-row items-center md:items-end gap-[20px] justify-center text-[30px] md:text-[20px] text-center md:text-right mt-[50px] md:mt-0">
           <Link href="/about">회사소개</Link>
+          <Link href="/service">서비스</Link>
+          <Link href="/work">포트폴리오</Link>
+          <Link href="/columns">홈페이지 컬럼</Link>
           <a href="https://blog.naver.com/nuvio" target="_blank">
             블로그
           </a>
