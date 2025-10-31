@@ -122,6 +122,22 @@ export default function RootLayout({ children }) {
           `}
         </Script>
         {/* End Google Analytics */}
+        <Script
+          id="beusable-rum"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w, d, a){
+              w.__beusablerumclient__ = {
+                  load : function(src){
+                      var b = d.createElement("script");
+                      b.src = src; b.async=true; b.type = "text/javascript";
+                      d.getElementsByTagName("head")[0].appendChild(b);
+                  }
+              };
+              w.__beusablerumclient__.load(a + "?url=" + encodeURIComponent(d.URL));
+          })(window, document, "//rum.beusable.net/load/b251031e102356u405");`,
+          }}
+        />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
