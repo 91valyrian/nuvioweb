@@ -133,83 +133,85 @@ export default function CardList({
     : ["card-list", cols, gap, className].join(" ");
 
   return (
-    <ul ref={listRef} className={listWrapClasses}>
-      {items.slice(0, visibleCount).map((item, idx) => (
-        <li
-          key={`${item.slug}-${idx}`}
-          className={
-            `card group overflow-hidden ` +
-            (horizontalOnMobile
-              ? "snap-start flex-none shrink-0 w-[85%] max-w-[620px] md:w-auto md:max-w-none"
-              : "")
-          }
-          onMouseEnter={handleEnter}
-          onMouseLeave={handleLeave}
-          onMouseMove={handleMove}
-        >
-          {/* 썸네일 */}
-          <div className="card-media">
-            <Image
-              src={item.thumbnail || "/images/work/placeholder-thum.png"}
-              alt={item.title}
-              fill
-              sizes="(min-width:768px) 50vw, 100vw"
-              style={{ objectFit: "cover" }}
-              quality={90}
-              priority={false}
-            />
-          </div>
-
-          {/* 내용 */}
-          <div className="card-body flex items-center justify-between">
-            <h3 className="card-title">{item.title}</h3>
-            {/* <p className="card-desc line-clamp-2">{item.summary}</p> */}
-            <p className="card-meta">
-              {item.client} · {item.year}
-            </p>
-          </div>
-
-          {/* 전체 링크 */}
-          <Link
-            href={`/work/${item.slug}`}
-            className="card-link"
-            aria-label={`${item.title} 상세보기`}
-          />
-        </li>
-      ))}
-      {/* 무한 스크롤 센티넬 */}
-      {loadMode === "auto" && visibleCount < items.length && (
-        <li
-          ref={sentinelRef}
-          className={
-            horizontalOnMobile
-              ? "card-sentinel flex-none w-[1px] h-[1px]"
-              : "card-sentinel h-[1px] w-full"
-          }
-          aria-hidden="true"
-        />
-      )}
-      {loadMode === "button" && visibleCount < items.length && (
-        <li className="col-span-full flex justify-center mt-[24px] mb-[30px]">
-          <button
-            type="button"
-            onClick={() =>
-              setVisibleCount((prev) => Math.min(prev + step, items.length))
+    <div className="pl-[20px] md:pl-0">
+      <ul ref={listRef} className={`${listWrapClasses}`}>
+        {items.slice(0, visibleCount).map((item, idx) => (
+          <li
+            key={`${item.slug}-${idx}`}
+            className={
+              `card group overflow-hidden ` +
+              (horizontalOnMobile
+                ? "snap-start flex-none shrink-0 w-[60%] max-w-[620px] md:w-auto md:max-w-none "
+                : "")
             }
-            className="relative group block w-[400px] md:w-[290px] h-[74px] md:h-[54px] cursor-pointer mx-auto bg-white text-[#090A0C] text-[14px] font-pretendard rounded-[9999px] shadow-[0_2px_4px_rgba(0,0,0,0.15)] transition-all duration-200 overflow-hidden before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-[calc(100%+15px)] before:h-[calc(100%+15px)] before:bg-[rgba(255,255,255,0.12)] before:rounded-[30px] before:shadow-[0_24px_90px_rgba(0,0,0,0.12)] before:-z-[1] z-[998] hover:bg-main hover:text-white"
-            aria-label={`${moreLabel} (${visibleCount}/${items.length})`}
+            onMouseEnter={handleEnter}
+            onMouseLeave={handleLeave}
+            onMouseMove={handleMove}
           >
-            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full overflow-hidden">
-              <span className="flex items-center justify-center text-[28px] md:text-[18px] font-semibold h-full transform translate-y-0 transition-transform duration-200 group-hover:-translate-y-[100%]">
-                {moreLabel}
+            {/* 썸네일 */}
+            <div className="card-media">
+              <Image
+                src={item.thumbnail || "/images/work/placeholder-thum.png"}
+                alt={item.title}
+                fill
+                sizes="(min-width:768px) 50vw, 100vw"
+                style={{ objectFit: "cover" }}
+                quality={90}
+                priority={false}
+              />
+            </div>
+
+            {/* 내용 */}
+            <div className="card-body flex items-center justify-between flex-col">
+              <h3 className="card-title">{item.title}</h3>
+              {/* <p className="card-desc line-clamp-2">{item.summary}</p> */}
+              <p className="card-meta">
+                {item.client} · {item.year}
+              </p>
+            </div>
+
+            {/* 전체 링크 */}
+            <Link
+              href={`/work/${item.slug}`}
+              className="card-link"
+              aria-label={`${item.title} 상세보기`}
+            />
+          </li>
+        ))}
+        {/* 무한 스크롤 센티넬 */}
+        {loadMode === "auto" && visibleCount < items.length && (
+          <li
+            ref={sentinelRef}
+            className={
+              horizontalOnMobile
+                ? "card-sentinel flex-none w-[1px] h-[1px]"
+                : "card-sentinel h-[1px] w-full"
+            }
+            aria-hidden="true"
+          />
+        )}
+        {loadMode === "button" && visibleCount < items.length && (
+          <li className="col-span-full flex justify-center mt-[24px] mb-[30px]">
+            <button
+              type="button"
+              onClick={() =>
+                setVisibleCount((prev) => Math.min(prev + step, items.length))
+              }
+              className="relative group block w-[400px] md:w-[290px] h-[74px] md:h-[54px] cursor-pointer mx-auto bg-white text-[#090A0C] text-[14px] font-pretendard rounded-[9999px] shadow-[0_2px_4px_rgba(0,0,0,0.15)] transition-all duration-200 overflow-hidden before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-[calc(100%+15px)] before:h-[calc(100%+15px)] before:bg-[rgba(255,255,255,0.12)] before:rounded-[30px] before:shadow-[0_24px_90px_rgba(0,0,0,0.12)] before:-z-[1] z-[998] hover:bg-main hover:text-white"
+              aria-label={`${moreLabel} (${visibleCount}/${items.length})`}
+            >
+              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full overflow-hidden">
+                <span className="flex items-center justify-center text-[28px] md:text-[18px] font-semibold h-full transform translate-y-0 transition-transform duration-200 group-hover:-translate-y-[100%]">
+                  {moreLabel}
+                </span>
+                <span className="flex items-center justify-center text-[34px] md:text-[24px] font-bold h-full text-white transform translate-y-0 transition-transform duration-200 group-hover:translate-y-[-100%]">
+                  {resolvedHoverLabel}
+                </span>
               </span>
-              <span className="flex items-center justify-center text-[34px] md:text-[24px] font-bold h-full text-white transform translate-y-0 transition-transform duration-200 group-hover:translate-y-[-100%]">
-                {resolvedHoverLabel}
-              </span>
-            </span>
-          </button>
-        </li>
-      )}
-    </ul>
+            </button>
+          </li>
+        )}
+      </ul>
+    </div>
   );
 }

@@ -191,7 +191,7 @@
 
   /* 카드 제목, 설명, 메타 */
   .card-title {
-    @apply text-[36px] md:text-[26px] font-semibold leading-snug;
+    @apply text-[36px] md:text-[36px] font-semibold leading-snug;
   }
   /* .card-desc {
     @apply mt-2 text-[28px] md:text-[20px] text-white/70;
@@ -202,7 +202,7 @@
 
   /* 썸네일 래퍼: 16:9 기본 (원하면 .ratio-square / .ratio-4-3 사용) */
   .card-media {
-    @apply relative w-full rounded-[20px] overflow-hidden bg-black/20 pt-[500px] md:pt-[300px] xl:pt-[385px];
+    @apply relative w-full rounded-[20px] overflow-hidden bg-black/20 pt-[500px] md:pt-[585px];
   }
   .card-media > img,
   .card-media > picture,

@@ -41,7 +41,7 @@ export default async function Home() {
             items={[...works].sort(
               (a, b) => new Date(b.inputDate) - new Date(a.inputDate)
             )}
-            initialCount={6}
+            initialCount={3}
             step={0}
             cols="cols-3"
             gap="gap-lg"

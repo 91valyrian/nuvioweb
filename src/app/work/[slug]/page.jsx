@@ -67,7 +67,7 @@ function extractImages(markdown = "") {
 
 // SEO Meta Tags (상위 노출 최적화: 제목/설명/키워드/OG/Twitter/robots/canonical)
 export async function generateMetadata({ params }) {
-  const slug = params?.slug;
+  const { slug } = await params;
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
 
   // 공통 기본값
@@ -201,8 +201,9 @@ export async function generateStaticParams() {
   return works.map((w) => ({ slug: w.slug }));
 }
 
-export default function WorkDetail({ params }) {
-  const work = getWorkBySlug(params.slug);
+export default async function WorkDetail({ params }) {
+  const { slug } = await params;
+  const work = getWorkBySlug(slug);
   if (!work) return notFound();
 
   const images = extractImages(work.content || "");
@@ -228,7 +229,7 @@ export default function WorkDetail({ params }) {
             alt={"Cover image for " + work.title}
             width={1920}
             height={720}
-            className="object-cover mx-auto w-full h-[720px]"
+            className="object-cover mx-auto w-full h-[720px] max-w-[1920px]"
             priority
           />
         </div>
