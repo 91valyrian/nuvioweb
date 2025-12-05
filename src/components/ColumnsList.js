@@ -63,7 +63,7 @@ export default function ColumnsList({ posts, categories }) {
         id="columns-list"
       >
         {/* 카테고리 버튼 */}
-        <div className="flex md:shrink-0 flex-wrap content-start w-full md:w-[340px] gap-[10px]">
+        <div className="flex md:shrink-0 flex-wrap content-start w-full md:w-[400px] gap-[10px]">
           {["전체", ...categories].map((cat) => {
             const isOn = active === cat;
             return (
