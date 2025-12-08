@@ -75,7 +75,7 @@ export default function ColumnsList({ posts, categories }) {
                   setPage(1);
                 }}
                 className={[
-                  "shrink-0 px-8 h-[64px] md:h-[50px] rounded-full border-2 text-[30px] md:text-[20px] transition-colors cursor-pointer",
+                  "shrink-0 px-8 h-[64px] md:h-[50px] rounded-[9999px] border-2 text-[30px] md:text-[20px] transition-colors cursor-pointer",
                   isOn
                     ? "border-white bg-white text-black"
                     : "border-white/30 text-white/80 hover:border-white/60 hover:text-white",
@@ -126,7 +126,7 @@ export default function ColumnsList({ posts, categories }) {
                 col.categories.map((c) => (
                   <span
                     key={c}
-                    className="text-[15px] px-3 py-2 rounded-full border border-white/20 text-white/70"
+                    className="text-[15px] px-3 py-2 rounded-[9999px] border border-white/20 text-white/70"
                   >
                     {c}
                   </span>
@@ -158,7 +158,7 @@ export default function ColumnsList({ posts, categories }) {
               setPage((p) => Math.max(1, p - 1));
             }}
             disabled={safePage <= 1}
-            className="px-3 h-[64px] md:h-[50px] rounded-full border-2 border-white/20 text-[30px] md:text-[20px] text-white/80 hover:bg-white hover:text-black disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-white/80 transition cursor-pointer"
+            className="px-3 h-[64px] md:h-[50px] rounded-[9999px] border-2 border-white/20 text-[30px] md:text-[20px] text-white/80 hover:bg-white hover:text-black disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-white/80 transition cursor-pointer"
           >
             이전
           </button>
@@ -194,7 +194,7 @@ export default function ColumnsList({ posts, categories }) {
               setPage((p) => Math.min(totalPages, p + 1));
             }}
             disabled={safePage >= totalPages}
-            className="px-3 h-[64px] md:h-[50px] rounded-full border-2 border-white/20 text-[30px] md:text-[20px] text-white/80 hover:bg-white hover:text-black disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-white/80 transition cursor-pointer"
+            className="px-3 h-[64px] md:h-[50px] rounded-[9999px] border-2 border-white/20 text-[30px] md:text-[20px] text-white/80 hover:bg-white hover:text-black disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-white/80 transition cursor-pointer"
           >
             다음
           </button>

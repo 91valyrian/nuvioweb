@@ -298,7 +298,7 @@ export default function ContactPage() {
                     href="https://pf.kakao.com/_Rhhcn/chat" // 실제 카카오 채널 URL로 변경
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hidden md:inline-flex items-center px-4 py-2 rounded-full bg-[#FEE500] text-black font-semibold text-[28px] md:text-[18px] shadow-[0_0_30px_rgba(255,229,0,0.4)] hover:shadow-[0_0_60px_rgba(255,229,0,0.6)] transition-all duration-300"
+                    className="hidden md:inline-flex items-center px-4 py-2 rounded-[9999px] bg-[#FEE500] text-black font-semibold text-[28px] md:text-[18px] shadow-[0_0_30px_rgba(255,229,0,0.4)] hover:shadow-[0_0_60px_rgba(255,229,0,0.6)] transition-all duration-300"
                   >
                     카카오톡으로 문의하기
                   </a>
@@ -308,7 +308,7 @@ export default function ContactPage() {
                   href="https://pf.kakao.com/_Rhhcn/chat" // 실제 카카오 채널 URL로 변경
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex md:hidden items-center px-4 py-2 rounded-full bg-[#FEE500] text-black font-semibold text-[28px] md:text-[18px] shadow-[0_0_30px_rgba(255,229,0,0.4)] hover:shadow-[0_0_60px_rgba(255,229,0,0.6)] transition-all duration-300"
+                  className="inline-flex md:hidden items-center px-4 py-2 rounded-[9999px] bg-[#FEE500] text-black font-semibold text-[28px] md:text-[18px] shadow-[0_0_30px_rgba(255,229,0,0.4)] hover:shadow-[0_0_60px_rgba(255,229,0,0.6)] transition-all duration-300"
                 >
                   카카오톡으로 문의하기
                 </a>

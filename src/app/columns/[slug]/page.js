@@ -258,7 +258,7 @@ export default async function ColumnDetail({ params }) {
             <ul className="flex flex-wrap gap-2" aria-label="해시태그">
               {post.tags.map((t, i) => (
                 <li key={`${t}-${i}`} className="list-none">
-                  <span className="inline-flex items-center px-5 md:px-4 h-[60px] md:h-[40px] rounded-full border border-neutral-300 bg-neutral-100 text-neutral-700 text-[28px] md:text-[18px] leading-none hover:bg-neutral-200 transition-colors select-none">
+                  <span className="inline-flex items-center px-5 md:px-4 h-[60px] md:h-[40px] rounded-[9999px] border border-neutral-300 bg-neutral-100 text-neutral-700 text-[28px] md:text-[18px] leading-none hover:bg-neutral-200 transition-colors select-none">
                     #{t}
                   </span>
                 </li>
@@ -276,7 +276,7 @@ export default async function ColumnDetail({ params }) {
             <ul className="flex flex-wrap gap-2">
               {relatedKeywords.map((kw, i) => (
                 <li key={i}>
-                  <span className="inline-flex items-center px-5 md:px-4 h-[60px] md:h-[40px] rounded-full border border-neutral-300 bg-neutral-100 text-neutral-700 text-[28px] md:text-[18px] leading-none hover:bg-neutral-200 transition-colors select-none">
+                  <span className="inline-flex items-center px-5 md:px-4 h-[60px] md:h-[40px] rounded-[9999px] border border-neutral-300 bg-neutral-100 text-neutral-700 text-[28px] md:text-[18px] leading-none hover:bg-neutral-200 transition-colors select-none">
                     #{kw}
                   </span>
                 </li>

@@ -12,7 +12,7 @@ export default function InQuiry() {
             <span className="hidden md:inline-block">Are you ready to</span>{" "}
             Contact us?
           </h4>
-          <span className="inline-grid place-items-center w-16 h-16 rounded-full bg-white text-white">
+          <span className="inline-grid place-items-center w-16 h-16 rounded-[9999px] bg-white text-white">
             <svg
               className="w-[40px] h-[32px] md:w-[32px] md:h-[26px]"
               width="100%"

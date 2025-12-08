@@ -225,7 +225,7 @@
 
   /* 배지/태그 */
   .card-badge {
-    @apply absolute left-4 top-4 rounded-full px-2.5 py-1 text-xs font-medium
+    @apply absolute left-4 top-4 rounded-[9999px] px-2.5 py-1 text-xs font-medium
            bg-white/15 text-white/90 backdrop-blur;
   }
 
