@@ -96,6 +96,7 @@ export default function HeroSwiper() {
 
   return (
     <section className="relative overflow-hidden">
+      <h1 className="sr-only">완벽한 첫인상, 기업의 가치를 높입니다.</h1>
       <Swiper
         className="w-full h-[1380px] md:h-[100vh]"
         modules={[Autoplay, Pagination, Navigation, A11y]}

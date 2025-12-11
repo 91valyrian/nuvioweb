@@ -58,6 +58,7 @@ export default function ColumnsList({ posts, categories }) {
 
   return (
     <>
+      <h2 className="sr-only">홈페이지 컬럼 리스트</h2>
       <div
         className="py-[120px] flex flex-col md:flex-row gap-[60px]"
         id="columns-list"
@@ -103,6 +104,7 @@ export default function ColumnsList({ posts, categories }) {
                     src={col.thumbnail}
                     alt={col.thumbnailAlt || col.title || ""}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>

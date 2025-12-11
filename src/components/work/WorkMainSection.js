@@ -6,9 +6,9 @@ export default function WorkMainSection({ images = [], title }) {
   return (
     <section className="">
       <div className="md:max-w-[1024px] xl:max-w-[1720px] mx-auto px-[20px]">
-        <h3 className="mb-6 text-[64px] md:text-[50px] font-semibold sr-only">
+        <h2 className="mb-6 text-[64px] md:text-[50px] font-semibold sr-only">
           {title} 전체 디자인
-        </h3>
+        </h2>
         {images.map((src, i) => (
           <figure key={`design-${i}`} className="mb-10">
             <Image

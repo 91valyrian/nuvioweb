@@ -5,21 +5,20 @@ import { serviceCards } from "@/data/serviceCards";
 export async function generateMetadata() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
   return {
-    title: "홈페이지 제작 서비스 - 기획·디자인·SEO 전문", // will become "홈페이지 제작 서비스 | nuvio" via layout template
+    title: "홈페이지 제작 서비스 - 맞춤형 기획·디자인·SEO·운영", // will become "홈페이지 제작 서비스 | nuvio" via layout template
     description:
-      "기업·병원·프랜차이즈 맞춤형 홈페이지 제작. 기획, 디자인, 개발, SEO까지 완성도 높은 웹사이트를 제공합니다.",
+      "브랜드 전략에 맞춘 맞춤형 홈페이지 기획, 브랜딩 디자인, 개발, SEO 최적화, 운영·유지 관리까지 제공합니다. 기업·병원·프랜차이즈 비즈니스에 필요한 웹 전체 구조를 설계합니다.",
     keywords: [
-      "홈페이지 제작",
-      "기업 홈페이지 제작",
-      "웹사이트 제작",
-      "반응형 홈페이지",
-      "홈페이지 리뉴얼",
-      "SEO 최적화",
-      "랜딩 페이지 제작",
-      "UI/UX",
-      "브랜딩",
-      "포트폴리오",
-      "nuvio",
+      "홈페이지 제작 서비스",
+      "맞춤형 홈페이지 제작",
+      "홈페이지 기획",
+      "홈페이지 디자인",
+      "SEO 홈페이지 제작",
+      "홈페이지 운영 대행",
+      "홈페이지 유지보수 서비스",
+      "기업 홈페이지 제작 서비스",
+      "병원 홈페이지 제작 서비스",
+      "프랜차이즈 홈페이지 제작 서비스",
     ],
     alternates: { canonical: `${base}/service` },
     openGraph: { images: [{ url: "/og/og-default.png" }] },
@@ -117,9 +116,9 @@ export default function ServicePage() {
                   {s.badge}
                 </p>
 
-                <h3 className="text-[42px] md:text-[31px] my-[10px] font-bold leading-tight">
+                <h2 className="text-[42px] md:text-[31px] my-[10px] font-bold leading-tight">
                   {s.titleEn}
-                </h3>
+                </h2>
                 <p className="text-[30px] md:text-[20px] font-mediume text-white/80 mt-[20px]">
                   {s.title}
                 </p>
@@ -146,10 +145,10 @@ export default function ServicePage() {
       <section className="py-[180px] bg-neutral-950 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-[50px]">
-            <h3 className="text-[61px] font-bold fade-up">
+            <h2 className="text-[61px] font-bold fade-up">
               이런 걱정,
               <br className="block md:hidden" /> nuvio에서는 없습니다.
-            </h3>
+            </h2>
 
             <p className="text-[30px] md:text-[24px] text-neutral-300 mt-[20px] fade-up">
               브랜드의 불안을 해결하는 디자인 파트너
@@ -171,7 +170,7 @@ export default function ServicePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 fade-up">
                   {/* left: concern */}
                   <div className="flex flex-col justify-center rounded-[18px] border border-white/10 p-6 md:p-8 bg-white/[0.02] text-center">
-                    <h4
+                    <h3
                       className="text-[34px] md:text-[31px] font-extrabold leading-tight"
                       dangerouslySetInnerHTML={{ __html: item.qTitle }}
                     />
@@ -185,7 +184,7 @@ export default function ServicePage() {
 
                   {/* right: answer */}
                   <div className="flex flex-col justify-center rounded-[18px] border border-white/10 p-6 md:p-8 bg-white/[0.02] text-center">
-                    <h4
+                    <h3
                       className="text-[34px] md:text-[31px] font-extrabold leading-tight"
                       dangerouslySetInnerHTML={{ __html: item.aTitle }}
                     />
@@ -205,13 +204,13 @@ export default function ServicePage() {
 
       <section className="py-[180px]">
         <div className="container mx-auto px-4">
-          <h3 className="text-[78px] md:text-[90px] leading-[88px] md:leading-[100px] font-bold relative z-[1] fade-up">
+          <h2 className="text-[78px] md:text-[90px] leading-[88px] md:leading-[100px] font-bold relative z-[1] fade-up">
             How
             <br />
             We
             <br />
             <span className="font-miller italic font-light">Work.</span>
-          </h3>
+          </h2>
 
           <div className="relative grid grid-cols-2 lg:grid-cols-3 gap-10 mt-[50px]">
             {workStep.map((item, i, arr) => (
@@ -229,9 +228,9 @@ export default function ServicePage() {
                   {item.step}
                 </div>
 
-                <h4 className="text-[42px] md:text-[31px] mt-[30px] font-bold">
+                <h3 className="text-[42px] md:text-[31px] mt-[30px] font-bold">
                   {item.title}
-                </h4>
+                </h3>
                 <p
                   className="text-white/70 text-[28px] md:text-[18px] mt-[10px]"
                   dangerouslySetInnerHTML={{ __html: item.desc }}

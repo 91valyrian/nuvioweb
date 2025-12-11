@@ -145,32 +145,19 @@ export async function generateMetadata({ params }) {
   }
 
   // ❸ 데이터가 있을 때 (페이지별 맞춤 메타)
-  const pageTitle = `${work.title} - 제작 사례
-`;
+  const pageTitle = `[${work.client || "브랜드"}][${work.summary}] 홈페이지 제작 사례 - ${work.seoTitle}`;
   // CTR형 설명: 문제→해결 + 핵심키워드 자연 삽입 (120자 내)
   const rawDesc =
     work.overview ||
     work.excerpt ||
-    `${work.client || "브랜드"}의 웹사이트 제작 사례입니다.`;
-  const descLead = truncateSentence(cleanText(rawDesc), 110);
-  const pageDesc = `${descLead} nuvio는 브랜드의 방향성과 사용자 경험을 중심으로 설계했습니다.`;
+    `[${work.client || "브랜드"}][${work.summary}] 홈페이지 제작 사례`;
+  const descLead = `${work.seoDesc}`; //truncateSentence(cleanText(rawDesc), 110);
+  const pageDesc = `${descLead}`;
   const url = `${base}/work/${slug}`;
   const ogImage = selectOgImage(work);
   const svc = Array.isArray(work.service) ? work.service : [];
-  const pageKeywords = [
-    work.client,
-    ...svc,
-    "포트폴리오",
-    "웹사이트 제작",
-    "홈페이지 제작",
-    "브랜드 홈페이지",
-    "기업 홈페이지 제작",
-    "SEO",
-    "검색엔진",
-    "서치어드바이저",
-    "서치콘솔",
-    "nuvio",
-  ].filter(Boolean);
+  const keywords = Array.isArray(work.seoKeywords) ? work.seoKeywords : [];
+  const pageKeywords = [work.client, ...keywords].filter(Boolean);
 
   return {
     title: pageTitle,
@@ -213,9 +200,9 @@ export default async function WorkDetail({ params }) {
       {/* 헤더 */}
       <div className="container mt-[200px] mb-[50px]">
         <header className="">
-          <h2 className="text-[70px] md:text-[100px] font-bold tracking-tight">
-            {work.title}
-          </h2>
+          <h1 className="text-[70px] md:text-[100px] font-bold tracking-tight">
+            {work.title} <span className="sr-only">홈페이지 제작사례</span>
+          </h1>
           <p className="text-[28px] md:text-[20px] mt-2 text-neutral-300">
             {work.client} · {work.year}
           </p>

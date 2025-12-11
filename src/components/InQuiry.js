@@ -8,10 +8,10 @@ export default function InQuiry() {
         className="block rounded-[9999px] border border-white px-10 py-10 hover:bg-main hover:text-white hover:border-main transition-all"
       >
         <div className="flex items-center justify-between">
-          <h4 className="text-[50px] md:text-[40px] font-bold">
+          <h2 className="text-[50px] md:text-[40px] font-bold">
             <span className="hidden md:inline-block">Are you ready to</span>{" "}
             Contact us?
-          </h4>
+          </h2>
           <span className="inline-grid place-items-center w-16 h-16 rounded-[9999px] bg-white text-white">
             <svg
               className="w-[40px] h-[32px] md:w-[32px] md:h-[26px]"

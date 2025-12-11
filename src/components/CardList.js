@@ -176,6 +176,14 @@ export default function CardList({
               className="card-link"
               aria-label={`${item.title} 상세보기`}
             />
+            {/* <a
+              href={`${item.href}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={`${item.title} 새창보기`}
+              className="card-link"
+              aria-label={`${item.title} 상세보기`}
+            /> */}
           </li>
         ))}
         {/* 무한 스크롤 센티넬 */}

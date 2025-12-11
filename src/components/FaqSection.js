@@ -211,9 +211,9 @@ export default function FaqSection() {
   return (
     <section className="py-[180px] bg-gradient-to-b from-[#141414] to-[#000000] text-white">
       <div className="container mx-auto px-4">
-        <h3 className="section-subtitle text-[54px] leading-[60px] md:text-[44px] md:leading-[50px] font-bold rotate-x-up text-center mb-[50px]">
+        <h2 className="section-subtitle text-[54px] leading-[60px] md:text-[44px] md:leading-[50px] font-bold rotate-x-up text-center mb-[50px]">
           자주 묻는 질문
-        </h3>
+        </h2>
 
         {/* Tabs */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">

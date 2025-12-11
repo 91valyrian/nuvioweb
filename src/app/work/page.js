@@ -6,20 +6,18 @@ import { getAllWorks } from "@/lib/works";
 export async function generateMetadata() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
   return {
-    title: "홈페이지 제작 사례·포트폴리오",
+    title: "홈페이지 제작 사례 · 기업·병원·프랜차이즈 포트폴리오",
     description:
-      "nuvio의 홈페이지 제작 사례와 포트폴리오를 통해 브랜드별 웹사이트 전략과 디자인, SEO 중심의 제작 과정을 확인하세요.",
+      "기업, 병원, 프랜차이즈, 쇼핑몰 등 실제 프로젝트 중심의 홈페이지 제작 사례를 모았습니다. 브랜딩 웹사이트, 랜딩페이지, SEO 중심 구조까지 nuvio의 작업 방식을 포트폴리오로 확인할 수 있습니다.",
     keywords: [
-      "포트폴리오",
-      "웹사이트 제작",
-      "홈페이지 제작",
-      "기업 홈페이지 제작",
-      "브랜드 홈페이지",
-      "SEO 홈페이지 제작",
+      "홈페이지 제작 포트폴리오",
       "홈페이지 제작 사례",
-      "리뉴얼",
-      "UI/UX",
-      "nuvio",
+      "브랜딩 홈페이지 사례",
+      "기업 홈페이지 제작 사례",
+      "병원 홈페이지 포트폴리오",
+      "프랜차이즈 홈페이지 사례",
+      "랜딩페이지 제작 사례",
+      "SEO 최적화 홈페이지 사례",
     ],
     alternates: { canonical: `${base}/work` },
     // 이미지 배열은 상속되지 않으므로(배열은 병합되지 않음) 페이지 전용 이미지만 지정
@@ -39,6 +37,7 @@ export default function WorkList() {
     <main>
       <SubVisual value="Work" image="/images/work/visual.webp" />
       <section className="pb-[80px] pb-[240px] md:pb-[200px]">
+        <h2 className="sr-only">포트폴리오 목록</h2>
         <div className="container">
           <CardList
             items={[...works].sort(

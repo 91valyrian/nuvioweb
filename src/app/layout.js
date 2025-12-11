@@ -14,9 +14,9 @@ import AnalyticsTracker from "@/components/AnalyticsTracker";
 const siteName = "nuvio";
 const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
 const defaultTitle =
-  "홈페이지 제작 · 기업·병원·프랜차이즈 맞춤형 웹사이트 | nuvio";
+  "홈페이지 제작 전문 · 기업·병원·프랜차이즈 브랜딩 웹사이트 | nuvio";
 const defaultDesc =
-  "브랜드 가치와 성과를 높이는 홈페이지 제작. nuvio는 기업·병원·프랜차이즈 맞춤형 웹사이트를 만듭니다";
+  "기획·디자인·개발·SEO까지 한 번에 설계하는 전략형 홈페이지 제작 스튜디오입니다. 기업·병원·프랜차이즈에 맞춘 브랜딩 웹사이트로 신뢰와 전환을 동시에 높여드립니다.";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -27,26 +27,17 @@ export const metadata = {
   description: defaultDesc,
   keywords: [
     "홈페이지 제작",
-    "웹사이트 제작",
-    "반응형 홈페이지",
-    "SEO 최적화",
-    "모바일 홈페이지",
-    "모바일 웹사이트",
-    "홈페이지 업체 추천",
-    "홈페이지 제작 업체 추천",
-    "홈페이지 리뉴얼",
-    "브랜딩 홈페이지 제작",
-    "학교 홈페이지 제작",
-    "교회 홈페이지 제작",
+    "홈페이지 제작 전문",
+    "기업 홈페이지 제작",
     "병원 홈페이지 제작",
-    "랜딩 페이지 제작",
-    "홈페이지 제작 견적",
-    "홈페이지 제작 비용",
-    "웹에이전시",
-    "검색엔진노출",
+    "프랜차이즈 홈페이지 제작",
+    "로펌 홈페이지 제작",
+    "법률사무소 홈페이지 제작",
+    "브랜드 홈페이지 제작",
+    "전략형 홈페이지 제작",
+    "반응형 홈페이지",
     "nuvio",
     "누비오",
-    "상위노출",
   ],
   applicationName: siteName,
   openGraph: {

@@ -14,9 +14,9 @@ export default function SubVisual({
           Let’s Talk Ideas,
           <span className="block pl-[150px] rotate-x-up">Build Together</span>
         </p>
-        <h2 className="flex items-center gap-8 subTitle text-[120px] leading-[122px] font-bold rotate-x-up">
+        <h1 className="flex items-center gap-8 subTitle text-[120px] leading-[122px] font-bold rotate-x-up">
           {value}
-        </h2>
+        </h1>
       </div>
 
       <div className="container flex justify-right"></div>

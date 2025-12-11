@@ -22,13 +22,14 @@ export async function generateMetadata({ params }) {
   const siteName = "nuvio";
   const baseSection = "Columns"; // 다른 페이지들과 유사한 유형
   // const seoTitle = `${post.categories} | ${post.title}`;
-  const seoTitle = `${post.title} - 홈페이지 컬럼`;
-  const canonical = `${SITE_URL}/columns/${post.slug}`;
-
-  const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean) : [];
   const categories = Array.isArray(post.categories)
     ? post.categories.filter(Boolean)
     : [];
+
+  const seoTitle = `[${categories.join(", ")}] ${post.title}`;
+  const canonical = `${SITE_URL}/columns/${post.slug}`;
+
+  const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean) : [];
 
   // 간단한 키워드 믹스(타이틀 키워드 + 카테고리 + 태그)
   const primary = post.title.replace(/\s+/g, " ").trim();
@@ -53,15 +54,23 @@ export async function generateMetadata({ params }) {
       url: canonical,
       title: seoTitle,
       description,
-      images: post.cover
-        ? [{ url: new URL(post.cover, SITE_URL).toString() }]
-        : [],
+      images:
+        post.thumbnail || post.cover
+          ? [
+              {
+                url: new URL(post.thumbnail || post.cover, SITE_URL).toString(),
+              },
+            ]
+          : [],
     },
     twitter: {
       card: "summary_large_image",
       title: seoTitle,
       description,
-      images: post.cover ? [new URL(post.cover, SITE_URL).toString()] : [],
+      images:
+        post.thumbnail || post.cover
+          ? [new URL(post.thumbnail || post.cover, SITE_URL).toString()]
+          : [],
     },
     robots: {
       index: true,
@@ -174,7 +183,8 @@ export default async function ColumnDetail({ params }) {
     description: post.summary,
     datePublished: post.date,
     author: [{ "@type": "Organization", name: post.author || "nuvio" }],
-    image: post.cover ? [post.cover] : undefined,
+    image:
+      post.thumbnail || post.cover ? [post.thumbnail || post.cover] : undefined,
     url: `${SITE_URL}/columns/${post.slug}`,
     publisher: { "@type": "Organization", name: siteName },
     mainEntityOfPage: {
@@ -198,10 +208,10 @@ export default async function ColumnDetail({ params }) {
       /> */}
       <div className="py-[50px] max-w-[1000px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
         <section className="visual mb-[30px] text-left">
-          <h2 className="text-[51px] md:text-[41px] leading-[61px] md:leading-[51px] font-bold">
+          <h1 className="text-[51px] md:text-[41px] leading-[61px] md:leading-[51px] font-bold">
             {post.title}
             {/* {post.subTitle && <span>, {post.subTitle}</span>} */}
-          </h2>
+          </h1>
 
           <div className="flex items-center justify-between border-t border-[#ddd] pt-[20px] mt-[20px] text-[18px] md:text-[18px] text-black/60 ">
             {/* {post.author && <span>by {post.author}</span>} <span>·</span> */}

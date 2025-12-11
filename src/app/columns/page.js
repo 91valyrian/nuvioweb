@@ -6,18 +6,18 @@ import SubVisual from "@/components/SubVisual";
 export async function generateMetadata() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
   return {
-    title: "홈페이지 제작 칼럼 - 브랜딩·SEO 인사이트",
+    title: "홈페이지 제작 칼럼 - 브랜딩·SEO·웹 전략 인사이트",
     description:
-      "홈페이지 제작과 SEO, 브랜딩 전략을 다루는 nuvio의 전문 칼럼. 실무 중심의 팁과 인사이트를 정리했습니다.",
+      "홈페이지 제작 기획, 브랜딩 전략, SEO 최적화, IX·UX 구조 등 실무 중심 인사이트를 정리한 컬럼입니다. 실제 프로젝트 경험을 바탕으로 전환율을 높이는 웹 전략을 공유합니다.",
     keywords: [
-      "홈페이지 제작",
-      "SEO 최적화",
-      "브랜딩 디자인",
+      "홈페이지 제작 칼럼",
+      "홈페이지 제작 팁",
+      "홈페이지 기획",
+      "SEO 칼럼",
+      "브랜딩 전략",
       "웹사이트 기획",
-      "홈페이지 리뉴얼",
-      "홈페이지 유지보수",
-      "검색엔진 노출",
-      "웹디자인 팁",
+      "홈페이지 운영 노하우",
+      "기업 홈페이지 리뉴얼 전략",
     ],
     alternates: { canonical: `${base}/columns` },
     // 이미지 배열은 상속되지 않으므로(배열은 병합되지 않음) 페이지 전용 이미지만 지정

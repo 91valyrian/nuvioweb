@@ -52,7 +52,7 @@ export default function Header() {
           ${mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
         `}
       >
-        <h1 className="container flex items-center justify-between xl:gap-[120px]">
+        <div className="container flex items-center justify-between xl:gap-[120px]">
           <Link href="/" className="">
             <Image
               src="/logo/logo.svg"
@@ -65,7 +65,7 @@ export default function Header() {
           </Link>
           {/* Nav에는 상태와 링크만 전달 */}
           <Nav open={open} onToggle={onToggle} links={links} />
-        </h1>
+        </div>
       </header>
 
       {/* Header '밖'에서 오버레이 렌더 (DOM상 header 옆) */}

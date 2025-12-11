@@ -123,7 +123,7 @@ export default function ContactPage() {
           <form onSubmit={onSubmit}>
             {/* Services (multiple) */}
             <fieldset className="flex flex-wrap md:flex-nowrap gap-[50px] md:gap-[20px]">
-              <h3 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
+              <h2 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
                 <legend className="text-[52px] md:text-[39px] leading-[62px] md:leading-[49px] font-bold rotate-x-up">
                   필요한 서비스를
                   <br />
@@ -132,7 +132,7 @@ export default function ContactPage() {
                     중복 선택 가능
                   </span>
                 </legend>
-              </h3>
+              </h2>
               <div className="w-full flex flex-wrap gap-[20px]">
                 {SERVICE_OPTIONS.map((label) => (
                   <Checkbox
@@ -148,13 +148,13 @@ export default function ContactPage() {
 
             {/* Budget (multiple) */}
             <fieldset className="flex flex-wrap md:flex-nowrap gap-[50px] md:gap-[20px] mt-[150px]">
-              <h3 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
+              <h2 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
                 <legend className="text-[52px] md:text-[39px] leading-[62px] md:leading-[49px] font-bold rotate-x-up">
                   프로젝트 예산을
                   <br />
                   선택해주세요.
                 </legend>
-              </h3>
+              </h2>
               <div className="w-full flex flex-wrap gap-[20px]">
                 {BUDGET_OPTIONS.map((label) => (
                   <Radiobox
@@ -170,13 +170,13 @@ export default function ContactPage() {
 
             {/* Two-column grid for basics */}
             <fieldset className="flex flex-wrap md:flex-nowrap gap-[50px] md:gap-[20px] mt-[150px]">
-              <h3 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
+              <h2 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
                 <legend className="text-[52px] md:text-[39px] leading-[62px] md:leading-[49px] font-bold rotate-x-up">
                   기본 정보를
                   <br />
                   입력해주세요.
                 </legend>
-              </h3>
+              </h2>
 
               <div className="w-full">
                 <div className="grid grid-cols-2 gap-[15px]">
