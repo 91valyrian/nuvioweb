@@ -19,6 +19,7 @@ const SERVICE_OPTIONS = [
 ];
 
 const BUDGET_OPTIONS = [
+  "100만원 이하",
   "200만원 이하",
   "300만원 이하",
   "500만원 이하",
