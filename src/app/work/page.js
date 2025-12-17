@@ -16,8 +16,8 @@ export async function generateMetadata() {
       "기업 홈페이지 제작 사례",
       "병원 홈페이지 포트폴리오",
       "프랜차이즈 홈페이지 사례",
-      "랜딩페이지 제작 사례",
-      "SEO 최적화 홈페이지 사례",
+      "랜딩페이지 제작",
+      "SEO 최적화 사례",
     ],
     alternates: { canonical: `${base}/work` },
     // 이미지 배열은 상속되지 않으므로(배열은 병합되지 않음) 페이지 전용 이미지만 지정
