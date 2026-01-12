@@ -1,78 +1,40 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import fs from "fs";
-import path from "path";
+import { supabase } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
-// 문의사항 저장 경로
-// Vercel 서버리스 환경에서는 /tmp 디렉토리만 쓰기 가능
-const INQUIRIES_FILE = process.env.VERCEL
-  ? path.join("/tmp", "inquiries.json")
-  : path.join(process.cwd(), "data", "inquiries.json");
-
-// 문의사항을 파일에 저장
-function saveInquiry(payload) {
+// Supabase에 문의사항 저장
+async function saveInquiryToSupabase(payload) {
   try {
-    // Vercel 환경에서는 /tmp 디렉토리 사용
-    if (process.env.VERCEL) {
-      const tmpDir = "/tmp";
-      if (!fs.existsSync(tmpDir)) {
-        console.warn("[WARN] /tmp directory does not exist");
-        return null;
-      }
-    } else {
-      // 로컬 환경에서는 data 디렉토리 생성
-      const dataDir = path.dirname(INQUIRIES_FILE);
-      if (!fs.existsSync(dataDir)) {
-        fs.mkdirSync(dataDir, { recursive: true });
-      }
+    const { data, error } = await supabase
+      .from("inquiries")
+      .insert([
+        {
+          name: payload.name || null,
+          email: payload.email || null,
+          company: payload.company || null,
+          position: payload.position || null,
+          phone: payload.phone || null,
+          url: payload.url || null,
+          budget: payload.budget || [],
+          services: payload.services || [],
+          message: payload.message || null,
+          completed: false,
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("[SUPABASE ERROR] Failed to save inquiry:", error);
+      return null;
     }
 
-    // 기존 문의사항 읽기
-    let inquiries = [];
-    if (fs.existsSync(INQUIRIES_FILE)) {
-      try {
-        const fileContent = fs.readFileSync(INQUIRIES_FILE, "utf8");
-        inquiries = JSON.parse(fileContent);
-      } catch (err) {
-        console.error("[ERROR] Failed to read inquiries file:", err);
-        inquiries = [];
-      }
-    }
-
-    // 새 문의사항 추가
-    const newInquiry = {
-      id: Date.now().toString(),
-      timestamp: new Date().toISOString(),
-      ...payload,
-    };
-
-    inquiries.unshift(newInquiry); // 최신순으로 앞에 추가
-
-    // 파일에 저장
-    fs.writeFileSync(INQUIRIES_FILE, JSON.stringify(inquiries, null, 2), "utf8");
-    
-    console.log("[SUCCESS] Inquiry saved:", {
-      id: newInquiry.id,
-      name: newInquiry.name,
-      file: INQUIRIES_FILE,
-    });
-
-    return newInquiry;
+    console.log("[SUPABASE] Inquiry saved:", { id: data.id, name: data.name });
+    return data;
   } catch (err) {
-    // 에러 상세 로깅
-    console.error("[ERROR] Failed to save inquiry:", {
-      message: err.message,
-      code: err.code,
-      errno: err.errno,
-      path: err.path,
-      syscall: err.syscall,
-      stack: err.stack,
-      filePath: INQUIRIES_FILE,
-      isVercel: !!process.env.VERCEL,
-    });
-    // 저장 실패해도 메일 발송은 계속 진행
+    console.error("[SUPABASE ERROR] Exception:", err);
     return null;
   }
 }
@@ -251,13 +213,15 @@ export async function GET() {
     RESEND_API_KEY: process.env.RESEND_API_KEY ? "✓ set (fallback)" : "✗ not set",
     USE_RESEND: process.env.USE_RESEND || "false",
     VERCEL: process.env.VERCEL ? "✓ yes" : "✗ no (local)",
+    SUPABASE_URL: process.env.SUPABASE_URL ? "✓ set" : "✗ missing",
+    SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY ? "✓ set (hidden)" : "✗ missing",
   };
 
   return NextResponse.json({
     ok: true,
     route: "contact",
     env: envStatus,
-    inquiriesPath: INQUIRIES_FILE,
+    storage: "supabase",
   });
 }
 
@@ -287,12 +251,11 @@ export async function POST(req) {
       message,
     };
 
-    // 문의사항을 파일에 저장 (Vercel에서는 /tmp 사용, 영구 저장 안됨)
-    const savedInquiry = saveInquiry(payload);
+    // Supabase에 문의사항 저장
+    const savedInquiry = await saveInquiryToSupabase(payload);
     console.log("[CONTACT] Inquiry save result:", savedInquiry ? "success" : "failed");
 
     // 메일 발송 - Vercel 서버리스 환경에서는 반드시 await 필요
-    // (응답 반환 후 함수가 종료되므로 백그라운드 처리 불가)
     let emailResult = { sent: false, error: null };
     try {
       const useResendFirst =
@@ -338,6 +301,7 @@ export async function POST(req) {
       message: "문의사항이 접수되었습니다.",
       emailSent: emailResult.sent,
       emailProvider: emailResult.provider || null,
+      savedToDb: !!savedInquiry,
     });
   } catch (e) {
     console.error("CONTACT API ERROR:", {

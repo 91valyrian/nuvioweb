@@ -1,14 +1,8 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import fs from "fs";
-import path from "path";
+import { supabase } from "@/lib/supabase";
 
-// Vercel 서버리스 환경에서는 /tmp 디렉토리만 쓰기 가능
-const INQUIRIES_FILE = process.env.VERCEL
-  ? path.join("/tmp", "inquiries.json")
-  : path.join(process.cwd(), "data", "inquiries.json");
 const SESSION_COOKIE_NAME = "admin_session";
-const SESSION_SECRET = process.env.SESSION_SECRET || "your-secret-key-change-this";
 
 // 세션 토큰 검증
 function verifySessionToken(token) {
@@ -38,17 +32,22 @@ async function checkAuth() {
   }
 }
 
-// 문의사항 읽기
-function getInquiries() {
+// Supabase에서 문의사항 조회
+async function getInquiries() {
   try {
-    if (!fs.existsSync(INQUIRIES_FILE)) {
+    const { data, error } = await supabase
+      .from("inquiries")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("[SUPABASE ERROR] Failed to get inquiries:", error);
       return [];
     }
 
-    const fileContent = fs.readFileSync(INQUIRIES_FILE, "utf8");
-    return JSON.parse(fileContent);
+    return data || [];
   } catch (err) {
-    console.error("Failed to read inquiries:", err);
+    console.error("[SUPABASE ERROR] Exception:", err);
     return [];
   }
 }
@@ -64,36 +63,14 @@ export async function GET() {
   }
 
   try {
-    const inquiries = getInquiries();
+    const inquiries = await getInquiries();
     return NextResponse.json({ ok: true, inquiries });
   } catch (error) {
+    console.error("[GET ERROR]", error);
     return NextResponse.json(
       { ok: false, error: "문의사항을 불러오는 중 오류가 발생했습니다." },
       { status: 500 }
     );
-  }
-}
-
-// 문의사항 저장
-function saveInquiries(inquiries) {
-  try {
-    // Vercel 환경에서는 /tmp 디렉토리 사용
-    if (!process.env.VERCEL) {
-      const dataDir = path.dirname(INQUIRIES_FILE);
-      if (!fs.existsSync(dataDir)) {
-        fs.mkdirSync(dataDir, { recursive: true });
-      }
-    }
-    fs.writeFileSync(INQUIRIES_FILE, JSON.stringify(inquiries, null, 2), "utf8");
-    console.log("[SUCCESS] Inquiries saved to:", INQUIRIES_FILE);
-  } catch (err) {
-    console.error("[ERROR] Failed to save inquiries:", {
-      message: err.message,
-      code: err.code,
-      path: INQUIRIES_FILE,
-      isVercel: !!process.env.VERCEL,
-    });
-    throw err;
   }
 }
 
@@ -119,15 +96,22 @@ export async function PATCH(req) {
       );
     }
 
-    const inquiries = getInquiries();
-    const updated = inquiries.map((inq) =>
-      inq.id === id ? { ...inq, completed: !!completed } : inq
-    );
+    const { error } = await supabase
+      .from("inquiries")
+      .update({ completed: !!completed })
+      .eq("id", id);
 
-    saveInquiries(updated);
+    if (error) {
+      console.error("[SUPABASE ERROR] Failed to update inquiry:", error);
+      return NextResponse.json(
+        { ok: false, error: "완료 상태 변경 중 오류가 발생했습니다." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
+    console.error("[PATCH ERROR]", error);
     return NextResponse.json(
       { ok: false, error: "완료 상태 변경 중 오류가 발생했습니다." },
       { status: 500 }
@@ -156,13 +140,22 @@ export async function DELETE(req) {
       );
     }
 
-    const inquiries = getInquiries();
-    const filtered = inquiries.filter((inq) => inq.id !== id);
+    const { error } = await supabase
+      .from("inquiries")
+      .delete()
+      .eq("id", id);
 
-    saveInquiries(filtered);
+    if (error) {
+      console.error("[SUPABASE ERROR] Failed to delete inquiry:", error);
+      return NextResponse.json(
+        { ok: false, error: "문의사항 삭제 중 오류가 발생했습니다." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
+    console.error("[DELETE ERROR]", error);
     return NextResponse.json(
       { ok: false, error: "문의사항 삭제 중 오류가 발생했습니다." },
       { status: 500 }

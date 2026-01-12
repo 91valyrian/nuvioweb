@@ -13,6 +13,7 @@
     "postbuild": "curl -X GET 'https://searchadvisor.naver.com/ping?sitemap=https://nuvio-web.com/sitemap.xml'"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.90.1",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@vercel/analytics": "^1.5.0",
     "clsx": "^2.1.1",

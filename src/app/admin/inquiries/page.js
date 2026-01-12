@@ -254,7 +254,7 @@ export default function AdminInquiriesPage() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <div className="text-xs text-white/50">
-                          {formatDate(inquiry.timestamp)}
+                          {formatDate(inquiry.created_at)}
                         </div>
                         {inquiry.completed && (
                           <span className="text-xs px-2 py-1 bg-green-500/20 text-green-400 rounded">
