@@ -1,7 +1,53 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import fs from "fs";
+import path from "path";
 
 export const runtime = "nodejs";
+
+// 문의사항 저장 경로
+const INQUIRIES_FILE = path.join(process.cwd(), "data", "inquiries.json");
+
+// 문의사항을 파일에 저장
+function saveInquiry(payload) {
+  try {
+    // data 디렉토리가 없으면 생성
+    const dataDir = path.dirname(INQUIRIES_FILE);
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+
+    // 기존 문의사항 읽기
+    let inquiries = [];
+    if (fs.existsSync(INQUIRIES_FILE)) {
+      try {
+        const fileContent = fs.readFileSync(INQUIRIES_FILE, "utf8");
+        inquiries = JSON.parse(fileContent);
+      } catch (err) {
+        console.error("Failed to read inquiries file:", err);
+        inquiries = [];
+      }
+    }
+
+    // 새 문의사항 추가
+    const newInquiry = {
+      id: Date.now().toString(),
+      timestamp: new Date().toISOString(),
+      ...payload,
+    };
+
+    inquiries.unshift(newInquiry); // 최신순으로 앞에 추가
+
+    // 파일에 저장
+    fs.writeFileSync(INQUIRIES_FILE, JSON.stringify(inquiries, null, 2), "utf8");
+
+    return newInquiry;
+  } catch (err) {
+    console.error("Failed to save inquiry:", err);
+    // 저장 실패해도 메일 발송은 계속 진행
+    return null;
+  }
+}
 
 // ----- helpers -----
 function sanitizeHtml(s = "") {
@@ -169,8 +215,45 @@ export async function GET() {
   return NextResponse.json({ ok: true, route: "contact" });
 }
 
+// 백그라운드에서 메일 발송 처리 (비동기)
+async function sendEmailInBackground(payload) {
+  // 에러가 발생해도 사용자에게는 영향을 주지 않도록 처리
+  try {
+    const useResendFirst =
+      String(process.env.USE_RESEND || "").toLowerCase() === "true";
+
+    if (useResendFirst) {
+      await sendViaResend(payload);
+      console.log("[MAIL] Sent via Resend (background)");
+      return;
+    }
+
+    try {
+      await sendViaSMTP(payload);
+      console.log("[MAIL] Sent via SMTP (background)");
+    } catch (smtpErr) {
+      console.error("MAIL ERROR (SMTP):", {
+        message: smtpErr?.message,
+        code: smtpErr?.code,
+      });
+
+      if (process.env.RESEND_API_KEY) {
+        await sendViaResend(payload);
+        console.log("[MAIL] Sent via Resend (fallback, background)");
+      } else {
+        throw smtpErr;
+      }
+    }
+  } catch (e) {
+    // 백그라운드 에러는 로그만 남기고 사용자에게는 영향 없음
+    console.error("MAIL ERROR (BACKGROUND):", {
+      message: e?.message,
+      code: e?.code,
+    });
+  }
+}
+
 export async function POST(req) {
-  let stage = "start";
   try {
     const {
       services = [],
@@ -196,54 +279,29 @@ export async function POST(req) {
       message,
     };
 
-    const useResendFirst =
-      String(process.env.USE_RESEND || "").toLowerCase() === "true";
+    // 문의사항을 파일에 저장 (즉시 처리)
+    saveInquiry(payload);
 
-    if (useResendFirst) {
-      stage = "resend";
-      const out = await sendViaResend(payload);
-      return NextResponse.json({ ok: true, ...out });
-    }
+    // 메일 발송은 백그라운드에서 비동기로 처리 (사용자 응답을 블로킹하지 않음)
+    sendEmailInBackground(payload).catch((err) => {
+      console.error("Background email sending failed:", err);
+    });
 
-    stage = "smtp";
-    try {
-      const out = await sendViaSMTP(payload);
-      return NextResponse.json({ ok: true, ...out });
-    } catch (smtpErr) {
-      console.error("MAIL ERROR (SMTP):", {
-        stage,
-        message: smtpErr?.message,
-        code: smtpErr?.code,
-        errno: smtpErr?.errno,
-        response: smtpErr?.response,
-        command: smtpErr?.command,
-        address: smtpErr?.address,
-        port: smtpErr?.port,
-      });
-
-      if (process.env.RESEND_API_KEY) {
-        stage = "resend-fallback";
-        const out = await sendViaResend(payload);
-        return NextResponse.json({ ok: true, ...out });
-      }
-      throw smtpErr;
-    }
+    // 사용자에게 즉시 성공 응답 반환
+    return NextResponse.json({
+      ok: true,
+      message: "문의사항이 접수되었습니다.",
+      sentInBackground: true,
+    });
   } catch (e) {
-    console.error("MAIL ERROR (FINAL):", {
-      stage,
+    console.error("CONTACT API ERROR:", {
       message: e?.message,
       code: e?.code,
-      errno: e?.errno,
-      response: e?.response,
-      command: e?.command,
-      address: e?.address,
-      port: e?.port,
     });
     return NextResponse.json(
       {
         ok: false,
-        stage,
-        error: e?.message || String(e),
+        error: e?.message || "문의사항 접수 중 오류가 발생했습니다.",
         code: e?.code || null,
       },
       { status: 500 }

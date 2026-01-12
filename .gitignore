@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 문의사항 데이터 (민감 정보 포함)
+/data/inquiries.json

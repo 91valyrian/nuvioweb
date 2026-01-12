@@ -1,15 +1,9 @@
 // src/app/layout.js
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-// import QuickInquiry from "@/components/QuickInquiry";
-import GlobalCursor from "@/components/GlobalCursor";
-import GlobalReveal from "@/components/GlobalReveal";
-import FaqSection from "@/components/FaqSection";
 import { Analytics } from "@vercel/analytics/next";
-
 import Script from "next/script";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
+import ConditionalLayout from "@/components/ConditionalLayout";
 
 const siteName = "nuvio";
 const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
@@ -137,21 +131,10 @@ export default function RootLayout({ children }) {
       </head>
       <body className="text-white">
         <AnalyticsTracker />
-        <GlobalCursor />
-        <a href="#main" className="skip sr-only">
-          Skip to content
-        </a>
-        <Header />
-
-        <main id="main" className="content">
+        <ConditionalLayout>
           {children}
-          <Analytics />
-        </main>
-        <FaqSection />
-        <GlobalReveal />
-
-        {/* <QuickInquiry /> */}
-        <Footer />
+        </ConditionalLayout>
+        <Analytics />
       </body>
     </html>
   );
