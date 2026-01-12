@@ -255,7 +255,7 @@ export default function LandingPage() {
           </Link>
           <a
             href="#section-consult"
-            className="inline-flex items-center justify-center px-6 py-2.5 border border-white/20 text-[28px] md:text-[16px] font-medium rounded-full text-white hover:bg-white hover:text-black transition-all duration-300"
+            className="inline-flex items-center justify-center px-6 py-2.5 border border-white/20 text-[28px] md:text-[16px] font-medium rounded-[9999px] text-white hover:bg-white hover:text-black transition-all duration-300"
           >
             무료 진단 신청
           </a>
@@ -281,12 +281,12 @@ export default function LandingPage() {
         />
 
         {/* 배경 조명 효과 - 기존 */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#6366f1]/20 rounded-full blur-[100px] z-[1] animate-pulse" />
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#8b5cf6]/10 rounded-full blur-[80px] z-[1]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#6366f1]/20 rounded-[9999px] blur-[100px] z-[1] animate-pulse" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#8b5cf6]/10 rounded-[9999px] blur-[80px] z-[1]" />
 
         {/* 왼쪽 하단 큰 퍼플 글로우 - 이미지 참고 */}
         <div
-          className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-gradient-radial from-[#a78bfa]/40 via-[#c4b5fd]/25 to-transparent rounded-full blur-[150px] z-[1] animate-pulse"
+          className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-gradient-radial from-[#a78bfa]/40 via-[#c4b5fd]/25 to-transparent rounded-[9999px] blur-[150px] z-[1] animate-pulse"
           style={{
             background:
               "radial-gradient(circle, rgba(167,139,250,0.4) 0%, rgba(196,181,253,0.25) 30%, transparent 70%)",
@@ -295,7 +295,7 @@ export default function LandingPage() {
 
         {/* 오른쪽 상단 큰 퍼플 글로우 - 이미지 참고 */}
         <div
-          className="absolute top-[5%] right-[-5%] w-[500px] h-[500px] md:w-[700px] md:h-[700px] bg-gradient-radial from-[#8b5cf6]/35 via-[#a78bfa]/20 to-transparent rounded-full blur-[120px] z-[1]"
+          className="absolute top-[5%] right-[-5%] w-[500px] h-[500px] md:w-[700px] md:h-[700px] bg-gradient-radial from-[#8b5cf6]/35 via-[#a78bfa]/20 to-transparent rounded-[9999px] blur-[120px] z-[1]"
           style={{
             background:
               "radial-gradient(circle, rgba(139,92,246,0.35) 0%, rgba(167,139,250,0.2) 40%, transparent 70%)",
@@ -329,13 +329,13 @@ export default function LandingPage() {
           <div className="hero-anim opacity-0 translate-y-10 flex flex-col md:flex-row gap-4 justify-center items-center">
             <a
               href="#section-consult"
-              className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white text-[30px] md:text-[18px] font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_40px_rgba(99,102,241,0.6)] transform hover:-translate-y-1"
+              className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white text-[30px] md:text-[18px] font-bold rounded-[9999px] transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_40px_rgba(99,102,241,0.6)] transform hover:-translate-y-1"
             >
               내 홈페이지 무료 진단하기
             </a>
             <a
               href="#section-stats"
-              className="w-full md:w-auto px-10 py-4 bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 text-white/70 hover:text-white text-[30px] md:text-[18px] font-medium rounded-full transition-all duration-300"
+              className="w-full md:w-auto px-10 py-4 bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 text-white/70 hover:text-white text-[30px] md:text-[18px] font-medium rounded-[9999px] transition-all duration-300"
             >
               왜 실패하는지 확인하기
             </a>
@@ -442,7 +442,7 @@ export default function LandingPage() {
               >
                 {/* <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-[#6366f1] to-[#8b5cf6]" /> */}
                 <div className="flex justify-between items-center mb-8">
-                  <span className="md:w-8 md:h-8 w-12 h-12 rounded-full bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center text-[26px] md:text-[14px] font-bold text-white shadow-lg shadow-[#6366f1]/30">
+                  <span className="md:w-8 md:h-8 w-12 h-12 rounded-[9999px] bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center text-[26px] md:text-[14px] font-bold text-white shadow-lg shadow-[#6366f1]/30">
                     {stat.num}
                   </span>
                   <span className="text-[24px] md:text-[14px] font-medium text-[#a78bfa]/60 uppercase">
@@ -460,9 +460,9 @@ export default function LandingPage() {
                     <span className="text-white">{stat.label}</span>
                     <span className="text-[#a78bfa]">{stat.value}%</span>
                   </div>
-                  <div className="w-full bg-white/10 rounded-full md:h-2 h-4">
+                  <div className="w-full bg-white/10 rounded-[9999px] md:h-2 h-4">
                     <div
-                      className="bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] md:h-2 h-4 rounded-full transition-all duration-1000"
+                      className="bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] md:h-2 h-4 rounded-[9999px] transition-all duration-1000"
                       style={{ width: `${stat.value}%` }}
                     />
                   </div>
@@ -566,7 +566,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div className="flex items-center mt-2 opacity-70">
-                  <div className="md:w-10 md:h-10 w-20 h-20 rounded-full bg-white/10 flex items-center justify-center text-[36px] md:text-lg">
+                  <div className="md:w-10 md:h-10 w-20 h-20 rounded-[9999px] bg-white/10 flex items-center justify-center text-[36px] md:text-lg">
                     {interview.icon}
                   </div>
                   <div className="ml-3">
@@ -598,7 +598,7 @@ export default function LandingPage() {
         id="section-solution"
         className="py-[150px] md:py-[100px] bg-[#0f0f1e] relative overflow-hidden"
       >
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#6366f1]/5 rounded-full blur-[120px] -z-0" />
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#6366f1]/5 rounded-[9999px] blur-[120px] -z-0" />
 
         <div className="container relative z-10">
           <div className="text-center mb-20 scroll-anim">
@@ -685,7 +685,7 @@ export default function LandingPage() {
               </p>
               <a
                 href="#section-consult"
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white text-[30px] md:text-[20px] font-bold rounded-full shadow-lg shadow-[#6366f1]/30 hover:shadow-[#6366f1]/50 transition-all transform hover:-translate-y-1"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white text-[30px] md:text-[20px] font-bold rounded-[9999px] shadow-lg shadow-[#6366f1]/30 hover:shadow-[#6366f1]/50 transition-all transform hover:-translate-y-1"
               >
                 무료 진단 신청하기
                 <svg
@@ -735,7 +735,7 @@ export default function LandingPage() {
                   key={idx}
                   className="glass-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl flex items-start hover:border-[#6366f1]/50 transition-colors"
                 >
-                  <div className="flex-shrink-0 md:w-8 md:h-8 w-12 h-12 rounded-full bg-gradient-to-br from-[#6366f1]/30 to-[#8b5cf6]/30 text-[#a78bfa] flex items-center justify-center mt-1 ring-2 ring-[#a78bfa]/20">
+                  <div className="flex-shrink-0 md:w-8 md:h-8 w-12 h-12 rounded-[9999px] bg-gradient-to-br from-[#6366f1]/30 to-[#8b5cf6]/30 text-[#a78bfa] flex items-center justify-center mt-1 ring-2 ring-[#a78bfa]/20">
                     <svg
                       className="md:w-5 md:h-5 w-8 h-8"
                       fill="none"
@@ -778,7 +778,7 @@ export default function LandingPage() {
         <div className="container max-w-4xl relative z-10">
           <div className="glass-card bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl px-8 py-14 md:p-14 shadow-2xl contact-anim opacity-0 translate-y-10">
             <div className="text-center mb-10">
-              <span className="bg-white/10 text-white px-3 py-1 rounded-full text-[28px] md:text-[16px] font-bold mb-4 inline-block">
+              <span className="bg-white/10 text-white px-3 py-1 rounded-[9999px] text-[28px] md:text-[16px] font-bold mb-4 inline-block">
                 25년차 전문가 무료 진단
               </span>
               <h2 className="text-[54px] md:text-[44px] font-bold text-white mb-6 leading-tight">
@@ -967,8 +967,8 @@ export default function LandingPage() {
       <footer className="bg-gradient-to-b from-[#0a0a14] to-black py-20 md:py-16 border-t border-white/10 relative overflow-hidden">
         {/* 배경 장식 */}
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
-          <div className="absolute top-0 left-[10%] w-[300px] h-[300px] bg-[#6366f1]/20 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 right-[10%] w-[400px] h-[400px] bg-[#8b5cf6]/20 rounded-full blur-[120px]" />
+          <div className="absolute top-0 left-[10%] w-[300px] h-[300px] bg-[#6366f1]/20 rounded-[9999px] blur-[100px]" />
+          <div className="absolute bottom-0 right-[10%] w-[400px] h-[400px] bg-[#8b5cf6]/20 rounded-[9999px] blur-[120px]" />
         </div>
 
         <div className="container relative z-10">
@@ -1106,10 +1106,10 @@ export default function LandingPage() {
       <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 pointer-events-none">
         <a
           href="#section-consult"
-          className="group relative px-8 py-5 md:px-12 md:py-6 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] text-white font-black text-[28px] md:text-[24px] rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 pointer-events-auto animate-sparkle animate-float"
+          className="group relative px-8 py-5 md:px-12 md:py-6 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] text-white font-black text-[28px] md:text-[24px] rounded-[9999px] shadow-2xl transform transition-all duration-300 hover:scale-110 pointer-events-auto animate-sparkle animate-float"
         >
           {/* 반짝이는 효과 */}
-          <div className="absolute inset-0 rounded-full overflow-hidden">
+          <div className="absolute inset-0 rounded-[9999px] overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer" />
           </div>
 
@@ -1128,7 +1128,7 @@ export default function LandingPage() {
           </span>
 
           {/* 글로우 효과 */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] opacity-75 blur-xl -z-10 animate-pulse" />
+          <div className="absolute inset-0 rounded-[9999px] bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] opacity-75 blur-xl -z-10 animate-pulse" />
         </a>
       </div>
     </main>

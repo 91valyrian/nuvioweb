@@ -27,7 +27,7 @@ export default function LandingPortfolioSection() {
           </div>
           <a
             href="#section-consult"
-            className="hidden md:inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white text-[18px] md:text-[16px] font-bold rounded-full hover:shadow-lg hover:shadow-[#6366f1]/30 transition-all duration-300 transform hover:-translate-y-0.5 mt-6 md:mt-0"
+            className="hidden md:inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white text-[18px] md:text-[16px] font-bold rounded-[9999px] hover:shadow-lg hover:shadow-[#6366f1]/30 transition-all duration-300 transform hover:-translate-y-0.5 mt-6 md:mt-0"
           >
             내 성공 사례 만들기
             <svg
@@ -51,7 +51,7 @@ export default function LandingPortfolioSection() {
         <div className="mt-8 text-center md:hidden">
           <a
             href="#section-consult"
-            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white text-[30px] md:text-[20px] font-bold rounded-full shadow-lg shadow-[#6366f1]/30 hover:shadow-[#6366f1]/50 transition-all transform hover:-translate-y-1"
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white text-[30px] md:text-[20px] font-bold rounded-[9999px] shadow-lg shadow-[#6366f1]/30 hover:shadow-[#6366f1]/50 transition-all transform hover:-translate-y-1"
           >
             내 성공 사례 만들기
             <svg

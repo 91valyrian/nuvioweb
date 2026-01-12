@@ -130,7 +130,7 @@ export default function LandingPortfolioClient() {
       >
         {loadingDetail ? (
           <div className="flex items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#a78bfa]"></div>
+            <div className="animate-spin rounded-[9999px] h-12 w-12 border-t-2 border-b-2 border-[#a78bfa]"></div>
           </div>
         ) : workDetail ? (
           <div className="space-y-6">
@@ -217,7 +217,7 @@ export default function LandingPortfolioClient() {
                   href={workDetail.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white font-bold rounded-full hover:shadow-lg hover:shadow-[#6366f1]/50 transition-all duration-300 transform hover:-translate-y-1 text-[24px] md:text-[18px]"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white font-bold rounded-[9999px] hover:shadow-lg hover:shadow-[#6366f1]/50 transition-all duration-300 transform hover:-translate-y-1 text-[24px] md:text-[18px]"
                 >
                   사이트 보기
                   <svg
