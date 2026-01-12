@@ -21,16 +21,21 @@ async function sendPushNotification(name) {
 
     const message = `[${maskedName}] 님이 문의를 남겼습니다.\n\n확인하기: https://nuvio-web.com/admin/inquiries`;
 
+    // ✅ Base64로 인코딩
+    const encodedMessage = Buffer.from(message, "utf-8").toString("base64");
+
     const response = await fetch(`https://ntfy.sh/${topic}`, {
       method: "POST",
       headers: {
-        Title: "새 문의가 도착했습니다!",
+        Title: Buffer.from("새 문의가 도착했습니다!", "utf-8").toString(
+          "base64"
+        ),
         Priority: "high",
         Tags: "mailbox_with_mail",
         Click: "https://nuvio-web.com/admin/inquiries",
-        "Content-Type": "text/plain; charset=utf-8", // ✅ UTF-8 명시
+        Encoding: "base64", // ✅ Base64 사용 명시
       },
-      body: message,
+      body: encodedMessage,
     });
 
     if (response.ok) {
@@ -42,7 +47,7 @@ async function sendPushNotification(name) {
       return false;
     }
   } catch (err) {
-    console.error("[NTFY] Error:", err.message);
+    console.error("[NTFY] Error:", err.message, err.stack);
     return false;
   }
 }
