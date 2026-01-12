@@ -4,6 +4,44 @@ import { supabase } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
+// ntfy.sh로 푸시 알림 전송 (개인정보 제외)
+async function sendPushNotification(name) {
+  const topic = process.env.NTFY_TOPIC;
+  if (!topic) {
+    console.log("[NTFY] Topic not configured, skipping push notification");
+    return null;
+  }
+
+  try {
+    // 이름 마스킹 (홍길동 → 홍*동)
+    const maskedName = name && name.length > 1
+      ? name[0] + "*".repeat(name.length - 2) + name[name.length - 1]
+      : name || "익명";
+
+    const response = await fetch(`https://ntfy.sh/${topic}`, {
+      method: "POST",
+      headers: {
+        "Title": "새 문의가 도착했습니다!",
+        "Priority": "high",
+        "Tags": "mailbox_with_mail",
+        "Click": "https://nuvio-web.com/admin/inquiries",
+      },
+      body: `[${maskedName}] 님이 문의를 남겼습니다.\n\n확인하기: https://nuvio-web.com/admin/inquiries`,
+    });
+
+    if (response.ok) {
+      console.log("[NTFY] Push notification sent successfully");
+      return true;
+    } else {
+      console.error("[NTFY] Failed to send:", response.status);
+      return false;
+    }
+  } catch (err) {
+    console.error("[NTFY] Error:", err.message);
+    return false;
+  }
+}
+
 // Supabase에 문의사항 저장
 async function saveInquiryToSupabase(payload) {
   try {
@@ -215,6 +253,7 @@ export async function GET() {
     VERCEL: process.env.VERCEL ? "✓ yes" : "✗ no (local)",
     SUPABASE_URL: process.env.SUPABASE_URL ? "✓ set" : "✗ missing",
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY ? "✓ set (hidden)" : "✗ missing",
+    NTFY_TOPIC: process.env.NTFY_TOPIC ? "✓ set" : "✗ not set (push disabled)",
   };
 
   return NextResponse.json({
@@ -295,6 +334,9 @@ export async function POST(req) {
       emailResult = { sent: false, error: mailErr?.message };
     }
 
+    // ntfy 푸시 알림 전송 (비동기, 실패해도 무시)
+    const pushSent = await sendPushNotification(name).catch(() => false);
+
     // 성공 응답 반환
     return NextResponse.json({
       ok: true,
@@ -302,6 +344,7 @@ export async function POST(req) {
       emailSent: emailResult.sent,
       emailProvider: emailResult.provider || null,
       savedToDb: !!savedInquiry,
+      pushSent: !!pushSent,
     });
   } catch (e) {
     console.error("CONTACT API ERROR:", {
