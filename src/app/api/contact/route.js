@@ -14,26 +14,31 @@ async function sendPushNotification(name) {
 
   try {
     // 이름 마스킹 (홍길동 → 홍*동)
-    const maskedName = name && name.length > 1
-      ? name[0] + "*".repeat(name.length - 2) + name[name.length - 1]
-      : name || "익명";
+    const maskedName =
+      name && name.length > 1
+        ? name[0] + "*".repeat(name.length - 2) + name[name.length - 1]
+        : name || "익명";
+
+    const message = `[${maskedName}] 님이 문의를 남겼습니다.\n\n확인하기: https://nuvio-web.com/admin/inquiries`;
 
     const response = await fetch(`https://ntfy.sh/${topic}`, {
       method: "POST",
       headers: {
-        "Title": "새 문의가 도착했습니다!",
-        "Priority": "high",
-        "Tags": "mailbox_with_mail",
-        "Click": "https://nuvio-web.com/admin/inquiries",
+        Title: "새 문의가 도착했습니다!",
+        Priority: "high",
+        Tags: "mailbox_with_mail",
+        Click: "https://nuvio-web.com/admin/inquiries",
+        "Content-Type": "text/plain; charset=utf-8", // ✅ UTF-8 명시
       },
-      body: `[${maskedName}] 님이 문의를 남겼습니다.\n\n확인하기: https://nuvio-web.com/admin/inquiries`,
+      body: message,
     });
 
     if (response.ok) {
       console.log("[NTFY] Push notification sent successfully");
       return true;
     } else {
-      console.error("[NTFY] Failed to send:", response.status);
+      const errorText = await response.text();
+      console.error("[NTFY] Failed to send:", response.status, errorText);
       return false;
     }
   } catch (err) {
@@ -244,15 +249,23 @@ export async function GET() {
   const envStatus = {
     SMTP_HOST: process.env.SMTP_HOST ? "✓ set" : "✗ missing",
     SMTP_PORT: process.env.SMTP_PORT ? "✓ set" : "✗ missing",
-    SMTP_USER: process.env.SMTP_USER ? `✓ ${process.env.SMTP_USER.substring(0, 3)}***` : "✗ missing",
+    SMTP_USER: process.env.SMTP_USER
+      ? `✓ ${process.env.SMTP_USER.substring(0, 3)}***`
+      : "✗ missing",
     SMTP_PASS: process.env.SMTP_PASS ? "✓ set (hidden)" : "✗ missing",
     MAIL_FROM: process.env.MAIL_FROM ? "✓ set" : "✗ missing",
-    MAIL_TO: process.env.MAIL_TO ? `✓ ${process.env.MAIL_TO.substring(0, 3)}***` : "✗ missing",
-    RESEND_API_KEY: process.env.RESEND_API_KEY ? "✓ set (fallback)" : "✗ not set",
+    MAIL_TO: process.env.MAIL_TO
+      ? `✓ ${process.env.MAIL_TO.substring(0, 3)}***`
+      : "✗ missing",
+    RESEND_API_KEY: process.env.RESEND_API_KEY
+      ? "✓ set (fallback)"
+      : "✗ not set",
     USE_RESEND: process.env.USE_RESEND || "false",
     VERCEL: process.env.VERCEL ? "✓ yes" : "✗ no (local)",
     SUPABASE_URL: process.env.SUPABASE_URL ? "✓ set" : "✗ missing",
-    SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY ? "✓ set (hidden)" : "✗ missing",
+    SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY
+      ? "✓ set (hidden)"
+      : "✗ missing",
     NTFY_TOPIC: process.env.NTFY_TOPIC ? "✓ set" : "✗ not set (push disabled)",
   };
 
@@ -292,7 +305,10 @@ export async function POST(req) {
 
     // Supabase에 문의사항 저장
     const savedInquiry = await saveInquiryToSupabase(payload);
-    console.log("[CONTACT] Inquiry save result:", savedInquiry ? "success" : "failed");
+    console.log(
+      "[CONTACT] Inquiry save result:",
+      savedInquiry ? "success" : "failed"
+    );
 
     // 메일 발송 - Vercel 서버리스 환경에서는 반드시 await 필요
     let emailResult = { sent: false, error: null };
