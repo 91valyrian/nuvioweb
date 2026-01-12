@@ -3,7 +3,10 @@ import { cookies } from "next/headers";
 import fs from "fs";
 import path from "path";
 
-const INQUIRIES_FILE = path.join(process.cwd(), "data", "inquiries.json");
+// Vercel 서버리스 환경에서는 /tmp 디렉토리만 쓰기 가능
+const INQUIRIES_FILE = process.env.VERCEL
+  ? path.join("/tmp", "inquiries.json")
+  : path.join(process.cwd(), "data", "inquiries.json");
 const SESSION_COOKIE_NAME = "admin_session";
 const SESSION_SECRET = process.env.SESSION_SECRET || "your-secret-key-change-this";
 
@@ -74,13 +77,22 @@ export async function GET() {
 // 문의사항 저장
 function saveInquiries(inquiries) {
   try {
-    const dataDir = path.dirname(INQUIRIES_FILE);
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
+    // Vercel 환경에서는 /tmp 디렉토리 사용
+    if (!process.env.VERCEL) {
+      const dataDir = path.dirname(INQUIRIES_FILE);
+      if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir, { recursive: true });
+      }
     }
     fs.writeFileSync(INQUIRIES_FILE, JSON.stringify(inquiries, null, 2), "utf8");
+    console.log("[SUCCESS] Inquiries saved to:", INQUIRIES_FILE);
   } catch (err) {
-    console.error("Failed to save inquiries:", err);
+    console.error("[ERROR] Failed to save inquiries:", {
+      message: err.message,
+      code: err.code,
+      path: INQUIRIES_FILE,
+      isVercel: !!process.env.VERCEL,
+    });
     throw err;
   }
 }

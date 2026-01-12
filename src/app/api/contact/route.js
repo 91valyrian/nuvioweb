@@ -6,15 +6,27 @@ import path from "path";
 export const runtime = "nodejs";
 
 // 문의사항 저장 경로
-const INQUIRIES_FILE = path.join(process.cwd(), "data", "inquiries.json");
+// Vercel 서버리스 환경에서는 /tmp 디렉토리만 쓰기 가능
+const INQUIRIES_FILE = process.env.VERCEL
+  ? path.join("/tmp", "inquiries.json")
+  : path.join(process.cwd(), "data", "inquiries.json");
 
 // 문의사항을 파일에 저장
 function saveInquiry(payload) {
   try {
-    // data 디렉토리가 없으면 생성
-    const dataDir = path.dirname(INQUIRIES_FILE);
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
+    // Vercel 환경에서는 /tmp 디렉토리 사용
+    if (process.env.VERCEL) {
+      const tmpDir = "/tmp";
+      if (!fs.existsSync(tmpDir)) {
+        console.warn("[WARN] /tmp directory does not exist");
+        return null;
+      }
+    } else {
+      // 로컬 환경에서는 data 디렉토리 생성
+      const dataDir = path.dirname(INQUIRIES_FILE);
+      if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir, { recursive: true });
+      }
     }
 
     // 기존 문의사항 읽기
@@ -24,7 +36,7 @@ function saveInquiry(payload) {
         const fileContent = fs.readFileSync(INQUIRIES_FILE, "utf8");
         inquiries = JSON.parse(fileContent);
       } catch (err) {
-        console.error("Failed to read inquiries file:", err);
+        console.error("[ERROR] Failed to read inquiries file:", err);
         inquiries = [];
       }
     }
@@ -40,10 +52,26 @@ function saveInquiry(payload) {
 
     // 파일에 저장
     fs.writeFileSync(INQUIRIES_FILE, JSON.stringify(inquiries, null, 2), "utf8");
+    
+    console.log("[SUCCESS] Inquiry saved:", {
+      id: newInquiry.id,
+      name: newInquiry.name,
+      file: INQUIRIES_FILE,
+    });
 
     return newInquiry;
   } catch (err) {
-    console.error("Failed to save inquiry:", err);
+    // 에러 상세 로깅
+    console.error("[ERROR] Failed to save inquiry:", {
+      message: err.message,
+      code: err.code,
+      errno: err.errno,
+      path: err.path,
+      syscall: err.syscall,
+      stack: err.stack,
+      filePath: INQUIRIES_FILE,
+      isVercel: !!process.env.VERCEL,
+    });
     // 저장 실패해도 메일 발송은 계속 진행
     return null;
   }
@@ -212,45 +240,25 @@ async function sendViaResend(payload) {
 
 // ----- route handlers -----
 export async function GET() {
-  return NextResponse.json({ ok: true, route: "contact" });
-}
+  // 환경변수 설정 상태 확인 (민감한 값은 마스킹)
+  const envStatus = {
+    SMTP_HOST: process.env.SMTP_HOST ? "✓ set" : "✗ missing",
+    SMTP_PORT: process.env.SMTP_PORT ? "✓ set" : "✗ missing",
+    SMTP_USER: process.env.SMTP_USER ? `✓ ${process.env.SMTP_USER.substring(0, 3)}***` : "✗ missing",
+    SMTP_PASS: process.env.SMTP_PASS ? "✓ set (hidden)" : "✗ missing",
+    MAIL_FROM: process.env.MAIL_FROM ? "✓ set" : "✗ missing",
+    MAIL_TO: process.env.MAIL_TO ? `✓ ${process.env.MAIL_TO.substring(0, 3)}***` : "✗ missing",
+    RESEND_API_KEY: process.env.RESEND_API_KEY ? "✓ set (fallback)" : "✗ not set",
+    USE_RESEND: process.env.USE_RESEND || "false",
+    VERCEL: process.env.VERCEL ? "✓ yes" : "✗ no (local)",
+  };
 
-// 백그라운드에서 메일 발송 처리 (비동기)
-async function sendEmailInBackground(payload) {
-  // 에러가 발생해도 사용자에게는 영향을 주지 않도록 처리
-  try {
-    const useResendFirst =
-      String(process.env.USE_RESEND || "").toLowerCase() === "true";
-
-    if (useResendFirst) {
-      await sendViaResend(payload);
-      console.log("[MAIL] Sent via Resend (background)");
-      return;
-    }
-
-    try {
-      await sendViaSMTP(payload);
-      console.log("[MAIL] Sent via SMTP (background)");
-    } catch (smtpErr) {
-      console.error("MAIL ERROR (SMTP):", {
-        message: smtpErr?.message,
-        code: smtpErr?.code,
-      });
-
-      if (process.env.RESEND_API_KEY) {
-        await sendViaResend(payload);
-        console.log("[MAIL] Sent via Resend (fallback, background)");
-      } else {
-        throw smtpErr;
-      }
-    }
-  } catch (e) {
-    // 백그라운드 에러는 로그만 남기고 사용자에게는 영향 없음
-    console.error("MAIL ERROR (BACKGROUND):", {
-      message: e?.message,
-      code: e?.code,
-    });
-  }
+  return NextResponse.json({
+    ok: true,
+    route: "contact",
+    env: envStatus,
+    inquiriesPath: INQUIRIES_FILE,
+  });
 }
 
 export async function POST(req) {
@@ -279,24 +287,63 @@ export async function POST(req) {
       message,
     };
 
-    // 문의사항을 파일에 저장 (즉시 처리)
-    saveInquiry(payload);
+    // 문의사항을 파일에 저장 (Vercel에서는 /tmp 사용, 영구 저장 안됨)
+    const savedInquiry = saveInquiry(payload);
+    console.log("[CONTACT] Inquiry save result:", savedInquiry ? "success" : "failed");
 
-    // 메일 발송은 백그라운드에서 비동기로 처리 (사용자 응답을 블로킹하지 않음)
-    sendEmailInBackground(payload).catch((err) => {
-      console.error("Background email sending failed:", err);
-    });
+    // 메일 발송 - Vercel 서버리스 환경에서는 반드시 await 필요
+    // (응답 반환 후 함수가 종료되므로 백그라운드 처리 불가)
+    let emailResult = { sent: false, error: null };
+    try {
+      const useResendFirst =
+        String(process.env.USE_RESEND || "").toLowerCase() === "true";
 
-    // 사용자에게 즉시 성공 응답 반환
+      if (useResendFirst) {
+        const result = await sendViaResend(payload);
+        console.log("[MAIL] Sent via Resend:", result);
+        emailResult = { sent: true, provider: "resend" };
+      } else {
+        try {
+          const result = await sendViaSMTP(payload);
+          console.log("[MAIL] Sent via SMTP:", result);
+          emailResult = { sent: true, provider: "smtp" };
+        } catch (smtpErr) {
+          console.error("[MAIL ERROR] SMTP failed:", {
+            message: smtpErr?.message,
+            code: smtpErr?.code,
+            stack: smtpErr?.stack,
+          });
+
+          // SMTP 실패 시 Resend로 폴백
+          if (process.env.RESEND_API_KEY) {
+            const result = await sendViaResend(payload);
+            console.log("[MAIL] Sent via Resend (fallback):", result);
+            emailResult = { sent: true, provider: "resend-fallback" };
+          } else {
+            emailResult = { sent: false, error: smtpErr?.message };
+          }
+        }
+      }
+    } catch (mailErr) {
+      console.error("[MAIL ERROR] All methods failed:", {
+        message: mailErr?.message,
+        code: mailErr?.code,
+      });
+      emailResult = { sent: false, error: mailErr?.message };
+    }
+
+    // 성공 응답 반환
     return NextResponse.json({
       ok: true,
       message: "문의사항이 접수되었습니다.",
-      sentInBackground: true,
+      emailSent: emailResult.sent,
+      emailProvider: emailResult.provider || null,
     });
   } catch (e) {
     console.error("CONTACT API ERROR:", {
       message: e?.message,
       code: e?.code,
+      stack: e?.stack,
     });
     return NextResponse.json(
       {
