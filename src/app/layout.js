@@ -8,9 +8,9 @@ import ConditionalLayout from "@/components/ConditionalLayout";
 const siteName = "nuvio";
 const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
 const defaultTitle =
-  "홈페이지 제작 전문 · 기업·병원·프랜차이즈 브랜딩 웹사이트 | nuvio";
+  "홈페이지 제작 | 검색되는 구조로 문의를 만드는 웹사이트 – nuvio"; //매출이 2배 오르는 홈페이지 제작 | 검색되는 구조로 문의를 만드는 웹사이트 – nuvio
 const defaultDesc =
-  "기획·디자인·개발·SEO까지 한 번에 설계하는 전략형 홈페이지 제작 스튜디오입니다. 기업·병원·프랜차이즈에 맞춘 브랜딩 웹사이트로 신뢰와 전환을 동시에 높여드립니다.";
+  "홈페이지 제작에서 중요한 것은 디자인이 아니라 구조입니다. nuvio는 기획·디자인·개발·SEO·AEO를 통합해 검색되는 구조부터 문의로 이어지는 웹사이트를 설계합니다. 기업·병원·프랜차이즈 맞춤 제작.";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -28,10 +28,7 @@ export const metadata = {
     "로펌 홈페이지 제작",
     "법률사무소 홈페이지 제작",
     "브랜드 홈페이지 제작",
-    "전략형 홈페이지 제작",
     "반응형 홈페이지",
-    "nuvio",
-    "누비오",
   ],
   applicationName: siteName,
   openGraph: {
@@ -131,9 +128,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="text-white">
         <AnalyticsTracker />
-        <ConditionalLayout>
-          {children}
-        </ConditionalLayout>
+        <ConditionalLayout>{children}</ConditionalLayout>
         <Analytics />
       </body>
     </html>

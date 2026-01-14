@@ -145,13 +145,20 @@ export async function generateMetadata({ params }) {
   }
 
   // ❸ 데이터가 있을 때 (페이지별 맞춤 메타)
-  const pageTitle = `[${work.client || "브랜드"}][${work.summary}] 홈페이지 제작 사례 - ${work.seoTitle}`;
+  // const pageTitle = `[${work.client || "브랜드"}][${work.summary}] 홈페이지 제작 사례 - ${work.seoTitle}`;
+  const pageTitle = work.seoTitle
+    ? `${work.seoTitle}`
+    : `[${work.summary}] ${work.client} 홈페이지 제작 사례`;
   // CTR형 설명: 문제→해결 + 핵심키워드 자연 삽입 (120자 내)
   const rawDesc =
     work.overview ||
     work.excerpt ||
     `[${work.client || "브랜드"}][${work.summary}] 홈페이지 제작 사례`;
-  const descLead = `${work.seoDesc}`; //truncateSentence(cleanText(rawDesc), 110);
+  // const descLead = `${work.seoDesc}`; //truncateSentence(cleanText(rawDesc), 110);
+  // seoDesc가 없을 경우를 대비한 Fallback 로직
+  const descLead = work.seoDesc
+    ? work.seoDesc
+    : `${work.client}의 ${work.summary} 홈페이지 제작 사례입니다. 업종별 특화된 구조와 SEO 설계를 지금 확인해 보세요.`;
   const pageDesc = `${descLead}`;
   const url = `${base}/work/${slug}`;
   const ogImage = selectOgImage(work);

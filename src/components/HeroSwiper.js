@@ -13,28 +13,28 @@ const slides = [
   {
     src: "/main/heroslide4.webp",
     alt: "완벽한 홈페이지 제작",
-    title:
-      "완벽한 첫인상,<br class='block md:hidden' /> 기업의 가치를<br />높이는 브랜딩<br class='block md:hidden' /> 홈페이지",
+    title: "검색되는 홈페이지 제작,<br /> 문의로 이어지는 웹사이트 구조",
     subtitle:
-      "당신의 비즈니스가 가질 수 있는<br class='block md:hidden' /> 최고의 인상을 홈페이지에 담아냅니다.",
+      "당신의 비즈니스가 가질 수 있는 <br class='block md:hidden' /> 최고의 인상을 검색되는 홈페이지 제작으로 완성합니다.",
     ctaLabel: "Contact",
     ctaHref: "/contact",
   },
   {
     src: "/main/heroslide111.webp",
     alt: "보여지는 것 이상의 홈페이지",
-    title: "보여지는 것<br /> 이상을 설계합니다.",
+    title:
+      "<span class='sr-only'>홈페이지 제작에서</span> 가장 중요한 것은<br/> 구조 설계 입니다.",
     subtitle:
-      "보이는 것 이상의 완성도를 고민하며,<br /> 브랜드가 오래 기억될 디지털 경험을 만듭니다.",
+      "보이는 디자인보다 먼저, 검색엔진과 사용자가 이해할 수 있는<br /> 홈페이지 구조를 설계합니다.",
     ctaLabel: "Contact",
     ctaHref: "/contact",
   },
   {
     src: "/main/heroslide5.webp",
     alt: "전략적 브랜딩 홈페이지",
-    title: "전략과 감각이 만나는<br /> 브랜딩 웹사이트",
+    title: "브랜드를 성장시키는<br/> 홈페이지 제작 전략",
     subtitle:
-      "단순히 예쁜 디자인이 아닌,<br /> 브랜드의 본질과 사용자의 여정을 함께 설계합니다.",
+      "단순히 예쁜 홈페이지 제작이 아니라,<br/>브랜드의 방향과 사용자 흐름을 함께 설계합니다.",
     ctaLabel: "Contact",
     ctaHref: "/contact",
   },
@@ -96,7 +96,9 @@ export default function HeroSwiper() {
 
   return (
     <section className="relative overflow-hidden">
-      <h1 className="sr-only">완벽한 첫인상, 기업의 가치를 높입니다.</h1>
+      <h1 className="sr-only">
+        홈페이지 제작, 구조부터 설계하는 웹사이트 제작
+      </h1>
       <Swiper
         className="w-full h-[1380px] md:h-[100vh]"
         modules={[Autoplay, Pagination, Navigation, A11y]}

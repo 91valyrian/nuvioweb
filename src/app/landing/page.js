@@ -1103,7 +1103,7 @@ export default function LandingPage() {
       </footer>
 
       {/* 퀵 전환 버튼 - 하단 고정 */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 pointer-events-none">
+      <div className="fixed bottom-10 left-0 right-0 z-50 flex justify-center p-4 md:p-6 pointer-events-none">
         <a
           href="#section-consult"
           className="group relative px-8 py-5 md:px-12 md:py-6 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] text-white font-black text-[28px] md:text-[24px] rounded-[9999px] shadow-2xl transform transition-all duration-300 hover:scale-110 pointer-events-auto animate-sparkle animate-float"
