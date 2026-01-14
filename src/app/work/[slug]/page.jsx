@@ -207,9 +207,10 @@ export default async function WorkDetail({ params }) {
       {/* 헤더 */}
       <div className="container mt-[200px] mb-[50px]">
         <header className="">
-          <h1 className="text-[70px] md:text-[100px] font-bold tracking-tight">
-            {work.title} <span className="sr-only">홈페이지 제작사례</span>
-          </h1>
+          <h1
+            className="text-[70px] md:text-[100px] font-bold tracking-tight"
+            dangerouslySetInnerHTML={{ __html: work.title }}
+          />
           <p className="text-[28px] md:text-[20px] mt-2 text-neutral-300">
             {work.client} · {work.year}
           </p>

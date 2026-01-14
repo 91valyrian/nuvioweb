@@ -974,7 +974,7 @@ export default function LandingPage() {
         <div className="container relative z-10">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             {/* 브랜드 섹션 */}
-            <div className="scroll-anim">
+            <div className="">
               <div className="mb-6">
                 <span className="text-[40px] md:text-[32px] font-black text-white mb-4 inline-block">
                   nuvio.
@@ -991,7 +991,7 @@ export default function LandingPage() {
             </div>
 
             {/* 연락처 섹션 */}
-            <div className="scroll-anim">
+            <div className="">
               <h3 className="text-[#a78bfa] font-bold text-[24px] md:text-[18px] mb-6 uppercase tracking-wider">
                 Contact
               </h3>
@@ -1066,7 +1066,7 @@ export default function LandingPage() {
             </div>
 
             {/* 정보 섹션 */}
-            <div className="scroll-anim">
+            <div className="">
               <h3 className="text-[#a78bfa] font-bold text-[24px] md:text-[18px] mb-6 uppercase tracking-wider">
                 Company Info
               </h3>

@@ -163,7 +163,10 @@ export default function CardList({
 
             {/* 내용 */}
             <div className="card-body flex items-center justify-between flex-col">
-              <h3 className="card-title">{item.title}</h3>
+              <h3
+                className="card-title"
+                dangerouslySetInnerHTML={{ __html: item.title }}
+              />
               {/* <p className="card-desc line-clamp-2">{item.summary}</p> */}
               <p className="card-meta">
                 {item.client} · {item.year}

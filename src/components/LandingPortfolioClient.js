@@ -107,9 +107,10 @@ export default function LandingPortfolioClient() {
                   {work.year || "신규제작"}
                 </span>
               </div>
-              <h3 className="text-[38px] md:text-[28px] font-bold text-white mb-3 group-hover:text-[#a78bfa] transition-colors">
-                {work.title}
-              </h3>
+              <h3
+                className="text-[38px] md:text-[28px] font-bold text-white mb-3 group-hover:text-[#a78bfa] transition-colors"
+                dangerouslySetInnerHTML={{ __html: work.title }}
+              />
               {work.seoDesc && (
                 <p className="text-white/80 text-[28px] md:text-[16px] leading-relaxed line-clamp-2">
                   {work.seoDesc}
