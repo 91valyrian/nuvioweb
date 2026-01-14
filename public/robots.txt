@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin/inquiries
 
 Sitemap: https://nuvio-web.com/sitemap.xml
