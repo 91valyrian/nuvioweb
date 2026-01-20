@@ -125,7 +125,7 @@ export default function LandingPortfolioClient() {
       <Modal
         open={!!selectedWork}
         onClose={handleCloseModal}
-        title={selectedWork?.title || ""}
+        title={selectedWork?.seoTitle || ""}
         size="lg"
         className="z-[2000]"
       >
@@ -140,7 +140,7 @@ export default function LandingPortfolioClient() {
               <div className="relative w-full aspect-video rounded-lg overflow-hidden">
                 <Image
                   src={workDetail.cover}
-                  alt={workDetail.title}
+                  alt={workDetail.seoTitle}
                   fill
                   className="object-cover"
                 />
