@@ -221,7 +221,7 @@ export default async function WorkDetail({ params }) {
         <div className="mb-12 overflow-hidden">
           <Image
             src={work.cover}
-            alt={"Cover image for " + work.title}
+            alt={"Cover image for " + work.seoTitle}
             width={1920}
             height={720}
             className="object-cover mx-auto w-full h-[720px] max-w-[1920px]"
@@ -280,7 +280,7 @@ export default async function WorkDetail({ params }) {
       </article>
 
       {/* 디자인 이미지 섹션 */}
-      <WorkMainSection images={images} title={work.title} />
+      <WorkMainSection images={images} title={work.seoTitle} />
 
       {/* 구조화 데이터(JSON-LD) */}
       <script
@@ -304,7 +304,7 @@ export default async function WorkDetail({ params }) {
       {(() => {
         // 최신순(내림차순)으로 정렬한 목록 기준으로 prev/next 계산
         const works = getAllWorks().sort(
-          (a, b) => new Date(b.inputDate) - new Date(a.inputDate)
+          (a, b) => new Date(b.inputDate) - new Date(a.inputDate),
         );
         const currentIndex = works.findIndex((w) => w.slug === work.slug);
         if (currentIndex === -1) return null;
@@ -324,7 +324,7 @@ export default async function WorkDetail({ params }) {
                 href={`/work/${prevWork.slug}`}
                 className="text-[44px] md:text-[40px] text-neutral-400 hover:text-white transition-colors"
               >
-                ← {prevWork.title}
+                ← {prevWork.seoTitle}
               </a>
             ) : (
               <div />
@@ -336,7 +336,7 @@ export default async function WorkDetail({ params }) {
                 href={`/work/${nextWork.slug}`}
                 className="text-[44px] md:text-[40px] text-neutral-400 hover:text-white transition-colors"
               >
-                {nextWork.title} →
+                {nextWork.seoTitle} →
               </a>
             ) : (
               <div />

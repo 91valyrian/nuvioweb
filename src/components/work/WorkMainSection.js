@@ -5,7 +5,7 @@ export default function WorkMainSection({ images = [], title }) {
 
   return (
     <section className="">
-      <div className="md:max-w-[1024px] xl:max-w-[1720px] mx-auto px-[20px]">
+      <div className="md:max-w-[1024px] xl:max-w-[1620px] mx-auto px-[20px]">
         <h2 className="mb-6 text-[64px] md:text-[50px] font-semibold sr-only">
           {title} 전체 디자인
         </h2>
@@ -14,7 +14,7 @@ export default function WorkMainSection({ images = [], title }) {
             <Image
               src={src}
               alt={`${title} 디자인 이미지 ${i + 1}`}
-              width={1800}
+              width={1620}
               height={1000}
               className="w-full h-auto rounded-[21px]"
             />
