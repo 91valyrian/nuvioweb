@@ -1212,10 +1212,10 @@ export default function LandingPage() {
             <button
               type="button"
               onClick={() => setShowEventModal(false)}
-              className="absolute top-4 right-4 z-20 w-12 h-12 flex items-center justify-center rounded-[9999px] bg-black/50 hover:bg-black/70 text-white transition-colors cursor-pointer border-2 border-white/30 hover:border-white/50"
+              className="absolute -top-20 right-0 w-24 h-24 md:top-12 md:right-4 z-20 md:w-12 md:h-12 flex items-center justify-center rounded-[9999px] bg-black/50 hover:bg-black/70 text-white transition-colors cursor-pointer border-2 border-white/30 hover:border-white/50"
               aria-label="모달 닫기"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-12 h-12 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -1236,7 +1236,7 @@ export default function LandingPage() {
             <a
               href="#section-consult"
               onClick={() => setShowEventModal(false)}
-              className="group relative inline-flex items-center justify-center w-full mt-4 px-6 py-4 md:px-8 md:py-5 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] text-white font-bold text-2xl md:text-lg rounded-[9999px] shadow-2xl transform transition-all duration-300 hover:scale-105 pointer-events-auto animate-sparkle animate-float overflow-hidden cursor-pointer"
+              className="group relative inline-flex items-center justify-center w-full mt-4 px-6 py-8 md:px-8 md:py-5 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] text-white font-bold text-4xl md:text-lg rounded-[9999px] shadow-2xl transform transition-all duration-300 hover:scale-105 pointer-events-auto animate-sparkle animate-float overflow-hidden cursor-pointer"
             >
               <div className="absolute inset-0 rounded-[9999px] overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer" />
