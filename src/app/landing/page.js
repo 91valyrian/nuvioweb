@@ -1207,12 +1207,12 @@ export default function LandingPage() {
           />
 
           {/* 모달 컨텐츠 - 이미지 + 버튼 + 닫기 */}
-          <div className="relative z-10 w-full max-w-md flex flex-col items-center">
+          <div className="relative z-10 w-full max-w-xl flex flex-col items-center">
             {/* 닫기 버튼 */}
             <button
               type="button"
               onClick={() => setShowEventModal(false)}
-              className="absolute top-4 right-4 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors cursor-pointer border-2 border-white/30 hover:border-white/50"
+              className="absolute top-4 right-4 z-20 w-12 h-12 flex items-center justify-center rounded-[9999px] bg-black/50 hover:bg-black/70 text-white transition-colors cursor-pointer border-2 border-white/30 hover:border-white/50"
               aria-label="모달 닫기"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
