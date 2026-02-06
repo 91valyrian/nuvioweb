@@ -18,6 +18,9 @@ export default function LandingPage() {
   const navbarRef = useRef(null);
   const pathname = usePathname();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showEventModal, setShowEventModal] = useState(false);
+  const eventModalShownRef = useRef(false);
+  const [showQuickCta, setShowQuickCta] = useState(false);
 
   useEffect(() => {
     // 기존 ScrollTrigger 모두 제거
@@ -132,6 +135,22 @@ export default function LandingPage() {
         );
       }
 
+      // 이벤트 모달: 인터뷰 섹션 진입 시 한 번만 표시
+      const interviewSection = document.getElementById("section-interview");
+      if (interviewSection && !eventModalShownRef.current) {
+        ScrollTrigger.create({
+          trigger: interviewSection,
+          start: "top 80%",
+          onEnter: () => {
+            if (!eventModalShownRef.current) {
+              eventModalShownRef.current = true;
+              setShowEventModal(true);
+            }
+          },
+          once: true,
+        });
+      }
+
       // 현재 스크롤 위치에서 이미 보이는 요소들 즉시 표시
       const checkVisibleElements = () => {
         const allElements = [
@@ -164,7 +183,7 @@ export default function LandingPage() {
       }, 100);
     };
 
-    // Navbar scroll effect
+    // Navbar scroll effect + 퀵 CTA 버튼 (hero 섹션 벗어난 후 노출)
     const handleScroll = () => {
       if (navbarRef.current) {
         if (window.scrollY > 20) {
@@ -175,6 +194,11 @@ export default function LandingPage() {
           navbarRef.current.classList.remove("bg-[#1a1a2e]/95", "shadow-lg");
         }
       }
+      const heroSection = document.getElementById("section-hero");
+      if (heroSection) {
+        const heroMidpoint = heroSection.offsetTop + heroSection.offsetHeight * 0.5;
+        setShowQuickCta(window.scrollY >= heroMidpoint);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -182,6 +206,7 @@ export default function LandingPage() {
     // 약간의 지연 후 애니메이션 초기화 (DOM이 완전히 렌더링된 후)
     const timer = setTimeout(() => {
       initAnimations();
+      handleScroll(); // 초기 스크롤 위치에서 퀵 CTA 표시 여부 체크
     }, 50);
 
     return () => {
@@ -309,6 +334,7 @@ export default function LandingPage() {
             </span>
           </div>
 
+          {/* 기존 콘텐츠 (이벤트 종료 시 복원)
           <h1 className="hero-anim opacity-0 translate-y-10 text-[64px] md:text-[48px] lg:text-[72px] font-bold leading-tight mb-8 break-keep text-white">
             홈페이지, <span className="text-[#a78bfa]">90%</span>는
             <br />
@@ -324,6 +350,28 @@ export default function LandingPage() {
               실적을 내는 영업사원
             </strong>
             을 만듭니다.
+          </p>
+          */}
+
+          {/* 설날 프로모션 이벤트 */}
+          <h1 className="hero-anim opacity-0 translate-y-10 text-[64px] md:text-[48px] lg:text-[72px] font-bold leading-tight mb-8 break-keep text-white">
+            설날 프로모션
+            <br />
+            맞춤형 홈페이지{" "}
+            <span className="text-[#a78bfa]">77만원 제작</span>
+            <br />
+            <span className="text-[#a78bfa]">AI 관리자 페이지(CMS) 무료</span> 제공
+          </h1>
+
+          <p className="hero-anim opacity-0 translate-y-10 text-[32px] md:text-[22px] text-white/80 mb-6 max-w-3xl mx-auto leading-relaxed break-keep">
+            2월까지 계약 시
+            <br />
+            얼굴마담이 아닌,
+            <br className="md:hidden block" />
+            <strong className="text-white font-semibold">
+              실적을 내는 영업사원
+            </strong>
+            같은 홈페이지를 만듭니다.
           </p>
 
           <div className="hero-anim opacity-0 translate-y-10 flex flex-col md:flex-row gap-4 justify-center items-center">
@@ -474,7 +522,10 @@ export default function LandingPage() {
       </section>
 
       {/* 3. Pain Points Interview */}
-      <section className="py-[150px] md:py-[100px] bg-[#1a1a2e] border-t border-white/5">
+      <section
+        id="section-interview"
+        className="py-[150px] md:py-[100px] bg-[#1a1a2e] border-t border-white/5"
+      >
         <div className="container">
           <div className="text-center mb-16 scroll-anim">
             <span className="text-[#a78bfa] font-bold tracking-wider uppercase text-[28px] md:text-[16px]">
@@ -1102,11 +1153,19 @@ export default function LandingPage() {
         </div>
       </footer>
 
-      {/* 퀵 전환 버튼 - 하단 고정 */}
-      <div className="fixed bottom-10 left-0 right-0 z-50 flex justify-center p-4 md:p-6 pointer-events-none">
+      {/* 퀵 전환 버튼 - hero 섹션 반 정도 지나면 하단 고정 노출 */}
+      <div
+        className={`fixed bottom-10 left-0 right-0 z-50 flex justify-center p-4 md:p-6 transition-all duration-500 ease-out ${
+          showQuickCta
+            ? "opacity-100 translate-y-0 scale-100"
+            : "opacity-0 translate-y-8 scale-95 pointer-events-none"
+        }`}
+      >
         <a
           href="#section-consult"
-          className="group relative px-8 py-5 md:px-12 md:py-6 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] text-white font-black text-[28px] md:text-[24px] rounded-[9999px] shadow-2xl transform transition-all duration-300 hover:scale-110 pointer-events-auto animate-sparkle animate-float"
+          className={`group relative px-8 py-5 md:px-12 md:py-6 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] text-white font-black text-[28px] md:text-[24px] rounded-[9999px] shadow-2xl transform transition-all duration-300 hover:scale-110 animate-sparkle animate-float ${
+            showQuickCta ? "pointer-events-auto" : "pointer-events-none"
+          }`}
         >
           {/* 반짝이는 효과 */}
           <div className="absolute inset-0 rounded-[9999px] overflow-hidden">
@@ -1131,6 +1190,63 @@ export default function LandingPage() {
           <div className="absolute inset-0 rounded-[9999px] bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] opacity-75 blur-xl -z-10 animate-pulse" />
         </a>
       </div>
+
+      {/* 이벤트 모달 팝업 - 인터뷰 섹션 도달 시 표시 */}
+      {showEventModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="event-modal-title"
+        >
+          {/* 배경 오버레이 */}
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={() => setShowEventModal(false)}
+            aria-hidden="true"
+          />
+
+          {/* 모달 컨텐츠 - 이미지 + 버튼 + 닫기 */}
+          <div className="relative z-10 w-full max-w-md flex flex-col items-center">
+            {/* 닫기 버튼 */}
+            <button
+              type="button"
+              onClick={() => setShowEventModal(false)}
+              className="absolute top-4 right-4 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors cursor-pointer border-2 border-white/30 hover:border-white/50"
+              aria-label="모달 닫기"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* 이벤트 이미지 */}
+            <div className="relative w-full" style={{ aspectRatio: "3/4" }}>
+              <Image
+                src="/event/landingEvent.webp"
+                alt="설날 프로모션 - 맞춤형 홈페이지 77만원 제작, AI 관리자 페이지 무료 제공"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 448px"
+                priority
+              />
+            </div>
+
+            {/* CTA 버튼 */}
+            <a
+              href="#section-consult"
+              onClick={() => setShowEventModal(false)}
+              className="group relative inline-flex items-center justify-center w-full mt-4 px-6 py-4 md:px-8 md:py-5 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] text-white font-bold text-2xl md:text-lg rounded-[9999px] shadow-2xl transform transition-all duration-300 hover:scale-105 pointer-events-auto animate-sparkle animate-float overflow-hidden cursor-pointer"
+            >
+              <div className="absolute inset-0 rounded-[9999px] overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer" />
+              </div>
+              <span className="relative z-10">지금 무료 상담받기</span>
+              <div className="absolute inset-0 rounded-[9999px] bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a78bfa] opacity-75 blur-xl -z-10 animate-pulse" />
+            </a>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
