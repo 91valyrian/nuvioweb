@@ -88,7 +88,7 @@ export default function LandingPage() {
                 toggleActions: "play none none none",
                 once: true, // 한 번만 실행
               },
-            }
+            },
           );
         }
       });
@@ -110,7 +110,7 @@ export default function LandingPage() {
               toggleActions: "play none none none",
               once: true, // 한 번만 실행
             },
-          }
+          },
         );
       });
 
@@ -131,7 +131,7 @@ export default function LandingPage() {
               toggleActions: "play none none none",
               once: true,
             },
-          }
+          },
         );
       }
 
@@ -196,7 +196,8 @@ export default function LandingPage() {
       }
       const heroSection = document.getElementById("section-hero");
       if (heroSection) {
-        const heroMidpoint = heroSection.offsetTop + heroSection.offsetHeight * 0.5;
+        const heroMidpoint =
+          heroSection.offsetTop + heroSection.offsetHeight * 0.5;
         setShowQuickCta(window.scrollY >= heroMidpoint);
       }
     };
@@ -246,7 +247,7 @@ export default function LandingPage() {
 
       if (res.ok) {
         alert(
-          "무료 진단 신청이 완료되었습니다. 25년차 전문가가 직접 분석해 24시간 내로 연락드리겠습니다."
+          "무료 진단 신청이 완료되었습니다. 25년차 전문가가 직접 분석해 24시간 내로 연락드리겠습니다.",
         );
         form.reset();
       } else {
@@ -334,7 +335,6 @@ export default function LandingPage() {
             </span>
           </div>
 
-          {/* 기존 콘텐츠 (이벤트 종료 시 복원)
           <h1 className="hero-anim opacity-0 translate-y-10 text-[64px] md:text-[48px] lg:text-[72px] font-bold leading-tight mb-8 break-keep text-white">
             홈페이지, <span className="text-[#a78bfa]">90%</span>는
             <br />
@@ -351,17 +351,6 @@ export default function LandingPage() {
             </strong>
             을 만듭니다.
           </p>
-          */}
-
-          {/* 설날 프로모션 이벤트 */}
-          <h1 className="hero-anim opacity-0 translate-y-10 text-[64px] md:text-[48px] lg:text-[72px] font-bold leading-tight mb-8 break-keep text-white">
-            설날 프로모션
-            <br />
-            맞춤형 홈페이지{" "}
-            <span className="text-[#a78bfa]">77만원 제작</span>
-            <br />
-            <span className="text-[#a78bfa]">AI 관리자 페이지(CMS) 무료</span> 제공
-          </h1>
 
           <p className="hero-anim opacity-0 translate-y-10 text-[32px] md:text-[22px] text-white/80 mb-6 max-w-3xl mx-auto leading-relaxed break-keep">
             2월까지 계약 시
@@ -1215,8 +1204,18 @@ export default function LandingPage() {
               className="absolute -top-20 right-0 w-24 h-24 md:top-12 md:right-4 z-20 md:w-12 md:h-12 flex items-center justify-center rounded-[9999px] bg-black/50 hover:bg-black/70 text-white transition-colors cursor-pointer border-2 border-white/30 hover:border-white/50"
               aria-label="모달 닫기"
             >
-              <svg className="w-12 h-12 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-12 h-12 md:w-6 md:h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
 
