@@ -249,6 +249,8 @@
 
   /* Main */
   --color-main: #1f4fff; /* DEFAULT */
+  --color-main-1: #1f4fff;
+  --color-main-2: #ff7c44;
   --color-main-dark: #0a1a3d;
   --color-main-light: #e6ecff;
 
@@ -439,4 +441,198 @@ body {
 
 .animate-shimmer {
   animation: shimmer 2s linear infinite;
+}
+
+/* ========== Landing (Aurora) page ========== */
+/* 랜딩만 16px 고정 (globals의 :root vw 폰트사이즈 미적용) */
+.landing-page-root {
+  --base-size: 16px;
+  font-size: 16px;
+}
+
+@keyframes aurora-liquid {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+  }
+  33% {
+    transform: translate(10%, 15%) rotate(120deg) scale(1.2);
+    border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+  }
+  66% {
+    transform: translate(-5%, 20%) rotate(240deg) scale(0.8);
+    border-radius: 30% 70% 70% 30% / 50% 40% 30% 60%;
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg) scale(1);
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+  }
+}
+
+.animate-aurora-1 {
+  animation: aurora-liquid 15s infinite alternate;
+}
+.animate-aurora-2 {
+  animation: aurora-liquid 12s infinite alternate-reverse;
+}
+.animate-aurora-3 {
+  animation: aurora-liquid 18s infinite linear;
+}
+.animate-aurora-4 {
+  animation: aurora-liquid 20s infinite ease-in-out;
+}
+
+/* Landing nav-link underline */
+.landing-nav-link {
+  position: relative;
+}
+.landing-nav-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background-color: white;
+  transition: width 0.3s ease-in-out;
+}
+.landing-nav-link.active::before,
+.landing-nav-link:hover::before {
+  width: 100%;
+}
+
+/* Landing GNB overlay */
+#gnb-overlay.landing-gnb-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Portfolio card hover scroll - JS(GSAP)에서만 제어, CSS 호버 없음 */
+.landing-portfolio-card .portfolio-shot-inner {
+  will-change: transform;
+}
+
+/* Marquee ribbon - 랜딩 전용, 상위 text-white 덮어쓰기 */
+.marquee-section {
+  isolation: isolate;
+}
+.marquee-section .marquee-ribbon {
+  position: relative;
+  left: 50%;
+  width: 120%;
+  min-height: 100px;
+  height: 100px;
+  overflow: hidden;
+  transform: translateX(-50%) rotate(-3deg);
+  margin: 0 -10%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.marquee-section .marquee-ribbon.reverse {
+  transform: translateX(-50%) rotate(3deg);
+  margin-top: -100px;
+}
+.marquee-section .marquee-content {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  will-change: transform;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.marquee-section .marquee-text {
+  display: inline-block;
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 100px;
+  letter-spacing: 0.5px;
+  padding: 0 10px;
+}
+.marquee-section .marquee-ribbon.ribbon-orange {
+  background-color: #ff7c44;
+}
+.marquee-section .marquee-ribbon.ribbon-blue {
+  background-color: #1f4fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.3);
+}
+.marquee-section .ribbon-orange .marquee-text {
+  color: #000 !important;
+}
+.marquee-section .ribbon-blue .marquee-text {
+  color: #fff !important;
+}
+@media (max-width: 768px) {
+  .marquee-section .marquee-ribbon {
+    min-height: 80px;
+    height: 80px;
+    margin: -20px -10%;
+  }
+  .marquee-section .marquee-text {
+    font-size: 20px;
+    line-height: 80px;
+    padding: 0 40px;
+  }
+}
+
+/* Speech bubble */
+.speech-bubble {
+  position: relative;
+  background: white;
+  padding: 16px 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+  width: 100%;
+}
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid white;
+}
+
+/* Review marquee cards */
+.review-marquee-container {
+  width: 100%;
+  overflow: hidden;
+}
+.review-marquee-content {
+  display: flex;
+  gap: 24px;
+  will-change: transform;
+}
+.review-card {
+  flex-shrink: 0;
+  width: 400px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 32px;
+  backdrop-filter: blur(10px);
+}
+@media (max-width: 768px) {
+  .review-card {
+    width: 320px;
+    padding: 24px;
+  }
+}
+
+.quote-popup-glow {
+  box-shadow:
+    0 0 20px rgba(31, 79, 255, 0.3),
+    0 0 40px rgba(31, 79, 255, 0.2),
+    0 0 60px rgba(31, 79, 255, 0.1),
+    0 10px 40px rgba(0, 0, 0, 0.8),
+    0 20px 80px rgba(0, 0, 0, 0.6);
 }

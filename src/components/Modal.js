@@ -48,13 +48,13 @@ export default function Modal({
         <div className="flex items-center gap-3 px-6 md:px-8 py-5 border-b border-white/10">
           {/* Variant Icon (optional) */}
           <div
-            className={`grid place-items-center w-10 h-10 rounded-[9999px] w-[70px] h-[70px] md:w-[50px] md:h-[50px] ${iconWrapClass}`}
+            className={`hidden md:grid place-items-center w-10 h-10 md:w-10 md:h-10 rounded-[9999px] ${iconWrapClass}`}
             aria-hidden="true"
           >
             {variant === "success" && (
               <svg
                 viewBox="0 0 20 20"
-                className="w-[44px] h-[44px] md:w-[24px] md:h-[24px]"
+                className="w-[16px] h-[16px] md:w-[24px] md:h-[24px]"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
@@ -67,7 +67,7 @@ export default function Modal({
             {variant === "error" && (
               <svg
                 viewBox="0 0 20 20"
-                className="w-[44px] h-[44px] md:w-[24px] md:h-[24px]"
+                className="w-[16px] h-[16px] md:w-[24px] md:h-[24px]"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
@@ -80,7 +80,7 @@ export default function Modal({
             {variant === "default" && (
               <svg
                 viewBox="0 0 20 20"
-                className="w-[44px] h-[44px] md:w-[24px] md:h-[24px]"
+                className="w-[16px] h-[16px] md:w-[24px] md:h-[24px]"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
@@ -94,7 +94,7 @@ export default function Modal({
 
           <h4
             id={ariaLabelledby || "modal-title"}
-            className="text-[36px] md:text-[24px] font-bold"
+            className="text-[20px] md:text-[24px] font-bold"
           >
             {title}
           </h4>

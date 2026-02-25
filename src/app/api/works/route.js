@@ -3,9 +3,9 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const works = getAllWorks()
-      .sort((a, b) => new Date(b.inputDate) - new Date(a.inputDate))
-      .slice(0, 3);
+    const works = getAllWorks().sort(
+      (a, b) => new Date(b.inputDate) - new Date(a.inputDate)
+    );
 
     return NextResponse.json(works);
   } catch (error) {

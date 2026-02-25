@@ -13,9 +13,9 @@ const slides = [
   {
     src: "/main/heroslide4.webp",
     alt: "완벽한 홈페이지 제작",
-    title: "검색되는 홈페이지 제작,<br /> 문의로 이어지는 웹사이트 구조",
+    title: "검색되는 홈페이지 제작,<br /> 문의로 이어지는<br class='block md:hidden' /> 웹사이트 구조",
     subtitle:
-      "당신의 비즈니스가 가질 수 있는 <br class='block md:hidden' /> 최고의 인상을 검색되는 홈페이지 제작으로 완성합니다.",
+      "당신의 비즈니스가 가질 수 있는 <br class='block md:hidden' /> 최고의 인상을<br class='block md:hidden' /> 검색되는 홈페이지 제작으로 완성합니다.",
     ctaLabel: "Contact",
     ctaHref: "/contact",
   },
@@ -179,7 +179,7 @@ export default function HeroSwiper() {
                     key={`text-${idx}-${active === idx ? "active" : "idle"}`}
                   >
                     <h2
-                      className="text-[78px] md:text-[61px] leading-[88px] md:leading-[71px] font-bold"
+                      className="text-[70px] md:text-[61px] leading-[88px] md:leading-[71px] font-bold"
                       dangerouslySetInnerHTML={{ __html: slides.title }}
                     />
                     <p
