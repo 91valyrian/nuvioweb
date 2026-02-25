@@ -452,10 +452,10 @@ export default function LandingPage() {
       {/* Hero */}
       <div className="relative w-screen min-h-screen flex justify-center items-start">
         <div className="absolute -top-[20%] w-full h-[80%] blur-[60px] contrast-[1.2] bg-black flex">
-          <div className="absolute w-[180vw] h-[160vw] md:w-[100vw] md:h-[100vw] rounded-full mix-blend-screen opacity-70 -top-[30%] -left-[20%] bg-[radial-gradient(circle,#1F4FFF,transparent)] animate-aurora-1" />
-          <div className="absolute w-[180vw] h-[160vw] md:w-[100vw] md:h-[100vw] rounded-full mix-blend-screen opacity-70 -top-[50%] -left-[40%] bg-[radial-gradient(circle,#220eff,transparent)] animate-aurora-2" />
-          <div className="absolute w-[180vw] h-[160vw] md:w-[100vw] md:h-[100vw] rounded-full mix-blend-screen opacity-70 bottom-[20%] left-[20%] bg-[radial-gradient(circle,#FF2C30,transparent)] animate-aurora-3" />
-          <div className="absolute w-[180vw] h-[160vw] md:w-[100vw] md:h-[100vw] rounded-full mix-blend-screen opacity-70 -top-[20%] left-[60%] bg-[radial-gradient(circle,#FF7C44,transparent)] animate-aurora-4" />
+          <div className="absolute w-[180vw] h-[160vw] md:w-[100vw] md:h-[100vw] rounded-[9999px] mix-blend-screen opacity-70 -top-[30%] -left-[20%] bg-[radial-gradient(circle,#1F4FFF,transparent)] animate-aurora-1" />
+          <div className="absolute w-[180vw] h-[160vw] md:w-[100vw] md:h-[100vw] rounded-[9999px] mix-blend-screen opacity-70 -top-[50%] -left-[40%] bg-[radial-gradient(circle,#220eff,transparent)] animate-aurora-2" />
+          <div className="absolute w-[180vw] h-[160vw] md:w-[100vw] md:h-[100vw] rounded-[9999px] mix-blend-screen opacity-70 bottom-[20%] left-[20%] bg-[radial-gradient(circle,#FF2C30,transparent)] animate-aurora-3" />
+          <div className="absolute w-[180vw] h-[160vw] md:w-[100vw] md:h-[100vw] rounded-[9999px] mix-blend-screen opacity-70 -top-[20%] left-[60%] bg-[radial-gradient(circle,#FF7C44,transparent)] animate-aurora-4" />
         </div>
         <div
           className="absolute inset-0 opacity-10 z-[5] pointer-events-none"
@@ -579,7 +579,7 @@ export default function LandingPage() {
               ].map((tag, i) => (
                 <span
                   key={tag}
-                  className={`fadeUp px-3 md:px-8 py-3 rounded-full text-[13px] md:text-[20px] ${
+                  className={`fadeUp px-3 md:px-8 py-3 rounded-[9999px] text-[13px] md:text-[20px] ${
                     i === 1
                       ? "bg-gradient-to-r from-main-1 to-main-2 text-white"
                       : i === 9
@@ -785,7 +785,7 @@ export default function LandingPage() {
       >
         {loadingDetail ? (
           <div className="flex items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-main-1" />
+            <div className="animate-spin rounded-[9999px] h-12 w-12 border-t-2 border-b-2 border-main-1" />
           </div>
         ) : workDetail ? (
           <div className="space-y-6">
@@ -847,7 +847,7 @@ export default function LandingPage() {
                   href={workDetail.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-main-1 text-white font-bold rounded-full hover:bg-main-1/90 transition-all duration-300 hover:scale-105 text-[16px] md:text-[18px]"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-main-1 text-white font-bold rounded-[9999px] hover:bg-main-1/90 transition-all duration-300 hover:scale-105 text-[16px] md:text-[18px]"
                 >
                   사이트 보기
                   <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
