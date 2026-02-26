@@ -663,7 +663,7 @@ export default function LandingPage() {
           <button
             type="button"
             onClick={handleInquiryClick}
-            className="flex-shrink-0 px-6 md:px-8 py-3 md:py-4 bg-white text-gray-800 rounded-xl text-center font-semibold hover:bg-gray-100 transition-all duration-300 text-sm md:text-base whitespace-nowrap"
+            className="flex-shrink-0 px-6 md:px-8 py-3 md:py-4 bg-white text-gray-800 rounded-xl text-center font-semibold hover:bg-gray-100 transition-all duration-300 text-sm md:text-base whitespace-nowrap pointer"
           >
             빠른 견적 상담
           </button>
