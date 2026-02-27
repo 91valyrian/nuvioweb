@@ -496,7 +496,7 @@ export default function LandingPage() {
               <Image src={ASSET("clarity_arrow-line.svg")} alt="arrow" width={24} height={24} />
             </a>
             <a
-              href="#inquiry"
+              href="#cases"
               className="bg-[#222] text-white text-[16px] md:text-[18px] font-normal inline-flex items-center justify-between md:justify-center gap-5 w-[80%] md:w-auto px-8 md:px-6 py-5 rounded-lg fadeUp"
               data-duration="1.0"
               data-delay="1"
@@ -1220,9 +1220,9 @@ export default function LandingPage() {
             data-scroll-start="top 80%"
           >
             {[
-              { name: "랜딩 페이지", price: "39", features: ["단일 목적 원페이지 기본 5 섹션 제공"], more: ["기본 검색엔진(SEO) 최적화", "성능 최적화", "속도 최적화", "반응형 제작", "UX 플로우 설계", "핵심 메시지, 맞춤형 카피라이팅 제공", "기본 애니메이션 제공"] },
-              { name: "기본 홈페이지 제작", price: "65", features: ["메인 포함 11P 이내", "페이지 추가 기능 제공"], more: ["기본 검색엔진(SEO) 최적화", "성능 최적화", "속도 최적화", "반응형 제작", "UX 플로우 설계", "핵심 메시지, 맞춤형 카피라이팅 제공", "몰입형 인터랙션 제공"] },
-              { name: "프리미엄 홈페이지 제작", price: "190", features: ["페이지 수 별도 협의", "목적별 맞춤 페이지 설계", "페이지 추가 기능 제공", "게시판 추가 기능 제공", "AI 기능 제공", "사용자 여정을 고려한 UX/UI 설계", "검색엔진 고도화·키워드 전략 반영"], more: ["기본 검색엔진(SEO) 최적화", "성능 최적화", "속도 최적화", "반응형 제작", "핵심 메시지, 맞춤형 카피라이팅 제공", "몰입형 인터랙션 제공"] },
+              { name: "랜딩 페이지", delPrice: "66", price: "39", features: ["단일 목적 원페이지 기본 5 섹션 제공"], more: ["기본 검색엔진(SEO) 최적화", "성능 최적화", "속도 최적화", "반응형 제작", "UX 플로우 설계", "핵심 메시지, 맞춤형 카피라이팅 제공", "기본 애니메이션 제공"] },
+              { name: "기본 홈페이지 제작", delPrice: "110", price: "65", features: ["메인 포함 11P 이내", "페이지 추가 기능 제공"], more: ["기본 검색엔진(SEO) 최적화", "성능 최적화", "속도 최적화", "반응형 제작", "UX 플로우 설계", "핵심 메시지, 맞춤형 카피라이팅 제공", "몰입형 인터랙션 제공"] },
+              { name: "프리미엄 홈페이지 제작", delPrice: "250", price: "190", features: ["페이지 수 별도 협의", "목적별 맞춤 페이지 설계", "페이지 추가 기능 제공", "게시판 추가 기능 제공", "AI 기능 제공", "사용자 여정을 고려한 UX/UI 설계", "검색엔진 고도화·키워드 전략 반영"], more: ["기본 검색엔진(SEO) 최적화", "성능 최적화", "속도 최적화", "반응형 제작", "핵심 메시지, 맞춤형 카피라이팅 제공", "몰입형 인터랙션 제공"] },
             ].map((plan) => (
               <div
                 key={plan.name}
@@ -1232,7 +1232,8 @@ export default function LandingPage() {
                   <h3 className="text-white text-xl md:text-2xl font-bold mb-1">{plan.name}</h3>
                   <div className="flex flex-col items-baseline gap-3 flex-wrap">
                     <h4 className="text-white text-[18px] md:text-[24px]">
-                      <span className="text-[32px] md:text-[50px] font-bold">{plan.price}</span>만원 부터
+                      <del className="block text-white/50 text-[16px] md:text-[20px]">{plan.delPrice} 만원</del> 
+                      <span className="text-[32px] md:text-[50px] font-bold leading-10">{plan.price}</span>만원 부터
                     </h4>
                     <span className="bg-main-1 text-white text-base font-semibold px-2 py-1 rounded">VAT 별도</span>
                   </div>
