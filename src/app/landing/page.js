@@ -930,7 +930,7 @@ export default function LandingPage() {
           <div className="xl:max-w-screen-2xl mx-auto px-6 md:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:grid-rows-3 xl:grid-rows-1 gap-4 md:gap-5 mt-16 md:mt-24">
             <div
-              className="benefit-card h-[52rem] md:h-full xl:h-[56.25rem] rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 md:row-span-2 px-8 py-10 md:px-12 md:py-16 fadeUp overflow-hidden"
+              className="benefit-card h-auto md:h-full xl:h-[56.25rem] rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 md:row-span-2 px-8 py-10 md:px-12 md:py-16 fadeUp overflow-hidden"
               data-duration="0.8"
               data-delay="0.4"
               data-y="30"
@@ -943,7 +943,7 @@ export default function LandingPage() {
               <p className="text-[18px] md:text-[20px] text-white/70 mt-2.5">
                 아직도 텍스트 수정하나에 비용을 지불하시나요? 관리자 페이지에 제공된 디자인모드 기능으로 코딩 없이 간단하게 수정하세요.
               </p>
-              <div className="w-[80rem] absolute left-8 md:left-12 mt-4">
+              <div className="md:w-[80rem] w-full md:absolute left-8 md:left-12 mt-4">
                 <video
                   src={ASSET("textmodify.mp4")}
                   autoPlay
@@ -987,7 +987,7 @@ export default function LandingPage() {
               </div>
             </div>
             <div
-              className="benefit-card h-[52rem] md:h-[28.0625rem] xl:h-[56.25rem] rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 md:col-span-2 xl:col-span-1 xl:row-span-1 px-8 py-10 md:px-12 md:py-16 fadeUp overflow-hidden"
+              className="benefit-card h-auto md:h-[28.0625rem] xl:h-[56.25rem] rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 md:col-span-2 xl:col-span-1 xl:row-span-1 px-8 py-10 md:px-12 md:py-16 fadeUp overflow-hidden"
               data-duration="0.8"
               data-delay="0.5"
               data-y="30"
@@ -998,7 +998,7 @@ export default function LandingPage() {
               <p className="text-[18px] md:text-[20px] text-white/70 mt-2.5">
                 매번 업체에 이미지 바꿔달라고 요청하시나요? 관리자 페이지에 제공된 디자인모드 기능으로 코딩 없이 클릭 몇번으로 관리하세요.
               </p>
-              <div className="w-[37.3125rem] absolute left-8 md:left-12 mt-4">
+              <div className="md:w-[37.3125rem] w-full md:absolute left-8 md:left-12 mt-4">
                 <Image src={ASSET("benefit04.png")} alt="이미지·동영상 삽입" width={597} height={400} className="w-full h-auto" />
               </div>
             </div>
