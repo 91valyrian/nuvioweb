@@ -103,12 +103,14 @@
     @apply text-[30px] md:text-[20px] bg-main h-[74px] md:h-[54px] text-white rounded-lg px-6 inline-flex items-center
            hover:bg-main/90 transition-colors duration-200 mt-[20px];
   }
-  .prose ul {
-    @apply list-disc list-inside mt-[20px] mb-[30px] text-[30px] md:text-[20px] text-black/80 leading-relaxed;
+  .prose ul,
+  .prose ol {
+    @apply list-none list-disc list-inside mt-[20px] mb-[30px] text-[30px] md:text-[20px] text-black/80 leading-relaxed;
     li {
       @apply mb-1;
     }
   }
+
   .prose blockquote {
     @apply text-[30px] md:text-[20px] text-black/80 leading-relaxed bg-[#E7EBFC] p-[20px] rounded-xl;
 
@@ -405,16 +407,24 @@ body {
 
 /* 퀵 전환 버튼 애니메이션 */
 @keyframes sparkle {
-  0%, 100% {
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4), 0 0 90px rgba(167, 139, 250, 0.2);
+  0%,
+  100% {
+    box-shadow:
+      0 0 30px rgba(99, 102, 241, 0.6),
+      0 0 60px rgba(139, 92, 246, 0.4),
+      0 0 90px rgba(167, 139, 250, 0.2);
   }
   50% {
-    box-shadow: 0 0 50px rgba(99, 102, 241, 0.8), 0 0 100px rgba(139, 92, 246, 0.6), 0 0 150px rgba(167, 139, 250, 0.4);
+    box-shadow:
+      0 0 50px rgba(99, 102, 241, 0.8),
+      0 0 100px rgba(139, 92, 246, 0.6),
+      0 0 150px rgba(167, 139, 250, 0.4);
   }
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -558,7 +568,9 @@ body {
 }
 .marquee-section .marquee-ribbon.ribbon-blue {
   background-color: #1f4fff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(0, 0, 0, 0.3);
 }
 .marquee-section .ribbon-orange .marquee-text {
   color: #000 !important;
