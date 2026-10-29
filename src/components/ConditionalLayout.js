@@ -18,9 +18,9 @@ export default function ConditionalLayout({ children }) {
   if (isLandingPage) {
     return (
       <>
-        <main id="main" className="landing-page">
+        <div id="main" className="landing-page">
           {children}
-        </main>
+        </div>
       </>
     );
   }
@@ -34,9 +34,9 @@ export default function ConditionalLayout({ children }) {
       </a>
       <Header />
 
-      <main id="main" className="content">
+      <div id="main" className="content">
         {children}
-      </main>
+      </div>
       <FaqSection />
       <GlobalReveal />
 

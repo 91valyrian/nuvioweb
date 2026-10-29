@@ -1,0 +1,6 @@
+interface:
+  display_name: "누비오 칼럼 작성"
+  short_description: "기존 디자인에 맞는 검색 의도 중심 칼럼과 썸네일·본문 이미지 제작"
+  default_prompt: "Use $nuvio-column-editor to create a useful Korean nuvio column with a matching thumbnail, body images, verified sources and relevant service links."
+policy:
+  allow_implicit_invocation: true

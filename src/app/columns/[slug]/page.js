@@ -2,14 +2,17 @@ import { notFound } from "next/navigation";
 import { getAllColumns, getColumnBySlug } from "@/lib/columns";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
-import Script from "next/script";
+import {
+  SITE_URL,
+  indexableRobots,
+  absoluteUrl,
+  jsonLd as serializeJsonLd,
+} from "@/lib/site";
+import { getRelatedColumns } from "@/lib/column-relations";
+import ServiceLinks from "@/components/ServiceLinks";
 import PrevNextColumns from "@/components/PrevNextColumns";
 import Link from "next/link";
 import { getRelatedKeywords } from "@/lib/getRelatedKeywords";
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://nuvio-web.com"; // canonical 생성에 사용
 
 export async function generateStaticParams() {
   return getAllColumns().map((p) => ({ slug: p.slug }));
@@ -18,7 +21,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = getColumnBySlug(slug);
-  if (!post) return {};
+  if (!post) notFound();
   const siteName = "nuvio";
   const baseSection = "Columns"; // 다른 페이지들과 유사한 유형
   // const seoTitle = `${post.categories} | ${post.title}`;
@@ -26,7 +29,7 @@ export async function generateMetadata({ params }) {
     ? post.categories.filter(Boolean)
     : [];
 
-  const seoTitle = `[${categories.join(", ")}] ${post.title}`;
+  const seoTitle = post.seoTitle || post.title;
   const canonical = `${SITE_URL}/columns/${post.slug}`;
 
   const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean) : [];
@@ -72,10 +75,7 @@ export async function generateMetadata({ params }) {
           ? [new URL(post.thumbnail || post.cover, SITE_URL).toString()]
           : [],
     },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    robots: indexableRobots,
   };
 }
 
@@ -165,13 +165,13 @@ export default async function ColumnDetail({ params }) {
   if (!post) return notFound();
   const relatedKeywordsBase = getRelatedKeywords(
     post.title,
-    post.content || ""
+    post.content || "",
   );
   const relatedKeywords = Array.from(
     new Set([
       ...(Array.isArray(post.tags) ? post.tags : []),
       ...relatedKeywordsBase,
-    ])
+    ]),
   );
 
   // Article 구조화데이터
@@ -182,11 +182,19 @@ export default async function ColumnDetail({ params }) {
     headline: post.title,
     description: post.summary,
     datePublished: post.date,
+    dateModified: post.updated || post.date,
+    inLanguage: "ko-KR",
     author: [{ "@type": "Organization", name: post.author || "nuvio" }],
     image:
-      post.thumbnail || post.cover ? [post.thumbnail || post.cover] : undefined,
+      post.thumbnail || post.cover
+        ? [absoluteUrl(post.thumbnail || post.cover)]
+        : undefined,
     url: `${SITE_URL}/columns/${post.slug}`,
-    publisher: { "@type": "Organization", name: siteName },
+    publisher: {
+      "@id": `${SITE_URL}/#organization`,
+      "@type": "Organization",
+      name: siteName,
+    },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE_URL}/columns/${post.slug}`,
@@ -206,9 +214,9 @@ export default async function ColumnDetail({ params }) {
         image="/images/columns/visual.webp"
         className="!h-[500px] !pt-[200px]"
       /> */}
-      <div className="py-[50px] max-w-[1000px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
+      <div className="column-card py-[50px] max-w-[1000px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
         <section className="visual mb-[30px] text-left">
-          <h1 className="text-[51px] md:text-[41px] leading-[61px] md:leading-[51px] font-bold">
+          <h1 className="text-[30px] md:text-[41px] leading-tight font-bold">
             {post.title}
             {/* {post.subTitle && <span>, {post.subTitle}</span>} */}
           </h1>
@@ -234,7 +242,7 @@ export default async function ColumnDetail({ params }) {
           </div>
         )}
 
-        <article className="prose prose-invert max-w-none">
+        <article className="prose prose-invert max-w-none column-article">
           <MDXRemote source={post.content} components={mdxComponents} />
           <hr />
           <p>
@@ -277,6 +285,8 @@ export default async function ColumnDetail({ params }) {
           </div>
         )} */}
 
+        <ServiceLinks title={post.title} tags={post.tags} />
+
         {/* 🔖 관련 키워드 자동 표시 */}
         {relatedKeywords.length > 0 && (
           <div className="mt-[100px]">
@@ -300,10 +310,7 @@ export default async function ColumnDetail({ params }) {
           all.length > 1 &&
           (() => {
             // 현재 글(slug) 제외하고 무작위 섞기
-            const shuffled = all
-              .filter((p) => p.slug !== post.slug)
-              .sort(() => Math.random() - 0.5)
-              .slice(0, 3);
+            const shuffled = getRelatedColumns(post, all, 3);
 
             if (shuffled.length === 0) return null;
 
@@ -395,9 +402,38 @@ export default async function ColumnDetail({ params }) {
         </div>
       </div>
 
-      <Script id="ld-article" type="application/ld+json">
-        {JSON.stringify(jsonLd)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd([
+            jsonLd,
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "홈",
+                  item: absoluteUrl("/"),
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "홈페이지 제작 칼럼",
+                  item: absoluteUrl("/columns"),
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: post.title,
+                  item: absoluteUrl(`/columns/${post.slug}`),
+                },
+              ],
+            },
+          ]),
+        }}
+      />
     </main>
   );
 }

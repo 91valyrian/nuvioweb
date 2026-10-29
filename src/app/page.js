@@ -1,3 +1,4 @@
+import ServicesOverview from "@/components/ServicesOverview";
 import Link from "next/link";
 import Image from "next/image";
 import HeroSwiper from "@/components/HeroSwiper";
@@ -5,9 +6,11 @@ import CardList from "@/components/CardList";
 import { getAllWorks } from "@/lib/works";
 import ColumnsPreview from "@/components/ColumnsPreview";
 
+export const metadata = { alternates: { canonical: "https://nuvio-web.com/" } };
+
 export default async function Home() {
   const works = getAllWorks().sort(
-    (a, b) => new Date(b.inputDate) - new Date(a.inputDate)
+    (a, b) => new Date(b.inputDate) - new Date(a.inputDate),
   );
   return (
     <main>
@@ -39,7 +42,7 @@ export default async function Home() {
           <CardList
             horizontalOnMobile
             items={[...works].sort(
-              (a, b) => new Date(b.inputDate) - new Date(a.inputDate)
+              (a, b) => new Date(b.inputDate) - new Date(a.inputDate),
             )}
             initialCount={3}
             step={0}
@@ -79,6 +82,7 @@ export default async function Home() {
       {/* <section id="about" className="section-about py-[120px]">
         <AboutSection />
       </section> */}
+      <ServicesOverview />
     </main>
   );
 }

@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-29",
+  "tool": "built-in image_gen",
+  "dimensions": [
+    1600,
+    900
+  ],
+  "assets": [
+    {
+      "file": "/images/columns/website-renewal-seo-checklist/thumbnail.webp",
+      "prompt": "Create a polished 16:9 Korean editorial blog thumbnail for nuvio web design studio. Match a deep midnight navy to indigo gradient background, white bold clean Korean sans-serif typography on left, glossy soft 3D website window cards and a curved redirect arrow on right in violet, blue and mint. Top left small wordmark text exactly 'nuvio'. Main Korean headline exactly '홈페이지 리뉴얼\\n검색 유입을 지키는\\nSEO 체크리스트'. Bottom left two outlined pill labels exactly 'URL 이전' and '오픈 전 점검'. Spacious professional composition, highly readable correct Korean, no statistics, no ranking graph, no other logos. Landscape 1600 by 900."
+    },
+    {
+      "file": "/images/columns/website-renewal-seo-checklist/url-map.webp",
+      "prompt": "Create a 16:9 editorial 3D illustration for a Korean website renewal SEO guide, matching a premium nuvio blog image: soft ivory studio background, floating browser window cards on left and right joined by individual clean violet redirect arrows, tidy one-to-one mapping of 3 old web page cards to 3 new page cards. Deep indigo, lavender, pale mint palette, subtle shadows, premium minimal interface objects. Do not show readable text, letters, brands, charts or fabricated metrics. Landscape 1600 by 900."
+    },
+    {
+      "file": "/images/columns/website-renewal-seo-checklist/launch-check.webp",
+      "prompt": "Create a 16:9 editorial 3D illustration for a website renewal launch checklist article. Soft warm white studio background, central lavender clipboard with three big checkmarks, a clean browser mockup panel beside it, small magnifying glass inspecting one page link and a mint shield checkmark symbol. Sophisticated soft 3D digital product objects, navy, indigo, lavender and mint, generous spacing, no readable text, no logos, no charts or statistics. Landscape 1600 by 900."
+    }
+  ]
+}

@@ -1,16 +1,16 @@
 // src/app/layout.js
 import "./globals.css";
+import { SITE_URL, isPreview, jsonLd } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import ConditionalLayout from "@/components/ConditionalLayout";
 
 const siteName = "nuvio";
-const siteUrl = "https://nuvio-web.com"; // 배포 도메인으로 교체
-const defaultTitle =
-  "홈페이지 제작 | 검색되는 구조로 문의를 만드는 웹사이트 – nuvio"; //매출이 2배 오르는 홈페이지 제작 | 검색되는 구조로 문의를 만드는 웹사이트 – nuvio
+const siteUrl = SITE_URL; // 배포 도메인으로 교체
+const defaultTitle = "홈페이지 제작 · 기획·디자인·개발·CMS | 누비오 nuvio"; //매출이 2배 오르는 홈페이지 제작 · 기획·디자인·개발·CMS | 누비오 nuvio
 const defaultDesc =
-  "홈페이지 제작에서 중요한 것은 디자인이 아니라 구조입니다. nuvio는 기획·디자인·개발·SEO·AEO를 통합해 검색되는 구조부터 문의로 이어지는 웹사이트를 설계합니다. 기업·병원·프랜차이즈 맞춤 제작.";
+  "기획·디자인·개발부터 운영용 CMS와 검색 기본 설정까지. 누비오는 기업·브랜드·프랜차이즈의 목적에 맞춘 홈페이지를 제작합니다. 제작 사례와 서비스 구성, 비용 결정 요소를 확인하고 상담하세요.";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -54,19 +54,17 @@ export const metadata = {
     images: ["/og/og-default.png"],
   },
   robots: {
-    index: true,
+    index: !isPreview,
     follow: true,
     googleBot: {
-      index: true,
+      index: !isPreview,
       follow: true,
       "max-snippet": -1,
       "max-image-preview": "large",
       "max-video-preview": -1,
     },
   },
-  alternates: {
-    canonical: siteUrl, // 각 페이지에서 덮어씀
-  },
+  alternates: { types: { "application/rss+xml": `${SITE_URL}/rss.xml` } },
   icons: {
     icon: [
       { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
@@ -88,6 +86,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko" className="scrollbar-dark">
       <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="누비오 칼럼과 제작 사례"
+          href={`${SITE_URL}/rss.xml`}
+        />
         {/* ✅ Google Analytics (GA4) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XS0LDTNCMH"
@@ -99,8 +103,9 @@ export default function RootLayout({ children }) {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-XS0LDTNCMH', {
-              page_path: window.location.pathname,
+              send_page_view: false,
             });
+            window.dispatchEvent(new Event('nuvio:analytics-ready'));
           `}
         </Script>
         {/* End Google Analytics */}
@@ -145,6 +150,33 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://use.typekit.net/qql5rly.css" />
       </head>
       <body className="text-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: jsonLd({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": `${SITE_URL}/#organization`,
+                  name: "누비오 (nuvio)",
+                  url: SITE_URL,
+                  logo: `${SITE_URL}/icons/apple-touch-icon.png`,
+                  sameAs: ["https://blog.naver.com/nuvio"],
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": `${SITE_URL}/#website`,
+                  name: "누비오",
+                  alternateName: "nuvio",
+                  url: SITE_URL,
+                  inLanguage: "ko-KR",
+                  publisher: { "@id": `${SITE_URL}/#organization` },
+                },
+              ],
+            }),
+          }}
+        />
         <AnalyticsTracker />
         <ConditionalLayout>{children}</ConditionalLayout>
         <Analytics />

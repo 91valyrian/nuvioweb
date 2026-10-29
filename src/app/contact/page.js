@@ -1,4 +1,6 @@
 "use client";
+import { SITE_URL } from "@/lib/site";
+import { trackLead } from "@/lib/analytics";
 import { useEffect, useState } from "react";
 import Input from "./_components/Input";
 import Textarea from "./_components/Textarea";
@@ -63,10 +65,10 @@ export default function ContactPage() {
     const fd = new FormData(form);
 
     const services = Array.from(
-      form.querySelectorAll('input[name="services"]:checked')
+      form.querySelectorAll('input[name="services"]:checked'),
     ).map((el) => el.value);
     const budgets = Array.from(
-      form.querySelectorAll('input[name="budget"]:checked')
+      form.querySelectorAll('input[name="budget"]:checked'),
     ).map((el) => el.value);
 
     const rawPhone = (fd.get("phone") || "").toString();
@@ -92,23 +94,27 @@ export default function ContactPage() {
         body: JSON.stringify(payload),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
+      if (!res.ok || !data.ok) {
         setError(data?.error || "전송 중 오류가 발생했습니다.");
         openResult(
           "error",
           data?.error ||
-            "전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
+            "전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.",
         );
       } else {
+        trackLead("contact");
         setOk(true);
-        openResult("success", "메일이 성공적으로 발송되었습니다!");
+        openResult(
+          "success",
+          "문의가 접수되었습니다. 확인 후 연락드리겠습니다.",
+        );
         form.reset();
       }
     } catch (err) {
       setError("네트워크 오류가 발생했습니다.");
       openResult(
         "error",
-        "네트워크 오류가 발생했습니다. 연결 상태를 확인해 주세요."
+        "네트워크 오류가 발생했습니다. 연결 상태를 확인해 주세요.",
       );
     } finally {
       setLoading(false);
@@ -381,20 +387,20 @@ export default function ContactPage() {
               "@context": "https://schema.org",
               "@type": "ContactPage",
               name: "홈페이지 제작 문의 · 견적 요청",
-              url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com"}/contact`,
+              url: `${SITE_URL}/contact`,
               inLanguage: "ko",
             },
             {
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "nuvio",
-              url: process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com",
+              url: SITE_URL,
               contactPoint: [
                 {
                   "@type": "ContactPoint",
                   contactType: "customer support",
                   availableLanguage: ["ko"],
-                  url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com"}/contact`,
+                  url: `${SITE_URL}/contact`,
                 },
               ],
             },

@@ -16,7 +16,10 @@ export default function ColumnsPreview() {
       <div className="container">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-[60px] md:mb-[50px] gap-[30px]">
           <div>
-            <h2 className="section-subtitle text-[54px] leading-[60px] md:text-[44px] md:leading-[50px] font-bold rotate-x-up">
+            <h2
+              id="columns-heading"
+              className="section-subtitle text-[54px] leading-[60px] md:text-[44px] md:leading-[50px] font-bold rotate-x-up"
+            >
               {/* 성공적인 홈페이지 제작을 위한 실전 노하우와 SEO 전략 */}
               홈페이지 제작,
               <br />

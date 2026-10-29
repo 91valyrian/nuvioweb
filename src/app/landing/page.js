@@ -1,4 +1,5 @@
 "use client";
+import { trackLead } from "@/lib/analytics";
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -12,8 +13,8 @@ gsap.registerPlugin(ScrollTrigger);
 /* 랜딩 전용 에셋: public/landing/ 폴더에 아래 파일들을 넣어주세요.
    (원본: Desktop/00. 작업/00. Nuvio/resource/테스트/ 에서 복사)
    - all_menu.svg, clarity_arrow-line.svg, lets-icons_check-fill.svg
-   - gradient-bg01.webp, benefit02.png, benefit03.png, benefit04.png
-   - benefit02-bg.png, reviews-bg.png, inquiry-bg.png
+   - gradient-bg01-optimized.webp, benefit02.png, benefit03.png, benefit04.png
+   - benefit02-bg.webp, reviews-bg.webp, inquiry-bg.webp
    - textmodify.mp4
    - streamline-freehand-*.svg (아이콘들)
 */
@@ -91,7 +92,7 @@ export default function LandingPage() {
       tl.to(
         header,
         { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        "-=0.6"
+        "-=0.6",
       );
     }
 
@@ -187,13 +188,13 @@ export default function LandingPage() {
           }
         });
       },
-      { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0 },
     );
     sections.forEach((s) => observer.observe(s));
     const firstSection = sections[0];
     if (firstSection) {
       const firstLink = document.querySelector(
-        `.landing-nav-link[data-section="${firstSection.id}"]`
+        `.landing-nav-link[data-section="${firstSection.id}"]`,
       );
       if (firstLink) firstLink.classList.add("active");
     }
@@ -224,7 +225,7 @@ export default function LandingPage() {
           });
           check();
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
       sectionEls.forEach((el) => io.observe(el));
     }
@@ -266,7 +267,11 @@ export default function LandingPage() {
           const onEnter = () => {
             if (!window.matchMedia("(min-width: 768px)").matches) return;
             gsap.killTweensOf(shotInner);
-            gsap.to(shotInner, { y: -maxScroll, duration: 1.6, ease: "power2.out" });
+            gsap.to(shotInner, {
+              y: -maxScroll,
+              duration: 1.6,
+              ease: "power2.out",
+            });
           };
           const onLeave = () => {
             gsap.killTweensOf(shotInner);
@@ -326,7 +331,11 @@ export default function LandingPage() {
     if (isSubmitting) return;
     const form = e.currentTarget;
     const fd = new FormData(form);
-    const planMap = { landing: "랜딩 페이지", basic: "기본 홈페이지 제작", premium: "프리미엄 홈페이지 제작" };
+    const planMap = {
+      landing: "랜딩 페이지",
+      basic: "기본 홈페이지 제작",
+      premium: "프리미엄 홈페이지 제작",
+    };
     const plan = planMap[fd.get("plan")] || fd.get("plan");
     const payload = {
       name: fd.get("name"),
@@ -348,10 +357,14 @@ export default function LandingPage() {
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) {
+        trackLead("landing");
         alert("문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.");
         form.reset();
       } else {
-        alert(data?.error || "전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+        alert(
+          data?.error ||
+            "전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.",
+        );
       }
     } catch (err) {
       alert("네트워크 오류가 발생했습니다. 연결 상태를 확인해 주세요.");
@@ -415,7 +428,9 @@ export default function LandingPage() {
       <div
         id="gnb-overlay"
         className={`fixed inset-0 z-30 flex flex-col justify-center items-center bg-black/95 backdrop-blur-md transition-all duration-300 ${
-          gnbOpen ? "landing-gnb-active opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+          gnbOpen
+            ? "landing-gnb-active opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none"
         }`}
         style={{ display: gnbOpen ? "flex" : undefined }}
       >
@@ -460,7 +475,8 @@ export default function LandingPage() {
         <div
           className="absolute inset-0 opacity-10 z-[5] pointer-events-none"
           style={{
-            backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')",
+            backgroundImage:
+              "url('https://grainy-gradients.vercel.app/noise.svg')",
           }}
         />
         <div
@@ -471,13 +487,23 @@ export default function LandingPage() {
           id="hero-text-group"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 px-6 md:px-8 mt-28 md:mt-18 w-full text-center"
         >
-          <h1 className="text-white text-[36px] md:text-[56px] font-bold leading-tight fadeUp" data-duration="1.0" data-delay="0.5" data-y="30">
+          <h1
+            className="text-white text-[36px] md:text-[56px] font-bold leading-tight fadeUp"
+            data-duration="1.0"
+            data-delay="0.5"
+            data-y="30"
+          >
             텍스트 하나 고치는데
             <br />
             아직도 <span className="text-main-2">많은 지출</span>을
             <br className="block md:hidden" /> 하고 계신가요?{" "}
           </h1>
-          <p className="text-white text-[18px] md:text-[24px] font-normal mt-7 leading-[130%] fadeUp" data-duration="1.0" data-delay="0.7" data-y="30">
+          <p
+            className="text-white text-[18px] md:text-[24px] font-normal mt-7 leading-[130%] fadeUp"
+            data-duration="1.0"
+            data-delay="0.7"
+            data-y="30"
+          >
             직접 개발한 강력한 관리자 페이지로
             <br />
             딸깍! 클릭 몇번으로
@@ -493,7 +519,12 @@ export default function LandingPage() {
               data-y="30"
             >
               <span>무료 상담 신청하기</span>
-              <Image src={ASSET("clarity_arrow-line.svg")} alt="arrow" width={24} height={24} />
+              <Image
+                src={ASSET("clarity_arrow-line.svg")}
+                alt="arrow"
+                width={24}
+                height={24}
+              />
             </a>
             <a
               href="#cases"
@@ -503,7 +534,12 @@ export default function LandingPage() {
               data-y="30"
             >
               <span>포트폴리오 확인하기</span>
-              <Image src={ASSET("clarity_arrow-line.svg")} alt="arrow" width={24} height={24} />
+              <Image
+                src={ASSET("clarity_arrow-line.svg")}
+                alt="arrow"
+                width={24}
+                height={24}
+              />
             </a>
           </div>
         </div>
@@ -544,9 +580,11 @@ export default function LandingPage() {
             data-scroll="true"
             data-scroll-start="top 80%"
           >
-            명함은 건네면서, 온라인 명함인<br className="block md:hidden" /> 홈페이지는 없으신가요?
+            명함은 건네면서, 온라인 명함인
+            <br className="block md:hidden" /> 홈페이지는 없으신가요?
             <br />
-            고객은 검색하고, 비교하고,<br className="block md:hidden" /> 결국 신뢰를 선택합니다.
+            고객은 검색하고, 비교하고,
+            <br className="block md:hidden" /> 결국 신뢰를 선택합니다.
           </p>
           <div className="mt-16">
             <div className="flex flex-wrap justify-center gap-3 max-w-7xl mx-auto">
@@ -615,32 +653,48 @@ export default function LandingPage() {
         <div className="marquee-ribbon ribbon-orange">
           <div className="marquee-content marquee-orange-1">
             <span className="marquee-text">
-              NO WEBSITE, NO TRUST • 홈페이지가 없으면 신뢰도 없습니다 • DON&apos;T LOSE YOUR CUSTOMERS • 잠재 고객은 기다려주지 않습니다 • WARNING: YOUR BUSINESS IS INVISIBLE •{" "}
+              NO WEBSITE, NO TRUST • 홈페이지가 없으면 신뢰도 없습니다 •
+              DON&apos;T LOSE YOUR CUSTOMERS • 잠재 고객은 기다려주지 않습니다 •
+              WARNING: YOUR BUSINESS IS INVISIBLE •{" "}
             </span>
             <span className="marquee-text">
-              NO WEBSITE, NO TRUST • 홈페이지가 없으면 신뢰도 없습니다 • DON&apos;T LOSE YOUR CUSTOMERS • 잠재 고객은 기다려주지 않습니다 • WARNING: YOUR BUSINESS IS INVISIBLE •{" "}
+              NO WEBSITE, NO TRUST • 홈페이지가 없으면 신뢰도 없습니다 •
+              DON&apos;T LOSE YOUR CUSTOMERS • 잠재 고객은 기다려주지 않습니다 •
+              WARNING: YOUR BUSINESS IS INVISIBLE •{" "}
             </span>
             <span className="marquee-text">
-              NO WEBSITE, NO TRUST • 홈페이지가 없으면 신뢰도 없습니다 • DON&apos;T LOSE YOUR CUSTOMERS • 잠재 고객은 기다려주지 않습니다 • WARNING: YOUR BUSINESS IS INVISIBLE •{" "}
+              NO WEBSITE, NO TRUST • 홈페이지가 없으면 신뢰도 없습니다 •
+              DON&apos;T LOSE YOUR CUSTOMERS • 잠재 고객은 기다려주지 않습니다 •
+              WARNING: YOUR BUSINESS IS INVISIBLE •{" "}
             </span>
           </div>
         </div>
         <div className="marquee-ribbon reverse ribbon-blue">
           <div className="marquee-content marquee-blue-1">
             <span className="marquee-text">
-              BREAK THE LIMIT • 한계를 넘는 성장 • HIGH CONVERSION • 압도적 전환율 • SMART STRATEGY • 멈추지 않는 비즈니스 엔진 • RUN YOUR BUSINESS •{" "}
+              BREAK THE LIMIT • 한계를 넘는 성장 • HIGH CONVERSION • 압도적
+              전환율 • SMART STRATEGY • 멈추지 않는 비즈니스 엔진 • RUN YOUR
+              BUSINESS •{" "}
             </span>
             <span className="marquee-text">
-              BREAK THE LIMIT • 한계를 넘는 성장 • HIGH CONVERSION • 압도적 전환율 • SMART STRATEGY • 멈추지 않는 비즈니스 엔진 • RUN YOUR BUSINESS •{" "}
+              BREAK THE LIMIT • 한계를 넘는 성장 • HIGH CONVERSION • 압도적
+              전환율 • SMART STRATEGY • 멈추지 않는 비즈니스 엔진 • RUN YOUR
+              BUSINESS •{" "}
             </span>
             <span className="marquee-text">
-              BREAK THE LIMIT • 한계를 넘는 성장 • HIGH CONVERSION • 압도적 전환율 • SMART STRATEGY • 멈추지 않는 비즈니스 엔진 • RUN YOUR BUSINESS •{" "}
+              BREAK THE LIMIT • 한계를 넘는 성장 • HIGH CONVERSION • 압도적
+              전환율 • SMART STRATEGY • 멈추지 않는 비즈니스 엔진 • RUN YOUR
+              BUSINESS •{" "}
             </span>
             <span className="marquee-text">
-              BREAK THE LIMIT • 한계를 넘는 성장 • HIGH CONVERSION • 압도적 전환율 • SMART STRATEGY • 멈추지 않는 비즈니스 엔진 • RUN YOUR BUSINESS •{" "}
+              BREAK THE LIMIT • 한계를 넘는 성장 • HIGH CONVERSION • 압도적
+              전환율 • SMART STRATEGY • 멈추지 않는 비즈니스 엔진 • RUN YOUR
+              BUSINESS •{" "}
             </span>
             <span className="marquee-text">
-              BREAK THE LIMIT • 한계를 넘는 성장 • HIGH CONVERSION • 압도적 전환율 • SMART STRATEGY • 멈추지 않는 비즈니스 엔진 • RUN YOUR BUSINESS •{" "}
+              BREAK THE LIMIT • 한계를 넘는 성장 • HIGH CONVERSION • 압도적
+              전환율 • SMART STRATEGY • 멈추지 않는 비즈니스 엔진 • RUN YOUR
+              BUSINESS •{" "}
             </span>
           </div>
         </div>
@@ -671,7 +725,10 @@ export default function LandingPage() {
       </div>
 
       {/* Portfolio / Cases */}
-      <section id="cases" className="relative md:py-40 py-28 w-full min-h-0 z-10 bg-black">
+      <section
+        id="cases"
+        className="relative md:py-40 py-28 w-full min-h-0 z-10 bg-black"
+      >
         <div className="px-6 md:px-8 w-full text-center">
           <div
             className="line w-0.5 h-20 mb-6 bg-gradient-to-b from-transparent to-white mx-auto fadeDown"
@@ -702,75 +759,88 @@ export default function LandingPage() {
             data-scroll="true"
             data-scroll-start="top 80%"
           >
-            현장의 언어를 토대로<br className="block md:hidden" /> 콘텐츠 로직을 설계하고,
+            현장의 언어를 토대로
+            <br className="block md:hidden" /> 콘텐츠 로직을 설계하고,
             <br />
-            매출로 잇는 최적의<br className="block md:hidden" /> 구조를 만듭니다.
+            매출로 잇는 최적의
+            <br className="block md:hidden" /> 구조를 만듭니다.
           </p>
         </div>
         <div className="w-full xl:max-w-screen-2xl mx-auto px-6 md:px-8 mt-16 md:mt-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-            {portfolioWorks.length === 0 ? (
-              [1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="rounded-2xl border border-white/10 bg-white/[0.02] animate-pulse overflow-hidden"
-                >
-                  <div className="h-[21.25rem] md:h-[26.25rem] bg-white/10 rounded-2xl" />
-                  <div className="p-4 mt-5">
-                    <div className="h-7 w-24 bg-white/10 rounded-md mb-4" />
-                    <div className="h-8 w-32 bg-white/10 rounded mb-3" />
-                    <div className="h-4 w-full bg-white/10 rounded" />
-                  </div>
-                </div>
-              ))
-            ) : (
-              portfolioWorks.slice(0, 3).map((work, i) => (
-                <button
-                  key={work.slug}
-                  type="button"
-                  onClick={() => handleWorkClick(work)}
-                  className="landing-portfolio-card group block w-full text-left rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-colors fadeUp cursor-pointer"
-                  data-duration="1.0"
-                  data-delay={0.5 + i * 0.2}
-                  data-scroll="true"
-                  data-scroll-start="top 80%"
-                >
-                  <div className="p-4">
-                    <div className="portfolio-shot relative h-[21.25rem] md:h-[26.25rem] overflow-hidden rounded-2xl bg-black">
-                      <div className="portfolio-shot-inner">
-                        {/* img 사용: 호버 시 이미지 끝까지 스크롤 모션을 위해 높이 계산 필요 */}
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={work.thumbnail2 || work.thumbnail || "/images/work/placeholder-thum.png"}
-                          alt={work.seoTitle || work.client || "포트폴리오 미리보기"}
-                          className="portfolio-img block w-full min-h-full h-auto object-cover object-top"
-                        />
-                      </div>
+            {portfolioWorks.length === 0
+              ? [1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="rounded-2xl border border-white/10 bg-white/[0.02] animate-pulse overflow-hidden"
+                  >
+                    <div className="h-[21.25rem] md:h-[26.25rem] bg-white/10 rounded-2xl" />
+                    <div className="p-4 mt-5">
+                      <div className="h-7 w-24 bg-white/10 rounded-md mb-4" />
+                      <div className="h-8 w-32 bg-white/10 rounded mb-3" />
+                      <div className="h-4 w-full bg-white/10 rounded" />
                     </div>
-                    <div className="mt-5">
-                      <div className="flex items-center gap-2">
-                        {work.service?.[0] && (
-                          <span className="inline-flex items-center h-7 px-3 rounded-md bg-white/10 text-white/90 text-[16px]">
-                            {work.service[0]}
+                  </div>
+                ))
+              : portfolioWorks.slice(0, 3).map((work, i) => (
+                  <button
+                    key={work.slug}
+                    type="button"
+                    onClick={() => handleWorkClick(work)}
+                    className="landing-portfolio-card group block w-full text-left rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-colors fadeUp cursor-pointer"
+                    data-duration="1.0"
+                    data-delay={0.5 + i * 0.2}
+                    data-scroll="true"
+                    data-scroll-start="top 80%"
+                  >
+                    <div className="p-4">
+                      <div className="portfolio-shot relative h-[21.25rem] md:h-[26.25rem] overflow-hidden rounded-2xl bg-black">
+                        <div className="portfolio-shot-inner">
+                          {/* img 사용: 호버 시 이미지 끝까지 스크롤 모션을 위해 높이 계산 필요 */}
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={
+                              work.thumbnail2 ||
+                              work.thumbnail ||
+                              "/images/work/placeholder-thum.png"
+                            }
+                            alt={
+                              work.seoTitle ||
+                              work.client ||
+                              "포트폴리오 미리보기"
+                            }
+                            className="portfolio-img block w-full min-h-full h-auto object-cover object-top"
+                          />
+                        </div>
+                      </div>
+                      <div className="mt-5">
+                        <div className="flex items-center gap-2">
+                          {work.service?.[0] && (
+                            <span className="inline-flex items-center h-7 px-3 rounded-md bg-white/10 text-white/90 text-[16px]">
+                              {work.service[0]}
+                            </span>
+                          )}
+                          <span className="inline-flex items-center h-7 px-3 rounded-md bg-main-1 text-white text-[16px] font-semibold">
+                            {work.year || "신규제작"}
                           </span>
+                        </div>
+                        <h3 className="mt-4 text-white text-[24px] md:text-[28px] font-semibold leading-tight">
+                          {work.client ||
+                            work.seoTitle
+                              ?.replace(/\[[^\]]*\]\s*/g, "")
+                              .split("–")[0]
+                              ?.trim() ||
+                            work.slug}
+                        </h3>
+                        {work.seoDesc && (
+                          <p className="mt-3 text-white/60 text-[18px] md:text-[20px] leading-[160%] line-clamp-2">
+                            {work.seoDesc}
+                          </p>
                         )}
-                        <span className="inline-flex items-center h-7 px-3 rounded-md bg-main-1 text-white text-[16px] font-semibold">
-                          {work.year || "신규제작"}
-                        </span>
                       </div>
-                      <h3 className="mt-4 text-white text-[24px] md:text-[28px] font-semibold leading-tight">
-                        {work.client || work.seoTitle?.replace(/\[[^\]]*\]\s*/g, "").split("–")[0]?.trim() || work.slug}
-                      </h3>
-                      {work.seoDesc && (
-                        <p className="mt-3 text-white/60 text-[18px] md:text-[20px] leading-[160%] line-clamp-2">
-                          {work.seoDesc}
-                        </p>
-                      )}
                     </div>
-                  </div>
-                </button>
-              ))
-            )}
+                  </button>
+                ))}
           </div>
         </div>
       </section>
@@ -802,19 +872,32 @@ export default function LandingPage() {
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <p className="text-white/60 text-[20px] md:text-[14px] mb-2">Client</p>
-                <p className="text-white text-[18px] md:text-[18px] font-semibold">{workDetail.client}</p>
+                <p className="text-white/60 text-[20px] md:text-[14px] mb-2">
+                  Client
+                </p>
+                <p className="text-white text-[18px] md:text-[18px] font-semibold">
+                  {workDetail.client}
+                </p>
               </div>
               <div>
-                <p className="text-white/60 text-[20px] md:text-[14px] mb-2">Year</p>
-                <p className="text-white text-[18px] md:text-[18px] font-semibold">{workDetail.year || "신규제작"}</p>
+                <p className="text-white/60 text-[20px] md:text-[14px] mb-2">
+                  Year
+                </p>
+                <p className="text-white text-[18px] md:text-[18px] font-semibold">
+                  {workDetail.year || "신규제작"}
+                </p>
               </div>
               {workDetail.service?.length > 0 && (
                 <div className="md:col-span-2">
-                  <p className="text-white/60 text-[20px] md:text-[14px] mb-2">Service</p>
+                  <p className="text-white/60 text-[20px] md:text-[14px] mb-2">
+                    Service
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {workDetail.service.map((srv, idx) => (
-                      <span key={idx} className="text-main-2 bg-main-1/10 px-3 py-1 rounded text-[18px] md:text-[14px]">
+                      <span
+                        key={idx}
+                        className="text-main-2 bg-main-1/10 px-3 py-1 rounded text-[18px] md:text-[14px]"
+                      >
                         {srv}
                       </span>
                     ))}
@@ -824,8 +907,12 @@ export default function LandingPage() {
             </div>
             {workDetail.seoDesc && (
               <div>
-                <p className="text-white/60 text-[20px] md:text-[14px] mb-2">Overview</p>
-                <p className="text-white/90 text-[18px] md:text-[16px] leading-relaxed">{workDetail.seoDesc}</p>
+                <p className="text-white/60 text-[20px] md:text-[14px] mb-2">
+                  Overview
+                </p>
+                <p className="text-white/90 text-[18px] md:text-[16px] leading-relaxed">
+                  {workDetail.seoDesc}
+                </p>
               </div>
             )}
             {workDetail.portfolioImage && (
@@ -850,15 +937,27 @@ export default function LandingPage() {
                   className="inline-flex items-center gap-3 px-8 py-4 bg-main-1 text-white font-bold rounded-[9999px] hover:bg-main-1/90 transition-all duration-300 hover:scale-105 text-[16px] md:text-[18px]"
                 >
                   사이트 보기
-                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  <svg
+                    className="w-4 h-4 md:w-5 md:h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
                   </svg>
                 </a>
               </div>
             )}
           </div>
         ) : selectedWork && !loadingDetail ? (
-          <div className="text-center py-20 text-white/60">포트폴리오 정보를 불러올 수 없습니다.</div>
+          <div className="text-center py-20 text-white/60">
+            포트폴리오 정보를 불러올 수 없습니다.
+          </div>
         ) : null}
       </Modal>
 
@@ -866,7 +965,9 @@ export default function LandingPage() {
       <section id="benefits" className="relative">
         <div
           className="relative md:py-40 py-28 w-full min-h-0 z-10 bg-cover bg-center"
-          style={{ backgroundImage: "url('/landing/gradient-bg01.webp')" }}
+          style={{
+            backgroundImage: "url('/landing/gradient-bg01-optimized.webp')",
+          }}
         >
           <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
             <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6 mb-12 md:mb-16">
@@ -907,7 +1008,8 @@ export default function LandingPage() {
                 data-scroll-start="top 80%"
               >
                 타사는 수정할 때마다
-                <br className="block md:hidden" /> 유지보수 비용을<br className="block md:hidden" /> 청구합니다.
+                <br className="block md:hidden" /> 유지보수 비용을
+                <br className="block md:hidden" /> 청구합니다.
                 <br />
                 누비오는 <span className="text-main-2">자체 CMS</span>로
                 <br className="block md:hidden" /> 직접 수정, 비용{" "}
@@ -921,94 +1023,123 @@ export default function LandingPage() {
                 data-scroll="true"
                 data-scroll-start="top 80%"
               >
-                만들고 나서가<br className="block md:hidden" /> 더 중요한 홈페이지 제작
+                만들고 나서가
+                <br className="block md:hidden" /> 더 중요한 홈페이지 제작
                 <br />
-                누비오 CMS는 코딩을 몰라도<br className="block md:hidden" /> 클릭 한 번으로 관리합니다.
+                누비오 CMS는 코딩을 몰라도
+                <br className="block md:hidden" /> 클릭 한 번으로 관리합니다.
               </p>
             </div>
           </div>
           <div className="xl:max-w-screen-2xl mx-auto px-6 md:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:grid-rows-3 xl:grid-rows-1 gap-4 md:gap-5 mt-16 md:mt-24">
-            <div
-              className="benefit-card h-auto md:h-full xl:h-[56.25rem] rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 md:row-span-2 px-8 py-10 md:px-12 md:py-16 fadeUp overflow-hidden"
-              data-duration="0.8"
-              data-delay="0.4"
-              data-y="30"
-              data-scroll="true"
-              data-scroll-start="top 80%"
-            >
-              <h3 className="text-white text-[24px] md:text-[28px] leading-tight font-bold">
-                페이지 내용 수정
-              </h3>
-              <p className="text-[18px] md:text-[20px] text-white/70 mt-2.5">
-                아직도 텍스트 수정하나에 비용을 지불하시나요? 관리자 페이지에 제공된 디자인모드 기능으로 코딩 없이 간단하게 수정하세요.
-              </p>
-              <div className="md:w-[80rem] w-full md:absolute left-8 md:left-12 mt-4">
-                <video
-                  src={ASSET("textmodify.mp4")}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className="w-full h-auto"
-                  aria-label="페이지 내용 수정 데모"
-                  title="페이지 내용 수정 데모"
-                >
-                  <p>이 브라우저는 비디오 재생을 지원하지 않습니다.</p>
-                </video>
-              </div>
-            </div>
-            <div
-              className="md:row-span-2 grid gap-4 md:gap-5 h-[56.25rem] md:h-full xl:h-[56.25rem] fadeUp"
-              data-duration="0.8"
-              data-delay="0.5"
-              data-y="30"
-              data-scroll="true"
-              data-scroll-start="top 80%"
-            >
-              <div className="benefit-card relative rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 px-8 py-10 md:px-12 md:py-16 overflow-hidden">
-                <h3 className="text-white text-[24px] md:text-[28px] leading-tight font-bold">문의 인박스 관리</h3>
+              <div
+                className="benefit-card h-auto md:h-full xl:h-[56.25rem] rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 md:row-span-2 px-8 py-10 md:px-12 md:py-16 fadeUp overflow-hidden"
+                data-duration="0.8"
+                data-delay="0.4"
+                data-y="30"
+                data-scroll="true"
+                data-scroll-start="top 80%"
+              >
+                <h3 className="text-white text-[24px] md:text-[28px] leading-tight font-bold">
+                  페이지 내용 수정
+                </h3>
                 <p className="text-[18px] md:text-[20px] text-white/70 mt-2.5">
-                  CMS 안에서 문의를 관리하고 원클릭으로 손쉽게 처리하세요.
+                  아직도 텍스트 수정하나에 비용을 지불하시나요? 관리자 페이지에
+                  제공된 디자인모드 기능으로 코딩 없이 간단하게 수정하세요.
                 </p>
-                <div className="w-[50rem] absolute left-8 md:left-12 mt-4">
-                  <Image src={ASSET("benefit02.png")} alt="문의 인박스 관리" width={800} height={500} className="w-full h-auto" />
+                <div className="md:w-[80rem] w-full md:absolute left-8 md:left-12 mt-4">
+                  <video
+                    src={ASSET("textmodify.mp4")}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-auto"
+                    aria-label="페이지 내용 수정 데모"
+                    title="페이지 내용 수정 데모"
+                  >
+                    <p>이 브라우저는 비디오 재생을 지원하지 않습니다.</p>
+                  </video>
                 </div>
               </div>
-              <div className="benefit-card relative rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 px-8 py-10 md:px-12 md:py-16 overflow-hidden">
-                <h3 className="text-white text-[24px] md:text-[28px] leading-tight font-bold">내 맘대로 페이지 추가</h3>
+              <div
+                className="md:row-span-2 grid gap-4 md:gap-5 h-[56.25rem] md:h-full xl:h-[56.25rem] fadeUp"
+                data-duration="0.8"
+                data-delay="0.5"
+                data-y="30"
+                data-scroll="true"
+                data-scroll-start="top 80%"
+              >
+                <div className="benefit-card relative rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 px-8 py-10 md:px-12 md:py-16 overflow-hidden">
+                  <h3 className="text-white text-[24px] md:text-[28px] leading-tight font-bold">
+                    문의 인박스 관리
+                  </h3>
+                  <p className="text-[18px] md:text-[20px] text-white/70 mt-2.5">
+                    CMS 안에서 문의를 관리하고 원클릭으로 손쉽게 처리하세요.
+                  </p>
+                  <div className="w-[50rem] absolute left-8 md:left-12 mt-4">
+                    <Image
+                      src={ASSET("benefit02.png")}
+                      alt="문의 인박스 관리"
+                      width={800}
+                      height={500}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
+                <div className="benefit-card relative rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 px-8 py-10 md:px-12 md:py-16 overflow-hidden">
+                  <h3 className="text-white text-[24px] md:text-[28px] leading-tight font-bold">
+                    내 맘대로 페이지 추가
+                  </h3>
+                  <p className="text-[18px] md:text-[20px] text-white/70 mt-2.5">
+                    페이지 추가하려면 기본 10만원이죠 하지만 누비오 웹의 CMS는
+                    페이지도 쉽게 추가합니다.
+                  </p>
+                  <div className="w-[30.9375rem] absolute left-8 md:left-12 mt-4">
+                    <Image
+                      src={ASSET("benefit03.png")}
+                      alt="내 맘대로 페이지 추가"
+                      width={495}
+                      height={300}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                className="benefit-card h-auto md:h-[28.0625rem] xl:h-[56.25rem] rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 md:col-span-2 xl:col-span-1 xl:row-span-1 px-8 py-10 md:px-12 md:py-16 fadeUp overflow-hidden"
+                data-duration="0.8"
+                data-delay="0.5"
+                data-y="30"
+                data-scroll="true"
+                data-scroll-start="top 80%"
+              >
+                <h3 className="text-white text-[24px] md:text-[28px] leading-tight font-bold">
+                  이미지·동영상 삽입
+                </h3>
                 <p className="text-[18px] md:text-[20px] text-white/70 mt-2.5">
-                  페이지 추가하려면 기본 10만원이죠 하지만 누비오 웹의 CMS는 페이지도 쉽게 추가합니다.
+                  매번 업체에 이미지 바꿔달라고 요청하시나요? 관리자 페이지에
+                  제공된 디자인모드 기능으로 코딩 없이 클릭 몇번으로 관리하세요.
                 </p>
-                <div className="w-[30.9375rem] absolute left-8 md:left-12 mt-4">
-                  <Image src={ASSET("benefit03.png")} alt="내 맘대로 페이지 추가" width={495} height={300} className="w-full h-auto" />
+                <div className="md:w-[37.3125rem] w-full md:absolute left-8 md:left-12 mt-4">
+                  <Image
+                    src={ASSET("benefit04.png")}
+                    alt="이미지·동영상 삽입"
+                    width={597}
+                    height={400}
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             </div>
-            <div
-              className="benefit-card h-auto md:h-[28.0625rem] xl:h-[56.25rem] rounded-xl bg-black bg-gradient-to-b from-transparent to-main-1/30 border border-white/50 md:col-span-2 xl:col-span-1 xl:row-span-1 px-8 py-10 md:px-12 md:py-16 fadeUp overflow-hidden"
-              data-duration="0.8"
-              data-delay="0.5"
-              data-y="30"
-              data-scroll="true"
-              data-scroll-start="top 80%"
-            >
-              <h3 className="text-white text-[24px] md:text-[28px] leading-tight font-bold">이미지·동영상 삽입</h3>
-              <p className="text-[18px] md:text-[20px] text-white/70 mt-2.5">
-                매번 업체에 이미지 바꿔달라고 요청하시나요? 관리자 페이지에 제공된 디자인모드 기능으로 코딩 없이 클릭 몇번으로 관리하세요.
-              </p>
-              <div className="md:w-[37.3125rem] w-full md:absolute left-8 md:left-12 mt-4">
-                <Image src={ASSET("benefit04.png")} alt="이미지·동영상 삽입" width={597} height={400} className="w-full h-auto" />
-              </div>
-            </div>
-          </div>
           </div>
         </div>
         {/* Benefits 2 */}
         <div
           className="relative md:py-40 py-28 w-full min-h-0 z-10 bg-cover bg-center text-white"
-          style={{ backgroundImage: "url('/landing/benefit02-bg.png')" }}
+          style={{ backgroundImage: "url('/landing/benefit02-bg.webp')" }}
         >
           <div className="px-6 md:px-8 w-full text-center">
             <div
@@ -1029,7 +1160,8 @@ export default function LandingPage() {
             >
               합리적인 가격과 함께
               <br />
-              <span className="text-main-2">다양한 혜택</span>을<br className="block md:hidden" /> 제공합니다.
+              <span className="text-main-2">다양한 혜택</span>을
+              <br className="block md:hidden" /> 제공합니다.
             </h2>
             <p
               className="text-white/70 text-[18px] md:text-[24px] font-normal mt-7 leading-[130%] fadeUp"
@@ -1054,24 +1186,63 @@ export default function LandingPage() {
               data-scroll-start="top 80%"
             >
               {[
-                { label: "반응형 홈페이지", icon: "streamline-freehand-color_worldwide-web-network-www.svg" },
-                { label: "웹 표준", icon: "streamline-freehand-color_website-development-browser-hand.svg" },
-                { label: "포털사이트 검색 등록", icon: "streamline-freehand-color_app-window-search-text.svg" },
-                { label: "다양한 게시판", icon: "streamline-freehand-color_data-transfer-document-module.svg" },
-                { label: "SSL 인증서 제공(1년)", icon: "streamline-freehand-color_security-computer-shield.svg" },
-                { label: "방화벽 설치", icon: "streamline-freehand-color_security-shield-wall.svg" },
-                { label: "폼 메일", icon: "streamline-freehand-color_content-write.svg" },
-                { label: "관리자 페이지", icon: "streamline-freehand-color_optimization-graph-settings.svg" },
-                { label: "저작권 확보 이미지", icon: "streamline-freehand-color_messages-bubble-image.svg" },
-                { label: "팝업 기능", icon: "streamline-freehand-color_ui-webpage-slider-cursor.svg" },
-                { label: "각종 API", icon: "streamline-freehand-color_server-api-cloud.svg" },
+                {
+                  label: "반응형 홈페이지",
+                  icon: "streamline-freehand-color_worldwide-web-network-www.svg",
+                },
+                {
+                  label: "웹 표준",
+                  icon: "streamline-freehand-color_website-development-browser-hand.svg",
+                },
+                {
+                  label: "포털사이트 검색 등록",
+                  icon: "streamline-freehand-color_app-window-search-text.svg",
+                },
+                {
+                  label: "다양한 게시판",
+                  icon: "streamline-freehand-color_data-transfer-document-module.svg",
+                },
+                {
+                  label: "SSL 인증서 제공(1년)",
+                  icon: "streamline-freehand-color_security-computer-shield.svg",
+                },
+                {
+                  label: "방화벽 설치",
+                  icon: "streamline-freehand-color_security-shield-wall.svg",
+                },
+                {
+                  label: "폼 메일",
+                  icon: "streamline-freehand-color_content-write.svg",
+                },
+                {
+                  label: "관리자 페이지",
+                  icon: "streamline-freehand-color_optimization-graph-settings.svg",
+                },
+                {
+                  label: "저작권 확보 이미지",
+                  icon: "streamline-freehand-color_messages-bubble-image.svg",
+                },
+                {
+                  label: "팝업 기능",
+                  icon: "streamline-freehand-color_ui-webpage-slider-cursor.svg",
+                },
+                {
+                  label: "각종 API",
+                  icon: "streamline-freehand-color_server-api-cloud.svg",
+                },
               ].map((item) => (
                 <div
                   key={item.label}
                   className="bg-white/5 border border-white/10 rounded-xl px-5 md:px-6 py-12 md:py-16 flex flex-col items-center justify-center gap-4 min-h-[120px] md:min-h-[140px] transition-all duration-300 hover:bg-white/8 hover:border-white/20 hover:-translate-y-1"
                 >
                   <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center relative">
-                    <Image src={ASSET(item.icon)} alt={item.label} width={48} height={48} className="w-full h-full object-contain" />
+                    <Image
+                      src={ASSET(item.icon)}
+                      alt={item.label}
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <p className="text-white text-[18px] md:text-[24px] font-medium text-center leading-[1.4]">
                     {item.label}
@@ -1087,7 +1258,7 @@ export default function LandingPage() {
       <section
         id="reviews"
         className="relative md:py-40 py-28 w-full min-h-0 z-10 bg-cover md:bg-center bg-right"
-        style={{ backgroundImage: "url('/landing/reviews-bg.png')" }}
+        style={{ backgroundImage: "url('/landing/reviews-bg.webp')" }}
       >
         <div className="text-white">
           <div className="px-6 md:px-8 w-full text-center">
@@ -1111,7 +1282,9 @@ export default function LandingPage() {
               <br />
               <span className="text-main-2">업체 답변 기다릴 시간</span>에
               <br />
-              이미 수정 끝내고<br className="md:hidden"/>  <span className="text-main-2">퇴근</span>합니다.
+              이미 수정 끝내고
+              <br className="md:hidden" />{" "}
+              <span className="text-main-2">퇴근</span>합니다.
             </h2>
             <p
               className="text-white/70 text-[18px] md:text-[24px] font-normal mt-7 leading-[130%] fadeUp"
@@ -1146,24 +1319,49 @@ export default function LandingPage() {
             <div className="review-marquee-content">
               {(() => {
                 const reviewList = [
-                  { title: "코딩 하나도 모르는데 홈페이지 관리가 가능하네요", body: "관리자 페이지가 너무 직관적이라 놀랐어요. 블로그 글 쓰는 것보다 쉽습니다. 개발 지식 전혀 없는 저희 직원들도 디자인을 변경할 수 있어요" },
-                  { title: "유지보수 업체 연락 두절... 리뉴얼하고 칼퇴해요", body: "기존 업체가 갑자기 연락이 안 돼서 발만 동동 구르던 적이 있어요. 이젠 제가 모든 권한을 가지고 직접 관리하니까 마음이 너무 편합니다. 독립한 기분이에요!" },
-                  { title: "디자인이 깔끔하고 작업 속도가 빠릅니다", body: "디자인이 깔끔하고 요청 드린 기능도 예상했던 것보다 훨씬 좋게 나와서 진짜 만족스러워요. 처음에는 좀 간단하게 하려다 만들어 주시는 거 보고 이것저것 기능을 추가하게 됐는데 빠르게 잘해주셨습니다." },
-                  { title: "직접 수정했는데 모바일이나 PC에서 전혀 문제가 없어요", body: "수정하고 나서 폰으로 확인해 보면 텍스트가 짤리거나 이미지가 밀리는 일이 없어요. 반응형 디자인이 자동으로 잡히니까 수정 작업에 대한 스트레스가 0에 가깝습니다." },
-                  { title: "전문 지식 없어도 SEO 100점 맞을 수 있습니다", body: "SEO가 뭔지도 몰랐던 초보 사장인데, AI가 시키는 대로 '딸깍' 하니까 검색 결과 상단에 우리 가게가 뜨네요. 전문가한테 수십만원 주고 맡기던 컨설팅보다 훨씬 낫습니다." },
-                  { title: "신입 사원도 30분 교육받고 바로 실무 투입됩니다", body: "인수인계가 너무 편해요. 복잡한 매뉴얼 필요 없이 \"여기 클릭해서 글만 바꾸면 돼\"라고 하면 끝이니까요. 관리 인건비와 교육 시간이 획기적으로 줄어들었습니다." },
+                  {
+                    title: "코딩 하나도 모르는데 홈페이지 관리가 가능하네요",
+                    body: "관리자 페이지가 너무 직관적이라 놀랐어요. 블로그 글 쓰는 것보다 쉽습니다. 개발 지식 전혀 없는 저희 직원들도 디자인을 변경할 수 있어요",
+                  },
+                  {
+                    title: "유지보수 업체 연락 두절... 리뉴얼하고 칼퇴해요",
+                    body: "기존 업체가 갑자기 연락이 안 돼서 발만 동동 구르던 적이 있어요. 이젠 제가 모든 권한을 가지고 직접 관리하니까 마음이 너무 편합니다. 독립한 기분이에요!",
+                  },
+                  {
+                    title: "디자인이 깔끔하고 작업 속도가 빠릅니다",
+                    body: "디자인이 깔끔하고 요청 드린 기능도 예상했던 것보다 훨씬 좋게 나와서 진짜 만족스러워요. 처음에는 좀 간단하게 하려다 만들어 주시는 거 보고 이것저것 기능을 추가하게 됐는데 빠르게 잘해주셨습니다.",
+                  },
+                  {
+                    title:
+                      "직접 수정했는데 모바일이나 PC에서 전혀 문제가 없어요",
+                    body: "수정하고 나서 폰으로 확인해 보면 텍스트가 짤리거나 이미지가 밀리는 일이 없어요. 반응형 디자인이 자동으로 잡히니까 수정 작업에 대한 스트레스가 0에 가깝습니다.",
+                  },
+                  {
+                    title: "전문 지식 없어도 SEO 100점 맞을 수 있습니다",
+                    body: "SEO가 뭔지도 몰랐던 초보 사장인데, AI가 시키는 대로 '딸깍' 하니까 검색 결과 상단에 우리 가게가 뜨네요. 전문가한테 수십만원 주고 맡기던 컨설팅보다 훨씬 낫습니다.",
+                  },
+                  {
+                    title: "신입 사원도 30분 교육받고 바로 실무 투입됩니다",
+                    body: '인수인계가 너무 편해요. 복잡한 매뉴얼 필요 없이 "여기 클릭해서 글만 바꾸면 돼"라고 하면 끝이니까요. 관리 인건비와 교육 시간이 획기적으로 줄어들었습니다.',
+                  },
                 ];
                 return [...reviewList, ...reviewList].map((r, i) => (
-                <div key={`review-${i}`} className="review-card">
-                  <div className="flex gap-1 mb-4">
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <span key={n} className="text-main-2 text-xl">★</span>
-                    ))}
+                  <div key={`review-${i}`} className="review-card">
+                    <div className="flex gap-1 mb-4">
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <span key={n} className="text-main-2 text-xl">
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <h3 className="text-white text-[18px] md:text-[24px] font-bold mb-3">
+                      {r.title}
+                    </h3>
+                    <p className="text-white/80 text-[16px] md:text-[18px] leading-relaxed">
+                      {r.body}
+                    </p>
                   </div>
-                  <h3 className="text-white text-[18px] md:text-[24px] font-bold mb-3">{r.title}</h3>
-                  <p className="text-white/80 text-[16px] md:text-[18px] leading-relaxed">{r.body}</p>
-                </div>
-              ));
+                ));
               })()}
             </div>
           </div>
@@ -1171,7 +1369,10 @@ export default function LandingPage() {
       </section>
 
       {/* Fee */}
-      <section id="fee" className="relative md:py-40 py-28 w-full min-h-0 z-10 bg-black">
+      <section
+        id="fee"
+        className="relative md:py-40 py-28 w-full min-h-0 z-10 bg-black"
+      >
         <div className="px-6 md:px-8 w-full text-center">
           <div
             className="line w-0.5 h-20 mb-6 bg-gradient-to-b from-transparent to-white mx-auto fadeDown"
@@ -1192,7 +1393,8 @@ export default function LandingPage() {
             불필요한 거품은 빼고,
             <br />
             성장에만 집중하는
-            <br className="block md:hidden" /> <span className="text-main-2">합리적인 선택</span>
+            <br className="block md:hidden" />{" "}
+            <span className="text-main-2">합리적인 선택</span>
           </h2>
           <p
             className="text-white/70 text-[18px] md:text-[24px] font-normal mt-7 leading-[130%] fadeUp"
@@ -1202,12 +1404,14 @@ export default function LandingPage() {
             data-scroll="true"
             data-scroll-start="top 80%"
           >
-            매달 청구되는 정체 모를<br className="block md:hidden" /> 유지보수비에 지치셨나요?
+            매달 청구되는 정체 모를
+            <br className="block md:hidden" /> 유지보수비에 지치셨나요?
             <br />
             누비오는 투명한 정찰제와 한 번의 제작으로
             <br className="block md:hidden" /> 평생 수정 자유를 약속합니다.
             <br />
-            우리 비즈니스 규모에 딱 맞는<br className="block md:hidden" /> 최적의 플랜을 확인해 보세요.
+            우리 비즈니스 규모에 딱 맞는
+            <br className="block md:hidden" /> 최적의 플랜을 확인해 보세요.
           </p>
         </div>
         <div className="w-full max-w-7xl mx-auto px-6 md:px-8 mt-16 md:mt-24">
@@ -1220,36 +1424,112 @@ export default function LandingPage() {
             data-scroll-start="top 80%"
           >
             {[
-              { name: "랜딩 페이지", delPrice: "66", price: "39", features: ["단일 목적 원페이지 기본 5 섹션 제공"], more: ["기본 검색엔진(SEO) 최적화", "성능 최적화", "속도 최적화", "반응형 제작", "UX 플로우 설계", "핵심 메시지, 맞춤형 카피라이팅 제공", "기본 애니메이션 제공"] },
-              { name: "기본 홈페이지 제작", delPrice: "110", price: "65", features: ["메인 포함 5P 이내", "페이지 추가 기능 제공"], more: ["기본 검색엔진(SEO) 최적화", "성능 최적화", "속도 최적화", "반응형 제작", "UX 플로우 설계", "핵심 메시지, 맞춤형 카피라이팅 제공", "몰입형 인터랙션 제공"] },
-              { name: "프리미엄 홈페이지 제작", delPrice: "250", price: "190", features: ["페이지 수 별도 협의", "목적별 맞춤 페이지 설계", "페이지 추가 기능 제공", "게시판 추가 기능 제공", "AI 기능 제공", "사용자 여정을 고려한 UX/UI 설계", "검색엔진 고도화·키워드 전략 반영"], more: ["기본 검색엔진(SEO) 최적화", "성능 최적화", "속도 최적화", "반응형 제작", "핵심 메시지, 맞춤형 카피라이팅 제공", "몰입형 인터랙션 제공"] },
+              {
+                name: "랜딩 페이지",
+                delPrice: "66",
+                price: "39",
+                features: ["단일 목적 원페이지 기본 5 섹션 제공"],
+                more: [
+                  "기본 검색엔진(SEO) 최적화",
+                  "성능 최적화",
+                  "속도 최적화",
+                  "반응형 제작",
+                  "UX 플로우 설계",
+                  "핵심 메시지, 맞춤형 카피라이팅 제공",
+                  "기본 애니메이션 제공",
+                ],
+              },
+              {
+                name: "기본 홈페이지 제작",
+                delPrice: "110",
+                price: "65",
+                features: ["메인 포함 5P 이내", "페이지 추가 기능 제공"],
+                more: [
+                  "기본 검색엔진(SEO) 최적화",
+                  "성능 최적화",
+                  "속도 최적화",
+                  "반응형 제작",
+                  "UX 플로우 설계",
+                  "핵심 메시지, 맞춤형 카피라이팅 제공",
+                  "몰입형 인터랙션 제공",
+                ],
+              },
+              {
+                name: "프리미엄 홈페이지 제작",
+                delPrice: "250",
+                price: "190",
+                features: [
+                  "페이지 수 별도 협의",
+                  "목적별 맞춤 페이지 설계",
+                  "페이지 추가 기능 제공",
+                  "게시판 추가 기능 제공",
+                  "AI 기능 제공",
+                  "사용자 여정을 고려한 UX/UI 설계",
+                  "검색엔진 고도화·키워드 전략 반영",
+                ],
+                more: [
+                  "기본 검색엔진(SEO) 최적화",
+                  "성능 최적화",
+                  "속도 최적화",
+                  "반응형 제작",
+                  "핵심 메시지, 맞춤형 카피라이팅 제공",
+                  "몰입형 인터랙션 제공",
+                ],
+              },
             ].map((plan) => (
               <div
                 key={plan.name}
                 className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-4 lg:p-8 backdrop-blur-sm transition-all duration-300 hover:bg-white/8 hover:border-white/20 hover:-translate-y-1"
               >
                 <div className="mb-0 pb-6 border-b border-white/10">
-                  <h3 className="text-white text-xl md:text-2xl font-bold mb-1">{plan.name}</h3>
+                  <h3 className="text-white text-xl md:text-2xl font-bold mb-1">
+                    {plan.name}
+                  </h3>
                   <div className="flex flex-col items-baseline gap-3 flex-wrap">
                     <h4 className="text-white text-[18px] md:text-[24px]">
-                      <del className="block text-white/50 text-[16px] md:text-[20px]">{plan.delPrice} 만원</del> 
-                      <span className="text-[32px] md:text-[50px] font-bold leading-10">{plan.price}</span>만원 부터
+                      <del className="block text-white/50 text-[16px] md:text-[20px]">
+                        {plan.delPrice} 만원
+                      </del>
+                      <span className="text-[32px] md:text-[50px] font-bold leading-10">
+                        {plan.price}
+                      </span>
+                      만원 부터
                     </h4>
-                    <span className="bg-main-1 text-white text-base font-semibold px-2 py-1 rounded">VAT 별도</span>
+                    <span className="bg-main-1 text-white text-base font-semibold px-2 py-1 rounded">
+                      VAT 별도
+                    </span>
                   </div>
                 </div>
                 <ul className="list-none py-4 m-0 flex flex-col gap-4 border-b border-white/10">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-3 text-white/90 text-[16px] md:text-[18px] leading-relaxed">
-                      <Image src={ASSET("lets-icons_check-fill.svg")} alt="" width={24} height={24} className="w-6 h-6 flex-shrink-0 mt-0.5" />
+                    <li
+                      key={f}
+                      className="flex items-start gap-3 text-white/90 text-[16px] md:text-[18px] leading-relaxed"
+                    >
+                      <Image
+                        src={ASSET("lets-icons_check-fill.svg")}
+                        alt=""
+                        width={24}
+                        height={24}
+                        className="w-6 h-6 flex-shrink-0 mt-0.5"
+                      />
                       <span>{f}</span>
                     </li>
                   ))}
                 </ul>
                 <ul className="list-none py-4 m-0 flex flex-col gap-4">
                   {plan.more.map((f) => (
-                    <li key={f} className="flex items-start gap-3 text-white/90 text-[16px] md:text-[18px] leading-relaxed">
-                      <Image src={ASSET("lets-icons_check-fill.svg")} alt="" width={24} height={24} className="w-6 h-6 flex-shrink-0 mt-0.5" />
+                    <li
+                      key={f}
+                      className="flex items-start gap-3 text-white/90 text-[16px] md:text-[18px] leading-relaxed"
+                    >
+                      <Image
+                        src={ASSET("lets-icons_check-fill.svg")}
+                        alt=""
+                        width={24}
+                        height={24}
+                        className="w-6 h-6 flex-shrink-0 mt-0.5"
+                      />
                       <span>{f}</span>
                     </li>
                   ))}
@@ -1264,7 +1544,7 @@ export default function LandingPage() {
       <section
         id="inquiry"
         className="relative md:py-40 py-28 w-full min-h-0 z-10 bg-cover bg-center"
-        style={{ backgroundImage: "url('/landing/inquiry-bg.png')" }}
+        style={{ backgroundImage: "url('/landing/inquiry-bg.webp')" }}
       >
         <div className="px-6 md:px-8 w-full text-center">
           <div
@@ -1284,8 +1564,7 @@ export default function LandingPage() {
             data-scroll-start="top 80%"
           >
             <span className="text-main-2">홈페이지 제작</span>
-            <br />
-            더 이상 망설이지 마세요!
+            <br />더 이상 망설이지 마세요!
           </h2>
           <p
             className="text-white/70 text-[18px] md:text-[24px] font-normal mt-7 leading-[130%] fadeUp"
@@ -1313,7 +1592,10 @@ export default function LandingPage() {
             data-scroll-start="top 80%"
           >
             <div className="mb-6">
-              <label htmlFor="company" className="block text-white text-base md:text-[18px] font-medium mb-2">
+              <label
+                htmlFor="company"
+                className="block text-white text-base md:text-[18px] font-medium mb-2"
+              >
                 상호명 <span className="text-main-2">(필수)</span>
               </label>
               <input
@@ -1326,7 +1608,10 @@ export default function LandingPage() {
               />
             </div>
             <div className="mb-6">
-              <label htmlFor="name" className="block text-white text-base md:text-[18px] font-medium mb-2">
+              <label
+                htmlFor="name"
+                className="block text-white text-base md:text-[18px] font-medium mb-2"
+              >
                 담당자 성함 <span className="text-main-2">(필수)</span>
               </label>
               <input
@@ -1339,7 +1624,10 @@ export default function LandingPage() {
               />
             </div>
             <div className="mb-6">
-              <label htmlFor="phone" className="block text-white text-base md:text-[18px] font-medium mb-2">
+              <label
+                htmlFor="phone"
+                className="block text-white text-base md:text-[18px] font-medium mb-2"
+              >
                 연락처 <span className="text-main-2">(필수)</span>
               </label>
               <input
@@ -1352,7 +1640,10 @@ export default function LandingPage() {
               />
             </div>
             <div className="mb-6">
-              <label htmlFor="website" className="block text-white text-base md:text-[18px] font-medium mb-2">
+              <label
+                htmlFor="website"
+                className="block text-white text-base md:text-[18px] font-medium mb-2"
+              >
                 현재 운영중인 홈페이지가 있다면 링크를 작성해주세요.
               </label>
               <input
@@ -1365,7 +1656,8 @@ export default function LandingPage() {
             </div>
             <div className="mb-6">
               <label className="block text-white text-base md:text-[18px] font-medium mb-3">
-                제작하고자 하는 사이트 유형 <span className="text-main-2">(필수)</span>
+                제작하고자 하는 사이트 유형{" "}
+                <span className="text-main-2">(필수)</span>
               </label>
               <div className="space-y-3">
                 {[
@@ -1373,7 +1665,10 @@ export default function LandingPage() {
                   { value: "basic", label: "기본 홈페이지 제작" },
                   { value: "premium", label: "프리미엄 홈페이지 제작" },
                 ].map((opt) => (
-                  <label key={opt.value} className="flex items-center cursor-pointer group">
+                  <label
+                    key={opt.value}
+                    className="flex items-center cursor-pointer group"
+                  >
                     <input
                       type="radio"
                       name="plan"
@@ -1381,30 +1676,50 @@ export default function LandingPage() {
                       required
                       className="w-5 h-5 text-main-1 bg-white/10 border-white/20 focus:ring-main-1 focus:ring-2 cursor-pointer accent-main-1"
                     />
-                    <span className="ml-3 text-white text-base group-hover:text-main-2 transition-colors">{opt.label}</span>
+                    <span className="ml-3 text-white text-base group-hover:text-main-2 transition-colors">
+                      {opt.label}
+                    </span>
                   </label>
                 ))}
               </div>
             </div>
             <div className="mb-6">
-              <label className="block text-white text-base md:text-[18px] font-medium mb-3">누비오를 어떻게 알게 되셨나요?</label>
+              <label className="block text-white text-base md:text-[18px] font-medium mb-3">
+                누비오를 어떻게 알게 되셨나요?
+              </label>
               <div className="space-y-3">
                 {[
-                  { value: "instagram-facebook", label: "인스타/페이스북 광고" },
+                  {
+                    value: "instagram-facebook",
+                    label: "인스타/페이스북 광고",
+                  },
                   { value: "naver", label: "네이버 검색" },
                   { value: "google", label: "구글 검색" },
                   { value: "referral", label: "지인 소개" },
                   { value: "other", label: "기타" },
                 ].map((opt) => (
-                  <label key={opt.value} className="flex items-center cursor-pointer group">
-                    <input type="radio" name="source" value={opt.value} className="w-5 h-5 accent-main-1 cursor-pointer" />
-                    <span className="ml-3 text-white text-base group-hover:text-main-2 transition-colors">{opt.label}</span>
+                  <label
+                    key={opt.value}
+                    className="flex items-center cursor-pointer group"
+                  >
+                    <input
+                      type="radio"
+                      name="source"
+                      value={opt.value}
+                      className="w-5 h-5 accent-main-1 cursor-pointer"
+                    />
+                    <span className="ml-3 text-white text-base group-hover:text-main-2 transition-colors">
+                      {opt.label}
+                    </span>
                   </label>
                 ))}
               </div>
             </div>
             <div className="mb-6">
-              <label htmlFor="inquiry" className="block text-white text-base md:text-[18px] font-medium mb-2">
+              <label
+                htmlFor="inquiry"
+                className="block text-white text-base md:text-[18px] font-medium mb-2"
+              >
                 문의 혹은 궁금하신 점이 있다면 자유롭게 작성해주세요.
               </label>
               <textarea
@@ -1426,7 +1741,8 @@ export default function LandingPage() {
                     className="mt-1 w-5 h-5 accent-main-1 cursor-pointer flex-shrink-0"
                   />
                   <span className="ml-3 text-white text-base leading-relaxed group-hover:text-main-2 transition-colors">
-                    개인정보 수집 및 이용에 동의합니다. <span className="text-main-2">(필수)</span>
+                    개인정보 수집 및 이용에 동의합니다.{" "}
+                    <span className="text-main-2">(필수)</span>
                   </span>
                 </label>
                 <button
@@ -1456,7 +1772,10 @@ export default function LandingPage() {
         <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
           <div className="flex flex-col items-center gap-2 mb-8">
             <p className="text-white/70 text-sm md:text-base">문의 전화</p>
-            <a href="tel:0507-1370-6110" className="text-white text-2xl md:text-3xl lg:text-4xl font-bold hover:text-main-2 transition-colors duration-300">
+            <a
+              href="tel:0507-1370-6110"
+              className="text-white text-2xl md:text-3xl lg:text-4xl font-bold hover:text-main-2 transition-colors duration-300"
+            >
               0507-1370-6110
             </a>
           </div>
@@ -1467,11 +1786,16 @@ export default function LandingPage() {
                 <span className="hidden md:inline">|</span>
                 <span>대표 : 이형석</span>
                 <span className="hidden md:inline">|</span>
-                <a href="mailto:nuvio@naver.com" className="hover:text-white transition-colors">
+                <a
+                  href="mailto:nuvio@naver.com"
+                  className="hover:text-white transition-colors"
+                >
                   메일 : nuvio@naver.com
                 </a>
               </div>
-              <p className="text-white/50 text-xs md:text-sm mt-4">© 2026 nuvio. All rights reserved.</p>
+              <p className="text-white/50 text-xs md:text-sm mt-4">
+                © 2026 nuvio. All rights reserved.
+              </p>
             </div>
           </div>
         </div>
@@ -1480,7 +1804,9 @@ export default function LandingPage() {
       {/* Privacy Modal */}
       <div
         className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity ${
-          privacyOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+          privacyOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none"
         }`}
         style={{ display: privacyOpen ? "flex" : "none" }}
         onClick={() => privacyOpen && setPrivacyOpen(false)}
@@ -1490,22 +1816,38 @@ export default function LandingPage() {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-            <h3 className="text-white text-xl md:text-2xl font-bold">개인정보 수집 및 이용 동의</h3>
-            <button type="button" className="text-white/70 hover:text-white text-2xl font-light" onClick={() => setPrivacyOpen(false)}>
+            <h3 className="text-white text-xl md:text-2xl font-bold">
+              개인정보 수집 및 이용 동의
+            </h3>
+            <button
+              type="button"
+              className="text-white/70 hover:text-white text-2xl font-light"
+              onClick={() => setPrivacyOpen(false)}
+            >
               ×
             </button>
           </div>
           <div className="text-white/90 text-sm md:text-base leading-relaxed space-y-4">
             <div>
-              <h4 className="text-white text-lg font-semibold mb-2">1. 수집하는 개인정보의 항목</h4>
-              <p>누비오는 문의하기 서비스를 제공하기 위해 다음과 같은 개인정보를 수집합니다.</p>
+              <h4 className="text-white text-lg font-semibold mb-2">
+                1. 수집하는 개인정보의 항목
+              </h4>
+              <p>
+                누비오는 문의하기 서비스를 제공하기 위해 다음과 같은 개인정보를
+                수집합니다.
+              </p>
               <ul className="list-disc list-inside mt-2 space-y-1 ml-4">
-                <li>필수항목: 상호명, 담당자 성함, 연락처, 희망 요금제, 알게 된 경로</li>
+                <li>
+                  필수항목: 상호명, 담당자 성함, 연락처, 희망 요금제, 알게 된
+                  경로
+                </li>
                 <li>선택항목: 현재 운영중인 홈페이지 링크, 문의사항</li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white text-lg font-semibold mb-2">2. 개인정보의 수집 및 이용 목적</h4>
+              <h4 className="text-white text-lg font-semibold mb-2">
+                2. 개인정보의 수집 및 이용 목적
+              </h4>
               <ul className="list-disc list-inside mt-2 space-y-1 ml-4">
                 <li>홈페이지 제작 문의 접수 및 상담 서비스 제공</li>
                 <li>고객 문의사항에 대한 답변 및 안내</li>
@@ -1513,16 +1855,33 @@ export default function LandingPage() {
               </ul>
             </div>
             <div>
-              <h4 className="text-white text-lg font-semibold mb-2">3. 개인정보의 보유 및 이용 기간</h4>
-              <p>수집된 개인정보는 문의 접수일로부터 3년간 보관하며, 이후 지체 없이 파기합니다.</p>
+              <h4 className="text-white text-lg font-semibold mb-2">
+                3. 개인정보의 보유 및 이용 기간
+              </h4>
+              <p>
+                수집된 개인정보는 문의 접수일로부터 3년간 보관하며, 이후 지체
+                없이 파기합니다.
+              </p>
             </div>
             <div>
-              <h4 className="text-white text-lg font-semibold mb-2">4. 개인정보의 제3자 제공</h4>
-              <p>누비오는 원칙적으로 이용자의 개인정보를 외부에 제공하지 않습니다. 다만, 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우 등 예외가 있습니다.</p>
+              <h4 className="text-white text-lg font-semibold mb-2">
+                4. 개인정보의 제3자 제공
+              </h4>
+              <p>
+                누비오는 원칙적으로 이용자의 개인정보를 외부에 제공하지
+                않습니다. 다만, 법령에 정해진 절차와 방법에 따라 수사기관의
+                요구가 있는 경우 등 예외가 있습니다.
+              </p>
             </div>
             <div>
-              <h4 className="text-white text-lg font-semibold mb-2">5. 동의 거부 권리 및 불이익</h4>
-              <p>이용자는 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있습니다. 다만, 동의를 거부할 경우 문의하기 서비스 이용이 제한될 수 있습니다.</p>
+              <h4 className="text-white text-lg font-semibold mb-2">
+                5. 동의 거부 권리 및 불이익
+              </h4>
+              <p>
+                이용자는 개인정보 수집 및 이용에 대한 동의를 거부할 권리가
+                있습니다. 다만, 동의를 거부할 경우 문의하기 서비스 이용이 제한될
+                수 있습니다.
+              </p>
             </div>
           </div>
           <div className="mt-8 pt-6 border-t border-white/10 text-center">

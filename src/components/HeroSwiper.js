@@ -13,7 +13,8 @@ const slides = [
   {
     src: "/main/heroslide4.webp",
     alt: "완벽한 홈페이지 제작",
-    title: "검색되는 홈페이지 제작,<br /> 문의로 이어지는<br class='block md:hidden' /> 웹사이트 구조",
+    title:
+      "검색되는 홈페이지 제작,<br /> 문의로 이어지는<br class='block md:hidden' /> 웹사이트 구조",
     subtitle:
       "당신의 비즈니스가 가질 수 있는 <br class='block md:hidden' /> 최고의 인상을<br class='block md:hidden' /> 검색되는 홈페이지 제작으로 완성합니다.",
     ctaLabel: "Contact",
@@ -175,7 +176,7 @@ export default function HeroSwiper() {
               <div className="relative z-10 flex h-full items-center">
                 <div className="container mx-auto px-5 md:px-6 max-w-[1600px]">
                   <div
-                    className={`max-w-[840px] mx-auto text-center text-neutral-100 opacity-0 transition-transform transition-opacity duration-700 ease-out ${active === idx ? "animate-[fadeInScale_0.8s_ease-out_0.3s_forwards]" : ""}`}
+                    className={`max-w-[840px] mx-auto text-center text-neutral-100 transition-transform transition-opacity duration-700 ease-out ${active === idx ? "animate-[fadeInScale_0.8s_ease-out_0.3s_forwards]" : ""}`}
                     key={`text-${idx}-${active === idx ? "active" : "idle"}`}
                   >
                     <h2

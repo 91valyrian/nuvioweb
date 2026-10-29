@@ -1,62 +1,47 @@
-// src/app/rss.xml/route.js
-import { getAllColumns } from "@/lib/columns";
+import { getAllColumns, getColumnBySlug } from "@/lib/columns";
 import { getAllWorks } from "@/lib/works";
-
-// ✅ XML 안전 변환 함수
-function escapeXml(unsafe) {
-  return unsafe
-    ? unsafe
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&apos;")
-    : "";
-}
-
-export async function GET() {
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-    "https://nuvio-web.com";
-
-  const now = new Date().toUTCString();
-
-  const columns = getAllColumns().map(
-    (c) => `
-      <item>
-        <title><![CDATA[${escapeXml(c.title)}]]></title>
-        <link>${siteUrl}/columns/${c.slug}</link>
-        <guid>${siteUrl}/columns/${c.slug}</guid>
-        <pubDate>${new Date(c.date).toUTCString()}</pubDate>
-        <description><![CDATA[${escapeXml(c.summary || "")}]]></description>
-      </item>`
+import { SITE_URL, absoluteUrl, validDate, stripHtml } from "@/lib/site";
+const escapeXml = (value = "") =>
+  String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+const cdata = (value = "") =>
+  `<![CDATA[${String(value).replace(/\]\]>/g, "]]]]><![CDATA[>")}]]>`;
+export function GET() {
+  const posts = [
+    ...getAllColumns().map((p) => ({
+      title: p.title,
+      path: `/columns/${p.slug}`,
+      date: p.date,
+      modified: p.updated || p.date,
+      description: getColumnBySlug(p.slug).content,
+    })),
+    ...getAllWorks().map((w) => ({
+      title: stripHtml(w.title),
+      path: `/work/${w.slug}`,
+      date: w.inputDate,
+      modified: w.updated || w.inputDate,
+      description: stripHtml(w.overview || w.client),
+    })),
+  ].sort((a, b) =>
+    (validDate(b.date) || "").localeCompare(validDate(a.date) || ""),
   );
-
-  const works = getAllWorks().map(
-    (w) => `
-      <item>
-        <title><![CDATA[${escapeXml(w.title)}]]></title>
-        <link>${siteUrl}/work/${w.slug}</link>
-        <guid>${siteUrl}/work/${w.slug}</guid>
-        <pubDate>${new Date(w.date).toUTCString()}</pubDate>
-        <description><![CDATA[${escapeXml(w.client || "")}]]></description>
-      </item>`
+  const items = posts
+    .map(
+      (p) =>
+        `<item><title>${cdata(p.title)}</title><link>${escapeXml(absoluteUrl(p.path))}</link><guid isPermaLink="true">${escapeXml(absoluteUrl(p.path))}</guid>${validDate(p.date) ? `<pubDate>${new Date(p.date).toUTCString()}</pubDate>` : ""}<description>${cdata(p.description)}</description></item>`,
+    )
+    .join("");
+  const modified = posts
+    .map((p) => validDate(p.modified))
+    .filter(Boolean)
+    .sort()
+    .at(-1);
+  return new Response(
+    `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>nuvio — 홈페이지 제작 칼럼</title><link>${SITE_URL}</link><description>홈페이지 제작 가이드와 누비오 제작 사례</description><language>ko</language>${modified ? `<lastBuildDate>${new Date(modified).toUTCString()}</lastBuildDate>` : ""}${items}</channel></rss>`,
+    { headers: { "Content-Type": "application/rss+xml; charset=utf-8" } },
   );
-
-  // ✅ & → &amp; 로 수정됨
-  const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
-  <rss version="2.0">
-    <channel>
-      <title><![CDATA[nuvio Feed — Columns &amp; Works]]></title>
-      <link>${siteUrl}</link>
-      <description><![CDATA[홈페이지 제작과 브랜딩 인사이트, nuvio의 최신 포트폴리오 및 칼럼]]></description>
-      <language>ko</language>
-      <lastBuildDate>${now}</lastBuildDate>
-      ${[...columns, ...works].join("")}
-    </channel>
-  </rss>`;
-
-  return new Response(rssFeed, {
-    headers: { "Content-Type": "application/xml; charset=utf-8" },
-  });
 }

@@ -1,6 +1,7 @@
 ---
 title: "홈페이지를 만들었는데 네이버/구글에 검색이 안 되는 이유"
 subTitle: ""
+updated: "2026-10-29"
 slug: "website-search-issues"
 date: "2025-10-02"
 tags:
@@ -35,8 +36,8 @@ categories:
 
 검색엔진은 페이지를 '읽고', '이해하고', '저장'하는 과정을 거친다. <br className="hidden md:block"/>
 이 단계 중 하나라도 누락되면 검색결과에 노출되지 않는다. <br className="hidden md:block"/>
-예를 들어 `robots.txt`의 설정 오류나 `noindex` 태그가 잘못 적용된 경우, <br className="hidden md:block"/>
-검색 로봇은 접근조차 하지 못한다. <br className="hidden md:block"/>
+예를 들어 `robots.txt`의 설정 오류나 `noindex` 태그가 잘못 적용된 경우에도 색인에서 제외될 수 있다. <br className="hidden md:block"/>
+robots.txt의 크롤링 제한과 noindex의 색인 제한은 서로 구분해야 한다. <br className="hidden md:block"/>
 즉, 홈페이지는 열려 있지만 **검색엔진의 지도에는 존재하지 않는 상태**가 된다.
 
 <Figure>
@@ -117,7 +118,7 @@ categories:
 ## 검색은 속도와 신뢰의 문제이기도 하다
 
 검색엔진은 페이지 속도를 사용자 경험(UX)의 핵심 지표로 본다. <br className="hidden md:block"/>
-로딩이 3초를 넘으면 이탈률은 50% 이상 증가하고, <br className="hidden md:block"/>
+페이지 로딩이 지연되면 사용자가 불편을 느낄 수 있고, <br className="hidden md:block"/>
 검색 순위는 즉시 하락한다.
 
 <br />

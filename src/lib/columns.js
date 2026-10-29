@@ -11,7 +11,7 @@ function normalizeToArray(value) {
       item
         .split(",")
         .map((s) => s.trim())
-        .filter(Boolean)
+        .filter(Boolean),
     );
   if (typeof value === "string")
     return value
@@ -56,8 +56,11 @@ export function getAllColumns() {
 }
 
 export function getColumnBySlug(slug) {
+  if (typeof slug !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug))
+    return null;
   const normalized = slug.replace(/\.mdx$/i, "");
   const file = path.join(COLUMNS_DIR, `${normalized}.mdx`);
+  if (!fs.existsSync(file)) return null;
   const raw = fs.readFileSync(file, "utf-8");
   const { data, content } = matter(raw);
 

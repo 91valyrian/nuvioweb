@@ -16,7 +16,7 @@ export const serviceCards = [
       },
     ],
     bg: "/images/service/service-01.png",
-    href: "/service/branding-site",
+    href: "/service/corporate",
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ export const serviceCards = [
       },
     ],
     bg: "/images/service/service-02.png",
-    href: "/service/promotion-landing",
+    href: "/service/landing-page",
   },
   {
     id: 3,
@@ -73,7 +73,7 @@ export const serviceCards = [
       },
     ],
     bg: "/images/service/service-04.png",
-    href: "/service/public",
+    href: "/service/renewal",
   },
   {
     id: 5,
@@ -92,7 +92,7 @@ export const serviceCards = [
       },
     ],
     bg: "/images/service/service-05.png",
-    href: "/service/optimization",
+    href: "/service/renewal",
   },
 ];
 
@@ -114,7 +114,7 @@ export const serviceCards = [
 //       },
 //     ],
 //     bg: "/images/service/service-01.png",
-//     href: "/service/branding-site",
+//     href: "/service/corporate",
 //   },
 //   {
 //     id: 2,
@@ -133,7 +133,7 @@ export const serviceCards = [
 //       },
 //     ],
 //     bg: "/images/service/service-02.png",
-//     href: "/service/promotion-landing",
+//     href: "/service/landing-page",
 //   },
 //   {
 //     id: 3,
@@ -171,7 +171,7 @@ export const serviceCards = [
 //       },
 //     ],
 //     bg: "/images/service/service-04.png",
-//     href: "/service/public",
+//     href: "/service/renewal",
 //   },
 //   {
 //     id: 5,

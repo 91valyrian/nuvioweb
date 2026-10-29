@@ -648,3 +648,144 @@ body {
     0 10px 40px rgba(0, 0, 0, 0.8),
     0 20px 80px rgba(0, 0, 0, 0.6);
 }
+
+/* Column editorial style: white card, dark text, blue callouts, readable mobile flow. */
+.column-article {
+  font-size: 20px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+.column-article > p,
+.column-article div p,
+.column-article li {
+  font-size: inherit;
+  line-height: inherit;
+}
+.column-article > p {
+  margin: 1.25em 0;
+}
+.column-article h2 {
+  margin-top: 2em;
+  font-size: 28px;
+  line-height: 1.4;
+}
+.column-article h3 {
+  font-size: 24px;
+  line-height: 1.5;
+}
+.column-article a {
+  display: inline;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: #1f4fff;
+  font-size: inherit;
+  text-decoration: underline;
+}
+.column-article a:hover {
+  background: transparent;
+  color: #1244f9;
+}
+.column-article table {
+  display: block;
+  overflow-x: auto;
+  font-size: 17px;
+}
+.column-article figcaption {
+  font-size: 16px;
+  line-height: 1.6;
+}
+@media (max-width: 767px) {
+  .column-article {
+    font-size: 18px;
+  }
+  .column-article h2 {
+    font-size: 25px;
+  }
+  .column-article h3 {
+    font-size: 22px;
+  }
+  .column-article table {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .slide-bg,
+  .marquee-content,
+  .review-marquee-content {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Editorial selectors are excluded from px-to-rem in postcss.config.js. */
+.column-card {
+  padding-inline: 24px;
+}
+.column-card h1 {
+  font-size: 32px;
+  line-height: 1.35;
+}
+.service-detail {
+  font-size: 18px;
+  line-height: 1.8;
+}
+.service-detail h1 {
+  font-size: clamp(32px, 4vw, 60px);
+}
+.service-detail h2,
+.services-overview h2 {
+  font-size: 28px;
+  line-height: 1.4;
+}
+.service-detail p,
+.service-detail li {
+  font-size: 18px;
+  line-height: 1.8;
+}
+.service-detail nav {
+  font-size: 16px;
+}
+.service-detail a {
+  font-size: 18px;
+}
+.services-overview h3,
+.service-links h2,
+.columns-index h3 {
+  font-size: 24px;
+  line-height: 1.4;
+}
+.services-overview p,
+.service-links li,
+.columns-index p {
+  font-size: 18px;
+  line-height: 1.7;
+}
+.columns-index nav a,
+.columns-index time {
+  font-size: 16px;
+}
+.columns-index nav a {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 16px;
+}
+@media (min-width: 768px) {
+  .column-card {
+    padding-inline: 40px;
+  }
+  .column-card h1 {
+    font-size: 41px;
+  }
+}
+
+.column-article p,
+.column-article blockquote,
+.column-article ul,
+.column-article ol {
+  font-size: inherit;
+}

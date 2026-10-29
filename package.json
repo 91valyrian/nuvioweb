@@ -10,7 +10,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postbuild": "curl -X GET 'https://searchadvisor.naver.com/ping?sitemap=https://nuvio-web.com/sitemap.xml'"
+    "check:content": "node scripts/check-content.mjs",
+    "test:seo": "node --test tests/seo.test.mjs",
+    "check:site": "node scripts/check-site.mjs",
+    "check:availability": "node scripts/check-availability.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.90.1",
@@ -21,7 +24,6 @@
     "gsap": "^3.13.0",
     "next": "^16.0.7",
     "next-mdx-remote": "^6.0.0",
-    "next-sitemap": "^4.2.3",
     "nodemailer": "^7.0.6",
     "normalize.css": "^8.0.1",
     "react": "^19.2.1",

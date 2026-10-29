@@ -1,30 +1,12 @@
+import { SITE_URL, pageMetadata } from "@/lib/site";
 // SEO Metadata 설정
-export async function generateMetadata() {
-  return {
+export function generateMetadata() {
+  return pageMetadata({
     title: "회사 소개 - 전략형 홈페이지 제작 회사 · 웹 스튜디오",
     description:
       "nuvio는 기획부터 디자인·개발·SEO까지 한 팀이 책임지는 전략형 홈페이지 제작 회사입니다. 경청과 인사이트를 바탕으로 브랜드에 맞는 브랜딩 웹사이트를 설계합니다.",
-    keywords: [
-      "홈페이지 제작 회사",
-      "홈페이지 제작 스튜디오",
-      "웹에이전시",
-      "전략형 홈페이지 제작",
-      "브랜딩 홈페이지 회사",
-      "기업 홈페이지 제작 회사",
-      "SEO 특화 홈페이지 제작",
-    ],
-    openGraph: {
-      title: "회사 소개 - 전략형 홈페이지 제작 회사 · 웹 스튜디오",
-      description:
-        "nuvio는 기획부터 디자인·개발·SEO까지 한 팀이 책임지는 전략형 홈페이지 제작 회사입니다. 경청과 인사이트를 바탕으로 브랜드에 맞는 브랜딩 웹사이트를 설계합니다.",
-      url: "https://nuvio-web.com/about",
-      siteName: "nuvio",
-      type: "website",
-    },
-    alternates: {
-      canonical: "https://nuvio-web.com/about",
-    },
-  };
+    path: "/about",
+  });
 }
 
 import SubVisual from "@/components/SubVisual";
@@ -153,17 +135,15 @@ export default function AboutPage() {
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "nuvio",
-              url: process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com",
-              logo:
-                (process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com") +
-                "/icons/apple-touch-icon.png",
+              url: SITE_URL,
+              logo: SITE_URL + "/icons/apple-touch-icon.png",
               // "sameAs": ["https://www.instagram.com/...", "https://www.linkedin.com/company/..."]
             },
             {
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "nuvio",
-              url: process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com",
+              url: SITE_URL,
               inLanguage: "ko",
               publisher: {
                 "@type": "Organization",
@@ -172,7 +152,7 @@ export default function AboutPage() {
               // 검색창이 있다면 SearchAction 추가 가능
               // "potentialAction": {
               //   "@type": "SearchAction",
-              //   "target": (process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com") + "/search?q={query}",
+              //   "target": (SITE_URL) + "/search?q={query}",
               //   "query-input": "required name=query"
               // }
             },
@@ -180,20 +160,15 @@ export default function AboutPage() {
               "@context": "https://schema.org",
               "@type": "AboutPage",
               name: "회사 소개 — 홈페이지 제작 전문 웹사이트 개발사 | nuvio",
-              url:
-                (process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com") +
-                "/about",
+              url: SITE_URL + "/about",
               inLanguage: "ko",
               isPartOf: {
                 "@type": "WebSite",
-                url:
-                  process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com",
+                url: SITE_URL,
               },
               primaryImageOfPage: {
                 "@type": "ImageObject",
-                url:
-                  (process.env.NEXT_PUBLIC_SITE_URL ||
-                    "https://nuvio-web.com") + "/images/about/visual.png",
+                url: SITE_URL + "/images/about/visual.webp",
               },
               description:
                 "nuvio는 브랜드 전략과 디자인, 개발을 아우르는 홈페이지 제작 전문 스튜디오입니다. 다양한 산업군의 웹사이트를 차별화된 전략으로 제작합니다.",
@@ -206,16 +181,13 @@ export default function AboutPage() {
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item:
-                    process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com",
+                  item: SITE_URL,
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "About",
-                  item:
-                    (process.env.NEXT_PUBLIC_SITE_URL ||
-                      "https://nuvio-web.com") + "/about",
+                  item: SITE_URL + "/about",
                 },
               ],
             },

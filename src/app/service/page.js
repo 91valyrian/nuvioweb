@@ -1,29 +1,16 @@
+import ServicesOverview from "@/components/ServicesOverview";
+import { pageMetadata } from "@/lib/site";
 import SubVisual from "@/components/SubVisual";
 import { serviceCards } from "@/data/serviceCards";
 
 // SEO metadata for Service page (minimal override; inherits the rest from layout)
-export async function generateMetadata() {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://nuvio-web.com";
-  return {
-    title: "홈페이지 제작 서비스 - 맞춤형 기획·디자인·SEO·운영", // will become "홈페이지 제작 서비스 | nuvio" via layout template
+export function generateMetadata() {
+  return pageMetadata({
+    title: "홈페이지 제작 서비스 - 맞춤형 기획·디자인·SEO·운영",
     description:
       "브랜드 전략에 맞춘 맞춤형 홈페이지 기획, 브랜딩 디자인, 개발, SEO 최적화, 운영·유지 관리까지 제공합니다. 기업·병원·프랜차이즈 비즈니스에 필요한 웹 전체 구조를 설계합니다.",
-    keywords: [
-      "홈페이지 제작 서비스",
-      "맞춤형 홈페이지 제작",
-      "홈페이지 기획",
-      "홈페이지 디자인",
-      "SEO 홈페이지 제작",
-      "홈페이지 운영 대행",
-      "홈페이지 유지보수 서비스",
-      "기업 홈페이지 제작 서비스",
-      "병원 홈페이지 제작 서비스",
-      "프랜차이즈 홈페이지 제작 서비스",
-    ],
-    alternates: { canonical: `${base}/service` },
-    openGraph: { images: [{ url: "/og/og-default.png" }] },
-    twitter: { images: ["/og/og-default.png"] },
-  };
+    path: "/service",
+  });
 }
 
 export default function ServicePage() {
@@ -279,6 +266,7 @@ export default function ServicePage() {
           ]),
         }}
       />
+      <ServicesOverview />
     </main>
   );
 }

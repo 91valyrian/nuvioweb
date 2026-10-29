@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { stripHtml } from "@/lib/site";
 import Link from "next/link";
 import { useState, useCallback, useRef, useEffect } from "react";
 
@@ -20,7 +21,7 @@ export default function CardList({
   const [cursor, setCursor] = useState({ x: 0, y: 0, show: false });
   const rafRef = useRef(null);
   const [visibleCount, setVisibleCount] = useState(() =>
-    Math.min(initialCount, items.length)
+    Math.min(initialCount, items.length),
   );
   const sentinelRef = useRef(null);
   const listRef = useRef(null);
@@ -63,7 +64,7 @@ export default function CardList({
           });
         }
       },
-      { root: null, rootMargin: observeOffset, threshold: 0.1 }
+      { root: null, rootMargin: observeOffset, threshold: 0.1 },
     );
 
     observer.observe(node);
@@ -76,7 +77,7 @@ export default function CardList({
 
     // Find newly added cards that have data-reveal but are not prepared yet
     const targets = Array.from(
-      root.querySelectorAll("li[data-reveal]:not([data-reveal-ready])")
+      root.querySelectorAll("li[data-reveal]:not([data-reveal-ready])"),
     );
     if (targets.length === 0) return;
 
@@ -108,11 +109,11 @@ export default function CardList({
               el.style.transform = "none";
               io.unobserve(el);
             },
-            Math.max(0, delay * 1000)
+            Math.max(0, delay * 1000),
           );
         });
       },
-      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
     );
 
     targets.forEach((el) => io.observe(el));
@@ -152,7 +153,7 @@ export default function CardList({
             <div className="card-media">
               <Image
                 src={item.thumbnail || "/images/work/placeholder-thum.png"}
-                alt={item.title}
+                alt={stripHtml(item.seoTitle || item.title)}
                 fill
                 sizes="(min-width:768px) 50vw, 100vw"
                 style={{ objectFit: "cover" }}
@@ -177,15 +178,19 @@ export default function CardList({
             <Link
               href={`/work/${item.slug}`}
               className="card-link"
-              aria-label={`${item.title} 상세보기`}
-            />
+              aria-label={`${stripHtml(item.seoTitle || item.title)} 상세보기`}
+            >
+              <span className="sr-only">
+                {stripHtml(item.seoTitle || item.title)} 제작 사례
+              </span>
+            </Link>
             {/* <a
               href={`${item.href}`}
               target="_blank"
               rel="noopener noreferrer"
               title={`${item.title} 새창보기`}
               className="card-link"
-              aria-label={`${item.title} 상세보기`}
+              aria-label={`${stripHtml(item.seoTitle || item.title)} 상세보기`}
             /> */}
           </li>
         ))}

@@ -1,3 +1,4 @@
+import { inquiryAccepted } from "@/lib/inquiry-delivery";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { supabase } from "@/lib/supabase";
@@ -28,7 +29,7 @@ async function sendPushNotification(name) {
       method: "POST",
       headers: {
         Title: Buffer.from("새 문의가 도착했습니다!", "utf-8").toString(
-          "base64"
+          "base64",
         ),
         Priority: "high",
         Tags: "mailbox_with_mail",
@@ -312,7 +313,7 @@ export async function POST(req) {
     const savedInquiry = await saveInquiryToSupabase(payload);
     console.log(
       "[CONTACT] Inquiry save result:",
-      savedInquiry ? "success" : "failed"
+      savedInquiry ? "success" : "failed",
     );
 
     // 메일 발송 - Vercel 서버리스 환경에서는 반드시 await 필요
@@ -355,6 +356,17 @@ export async function POST(req) {
       emailResult = { sent: false, error: mailErr?.message };
     }
 
+    if (!inquiryAccepted(savedInquiry, emailResult.sent)) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            "문의를 저장하지 못했습니다. 잠시 후 다시 시도하거나 전화·카카오톡으로 문의해 주세요.",
+        },
+        { status: 503 },
+      );
+    }
+
     // ntfy 푸시 알림 전송 (비동기, 실패해도 무시)
     const pushSent = await sendPushNotification(name).catch(() => false);
 
@@ -379,7 +391,7 @@ export async function POST(req) {
         error: e?.message || "문의사항 접수 중 오류가 발생했습니다.",
         code: e?.code || null,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
