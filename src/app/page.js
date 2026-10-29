@@ -44,9 +44,9 @@ export default async function Home() {
             items={[...works].sort(
               (a, b) => new Date(b.inputDate) - new Date(a.inputDate),
             )}
-            initialCount={3}
+            initialCount={4}
             step={0}
-            cols="cols-3"
+            cols="cols-4"
             gap="gap-lg"
             className="mt-[30px] md:mt-[50px] fade-up"
           />

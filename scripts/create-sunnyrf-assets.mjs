@@ -161,30 +161,9 @@ await sharp(svg(1720, 6400, bg))
   ])
   .webp({ quality: 88 })
   .toFile(`${out}/portfolio.webp`);
-// List thumbnail: one authentic product image, without UI collages or added copy.
-const product = await sharp(path.join(source, "equipment.png"))
-  .extract({ left: 650, top: 0, width: 1050, height: 2000 })
-  .png()
-  .toBuffer();
-await sharp(product).webp({ quality: 94 }).toFile(`${out}/source-product.webp`);
-const productLayer = await sharp(product)
-  .resize({ height: 1740 })
-  .png()
-  .toBuffer();
-const productMeta = await sharp(productLayer).metadata();
-const thumbBackground = Buffer.from(
-  `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1900"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#dae2df"/><stop offset="1" stop-color="#f2f1ed"/></linearGradient></defs><rect width="1600" height="1900" fill="url(#bg)"/></svg>`,
-);
-await sharp(thumbBackground)
-  .composite([
-    {
-      input: productLayer,
-      left: Math.round((1600 - productMeta.width) / 2),
-      top: 80,
-    },
-  ])
-  .webp({ quality: 90 })
-  .toFile(`${out}/thumb.webp`);
+// The list thumbnail is the user-supplied PNG, preserved without editing.
+// It is intentionally not regenerated from screenshots or the source site's product.
+await fs.access(`${out}/thumb-product.png`);
 let cover =
   rect(0, 0, 1920, 720, "#f5f2eb") +
   rect(0, 0, 740, 720, "#ff6a20") +
@@ -198,7 +177,7 @@ await sharp(svg(1920, 720, cover))
   ])
   .webp({ quality: 89 })
   .toFile(`${out}/cover.webp`);
-for (const name of ["thumb", "thumb-web", "cover", "portfolio"]) {
+for (const name of ["thumb-web", "cover", "portfolio"]) {
   const file = `${out}/${name}.webp`,
     m = await sharp(file).metadata();
   console.log(file, m.width, m.height, (await fs.stat(file)).size);

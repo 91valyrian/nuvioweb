@@ -52,6 +52,8 @@ A plain Korean `title` is supported by the renderer and safer than constructing 
 | `cover.webp` | Wide hero and social preview | 1920×720, keep important content centered |
 | `portfolio.webp` | Complete fresh presentation board with real desktop and mobile views | around 1720px wide; height chosen for readable sections, normally well below 16000px |
 
+When the user supplies a thumbnail, preserve that exact source image and prefer a new filename to avoid stale optimized/browser caches. For a tall transparent product/logo that must remain fully visible, set optional frontmatter `thumbnailFit: "contain"`; other entries retain the default cover crop. Optional `thumbnailBackground` sets the card background for transparent product/logo images; use the client brand color when requested without altering the supplied pixels.
+
 The shape/filename contract does not prescribe the design. Every new case should choose a layout for its source website. Prefer a readable curated board to an extremely tall miniature of every page. Use WebP and balance legibility against download size; inspect text after compression.
 
 If a board needs multiple assets, check that the modal still has a complete useful `portfolio.webp`, and avoid repeating that whole board plus all identical fragments in the detail. Only change shared renderer code if the requested presentation truly needs it; preserve older entries.

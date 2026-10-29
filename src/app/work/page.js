@@ -34,8 +34,8 @@ export default function WorkList() {
             loadMode="button"
             moreLabel="LOAD MORE"
             moreHoverLabel="+"
-            step={3}
-            cols="cols-3"
+            step={4}
+            cols="cols-4"
             gap="gap-lg"
             className="mt-[30px] md:mt-[50px]"
           />

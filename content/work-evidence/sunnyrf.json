@@ -139,7 +139,8 @@
     "/images/work/sunnyrf/thumb-web.webp",
     "/images/work/sunnyrf/cover.webp",
     "/images/work/sunnyrf/portfolio.webp",
-    "/images/work/sunnyrf/source-product.webp"
+    "/images/work/sunnyrf/source-product.webp",
+    "/images/work/sunnyrf/thumb-product.png"
   ],
   "proposedDirection": "오렌지·아이보리 제품 갤러리와 어두운 모바일 비교 섹션. 기존 포트폴리오 이미지는 사용하지 않음.",
   "unknowns": [
@@ -330,10 +331,13 @@
       "desktop-tile-9",
       "desktop-tile-10",
       "desktop-tile-11"
+    ],
+    "thumb-product.png": [
+      "uploadedThumbnail"
     ]
   },
   "entry": "content/work/sunnyrf.mdx",
-  "thumbnailDirection": "사용자 요청: 단일 실제 제품 이미지. UI 콜라주·추가 제목·문구·배지는 제외. 상세 보드에 PC·모바일 화면을 유지.",
+  "thumbnailDirection": "사용자 첨부 PNG 원본만 표시하고 카드 배경은 SUNNY 오렌지 #ff6a20 적용.",
   "sourceAssets": [
     {
       "url": "https://sunnyrf.mycafe24.com/theme/sunny/sections/visual/sunnyPrinciple/equipment.png",
@@ -361,6 +365,15 @@
     "limitations": [
       "Orca capture/viewport commands remain intermittent; rejected repeated-tile images were not published.",
       "Final local mobile-detail screenshot and final crop changes could not be fully visually rechecked because Orca requests timed out and the shared tab changed during inspection. Mobile source captures used in the board were visually verified."
-    ]
-  }
+    ],
+    "latestListUpdate": "PASS: uploaded PNG byte-for-byte identical; homepage 4 cards and four equal desktop columns verified in Orca; object-fit contain; rgb(255,106,32) card background; content check and production build passed."
+  },
+  "uploadedThumbnail": {
+    "file": "/images/work/sunnyrf/thumb-product.png",
+    "sha256": "e89c91aa36b92ef812fa647a4ad744c307747a2452a8c6b2e71c82e68fce5f1c",
+    "source": "User attachment, 2026-10-29",
+    "transformation": "None; original bytes preserved",
+    "rendering": "object-fit: contain; card background #ff6a20 (SUNNY orange), requested by user. PNG bytes unchanged."
+  },
+  "gridUpdate": "홈 최신 4개 표시; 포트폴리오 전체 목록은 데스크톱(1024px 이상) 4열, 태블릿 2열, 모바일 1열. 홈 모바일 가로 스크롤 유지."
 }

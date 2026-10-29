@@ -150,13 +150,16 @@ export default function CardList({
             onMouseMove={handleMove}
           >
             {/* 썸네일 */}
-            <div className="card-media">
+            <div
+              className="card-media"
+              style={item.thumbnailBackground ? { backgroundColor: item.thumbnailBackground } : undefined}
+            >
               <Image
                 src={item.thumbnail || "/images/work/placeholder-thum.png"}
                 alt={stripHtml(item.seoTitle || item.title)}
                 fill
                 sizes="(min-width:768px) 50vw, 100vw"
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: item.thumbnailFit === "contain" ? "contain" : "cover" }}
                 quality={90}
                 priority={false}
               />
