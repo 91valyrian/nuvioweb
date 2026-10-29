@@ -6,6 +6,12 @@ When asked to create, revise, or add a nuvio column (칼럼/컬럼/블로그 글
 
 Preserve established article URLs and publication dates. Prefer improving an existing article when search intent overlaps. Never fabricate metrics, rankings, client work, testimonials or search volume. Use current primary sources for technical claims and distinguish examples from real project results.
 
+## Portfolio writing from a website URL
+
+For nuvio portfolio/제작 사례 creation or updates from a supplied website URL, read `.agents/skills/nuvio-portfolio-editor/SKILL.md` and its format/capture references. Inspect the actual desktop and mobile site, write the existing `content/work/<slug>.mdx` schema, and create new source-specific thumbnail, landing screenshot, cover and portfolio board assets. Existing portfolio files are references for data/integration only: ignore their images and never reuse or imitate those image layouts. Use real captures of the supplied site in a newly designed presentation; never present a cropped desktop capture as a mobile rendering or use AI-redrawn UI as evidence.
+
+Keep portfolio hosting/canonical on `https://nuvio-web.com`; use the supplied client URL in `href`. Preserve established slugs when updating. Only state work scope, project year and results that are supplied or verifiable; identify missing capture/access evidence instead of fabricating a finished case. Preserve the modal's `portfolio.webp` integration.
+
 ## Styling conventions
 
 - Across this project, use `rounded-[9999px]` for circular and pill shapes. Do not use the Tailwind `rounded-full` utility, including responsive or state variants. Keep deliberate finite corner radii on cards and panels.

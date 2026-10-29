@@ -1,0 +1,6 @@
+interface:
+  display_name: "누비오 포트폴리오 작성"
+  short_description: "완성 사이트 URL의 실제 PC·모바일 화면으로 새 레이아웃의 제작 사례 작성"
+  default_prompt: "Use $nuvio-portfolio-editor to inspect this completed website URL on desktop and mobile, write a nuvio portfolio entry and create fresh screenshot-based presentation images in a new layout."
+policy:
+  allow_implicit_invocation: true
