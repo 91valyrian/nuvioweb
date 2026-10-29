@@ -1,0 +1,94 @@
+{
+  "status": "incomplete-capture-blocked",
+  "sourceUrl": "https://www.sunnyrf.com/",
+  "inspectedAt": "2026-10-29T16:57:40+09:00",
+  "tool": "Orca CLI built-in browser",
+  "projectOwnership": "User supplied this website as their completed project.",
+  "pages": [
+    {
+      "url": "https://www.sunnyrf.com/",
+      "title": "써니 SUNNY│쉬엔비",
+      "observed": [
+        "제품 소개",
+        "PULSAR·SUNNY 핸드피스",
+        "기술 설명",
+        "FAQ",
+        "제품문의 링크",
+        "병원찾기 링크"
+      ],
+      "verifiedViewports": [
+        {
+          "width": 636,
+          "height": 1057,
+          "devicePixelRatio": 1
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "devicePixelRatio": 3,
+          "device": "iPhone 12"
+        }
+      ]
+    }
+  ],
+  "captureAttempts": [
+    {
+      "file": "desktop-hero.png",
+      "requestedViewport": {
+        "width": 1440,
+        "height": 900,
+        "devicePixelRatio": 1
+      },
+      "result": "Command accepted but subsequent evaluation reverted to 636×1057; screenshot repeated horizontal regions. Not accepted as desktop evidence."
+    },
+    {
+      "file": "desktop-product.png",
+      "result": "636×1057 screenshot contained mostly blank animated content. Rejected."
+    },
+    {
+      "file": "mobile-hero.png",
+      "verifiedViewport": {
+        "width": 390,
+        "height": 844,
+        "devicePixelRatio": 3
+      },
+      "result": "Screenshot contained repeated tiles and clipped content. Rejected."
+    },
+    {
+      "file": "mobile-full.png",
+      "result": "Full-page screenshot repeated the same top regions down the image. Rejected."
+    }
+  ],
+  "rawCaptureWorkspace": "/tmp/nuvio-sunnyrf-captures",
+  "acceptedCaptures": [],
+  "publicAssetsCreated": [],
+  "proposedDirection": "브랜드의 오렌지색을 중심으로 밝은 제품 소개 패널과 어두운 기술 설명 패널을 연결하는 갤러리. 실제 PC 화면과 모바일 화면을 별도로 배치하며 정상 캡처 확보 후 확정.",
+  "unknowns": [
+    "제작 연도",
+    "구체적인 기획·디자인·개발 역할",
+    "구현 기술",
+    "검색 및 전환 성과",
+    "제품 효능과 인증의 독립적 검증"
+  ],
+  "remaining": [
+    "정상적인 데스크톱 렌더링과 캡처",
+    "타일 반복 없는 모바일 캡처와 전체 스크롤 검수",
+    "썸네일·랜딩 이미지·커버·portfolio.webp 제작",
+    "MDX 등록",
+    "콘텐츠·빌드 검증 및 실제 상세·목록·모달 UI 확인",
+    "완료 후 dev 커밋·푸시"
+  ],
+  "publication": "No work MDX was registered; this incomplete preparation is not included in the public portfolio or sitemap.",
+  "scope": {
+    "included": [
+      "https://www.sunnyrf.com/"
+    ],
+    "instruction": "사용자 지시: SunnyRF 단일 페이지만 포트폴리오에 적용. 외부 링크의 도착 페이지는 추가 접속·캡처·제작 범위에서 제외."
+  },
+  "excludedPriorInspection": [
+    {
+      "url": "https://www.shenb.co.kr/contactus/inquiry.php",
+      "reason": "범위 정정 전에 읽기만 한 외부 문의 페이지. 포트폴리오 내용 및 이미지 근거로 사용하지 않음."
+    }
+  ]
+}
