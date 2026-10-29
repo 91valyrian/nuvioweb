@@ -1,5 +1,5 @@
 {
-  "status": "incomplete-capture-blocked",
+  "status": "implemented-and-validated",
   "sourceUrl": "https://www.sunnyrf.com/",
   "inspectedAt": "2026-10-29T16:57:40+09:00",
   "tool": "Orca CLI built-in browser",
@@ -60,9 +60,88 @@
     }
   ],
   "rawCaptureWorkspace": "/tmp/nuvio-sunnyrf-captures",
-  "acceptedCaptures": [],
-  "publicAssetsCreated": [],
-  "proposedDirection": "브랜드의 오렌지색을 중심으로 밝은 제품 소개 패널과 어두운 기술 설명 패널을 연결하는 갤러리. 실제 PC 화면과 모바일 화면을 별도로 배치하며 정상 캡처 확보 후 확정.",
+  "acceptedCaptures": [
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 900,
+      "title": "써니 SUNNY│쉬엔비",
+      "capturedAt": "2026-10-29T08:05:01.661Z",
+      "file": "desktop-product.png",
+      "sha256": "52315237683c1790f915fdb377ebdd3db615862b30dc531088b9e8cb36e686bd",
+      "publishedScreen": "/images/work/sunnyrf/screens/desktop-product.webp"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 1800,
+      "title": "써니 SUNNY│쉬엔비",
+      "capturedAt": "2026-10-29T08:05:03.631Z",
+      "file": "desktop-handpiece.png",
+      "sha256": "457a49ffc9bcb37971584ffa849cb41822fe154c04ff33b04a881a1bdcc7070c",
+      "publishedScreen": "/images/work/sunnyrf/screens/desktop-handpiece.webp"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 5040,
+      "title": "써니 SUNNY│쉬엔비",
+      "capturedAt": "2026-10-29T08:05:05.345Z",
+      "file": "desktop-technology.png",
+      "sha256": "a7bd98248717a02ef7d901cfe4e2d4acfcd6e4c888be09c9ef432f862a9ee4c6",
+      "publishedScreen": "/images/work/sunnyrf/screens/desktop-technology.webp"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 390,
+      "height": 844,
+      "devicePixelRatio": 3,
+      "scrollY": 230,
+      "title": "써니 SUNNY│쉬엔비",
+      "capturedAt": "2026-10-29T08:04:49.438Z",
+      "file": "mobile-product.png",
+      "sha256": "c14c266b3c11e7e0c8c0294b794bc24bdcb2a066c36405505fdeaa7798bfcc2b",
+      "publishedScreen": "/images/work/sunnyrf/screens/mobile-product.webp"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 390,
+      "height": 844,
+      "devicePixelRatio": 3,
+      "scrollY": 1000,
+      "title": "써니 SUNNY│쉬엔비",
+      "capturedAt": "2026-10-29T08:06:20.277Z",
+      "file": "mobile-handpiece-final.png",
+      "sha256": "7eea6652a7e98d21d0bb25827d6f6d2ba56b9f7e17740803c909694aabefd796",
+      "publishedScreen": "/images/work/sunnyrf/screens/mobile-handpiece-final.webp"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 390,
+      "height": 844,
+      "devicePixelRatio": 3,
+      "scrollY": 3744,
+      "title": "써니 SUNNY│쉬엔비",
+      "capturedAt": "2026-10-29T08:06:22.633Z",
+      "file": "mobile-mode-final.png",
+      "sha256": "ece54a16ece64114be231d023939dc37b254aba726dc6b57f20dd31b0a9fdea2",
+      "publishedScreen": "/images/work/sunnyrf/screens/mobile-mode-final.webp"
+    }
+  ],
+  "publicAssetsCreated": [
+    "/images/work/sunnyrf/thumb.webp",
+    "/images/work/sunnyrf/thumb-web.webp",
+    "/images/work/sunnyrf/cover.webp",
+    "/images/work/sunnyrf/portfolio.webp",
+    "/images/work/sunnyrf/source-product.webp"
+  ],
+  "proposedDirection": "오렌지·아이보리 제품 갤러리와 어두운 모바일 비교 섹션. 기존 포트폴리오 이미지는 사용하지 않음.",
   "unknowns": [
     "제작 연도",
     "구체적인 기획·디자인·개발 역할",
@@ -70,15 +149,8 @@
     "검색 및 전환 성과",
     "제품 효능과 인증의 독립적 검증"
   ],
-  "remaining": [
-    "정상적인 데스크톱 렌더링과 캡처",
-    "타일 반복 없는 모바일 캡처와 전체 스크롤 검수",
-    "썸네일·랜딩 이미지·커버·portfolio.webp 제작",
-    "MDX 등록",
-    "콘텐츠·빌드 검증 및 실제 상세·목록·모달 UI 확인",
-    "완료 후 dev 커밋·푸시"
-  ],
-  "publication": "No work MDX was registered; this incomplete preparation is not included in the public portfolio or sitemap.",
+  "remaining": [],
+  "publication": "Repository implementation and validation complete. No production deployment or production UI verification performed.",
   "scope": {
     "included": [
       "https://www.sunnyrf.com/"
@@ -90,5 +162,205 @@
       "url": "https://www.shenb.co.kr/contactus/inquiry.php",
       "reason": "범위 정정 전에 읽기만 한 외부 문의 페이지. 포트폴리오 내용 및 이미지 근거로 사용하지 않음."
     }
-  ]
+  ],
+  "captureResolution": {
+    "observedProblem": "Viewport overrides were sometimes reset by host layout; captures taken before compositor repaint showed repeated or stale regions. Native full-screenshot continued to repeat viewport content.",
+    "workflow": "Verify effective viewport after two animation frames; wait for visible animation settling, capture selected viewports, visually reject blank or tiled images. For the long desktop image use sequential observed scroll positions with overlaps removed.",
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1
+    },
+    "mobile": {
+      "device": "iPhone 12",
+      "width": 390,
+      "height": 844,
+      "devicePixelRatio": 3
+    },
+    "longCapture": "12 screenshots; real measured scrollY; crop only scrollbar/overlap. Floating quick menu hidden temporarily for this long image only, then restored. Other screenshots include the original quick menu.",
+    "sourcePageUnchanged": "No source UI redrawing or content replacement; no external destination used."
+  },
+  "longCaptureTiles": [
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 0,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:37.756Z",
+      "file": "desktop-tile-0.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 850,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:39.479Z",
+      "file": "desktop-tile-1.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 1700,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:41.307Z",
+      "file": "desktop-tile-2.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 2550,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:42.858Z",
+      "file": "desktop-tile-3.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 3400,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:44.430Z",
+      "file": "desktop-tile-4.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 4250,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:45.972Z",
+      "file": "desktop-tile-5.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 5100,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:47.563Z",
+      "file": "desktop-tile-6.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 5950,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:49.119Z",
+      "file": "desktop-tile-7.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 6800,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:50.607Z",
+      "file": "desktop-tile-8.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 7650,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:52.078Z",
+      "file": "desktop-tile-9.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 8500,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:53.591Z",
+      "file": "desktop-tile-10.png"
+    },
+    {
+      "url": "https://www.sunnyrf.com/",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "scrollY": 9177,
+      "totalHeight": 10077,
+      "capturedAt": "2026-10-29T08:07:55.568Z",
+      "file": "desktop-tile-11.png"
+    }
+  ],
+  "assetProvenance": {
+    "thumb.webp": [
+      "sourceAssets[0]"
+    ],
+    "cover.webp": [
+      "desktop-product"
+    ],
+    "portfolio.webp": [
+      "desktop-product",
+      "desktop-handpiece",
+      "desktop-technology",
+      "mobile-product",
+      "mobile-handpiece-final",
+      "mobile-mode-final"
+    ],
+    "thumb-web.webp": [
+      "desktop-tile-0",
+      "desktop-tile-1",
+      "desktop-tile-2",
+      "desktop-tile-3",
+      "desktop-tile-4",
+      "desktop-tile-5",
+      "desktop-tile-6",
+      "desktop-tile-7",
+      "desktop-tile-8",
+      "desktop-tile-9",
+      "desktop-tile-10",
+      "desktop-tile-11"
+    ]
+  },
+  "entry": "content/work/sunnyrf.mdx",
+  "thumbnailDirection": "사용자 요청: 단일 실제 제품 이미지. UI 콜라주·추가 제목·문구·배지는 제외. 상세 보드에 PC·모바일 화면을 유지.",
+  "sourceAssets": [
+    {
+      "url": "https://sunnyrf.mycafe24.com/theme/sunny/sections/visual/sunnyPrinciple/equipment.png",
+      "observedOn": "https://www.sunnyrf.com/",
+      "element": "Sunny 장비 이미지",
+      "originalWidth": 2068,
+      "originalHeight": 2000,
+      "sha256": "25ee66529af23010c1a82256182e3511618ebec296bc7f1a5ffd4fe703ca82d4",
+      "usage": "제품의 실제 PNG 픽셀을 배경에 배치. 빈 좌우 여백을 크롭하고 종횡비 유지. UI나 제품 재생성 없음.",
+      "publishedSource": "/images/work/sunnyrf/source-product.webp"
+    }
+  ],
+  "validation": {
+    "content": "PASS: 46 columns, 8 portfolios, 6 services",
+    "seoRegression": "PASS: 8 tests",
+    "build": "PASS: 79 generated pages",
+    "site": "PASS: 71 sitemap URLs, canonical, JSON-LD, pagination, 404, redirects, noindex, RSS dates",
+    "skill": "PASS: quick_validate.py",
+    "caseIntegration": "PASS: /api/works/sunnyrf returns source href and portfolio.webp; thumbnail, thumbnail2, cover, portfolioImage return 200 with expected dimensions; optimized thumbnail returns the new product image.",
+    "visualReview": [
+      "All selected source PC/mobile captures and final assets inspected.",
+      "Desktop work detail and landing modal were visually inspected; list crop exposed the earlier collage issue and user requested replacement.",
+      "Final simple product thumbnail inspected as an image; final optimized thumbnail verified against stale orange artwork."
+    ],
+    "limitations": [
+      "Orca capture/viewport commands remain intermittent; rejected repeated-tile images were not published.",
+      "Final local mobile-detail screenshot and final crop changes could not be fully visually rechecked because Orca requests timed out and the shared tab changed during inspection. Mobile source captures used in the board were visually verified."
+    ]
+  }
 }

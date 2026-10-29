@@ -1,11 +1,26 @@
 # Observe the site; design a new presentation
 
+## Orca browser workflow
+
+In an Orca session, load `orca-cli` and its version-matched browser reference first. Resolve the executable as that skill directs; `ORCA` below is a placeholder for that executable.
+
+1. Create a source tab with `ORCA tab create --url <source-url> --json`. Keep the returned `browserPageId` and pass it as `--page <browserPageId>` on later commands so inspection stays on the intended page.
+2. Use `ORCA snapshot --page <browserPageId> --json` to read the page and obtain current element refs. Inspect navigation with documented `click`, `scroll` and other interaction commands. Re-snapshot after navigation, tab switches or page-changing clicks; never reuse stale refs.
+3. Use `ORCA screenshot` or `ORCA full-screenshot` with the page id to capture real source pixels. Consult the selected CLI's `--help` or documented `exec` help for viewport/device controls and capture output options before using them. Set a genuine desktop/mobile viewport, then verify the rendered dimensions with documented page evaluation (for example, `window.innerWidth`, `window.innerHeight` and `window.devicePixelRatio`) and record them with the capture provenance. A CSS resize or screenshot crop alone is not device emulation.
+4. Verify control from an observed effect, such as a changed scroll position or a visible navigation state, rather than relying only on command acceptance. Use the same workflow for the local portfolio preview.
+
+If Orca reports a connection error, follow the `orca-cli` recovery instructions and report the exact failing command/error if recovery fails. A failure from Chrome or the ChatGPT browser tool does not establish that Orca's built-in browser is unavailable. Do not bypass a site access denial; if genuine mobile rendering or capture remains unavailable, apply the evidence limitations below.
+
 ## Desktop and mobile evidence
 
 1. Open the provided URL and record the actual final URL. Inspect the homepage plus the pages that explain the business and its main conversion path. Do not silently replace the supplied site with an unrelated search result. Follow the available browser tool's normal access rules.
 2. Capture a genuine desktop viewport, commonly 1440×900 or 1920×1080, and a genuine mobile viewport, commonly 390×844 or 375×812. These are starting choices, not invented capture metadata. Record the dimensions actually supported/used. Inspect any important navigation difference, stacking, image crop, calls to action and forms on mobile without submitting a live form.
 3. Scroll through the public pages so lazy-loaded sections and fonts settle. Capture meaningful sections/full-page views using documented tool support. Avoid capturing skeletons or a hero that failed to load. An open mobile menu can be a useful separate detail; it must not obscure the only main mobile screenshot.
 4. Use documented viewport/device emulation when the tool provides it. If no authorized tool can render at a real mobile width, report the limitation and request the missing capture only if needed to complete the portfolio. A narrow crop of a desktop capture does not count as responsive mobile evidence. Do not bypass denied browser access through another surface.
+
+## List thumbnail
+
+Use one source-specific product/brand photograph or the client's actual logo with a quiet background. Match the established grid's simple image-led treatment. Do not place a desktop/mobile collage, browser/device frames, added headings, slogans, labels or badges in `thumb.webp`. Real logo lettering and text already printed on a product are allowed. Compose detailed screenshot layouts for the case presentation instead. Preview the actual card crop so the focal product/logo stays visible.
 
 ## A site-specific art direction
 

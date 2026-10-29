@@ -170,7 +170,8 @@ export default function CardList({
               />
               {/* <p className="card-desc line-clamp-2">{item.summary}</p> */}
               <p className="card-meta">
-                {item.client} · {item.year}
+                {item.client}
+                {item.year ? ` · ${item.year}` : ""}
               </p>
             </div>
 

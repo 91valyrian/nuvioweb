@@ -11,7 +11,9 @@ Locate the repository from the current working directory or this skill's resolve
 
 ## Inspect the supplied website
 
-Treat the user's supplied URL as the source of the case study. Use available authorized browser tools to inspect the public site, its desktop navigation and meaningful subpages, and its actual responsive mobile rendering. Record the final source URL, inspection date, viewport dimensions and which pages/screens were actually observed. Use the browser tool's documented capture/viewport capabilities; do not invent APIs or bypass an access denial.
+Treat the user's supplied URL as the source of the case study. In an Orca session, use Orca's built-in browser through the `orca-cli` skill for site inspection, interaction, screenshots and local UI previews. Load that skill and its version-matched `references/browser.md` before driving a tab; follow its executable resolution and documented commands. Do not default to Chrome or the ChatGPT in-app browser in this environment. Honor an explicitly requested browser instead.
+
+Inspect the public site, its desktop navigation and meaningful subpages, and its actual responsive mobile rendering. Follow the Orca workflow in [references/capture-and-layout.md](references/capture-and-layout.md). Outside Orca, use available authorized browser tools. Record the final source URL, inspection date, viewport dimensions and which pages/screens were actually observed. Use documented capture/viewport capabilities; do not invent APIs or bypass an access denial.
 
 Read what the business offers, identify its public brand name, audience, main information structure and visible inquiry/reservation path. Describe observable design and usability choices. A user saying they made the site establishes it as their project, but does not establish a particular tech stack, project year, SEO implementation, division of work or measured results. Use supplied facts; omit unconfirmed optional details, and ask only if a missing fact materially blocks the requested entry.
 
@@ -20,6 +22,8 @@ A URL or site summary alone is insufficient evidence for a finished visual portf
 ## Keep the format; create new visuals
 
 Inspect two existing work MDX files and the current renderers to learn fields, filenames and integration only. **Ignore all existing portfolio images as visual references and source material.** Do not open or reuse them to imitate their layouts. Do not recolor, crop, relabel or paste a previous project's portfolio image into the new work.
+
+Keep the list thumbnail visually consistent with nuvio's portfolio grid: use one authentic product/brand photograph or the client's logo on a restrained background. Do not turn the thumbnail into an article cover or presentation board: no PC/mobile screenshot collage, device montage, added headline, slogan, badge or explanatory copy. Existing lettering within the genuine logo/product image is fine. Reserve the detailed screen composition for the cover and `portfolio.webp`; validate the list card's actual crop separately.
 
 Build a fresh visual direction from the supplied website: its colors, type, composition, content density and responsive behavior. Create real screenshots of that site, then arrange them into a new portfolio presentation: a suitable cover, thumbnail, desktop view, mobile view, and selected subpage/detail views when they communicate something useful. Follow the capture/layout reference. A new presentation layout is expected; a single unchanged full-page screenshot is not the completed portfolio.
 
@@ -37,6 +41,6 @@ Respect the MDX image extraction and `portfolio.webp` API contract in the format
 
 Inspect the finished image files at useful scale: no stretched UI, clipped headlines, hidden mobile navigation, accidental duplicated screens, fabricated charts or unreadable all-page miniatures. Confirm that the visible mobile layout actually came from a mobile viewport. Save an evidence manifest without credentials or private data.
 
-Run `npm run check:content` and `npm run build`, plus appropriate site checks when changing a renderer. Check the work list card, portfolio detail, cover crop, landing thumbnail and modal image, sitemap/RSS, metadata and related service links. Preview desktop/mobile UI with available authorized browser tools; report any unavailable visual checks honestly.
+Run `npm run check:content` and `npm run build`, plus appropriate site checks when changing a renderer. Check the work list card, portfolio detail, cover crop, landing thumbnail and modal image, sitemap/RSS, metadata and related service links. In Orca, preview desktop/mobile UI through Orca CLI using the same inspection and capture workflow; outside Orca, use available authorized browser tools. Report any unavailable visual checks honestly.
 
 Report the entry path, asset folder, inspected URL/viewports, visual direction, confirmed vs omitted facts, checks and deployment status. A URL-to-portfolio request authorizes local creation and preview, not automatically a live contact submission or production deployment. Preserve explicit authorization already given in the conversation.

@@ -820,9 +820,11 @@ export default function LandingPage() {
                               {work.service[0]}
                             </span>
                           )}
-                          <span className="inline-flex items-center h-7 px-3 rounded-md bg-main-1 text-white text-[16px] font-semibold">
-                            {work.year || "신규제작"}
-                          </span>
+                          {work.year && (
+                            <span className="inline-flex items-center h-7 px-3 rounded-md bg-main-1 text-white text-[16px] font-semibold">
+                              {work.year}
+                            </span>
+                          )}
                         </div>
                         <h3 className="mt-4 text-white text-[24px] md:text-[28px] font-semibold leading-tight">
                           {work.client ||
@@ -860,12 +862,13 @@ export default function LandingPage() {
         ) : workDetail ? (
           <div className="space-y-6">
             {workDetail.cover && (
-              <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+              <div className="relative w-full rounded-lg overflow-hidden">
                 <Image
                   src={workDetail.cover}
                   alt={workDetail.seoTitle}
-                  fill
-                  className="object-cover"
+                  width={1920}
+                  height={720}
+                  className="w-full h-auto"
                   sizes="(min-width: 920px) 920px, 92vw"
                 />
               </div>
@@ -879,14 +882,16 @@ export default function LandingPage() {
                   {workDetail.client}
                 </p>
               </div>
-              <div>
-                <p className="text-white/60 text-[20px] md:text-[14px] mb-2">
-                  Year
-                </p>
-                <p className="text-white text-[18px] md:text-[18px] font-semibold">
-                  {workDetail.year || "신규제작"}
-                </p>
-              </div>
+              {workDetail.year && (
+                <div>
+                  <p className="text-white/60 text-[20px] md:text-[14px] mb-2">
+                    Year
+                  </p>
+                  <p className="text-white text-[18px] md:text-[18px] font-semibold">
+                    {workDetail.year}
+                  </p>
+                </div>
+              )}
               {workDetail.service?.length > 0 && (
                 <div className="md:col-span-2">
                   <p className="text-white/60 text-[20px] md:text-[14px] mb-2">

@@ -47,7 +47,7 @@ A plain Korean `title` is supported by the renderer and safer than constructing 
 
 | File | Role | Starting dimensions, adapt after preview |
 |---|---|---|
-| `thumb.webp` | Work/home list identity with crop-safe composition | portrait around 1600×1900 |
+| `thumb.webp` | Work/home list: single authentic product/brand image or logo, crop-safe; no UI collage or added copy | portrait around 1600×1900 |
 | `thumb-web.webp` | Landing card desktop scrolling view | around 1240px wide, proportional page height |
 | `cover.webp` | Wide hero and social preview | 1920×720, keep important content centered |
 | `portfolio.webp` | Complete fresh presentation board with real desktop and mobile views | around 1720px wide; height chosen for readable sections, normally well below 16000px |

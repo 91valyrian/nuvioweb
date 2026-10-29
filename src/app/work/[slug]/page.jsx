@@ -83,7 +83,8 @@ export default async function WorkDetail({ params }) {
             dangerouslySetInnerHTML={{ __html: work.title }}
           />
           <p className="text-[28px] md:text-[20px] mt-2 text-neutral-300">
-            {work.client} · {work.year}
+            {work.client}
+                {work.year ? ` · ${work.year}` : ""}
           </p>
         </header>
       </div>
@@ -95,7 +96,7 @@ export default async function WorkDetail({ params }) {
             alt={"Cover image for " + work.seoTitle}
             width={1920}
             height={720}
-            className="object-cover mx-auto w-full h-[720px] max-w-[1920px]"
+            className="object-cover mx-auto w-full h-auto md:h-[720px] max-w-[1920px]"
             sizes="100vw"
             priority
           />
