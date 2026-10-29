@@ -20,11 +20,15 @@ If Orca reports a connection error, follow the `orca-cli` recovery instructions 
 
 ## List thumbnail
 
-Use one source-specific product/brand photograph or the client's actual logo with a quiet background. Match the established grid's simple image-led treatment. Do not place a desktop/mobile collage, browser/device frames, added headings, slogans, labels or badges in `thumb.webp`. Real logo lettering and text already printed on a product are allowed. Compose detailed screenshot layouts for the case presentation instead. Preview the actual card crop so the focal product/logo stays visible.
+Inspect 2–4 representative existing list thumbnails for style only: photographic versus illustrative treatment, contrast, lighting, physical texture, focal-subject scale and crop. Keep their pixels and branding out of the new image. Existing detailed portfolio boards are not visual references.
+
+Use the imagegen skill to create one new image that connects the supplied site's actual industry and brand colors with that observed grid style. Prefer a coherent editorial photograph/concept to a flat product-on-color poster when the grid is photographic. A fitting symbolic subject or setting is allowed; the actual product need not appear. Avoid UI/device collages, added headings, slogans, badges, invented logos or fake result graphics. Record the image as an AI-generated concept, never an actual client location/product photograph or site evidence. If the user specifically chooses their own photo/logo instead, honor that choice.
+
+Save the prompt and generation provenance. Preview the image in the real desktop/mobile card crop and choose a restrained crop-safe composition; optimize the asset without changing its art direction through deterministic redraws. Keep generated concept pixels out of the authentic screen areas of `portfolio.webp`.
 
 ## A site-specific art direction
 
-Read the new website's visual language, not the old portfolio images. Choose a background palette, spacing rhythm, hierarchy and composition that frame this project's screens. Keep the website UI exactly as observed while varying its surrounding presentation.
+For the detailed case board, read the new website's visual language rather than old case-board images; use the thumbnail references only for list consistency. Choose a background palette, spacing rhythm, hierarchy and composition that frame this project's screens. Keep the website UI exactly as observed while varying its surrounding presentation.
 
 Useful directions include:
 

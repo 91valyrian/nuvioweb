@@ -161,9 +161,9 @@ await sharp(svg(1720, 6400, bg))
   ])
   .webp({ quality: 88 })
   .toFile(`${out}/portfolio.webp`);
-// The list thumbnail is the user-supplied PNG, preserved without editing.
-// It is intentionally not regenerated from screenshots or the source site's product.
-await fs.access(`${out}/thumb-product.png`);
+// The selected AI thumbnail is created through imagegen and stored independently.
+// Rebuilding authentic screenshot boards must not replace the approved artwork.
+await fs.access(`${out}/thumb-editorial-v1.webp`);
 let cover =
   rect(0, 0, 1920, 720, "#f5f2eb") +
   rect(0, 0, 740, 720, "#ff6a20") +

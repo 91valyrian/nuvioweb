@@ -1,0 +1,13 @@
+{
+  "tool": "built-in image_gen",
+  "useCase": "photorealistic-natural",
+  "prompt": "Use case: photorealistic-natural.\nAsset type: a single premium editorial photograph for a Korean web design portfolio thumbnail, portrait composition about 1600x1900.\nCreate a new conceptual image for SUNNY, a medical-aesthetic radio-frequency device brand. Match a portfolio grid of understated real photographic subjects: a textured beauty salon entrance, a bronze justice statue close-up, food photographed on dark stone. Match their restrained contrast, physical texture, full-bleed composition and professional photographic mood, without copying any reference scene.\nSubject: a close architectural detail of an elegant ivory upholstered aesthetic-treatment chair in a contemporary clinical treatment space, with a brushed stainless-steel articulated examination light partly visible. A warm burnt-orange/amber fluted-glass partition and dark warm-gray wall form the background. The chair is the clear central subject, filling much of the frame; crop confidently like editorial interior photography. Orange is a controlled brand accent, not a flat orange poster.\nLighting: soft side daylight, nuanced shadows, realistic upholstery stitching, brushed-metal highlights, subtle film texture; warm neutral colors, muted sophisticated orange, no overly glossy CGI.\nComposition: one coherent photographic scene with a crop-safe central focal area that still works when vertically cropped to a nearly square card. No border, no frame, no collage, no phones or computers, no website UI, no typography, no captions, no logos, no readable equipment screens, no people, no medical procedure, no before/after. It is an illustrative brand-concept image, not an actual client location or actual product photograph.",
+  "referenceThumbnails": [
+    "parkjunbeautylab",
+    "kim-gunhyo-law-office",
+    "hanzzim"
+  ],
+  "generatedSource": "/Users/lhs/.codex/generated_images/01a1863f-07b0-73f2-b739-495d0c900702/exec-88e442c9-c6d5-42b8-970f-2ae7644bcd0f.png",
+  "output": "/images/work/sunnyrf/thumb-editorial-v1.webp",
+  "note": "AI-generated editorial brand concept. Not an actual client location, actual product or captured website UI."
+}

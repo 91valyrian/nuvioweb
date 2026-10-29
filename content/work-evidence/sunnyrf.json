@@ -140,7 +140,8 @@
     "/images/work/sunnyrf/cover.webp",
     "/images/work/sunnyrf/portfolio.webp",
     "/images/work/sunnyrf/source-product.webp",
-    "/images/work/sunnyrf/thumb-product.png"
+    "/images/work/sunnyrf/thumb-product.png",
+    "/images/work/sunnyrf/thumb-editorial-v1.webp"
   ],
   "proposedDirection": "오렌지·아이보리 제품 갤러리와 어두운 모바일 비교 섹션. 기존 포트폴리오 이미지는 사용하지 않음.",
   "unknowns": [
@@ -151,7 +152,7 @@
     "제품 효능과 인증의 독립적 검증"
   ],
   "remaining": [],
-  "publication": "Repository implementation and validation complete. No production deployment or production UI verification performed.",
+  "publication": "Dev implementation prepared for clean release validation before authorized main push.",
   "scope": {
     "included": [
       "https://www.sunnyrf.com/"
@@ -334,10 +335,13 @@
     ],
     "thumb-product.png": [
       "uploadedThumbnail"
+    ],
+    "thumb-editorial-v1.webp": [
+      "generatedThumbnail"
     ]
   },
   "entry": "content/work/sunnyrf.mdx",
-  "thumbnailDirection": "사용자 첨부 PNG 원본만 표시하고 카드 배경은 SUNNY 오렌지 #ff6a20 적용.",
+  "thumbnailDirection": "기존 포트폴리오의 사진형 업종 이미지 스타일에 맞춘 AI 에디토리얼 콘셉트: 아이보리 진료용 의자, 오렌지 유리, 금속 조명. 실제 고객 장소나 제품 사진으로 주장하지 않음.",
   "sourceAssets": [
     {
       "url": "https://sunnyrf.mycafe24.com/theme/sunny/sections/visual/sunnyPrinciple/equipment.png",
@@ -366,14 +370,33 @@
       "Orca capture/viewport commands remain intermittent; rejected repeated-tile images were not published.",
       "Final local mobile-detail screenshot and final crop changes could not be fully visually rechecked because Orca requests timed out and the shared tab changed during inspection. Mobile source captures used in the board were visually verified."
     ],
-    "latestListUpdate": "PASS: uploaded PNG byte-for-byte identical; homepage 4 cards and four equal desktop columns verified in Orca; object-fit contain; rgb(255,106,32) card background; content check and production build passed."
+    "latestListUpdate": "Thumbnail updated to AI editorial concept; four-card layout retained. Release validation performed separately on committed files."
   },
   "uploadedThumbnail": {
     "file": "/images/work/sunnyrf/thumb-product.png",
     "sha256": "e89c91aa36b92ef812fa647a4ad744c307747a2452a8c6b2e71c82e68fce5f1c",
     "source": "User attachment, 2026-10-29",
     "transformation": "None; original bytes preserved",
-    "rendering": "object-fit: contain; card background #ff6a20 (SUNNY orange), requested by user. PNG bytes unchanged."
+    "rendering": "object-fit: contain; card background #ff6a20 (SUNNY orange), requested by user. PNG bytes unchanged.",
+    "status": "Superseded by explicit user request for an AI thumbnail; original upload retained unchanged."
   },
-  "gridUpdate": "홈 최신 4개 표시; 포트폴리오 전체 목록은 데스크톱(1024px 이상) 4열, 태블릿 2열, 모바일 1열. 홈 모바일 가로 스크롤 유지."
+  "gridUpdate": "홈 최신 4개 표시; 포트폴리오 전체 목록은 데스크톱(1024px 이상) 4열, 태블릿 2열, 모바일 1열. 홈 모바일 가로 스크롤 유지.",
+  "generatedThumbnail": {
+    "file": "/images/work/sunnyrf/thumb-editorial-v1.webp",
+    "promptFile": "content/work-evidence/sunnyrf-thumbnail-prompt.json",
+    "tool": "built-in image_gen",
+    "conceptOnly": true,
+    "referenceThumbnails": [
+      "parkjunbeautylab",
+      "kim-gunhyo-law-office",
+      "hanzzim"
+    ],
+    "styleObservations": [
+      "사진 중심의 단일 장면",
+      "업종이 드러나는 중심 소재",
+      "물리적 질감과 자연스러운 그림자",
+      "과장된 포스터 문구나 UI 콜라주 없음"
+    ],
+    "referencesUsage": "기존 썸네일을 스타일 판단에만 사용. 기존 픽셀 재사용 없음."
+  }
 }

@@ -156,7 +156,7 @@ export default function CardList({
             >
               <Image
                 src={item.thumbnail || "/images/work/placeholder-thum.png"}
-                alt={stripHtml(item.seoTitle || item.title)}
+                alt={item.thumbnailAlt || stripHtml(item.seoTitle || item.title)}
                 fill
                 sizes="(min-width:768px) 50vw, 100vw"
                 style={{ objectFit: item.thumbnailFit === "contain" ? "contain" : "cover" }}
