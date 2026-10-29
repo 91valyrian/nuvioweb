@@ -1,0 +1,49 @@
+.work-detail-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+.work-detail-content.work-detail-intro {
+  padding-block: 48px;
+}
+.work-detail-content.work-detail-copy {
+  max-width: 1000px;
+  padding-block: 36px;
+}
+.work-detail-content .work-detail-overview {
+  font-size: 20px;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+.work-detail-content.work-detail-copy h2 {
+  font-size: 28px;
+  line-height: 1.4;
+}
+.work-detail-content.work-detail-copy p {
+  font-size: 18px;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+.work-detail-content.work-detail-images img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 767px) {
+  .work-detail-content {
+    padding-inline: 20px;
+  }
+  .work-detail-content.work-detail-intro {
+    padding-block: 32px;
+  }
+  .work-detail-content.work-detail-copy {
+    padding-block: 28px;
+  }
+  .work-detail-content .work-detail-overview {
+    font-size: 18px;
+  }
+  .work-detail-content.work-detail-copy h2 {
+    font-size: 24px;
+  }
+}

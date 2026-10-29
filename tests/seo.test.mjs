@@ -118,3 +118,18 @@ test("editorial type keeps physical size while legacy layout still scales", asyn
   assert(result.css.includes(".service-detail p{font-size:18px}"));
   assert(result.css.includes(".legacy{font-size:1.25rem}"));
 });
+
+test("portfolio body width remains capped in physical pixels after PostCSS", async () => {
+  const { readFileSync } = await import("node:fs");
+  const { default: postcss } = await import("postcss");
+  const { default: pxtorem } = await import("postcss-pxtorem");
+  const { default: config } = await import("../postcss.config.js");
+  const css = readFileSync("src/components/work/work-detail.css", "utf8");
+  const result = await postcss([
+    pxtorem(config.plugins["postcss-pxtorem"]),
+  ]).process(css, { from: undefined });
+  assert.match(result.css, /max-width:\s*1200px/);
+  assert.match(result.css, /max-width:\s*1000px/);
+  assert.match(result.css, /font-size:\s*20px/);
+  assert(!result.css.includes("75rem"));
+});

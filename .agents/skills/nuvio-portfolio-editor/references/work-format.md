@@ -50,7 +50,7 @@ A plain Korean `title` is supported by the renderer and safer than constructing 
 | `thumb.webp` | Work/home list: AI-generated industry/brand concept matching existing thumbnails; or user-selected photo/logo. Crop-safe, no UI collage or added copy | portrait around 1600×1900 |
 | `thumb-web.webp` | Landing card desktop scrolling view | around 1240px wide, proportional page height |
 | `cover.webp` | AI-generated wide hero coordinated with the thumbnail; conceptual brand imagery | 1920×720, keep important content centered |
-| `portfolio.webp` | Complete fresh presentation board with real desktop and mobile views | around 1720px wide; height chosen for readable sections, normally well below 16000px |
+| `portfolio.webp` | Complete fresh presentation board with real desktop and mobile views | around 1720px wide; rendered within a 1200px body cap; height chosen for readable sections, normally well below 16000px |
 
 When the user supplies a thumbnail, preserve that exact source image and prefer a new filename to avoid stale optimized/browser caches. For a tall transparent product/logo that must remain fully visible, set optional frontmatter `thumbnailFit: "contain"`; other entries retain the default cover crop. Optional `thumbnailBackground` sets the card background for transparent product/logo images; use the client brand color when requested without altering the supplied pixels.
 

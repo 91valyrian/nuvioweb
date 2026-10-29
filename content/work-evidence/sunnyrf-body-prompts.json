@@ -1,0 +1,13 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "Approved SunnyRF AI hero",
+  "prompts": [
+    "Use case: photorealistic-natural. Create a 1720x700 wide editorial material-detail photograph for a SUNNY medical-aesthetic web portfolio. Reference the approved AI hero's exact warm daylight, amber-orange fluted glass, brushed stainless steel and warm-gray plaster. A close architectural macro of amber fluted glass meeting a brushed stainless-steel counter edge, diagonal natural shadows, nuanced realistic material texture, restrained premium photographic contrast, one coherent image. No chair, people, typography, logo, screen, website UI, device mockup, invented medical product, or procedures. It is an AI brand-concept material study, not a client photograph.",
+    "Use case: photorealistic-natural. Create a 1720x700 wide editorial still-life photograph for a SUNNY medical-aesthetic web portfolio. Reference the approved AI hero's warm side daylight, ivory upholstery, brushed metal, amber-orange glass and textured warm-gray wall. A neatly folded ivory cotton treatment towel on a minimal brushed stainless-steel tray/counter, softly focused amber fluted-glass background, a small edge of the same examination light casting a warm circle onto the surface. Tactile fabric and metal, quiet clinical precision, natural shadows and restrained editorial photographic contrast. One coherent scene, no people, text, logos, screens, website UI, procedures or invented branded equipment. AI brand-concept detail, not an actual client location or product photograph."
+  ],
+  "outputs": [
+    "/images/work/sunnyrf/concept-material-v1.webp",
+    "/images/work/sunnyrf/concept-care-v1.webp"
+  ],
+  "note": "Decorative brand concepts, never altered website pixels; inserted between actual screen sections."
+}

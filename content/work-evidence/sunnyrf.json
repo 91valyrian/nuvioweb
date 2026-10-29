@@ -142,7 +142,10 @@
     "/images/work/sunnyrf/source-product.webp",
     "/images/work/sunnyrf/thumb-product.png",
     "/images/work/sunnyrf/thumb-editorial-v1.webp",
-    "/images/work/sunnyrf/cover-editorial-v1.webp"
+    "/images/work/sunnyrf/cover-editorial-v1.webp",
+    "/images/work/sunnyrf/concept-material-v1.webp",
+    "/images/work/sunnyrf/concept-care-v1.webp",
+    "/images/work/sunnyrf/v2/portfolio.webp"
   ],
   "proposedDirection": "오렌지·아이보리 제품 갤러리와 어두운 모바일 비교 섹션. 기존 포트폴리오 이미지는 사용하지 않음.",
   "unknowns": [
@@ -342,6 +345,9 @@
     ],
     "cover-editorial-v1.webp": [
       "generatedHero"
+    ],
+    "v2/portfolio.webp": [
+      "Original authentic capture board with two separate, labeled AI concept interludes"
     ]
   },
   "entry": "content/work/sunnyrf.mdx",
@@ -360,7 +366,7 @@
   ],
   "validation": {
     "content": "PASS: 46 columns, 8 portfolios, 6 services",
-    "seoRegression": "PASS: 8 tests",
+    "seoRegression": "PASS: 9 tests, including physical body max-width after PostCSS.",
     "build": "PASS: 79 generated pages",
     "site": "PASS: 71 sitemap URLs, canonical, JSON-LD, pagination, 404, redirects, noindex, RSS dates",
     "skill": "PASS: quick_validate.py",
@@ -410,5 +416,22 @@
     "conceptOnly": true,
     "reference": "Approved AI thumbnail",
     "composition": "Wide editorial view of the same ivory treatment chair, orange glass, metal lamp and side daylight."
+  },
+  "bodyLayout": {
+    "maximumWidthPx": 1200,
+    "proseMaximumWidthPx": 1000,
+    "physicalUnits": true,
+    "newBoard": "/images/work/sunnyrf/v2/portfolio.webp",
+    "insertions": [
+      {
+        "source": "/images/work/sunnyrf/concept-material-v1.webp",
+        "position": "after product/handpiece section; outside screen pixels"
+      },
+      {
+        "source": "/images/work/sunnyrf/concept-care-v1.webp",
+        "position": "after technology section, before mobile section; outside screen pixels"
+      }
+    ],
+    "promptFile": "content/work-evidence/sunnyrf-body-prompts.json"
   }
 }

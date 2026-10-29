@@ -171,3 +171,79 @@ for (const name of ["thumb-web", "portfolio"]) {
     m = await sharp(file).metadata();
   console.log(file, m.width, m.height, (await fs.stat(file)).size);
 }
+
+// Versioned complete modal/detail board: concept interludes sit between real UI sections.
+const baseBoard = `${out}/portfolio.webp`;
+const interlude = async (file, heading, caption) => {
+  const background = svg(
+    1720,
+    900,
+    rect(0, 0, 1720, 900, "#f5f2eb") +
+      text(80, 65, heading, 25, "#b75c2a", 700) +
+      text(80, 820, caption, 25, "#55544e"),
+  );
+  return sharp(background)
+    .composite([
+      {
+        input: await sharp(`${out}/${file}`)
+          .resize(1560, 635, { fit: "cover" })
+          .png()
+          .toBuffer(),
+        left: 80,
+        top: 110,
+      },
+    ])
+    .png()
+    .toBuffer();
+};
+await fs.mkdir(`${out}/v2`, { recursive: true });
+await sharp({
+  create: { width: 1720, height: 8200, channels: 3, background: "#f5f2eb" },
+})
+  .composite([
+    {
+      input: await sharp(baseBoard)
+        .extract({ left: 0, top: 0, width: 1720, height: 2400 })
+        .png()
+        .toBuffer(),
+      left: 0,
+      top: 0,
+    },
+    {
+      input: await interlude(
+        "concept-material-v1.webp",
+        "BRAND MATERIALS / CONCEPT",
+        "Amber glass, brushed metal and warm light.",
+      ),
+      left: 0,
+      top: 2400,
+    },
+    {
+      input: await sharp(baseBoard)
+        .extract({ left: 0, top: 2400, width: 1720, height: 1330 })
+        .png()
+        .toBuffer(),
+      left: 0,
+      top: 3300,
+    },
+    {
+      input: await interlude(
+        "concept-care-v1.webp",
+        "DETAIL & CARE / CONCEPT",
+        "A quiet visual rhythm between information and experience.",
+      ),
+      left: 0,
+      top: 4630,
+    },
+    {
+      input: await sharp(baseBoard)
+        .extract({ left: 0, top: 3730, width: 1720, height: 2670 })
+        .png()
+        .toBuffer(),
+      left: 0,
+      top: 5530,
+    },
+  ])
+  .webp({ quality: 89 })
+  .toFile(`${out}/v2/portfolio.webp`);
+console.log(`${out}/v2/portfolio.webp`, 1720, 8200);

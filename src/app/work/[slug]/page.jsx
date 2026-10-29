@@ -103,7 +103,7 @@ export default async function WorkDetail({ params }) {
         </div>
       )}
 
-      <article className="container py-12 ">
+      <article className="work-detail-content work-detail-intro">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px] md:gap-0 text-center md:text-left md:pb-40 text-left">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-[50px] md:gap-0 ">
             <div className="">
@@ -136,7 +136,7 @@ export default async function WorkDetail({ params }) {
             {/* 요약 */}
             {work.overview && (
               <p
-                className="text-[32px] md:text-[24px]"
+                className="work-detail-overview"
                 dangerouslySetInnerHTML={{ __html: work.overview }}
               />
             )}
@@ -152,14 +152,14 @@ export default async function WorkDetail({ params }) {
         </div>
       </article>
 
-      <div className="container">
+      <div className="work-detail-content">
         <ServiceLinks
           title={work.seoTitle || work.summary}
           tags={work.seoKeywords || []}
         />
       </div>
 
-      <section className="container py-12 max-w-[1100px]">
+      <section className="work-detail-content work-detail-copy">
         <h2 className="text-3xl font-bold mb-5">프로젝트의 제작 방향</h2>
         <p className="text-xl leading-relaxed text-neutral-300">
           {work.seoDesc || stripHtml(work.overview)}

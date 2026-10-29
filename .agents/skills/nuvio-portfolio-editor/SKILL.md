@@ -39,6 +39,12 @@ Write Korean `seoTitle`, `seoDesc`, industry-appropriate `seoKeywords`, `client`
 
 Respect the MDX image extraction and `portfolio.webp` API contract in the format reference. Link the case to relevant existing services/columns where the current integration supports it. The portfolio is hosted at `https://nuvio-web.com/work/<slug>`; the supplied client URL goes in `href`, not in the portfolio canonical. `nuvio.kr` is an unrelated third-party domain.
 
+## Readable detail body and supporting imagery
+
+Keep detail text, related links and image boards within the project's readable body width (currently 1200 physical pixels; prose section 1000 pixels), with responsive side gutters. The hero may remain wide. Keep these selectors excluded from legacy viewport-scaled px-to-rem conversion so the maximum width is real.
+
+When adding supporting AI artwork, use a few coordinated brand/material details between captured-screen sections, outside the actual UI pixels. Do not fill every section or repeat the same hero. Record conceptual artwork separately from capture evidence. Preserve a complete `portfolio.webp` image for the modal; use a versioned asset directory when revising the full board.
+
 ## Verify and deliver
 
 Inspect the finished image files at useful scale: no stretched UI, clipped headlines, hidden mobile navigation, accidental duplicated screens, fabricated charts or unreadable all-page miniatures. Confirm that the visible mobile layout actually came from a mobile viewport. Save an evidence manifest without credentials or private data.
