@@ -37,7 +37,7 @@ export default async function ServiceDetail({ params }) {
       </p>
       <Link
         href="/contact"
-        className="inline-flex bg-main px-6 py-4 rounded-full mt-8 text-lg"
+        className="inline-flex bg-main px-6 py-4 rounded-[9999px] mt-8 text-lg"
       >
         프로젝트 상담 요청
       </Link>
@@ -125,7 +125,7 @@ export default async function ServiceDetail({ params }) {
         </p>
         <Link
           href="/contact"
-          className="inline-flex bg-main rounded-full px-6 py-4 mt-6 text-lg"
+          className="inline-flex bg-main rounded-[9999px] px-6 py-4 mt-6 text-lg"
         >
           {s.title} 상담하기
         </Link>

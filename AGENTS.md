@@ -6,6 +6,10 @@ When asked to create, revise, or add a nuvio column (칼럼/컬럼/블로그 글
 
 Preserve established article URLs and publication dates. Prefer improving an existing article when search intent overlaps. Never fabricate metrics, rankings, client work, testimonials or search volume. Use current primary sources for technical claims and distinguish examples from real project results.
 
+## Styling conventions
+
+- Across this project, use `rounded-[9999px]` for circular and pill shapes. Do not use the Tailwind `rounded-full` utility, including responsive or state variants. Keep deliberate finite corner radii on cards and panels.
+
 ## SEO invariants
 
 - Use `src/lib/site.js` for canonical origin, metadata, JSON-LD escaping and valid dates. Keep `https://nuvio-web.com` as production origin. Preview deployments must stay noindex, including child googleBot overrides.

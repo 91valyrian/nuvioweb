@@ -9,7 +9,7 @@ export default function ColumnsList({
   totalPages,
 }) {
   const navClass =
-    "inline-flex items-center justify-center min-w-12 min-h-12 px-4 py-3 rounded-full border border-white/30 text-base hover:bg-white hover:text-black";
+    "inline-flex items-center justify-center min-w-12 min-h-12 px-4 py-3 rounded-[9999px] border border-white/30 text-base hover:bg-white hover:text-black";
   return (
     <>
       <h2 className="sr-only">홈페이지 제작 칼럼 목록</h2>
