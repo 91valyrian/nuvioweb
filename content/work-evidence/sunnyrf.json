@@ -141,7 +141,8 @@
     "/images/work/sunnyrf/portfolio.webp",
     "/images/work/sunnyrf/source-product.webp",
     "/images/work/sunnyrf/thumb-product.png",
-    "/images/work/sunnyrf/thumb-editorial-v1.webp"
+    "/images/work/sunnyrf/thumb-editorial-v1.webp",
+    "/images/work/sunnyrf/cover-editorial-v1.webp"
   ],
   "proposedDirection": "오렌지·아이보리 제품 갤러리와 어두운 모바일 비교 섹션. 기존 포트폴리오 이미지는 사용하지 않음.",
   "unknowns": [
@@ -338,6 +339,9 @@
     ],
     "thumb-editorial-v1.webp": [
       "generatedThumbnail"
+    ],
+    "cover-editorial-v1.webp": [
+      "generatedHero"
     ]
   },
   "entry": "content/work/sunnyrf.mdx",
@@ -398,5 +402,13 @@
       "과장된 포스터 문구나 UI 콜라주 없음"
     ],
     "referencesUsage": "기존 썸네일을 스타일 판단에만 사용. 기존 픽셀 재사용 없음."
+  },
+  "generatedHero": {
+    "file": "/images/work/sunnyrf/cover-editorial-v1.webp",
+    "promptFile": "content/work-evidence/sunnyrf-hero-prompt.json",
+    "tool": "built-in image_gen",
+    "conceptOnly": true,
+    "reference": "Approved AI thumbnail",
+    "composition": "Wide editorial view of the same ivory treatment chair, orange glass, metal lamp and side daylight."
   }
 }

@@ -26,6 +26,10 @@ Use the imagegen skill to create one new image that connects the supplied site's
 
 Save the prompt and generation provenance. Preview the image in the real desktop/mobile card crop and choose a restrained crop-safe composition; optimize the asset without changing its art direction through deterministic redraws. Keep generated concept pixels out of the authentic screen areas of `portfolio.webp`.
 
+## Detail hero
+
+Generate a wide hero image with imagegen using the approved AI thumbnail as reference. Keep the same subject family, brand palette, photographic treatment, lighting and atmosphere, while composing for approximately 1920×720 and responsive central cropping. It is a coordinated image, not a screenshot collage or text-led article banner. Do not imply the scene depicts an actual client interior or product. Store a versioned `cover` asset plus prompt/provenance; leave actual captured UI in the case board unchanged.
+
 ## A site-specific art direction
 
 For the detailed case board, read the new website's visual language rather than old case-board images; use the thumbnail references only for list consistency. Choose a background palette, spacing rhythm, hierarchy and composition that frame this project's screens. Keep the website UI exactly as observed while varying its surrounding presentation.

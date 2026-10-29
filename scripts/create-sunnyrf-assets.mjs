@@ -164,20 +164,9 @@ await sharp(svg(1720, 6400, bg))
 // The selected AI thumbnail is created through imagegen and stored independently.
 // Rebuilding authentic screenshot boards must not replace the approved artwork.
 await fs.access(`${out}/thumb-editorial-v1.webp`);
-let cover =
-  rect(0, 0, 1920, 720, "#f5f2eb") +
-  rect(0, 0, 740, 720, "#ff6a20") +
-  text(85, 115, "NUVIO / WEBSITE", 24) +
-  text(75, 345, "SUNNY", 150, "#25241f", 700) +
-  text(85, 430, "MEDICAL DEVICE BRAND", 29) +
-  text(85, 625, "Desktop & mobile experience", 25);
-await sharp(svg(1920, 720, cover))
-  .composite([
-    { input: await screen("desktop-product", 1000), left: 800, top: 45 },
-  ])
-  .webp({ quality: 89 })
-  .toFile(`${out}/cover.webp`);
-for (const name of ["thumb-web", "cover", "portfolio"]) {
+// The coordinated AI hero is also preserved independently of screen-board rebuilds.
+await fs.access(`${out}/cover-editorial-v1.webp`);
+for (const name of ["thumb-web", "portfolio"]) {
   const file = `${out}/${name}.webp`,
     m = await sharp(file).metadata();
   console.log(file, m.width, m.height, (await fs.stat(file)).size);

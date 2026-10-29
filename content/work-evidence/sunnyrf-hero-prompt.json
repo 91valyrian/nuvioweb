@@ -1,0 +1,8 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Use case: lighting-weather / compositing.\nAsset type: a wide 1920x720 website portfolio detail hero, edge-to-edge editorial photograph.\nReference image is the approved AI-generated SUNNY conceptual thumbnail, not an actual client location. Create a closely matching wide photographic composition of this same ivory upholstered aesthetic-treatment chair, brushed stainless-steel articulated examination light, amber-orange fluted-glass partition and textured warm dark-gray wall. Preserve the same warm side daylight, realistic stitching, nuanced contrast, tactile material surfaces and sophisticated editorial interior-photography mood. Widen the framing naturally, with the ivory chair anchoring the central-left to center and amber glass visible in the background, allowing the examination lamp to balance the upper right. A confident close architectural photograph, not a poster. Keep essential subject within central safe area for responsive crops. No text, no logos, no website UI, no screens, no product copy, no border or frame, no collage, no people. This remains illustrative AI concept imagery, not evidence of an actual client interior or product.",
+  "referenceImage": "Approved SUNNY AI thumbnail",
+  "generatedSource": "/Users/lhs/.codex/generated_images/01a1863f-07b0-73f2-b739-495d0c900702/exec-512b6528-46ae-4b19-842d-ee84117fa0c0.png",
+  "output": "/images/work/sunnyrf/cover-editorial-v1.webp",
+  "note": "AI-generated coordinated hero concept; not actual client interior/product/UI."
+}
