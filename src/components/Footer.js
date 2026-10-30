@@ -18,12 +18,6 @@ export default function Footer() {
             <p className="">서울시 중구 왕십리로 393-1 202호</p>
             <ul className="flex gap-[20px]">
               <li>
-                <span>T : </span>{" "}
-                <a href="tel:010-9928-6110" target="_blank">
-                  010-9928-6110
-                </a>
-              </li>
-              <li>
                 <span>E : </span>{" "}
                 <a href="mailto:nuvio@naver.com">nuvio@naver.com</a>
               </li>
