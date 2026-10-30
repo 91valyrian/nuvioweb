@@ -12,50 +12,50 @@ export default function ColumnsList({
     "inline-flex items-center justify-center min-w-12 min-h-12 px-4 py-3 rounded-[9999px] border border-white/30 text-base hover:bg-white hover:text-black";
   return (
     <>
-      <h2 className="sr-only">홈페이지 제작 칼럼 목록</h2>
-      <div className="py-16 flex flex-col md:flex-row gap-10" id="columns-list">
+      <header className="columns-library-heading">
+        <div><span className="columns-library-kicker">NUVIO JOURNAL</span><h2>웹사이트를 위한 좋은 생각들.</h2></div>
+        <p>제작을 준비하는 순간부터, 운영의 다음 단계까지.<br />프로젝트에 필요한 이야기를 만나보세요.</p>
+      </header>
+      <div className="columns-library" id="columns-list">
         <nav
           aria-label="칼럼 주제"
-          className="md:w-[240px] shrink-0 flex flex-wrap content-start gap-3"
+          className="columns-category-bar"
         >
           {["", ...categories].map((cat) => (
             <Link
               key={cat}
               href={columnListUrl(1, cat)}
               aria-current={cat === category ? "page" : undefined}
-              className={`${navClass} ${cat === category ? "bg-white text-black" : ""}`}
+              className="columns-category rounded-[9999px]"
             >
               {cat || "전체"}
             </Link>
           ))}
         </nav>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-8 min-w-0 flex-1">
+        <div className="columns-results-label"><span>{category || "전체 이야기"}</span><span>PAGE {String(page).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span></div>
+        <ul className="columns-card-grid">
           {visible.map((post) => (
             <li key={post.slug}>
-              <Link href={`/columns/${post.slug}`} className="group block">
+              <Link href={`/columns/${post.slug}`} className="columns-story group block">
                 {post.thumbnail && (
-                  <div className="relative aspect-video mb-4 rounded-2xl overflow-hidden">
+                  <div className="columns-story-image relative aspect-video rounded-2xl overflow-hidden">
                     <Image
                       src={post.thumbnail}
                       alt={post.thumbnailAlt || post.title}
                       fill
-                      sizes="(min-width: 1280px) 600px, (min-width: 768px) 45vw, 100vw"
+                      sizes="(min-width: 1600px) 760px, (min-width: 768px) 46vw, 100vw"
                       className="object-cover transition-transform group-hover:scale-105"
                     />
                   </div>
                 )}
-                <h3 className="text-2xl font-semibold leading-snug group-hover:underline">
+                <div className="columns-story-meta"><span>{post.categories?.[0] || "INSIGHT"}</span><time dateTime={post.date}>{post.date}</time></div>
+                <h3 className="text-2xl font-semibold leading-snug">
                   {post.title}
                 </h3>
                 <p className="text-neutral-400 text-lg mt-3 line-clamp-2">
                   {post.summary}
                 </p>
-                <time
-                  dateTime={post.date}
-                  className="block text-neutral-500 text-base mt-3"
-                >
-                  {post.date}
-                </time>
+
               </Link>
             </li>
           ))}
