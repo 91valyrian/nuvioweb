@@ -155,6 +155,7 @@ export default function ContactPage() {
           <div className="contact-direct">
             <p>바로 이야기하고 싶다면</p>
             <a href="mailto:91.valyrian@gmail.com">91.valyrian@gmail.com ↗</a>
+            <a href="tel:01099286110">전화로 문의하기 ↗</a>
             <a
               href="https://pf.kakao.com/_Rhhcn/chat"
               target="_blank"

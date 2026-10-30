@@ -18,6 +18,9 @@ export default function Footer() {
             <p className="">서울시 중구 왕십리로 393-1 202호</p>
             <ul className="flex gap-[20px]">
               <li>
+                <a href="tel:01099286110">전화로 문의하기</a>
+              </li>
+              <li>
                 <span>E : </span>{" "}
                 <a href="mailto:nuvio@naver.com">nuvio@naver.com</a>
               </li>
