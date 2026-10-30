@@ -11,7 +11,7 @@ export default function SubVisual({
       style={{ backgroundImage: `url(${image})` }}
     >
       <div className={`container ${containerClassName}`}>
-        <h1 className="subTitle mb-[16px] text-[28px] md:text-[32px] leading-tight font-bold rotate-x-up">
+        <h1 className="subTitle mb-[16px] text-[28px] md:text-[32px] leading-tight font-normal rotate-x-up">
           {title ||
             {
               About: "누비오 회사 소개",
@@ -22,9 +22,11 @@ export default function SubVisual({
             }[value] ||
             value}
         </h1>
-        <p className="text-[52px] leading-[62px] md:text-[49px] md:leading-[59px] font-light rotate-x-up">
-          Let’s Talk Ideas,
-          <span className="block pl-[150px] rotate-x-up">Build Together</span>
+        <p className="sub-visual-slogan font-normal rotate-x-up">
+          Let’s Talk <span className="font-miller italic font-light">Ideas,</span>
+          <span className="block pl-[150px] rotate-x-up">
+            Build <span className="font-miller italic font-light">Together</span>
+          </span>
         </p>
       </div>
 

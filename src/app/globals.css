@@ -1012,3 +1012,14 @@ body {
 
 /* Keep FAQ content within the centered reading layout. */
 .site-wide-layout .container.faq-inner { max-width: 1600px; margin-inline: auto; padding-inline: 20px; }
+
+/* Shared subpage heroes: editorial English display typography. */
+.site-wide-layout .sub-visual-slogan {
+  font-size: clamp(64px, 5.2vw, 120px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+@media (max-width: 767px) {
+  .site-wide-layout .sub-visual-slogan { font-size: clamp(32px, 7vw, 52px); }
+  .site-wide-layout .sub-visual-slogan > .block { padding-left: 8vw; }
+}
