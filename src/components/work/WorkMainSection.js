@@ -15,7 +15,7 @@ export default function WorkMainSection({ images = [], title }) {
             <Image
               src={src}
               alt={`${title} 디자인 이미지 ${i + 1}`}
-              sizes="(min-width: 1200px) 1152px, calc(100vw - 40px)"
+              sizes="(min-width: 1600px) 1552px, (min-width: 768px) calc(100vw - 48px), calc(100vw - 40px)"
               width={1620}
               height={1000}
               className="w-full h-auto rounded-[21px]"

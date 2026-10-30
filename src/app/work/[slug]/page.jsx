@@ -84,7 +84,7 @@ export default async function WorkDetail({ params }) {
           />
           <p className="text-[28px] md:text-[20px] mt-2 text-neutral-300">
             {work.client}
-                {work.year ? ` · ${work.year}` : ""}
+            {work.year ? ` · ${work.year}` : ""}
           </p>
         </header>
       </div>
@@ -104,8 +104,8 @@ export default async function WorkDetail({ params }) {
       )}
 
       <article className="work-detail-content work-detail-intro">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px] md:gap-0 text-center md:text-left md:pb-40 text-left">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-[50px] md:gap-0 ">
+        <div className="work-detail-intro-grid">
+          <div className="work-detail-facts">
             <div className="">
               <p className="text-[28px] md:text-[20px] rounded-[10px] py-[7px] px-[20px] mb-[10px] border border-solid border-neutral-400 text-neutral-400 inline-block">
                 Client
@@ -125,8 +125,6 @@ export default async function WorkDetail({ params }) {
                 </ul>
               )}
             </div>
-
-            <div aria-hidden="true" className="hidden md:block" />
           </div>
 
           <div className="">
@@ -154,22 +152,23 @@ export default async function WorkDetail({ params }) {
 
       <div className="work-detail-content">
         <ServiceLinks
+          variant="work"
           title={work.seoTitle || work.summary}
           tags={work.seoKeywords || []}
         />
-      </div>
 
-      <section className="work-detail-content work-detail-copy">
-        <h2 className="text-3xl font-bold mb-5">프로젝트의 제작 방향</h2>
-        <p className="text-xl leading-relaxed text-neutral-300">
-          {work.seoDesc || stripHtml(work.overview)}
-        </p>
-        <p className="text-lg leading-relaxed text-neutral-400 mt-5">
-          브랜드의 소개와 서비스 정보를 어떤 순서로 전달하는지 아래의 공개
-          화면에서 살펴보세요. 비슷한 프로젝트를 준비한다면 필요한 메뉴와 운영
-          기능을 정리해 상담할 수 있습니다.
-        </p>
-      </section>
+        <section className="work-detail-content work-detail-copy">
+          <h2 className="text-3xl font-bold mb-5">프로젝트의 제작 방향</h2>
+          <p className="text-xl leading-relaxed text-neutral-300">
+            {work.seoDesc || stripHtml(work.overview)}
+          </p>
+          <p className="text-lg leading-relaxed text-neutral-400 mt-5">
+            브랜드의 소개와 서비스 정보를 어떤 순서로 전달하는지 아래의 공개
+            화면에서 살펴보세요. 비슷한 프로젝트를 준비한다면 필요한 메뉴와 운영
+            기능을 정리해 상담할 수 있습니다.
+          </p>
+        </section>
+      </div>
 
       {/* 디자인 이미지 섹션 */}
       <WorkMainSection images={images} title={work.seoTitle} />

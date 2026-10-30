@@ -128,8 +128,11 @@ test("portfolio body width remains capped in physical pixels after PostCSS", asy
   const result = await postcss([
     pxtorem(config.plugins["postcss-pxtorem"]),
   ]).process(css, { from: undefined });
-  assert.match(result.css, /max-width:\s*1200px/);
-  assert.match(result.css, /max-width:\s*1000px/);
+  assert.match(result.css, /max-width:\s*1600px/);
+  assert.match(
+    result.css,
+    /\.work-detail-content\.work-detail-copy\s*\{[^}]*max-width:\s*none/,
+  );
   assert.match(result.css, /font-size:\s*20px/);
-  assert(!result.css.includes("75rem"));
+  assert(!result.css.includes("100rem"));
 });
