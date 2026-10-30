@@ -149,7 +149,7 @@ export default function RootLayout({ children }) {
         />
         <link rel="stylesheet" href="https://use.typekit.net/qql5rly.css" />
       </head>
-      <body className="text-white">
+      <body className="text-white site-wide-layout">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

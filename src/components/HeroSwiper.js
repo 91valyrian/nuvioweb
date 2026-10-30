@@ -174,7 +174,7 @@ export default function HeroSwiper() {
 
               {/* 텍스트 레이어 */}
               <div className="relative z-10 flex h-full items-center">
-                <div className="container mx-auto px-5 md:px-6 max-w-[1600px]">
+                <div className="container">
                   <div
                     className={`max-w-[840px] mx-auto text-center text-neutral-100 transition-transform transition-opacity duration-700 ease-out ${active === idx ? "animate-[fadeInScale_0.8s_ease-out_0.3s_forwards]" : ""}`}
                     key={`text-${idx}-${active === idx ? "active" : "idle"}`}

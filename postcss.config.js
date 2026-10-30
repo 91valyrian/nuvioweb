@@ -9,6 +9,7 @@ module.exports = {
         /\.inquiries-admin/,
         /\.contact-inquiry/,
         /\.work-detail-content/,
+        /\.site-wide-layout/,
         /\.column-article/,
         /\.column-card/,
         /\.columns-index/,

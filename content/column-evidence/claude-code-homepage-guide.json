@@ -1,0 +1,28 @@
+{
+  "intent": "Claude Code로 홈페이지를 직접 만들 때 준비 자료·제작 순서·오픈 검수 범위를 판단하려는 담당자",
+  "topicDecision": "기존 ai-homepage-limit은 범용 AI 제작 도구의 특징과 한계, 신규 글은 Claude Code 프로젝트 작업 흐름과 요청 예시를 다룸. Search Console 데이터 없이 편집상 기회로 선정.",
+  "verifiedOn": "2026-10-30",
+  "sources": [
+    "https://code.claude.com/docs/en/overview",
+    "https://code.claude.com/docs/en/best-practices",
+    "https://code.claude.com/docs/en/permissions",
+    "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+  ],
+  "imageGeneration": {
+    "mode": "built-in image_gen",
+    "prompts": [
+      [
+        "thumbnail",
+        "Create a polished Korean editorial blog thumbnail, horizontal 16:9 1600x900, navy indigo gradient background, luminous tasteful soft 3D browser window and code terminal on right, a subtle coral orange cursor shape, professional contemporary tech editorial art, generous safe margins. Left huge perfectly spelled bold white Korean headline in three lines: '클로드 코드로' / '홈페이지 제작' / '어디까지 가능할까?' Small white 'nuvio' wordmark upper left. Bottom left two thin outlined pills exact Korean text '제작 순서' and '오픈 전 검수'. No Anthropic logo, no fake metrics, no screenshots claiming real product UI. Restrained sophisticated composition, high readability matching navy 3D website agency editorial thumbnails."
+      ],
+      [
+        "workflow",
+        "Create horizontal 16:9 1600x900 explanatory editorial 3D clay illustration on warm white background. Three elegant floating stations connected left to right: planning clipboard with abstract lines, navy code terminal beside a browser composition, browser plus mobile preview with a small magnifying glass. Indigo/lavender/mint palette, soft shadows, clean generous spacing, no people, no logos, NO TEXT OR LETTERS OR NUMBERS anywhere, no analytics charts. Visual explains planning to implementation to verification, attractive premium minimal publication artwork."
+      ],
+      [
+        "launch",
+        "Create horizontal 16:9 1600x900 explanatory editorial soft 3D clay illustration on warm white background, navy indigo lavender mint accents. Large desktop website preview and small mobile preview side by side at center, left small envelope arriving in an inbox, right a checklist with neutral square check icons and a small shield, subtle connected visual composition. All UI abstract unlabelled blocks, no text, no letters, no numerals, no logos, no fake analytics, no success percentage. Depicts manual launch review of mobile layout, functional contact delivery, and safe operation. Clear uncluttered studio light and shadows."
+      ]
+    ]
+  }
+}

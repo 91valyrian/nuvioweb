@@ -11,8 +11,8 @@ export default function GlobalReveal() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // 기존 트리거 모두 제거
-    ScrollTrigger.getAll().forEach((st) => st.kill());
+    // Own only these animations; preserve section-specific pinned timelines.
+    const context = gsap.context(() => {
 
     // 새 페이지의 fade-up 요소들 재등록
     const fadeElements = gsap.utils.toArray(".fade-up");
@@ -88,10 +88,9 @@ export default function GlobalReveal() {
       },
     });
 
-    // cleanup
-    return () => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
-    };
+    });
+
+    return () => context.revert();
   }, [pathname]); // ✅ 페이지 전환 시마다 다시 실행
 
   return null;

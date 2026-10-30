@@ -214,7 +214,7 @@ export default async function ColumnDetail({ params }) {
         image="/images/columns/visual.webp"
         className="!h-[500px] !pt-[200px]"
       /> */}
-      <div className="column-card py-[50px] max-w-[1000px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
+      <div className="column-card py-[50px] mx-auto bg-[#f8f8f8] px-[30px] md:px-[40px] rounded-[20px] text-black">
         <section className="visual mb-[30px] text-left">
           <h1 className="text-[30px] md:text-[41px] leading-tight font-bold">
             {post.title}

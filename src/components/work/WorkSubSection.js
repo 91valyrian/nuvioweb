@@ -5,7 +5,7 @@ export default function WorkSubSection({ groups, title }) {
 
   return (
     <section className="py-40">
-      <div className="md:max-w-[1280px] xl:max-w-[1800px] mx-auto px-[20px]">
+      <div className="wide-inner">
         <h2 className="mb-6 text-[64px] md:text-[50px] font-semibold">
           Sub Page
         </h2>
