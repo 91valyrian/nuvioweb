@@ -7,9 +7,13 @@ import {
   deliverInquiry,
   imapConfiguration,
   INQUIRY_RECIPIENT,
+  INQUIRY_AUTO_STAR_HEADER,
+  INQUIRY_LABEL,
+  INQUIRY_COMPLETED_LABEL,
 } from "../src/lib/inquiry-mail.js";
 import {
   parseInquiryEmail,
+  classifyInquiryMail,
   parseMailboxId,
   changeMailInquiry,
   listMailInquiries,
@@ -78,7 +82,8 @@ test("real MIME round trip preserves Korean inquiry data and escapes email HTML"
   assert.equal(parsed.message, input.message);
   assert.equal(parsed.name, input.name);
   assert.equal(parsed.id, "123:7");
-  assert.equal(parsed.completed, true);
+  assert.equal(parsed.completed, false);
+  assert.equal(parsed.autoStarred, true);
   assert.equal(
     await parseInquiryEmail(
       await mime({
@@ -191,6 +196,171 @@ test("mailbox connection errors propagate instead of showing an empty inbox", as
       }),
       /offline/,
     );
+  } finally {
+    delete process.env.IMAP_PASS;
+  }
+});
+
+test("automatic stars are independent of completion; old messages keep their existing status", async () => {
+  const options = inquiryMailOptions(
+    normalizeInquiry(input),
+    INQUIRY_RECIPIENT,
+  );
+  const source = await mime(options);
+  assert.equal(
+    (await parseInquiryEmail(source, { flags: new Set(["\\Flagged"]) }))
+      .completed,
+    false,
+  );
+  assert.equal(
+    (
+      await parseInquiryEmail(source, {
+        labels: new Set([INQUIRY_COMPLETED_LABEL]),
+      })
+    ).completed,
+    true,
+  );
+  const legacy = { ...options, headers: { "X-Nuvio-Inquiry": "v1" } };
+  assert.equal(
+    (
+      await parseInquiryEmail(await mime(legacy), {
+        flags: new Set(["\\Flagged"]),
+      })
+    ).completed,
+    true,
+  );
+  assert.equal(options.from, INQUIRY_RECIPIENT);
+  assert.equal(options.priority, "high");
+  assert.equal(options.headers[INQUIRY_AUTO_STAR_HEADER], "v1");
+});
+
+function fakeInquiryMailbox(source, { delayed = false } = {}) {
+  const changes = [],
+    queries = [];
+  let attempts = 0,
+    released = false,
+    loggedOut = false;
+  const folders = [];
+  const client = {
+    capabilities: new Set(["X-GM-EXT-1"]),
+    mailbox: { uidValidity: 123 },
+    connect: async () => {},
+    noop: async () => {},
+    getMailboxLock: async () => ({
+      release: () => {
+        released = true;
+      },
+    }),
+    logout: async () => {
+      loggedOut = true;
+    },
+    list: async () => folders,
+    mailboxCreate: async (name) => {
+      folders.push({ path: name });
+    },
+    search: async (query) => {
+      queries.push(query);
+      return delayed && attempts++ === 0 ? [] : [7];
+    },
+    fetchOne: async (_, query) =>
+      query.source
+        ? { source, flags: new Set(["\\Flagged"]), labels: new Set() }
+        : { size: 100 },
+    messageFlagsAdd: async (...args) => {
+      changes.push(["add", ...args]);
+      return true;
+    },
+    messageFlagsRemove: async (...args) => {
+      changes.push(["remove", ...args]);
+      return true;
+    },
+  };
+  return {
+    client,
+    changes,
+    queries,
+    folders,
+    cleaned: () => released && loggedOut,
+  };
+}
+
+test("classification applies label, Important and star only to the delivered inquiry, with delayed arrival retry", async () => {
+  process.env.IMAP_PASS = "offline-test-only";
+  try {
+    const record = normalizeInquiry(input);
+    const mock = fakeInquiryMailbox(
+      await mime(inquiryMailOptions(record, INQUIRY_RECIPIENT)),
+      { delayed: true },
+    );
+    await classifyInquiryMail(record, {
+      createClient: () => mock.client,
+      wait: async () => {},
+    });
+    assert.equal(mock.queries.length, 2);
+    assert.equal(
+      mock.queries[0].header["Message-ID"],
+      `<${record.id}@nuvio-web.com>`,
+    );
+    assert.deepEqual(mock.changes, [
+      [
+        "add",
+        7,
+        [INQUIRY_LABEL, "\\Important"],
+        { uid: true, useLabels: true },
+      ],
+      ["add", 7, ["\\Flagged"], { uid: true }],
+    ]);
+    assert.ok(mock.folders.some((folder) => folder.path === INQUIRY_LABEL));
+    assert.equal(mock.cleaned(), true);
+  } finally {
+    delete process.env.IMAP_PASS;
+  }
+});
+
+test("classification rejects an unrelated mail or different inquiry without changing its labels", async () => {
+  process.env.IMAP_PASS = "offline-test-only";
+  try {
+    const record = normalizeInquiry(input);
+    for (const source of [
+      await mime({ text: "unrelated" }),
+      await mime(
+        inquiryMailOptions(normalizeInquiry(input), INQUIRY_RECIPIENT),
+      ),
+    ]) {
+      const mock = fakeInquiryMailbox(source);
+      await assert.rejects(
+        classifyInquiryMail(record, {
+          createClient: () => mock.client,
+          wait: async () => {},
+        }),
+      );
+      assert.equal(mock.changes.length, 0);
+      assert.equal(mock.cleaned(), true);
+    }
+  } finally {
+    delete process.env.IMAP_PASS;
+  }
+});
+
+test("completing and reopening new inquiries changes only the completion label and preserves their stars", async () => {
+  process.env.IMAP_PASS = "offline-test-only";
+  try {
+    const source = await mime(
+      inquiryMailOptions(normalizeInquiry(input), INQUIRY_RECIPIENT),
+    );
+    for (const completed of [true, false]) {
+      const mock = fakeInquiryMailbox(source);
+      await changeMailInquiry("123:7", { completed }, () => mock.client);
+      assert.deepEqual(mock.changes, [
+        [
+          completed ? "add" : "remove",
+          7,
+          [INQUIRY_COMPLETED_LABEL],
+          { uid: true, useLabels: true },
+        ],
+      ]);
+      assert.equal(mock.cleaned(), true);
+    }
   } finally {
     delete process.env.IMAP_PASS;
   }

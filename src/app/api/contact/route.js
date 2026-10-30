@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
+import { classifyInquiryMail } from "@/lib/inquiry-mailbox";
 import nodemailer from "nodemailer";
 import {
   normalizeInquiry,
@@ -40,6 +41,16 @@ export async function POST(req) {
       );
     const config = smtpConfiguration();
     await deliverInquiry(record, config, nodemailer.createTransport);
+    // Classification is independent of accepted delivery; never invite a duplicate submission.
+    after(async () => {
+      try {
+        await classifyInquiryMail(record);
+      } catch (error) {
+        console.error("[CONTACT_MAIL_CLASSIFICATION_FAILED]", {
+          code: error.code || error.name,
+        });
+      }
+    });
     // This is delivery acknowledgement, never a simulated database success.
     if (process.env.NTFY_TOPIC) {
       try {

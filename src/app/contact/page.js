@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SITE_URL, jsonLd } from "@/lib/site";
 import { trackLead } from "@/lib/analytics";
 import "./contact.css";
@@ -61,6 +61,18 @@ export default function ContactPage() {
   const busy = useRef(false),
     resultRef = useRef(null),
     policyRef = useRef(null);
+
+  // Wait until React has replaced the long form with the result panel.
+  useEffect(() => {
+    if (status !== "success" && status !== "error") return;
+    const frame = requestAnimationFrame(() => {
+      const result = resultRef.current;
+      if (!result) return;
+      result.focus({ preventScroll: true });
+      result.scrollIntoView({ behavior: "instant", block: "start" });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [status]);
   async function onSubmit(event) {
     event.preventDefault();
     if (busy.current) return;
@@ -108,7 +120,6 @@ export default function ContactPage() {
       );
     } finally {
       busy.current = false;
-      requestAnimationFrame(() => resultRef.current?.focus());
     }
   }
   return (

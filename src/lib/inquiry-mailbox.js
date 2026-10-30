@@ -5,6 +5,9 @@ import {
   INQUIRY_ATTACHMENT,
   INQUIRY_HEADER,
   INQUIRY_RECIPIENT,
+  INQUIRY_AUTO_STAR_HEADER,
+  INQUIRY_LABEL,
+  INQUIRY_COMPLETED_LABEL,
 } from "./inquiry-mail.js";
 
 export class MailboxChangedError extends Error {}
@@ -26,7 +29,7 @@ export function parseMailboxId(id, validity) {
 }
 export async function parseInquiryEmail(
   source,
-  { uid, validity, flags = new Set(), date } = {},
+  { uid, validity, flags = new Set(), labels = new Set(), date } = {},
 ) {
   const parsed = await simpleParser(source, {
     skipHtmlToText: true,
@@ -81,7 +84,12 @@ export async function parseInquiryEmail(
       : Number.isFinite(Date.parse(r.created_at))
         ? new Date(r.created_at).toISOString()
         : new Date(0).toISOString(),
-    completed: flags.has("\\Flagged"),
+    autoStarred:
+      parsed.headers.get(INQUIRY_AUTO_STAR_HEADER.toLowerCase()) === "v1",
+    completed:
+      parsed.headers.get(INQUIRY_AUTO_STAR_HEADER.toLowerCase()) === "v1"
+        ? labels.has(INQUIRY_COMPLETED_LABEL)
+        : flags.has("\\Flagged"),
   };
 }
 async function withInbox(
@@ -134,7 +142,13 @@ export async function listMailInquiries({
       const messages = allowed.length
         ? await client.fetchAll(
             allowed,
-            { uid: true, source: true, flags: true, internalDate: true },
+            {
+              uid: true,
+              source: true,
+              flags: true,
+              labels: true,
+              internalDate: true,
+            },
             { uid: true },
           )
         : [];
@@ -144,6 +158,7 @@ export async function listMailInquiries({
           uid: message.uid,
           validity,
           flags: message.flags,
+          labels: message.labels,
           date: message.internalDate,
         });
         if (inquiry) inquiries.push(inquiry);
@@ -178,18 +193,18 @@ export async function changeMailInquiry(
         throw new InquiryNotFoundError("문의를 찾을 수 없습니다.");
       const message = await client.fetchOne(
         String(uid),
-        { uid: true, source: true, flags: true },
+        { uid: true, source: true, flags: true, labels: true },
         { uid: true },
       );
-      if (
-        !message ||
-        !(await parseInquiryEmail(message.source, {
+      const inquiry =
+        message &&
+        (await parseInquiryEmail(message.source, {
           uid,
           validity,
           flags: message.flags,
-        }))
-      )
-        throw new InquiryNotFoundError("문의를 찾을 수 없습니다.");
+          labels: message.labels,
+        }));
+      if (!inquiry) throw new InquiryNotFoundError("문의를 찾을 수 없습니다.");
       if (archive) {
         const folder = "NUVIO-Inquiries-Archive";
         const mailboxes = await client.list();
@@ -199,10 +214,106 @@ export async function changeMailInquiry(
           throw new Error("보관하지 못했습니다.");
       } else {
         const method = completed ? "messageFlagsAdd" : "messageFlagsRemove";
-        if (!(await client[method](uid, ["\\Flagged"], { uid: true })))
+        if (inquiry.autoStarred && completed)
+          await ensureLabel(client, INQUIRY_COMPLETED_LABEL);
+        if (
+          !(await client[method](
+            uid,
+            [inquiry.autoStarred ? INQUIRY_COMPLETED_LABEL : "\\Flagged"],
+            { uid: true, ...(inquiry.autoStarred ? { useLabels: true } : {}) },
+          ))
+        )
           throw new Error("상태를 변경하지 못했습니다.");
       }
       return { ok: true };
+    },
+    true,
+    createClient,
+  );
+}
+
+async function ensureLabel(client, name) {
+  const mailboxes = await client.list();
+  if (!mailboxes.some((mailbox) => mailbox.path === name)) {
+    try {
+      await client.mailboxCreate(name);
+    } catch (error) {
+      // Another concurrent request may have created the same label.
+      if (!(await client.list()).some((mailbox) => mailbox.path === name))
+        throw error;
+    }
+  }
+}
+
+// SMTP headers cannot set Gmail labels or stars. Mutate only this verified inquiry.
+export async function classifyInquiryMail(
+  record,
+  {
+    createClient,
+    wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
+  } = {},
+) {
+  return withInbox(
+    async (client, validity) => {
+      if (!client.capabilities?.has("X-GM-EXT-1"))
+        throw new Error("Gmail labels unavailable");
+      let uids = [];
+      for (let attempt = 0; attempt < 4; attempt++) {
+        if (attempt) {
+          await wait(1000);
+          await client.noop();
+        }
+        uids =
+          (await client.search(
+            {
+              header: {
+                "Message-ID": `<${record.id}@nuvio-web.com>`,
+                [INQUIRY_HEADER]: "v1",
+              },
+            },
+            { uid: true },
+          )) || [];
+        if (uids.length) break;
+      }
+      if (!uids.length)
+        throw new Error("Delivered inquiry not yet visible in inbox");
+      let matched = 0;
+      for (const uid of uids) {
+        const info = await client.fetchOne(
+          String(uid),
+          { uid: true, size: true },
+          { uid: true },
+        );
+        if (!info || info.size > maxMessageSize) continue;
+        const message = await client.fetchOne(
+          String(uid),
+          { uid: true, source: true, flags: true, labels: true },
+          { uid: true },
+        );
+        const inquiry =
+          message &&
+          (await parseInquiryEmail(message.source, {
+            uid,
+            validity,
+            flags: message.flags,
+            labels: message.labels,
+          }));
+        if (!inquiry || inquiry.recordId !== record.id || !inquiry.autoStarred)
+          continue;
+        await ensureLabel(client, INQUIRY_LABEL);
+        if (
+          !(await client.messageFlagsAdd(uid, [INQUIRY_LABEL, "\\Important"], {
+            uid: true,
+            useLabels: true,
+          }))
+        )
+          throw new Error("Inquiry label update failed");
+        if (!(await client.messageFlagsAdd(uid, ["\\Flagged"], { uid: true })))
+          throw new Error("Inquiry star update failed");
+        matched++;
+      }
+      if (!matched) throw new Error("Inquiry identity could not be verified");
+      return { classified: true };
     },
     true,
     createClient,

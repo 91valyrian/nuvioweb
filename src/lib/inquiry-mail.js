@@ -2,6 +2,9 @@ import { randomUUID } from "node:crypto";
 
 export const INQUIRY_RECIPIENT = "91.valyrian@gmail.com";
 export const INQUIRY_HEADER = "X-Nuvio-Inquiry";
+export const INQUIRY_AUTO_STAR_HEADER = "X-Nuvio-Auto-Star";
+export const INQUIRY_LABEL = "홈페이지 제작 문의";
+export const INQUIRY_COMPLETED_LABEL = "NUVIO-Inquiries-Completed";
 export const INQUIRY_ATTACHMENT = "nuvio-inquiry.json";
 export class InquiryValidationError extends Error {}
 export class MailConfigurationError extends Error {}
@@ -71,14 +74,15 @@ export function inquiryMailOptions(record, sender) {
     ["문의 내용", record.message],
   ];
   return {
-    from: { name: "누비오 홈페이지 문의", address: sender },
+    from: sender,
     to: INQUIRY_RECIPIENT,
     ...(record.email
       ? { replyTo: { name: record.name, address: record.email } }
       : {}),
-    subject: `[홈페이지 제작 문의] ${record.name}${record.company ? ` · ${record.company}` : ""}`,
+    subject: `[홈페이지 제작 문의] ${record.name}${record.company ? ` - ${record.company}` : ""}`,
     messageId: `<${record.id}@nuvio-web.com>`,
-    headers: { [INQUIRY_HEADER]: "v1" },
+    headers: { [INQUIRY_HEADER]: "v1", [INQUIRY_AUTO_STAR_HEADER]: "v1" },
+    priority: "high",
     text: rows
       .map(([label, value]) => `${label}: ${value || "-"}`)
       .join("\n\n"),
