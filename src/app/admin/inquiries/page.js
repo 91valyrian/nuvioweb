@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import "./inquiries.css";
 
 export default function AdminInquiriesPage() {
-  const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [inquiries, setInquiries] = useState([]);
   const [error, setError] = useState("");
+  const [fetching, setFetching] = useState(false);
+  const [nextCursor, setNextCursor] = useState(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   const checkAuth = async () => {
     try {
@@ -68,38 +70,58 @@ export default function AdminInquiriesPage() {
     }
   };
 
-  const loadInquiries = async () => {
+  const loadInquiries = async ({ append = false } = {}) => {
+    setFetching(true);
+    setError("");
     try {
-      const res = await fetch("/api/admin/inquiries");
+      const res = await fetch(
+        `/api/admin/inquiries${append && nextCursor ? `?before=${nextCursor}` : ""}`,
+        { cache: "no-store" },
+      );
       const data = await res.json();
-
-      if (data.ok) {
-        setInquiries(data.inquiries || []);
-      } else {
-        setError(data.error || "문의사항을 불러올 수 없습니다.");
+      if (res.status === 401) {
+        setIsAuthenticated(false);
+        setInquiries([]);
+        return;
       }
+      if (!res.ok || !data.ok)
+        throw new Error(data.error || "문의 목록을 불러올 수 없습니다.");
+      setInquiries((prev) =>
+        append ? [...prev, ...(data.inquiries || [])] : data.inquiries || [],
+      );
+      setNextCursor(data.hasMore ? data.nextCursor : null);
+      setHasLoaded(true);
     } catch (err) {
-      setError("문의사항을 불러오는 중 오류가 발생했습니다.");
+      setError(err.message || "문의 목록을 불러오는 중 오류가 발생했습니다.");
+    } finally {
+      setFetching(false);
     }
   };
 
   const handleDelete = async (id) => {
-    if (!confirm("정말 이 문의사항을 삭제하시겠습니까?")) {
+    if (
+      !confirm(
+        "이 문의를 목록에서 보관 처리할까요? 원본은 Gmail의 NUVIO-Inquiries-Archive 폴더로 이동하며 영구 삭제되지 않습니다.",
+      )
+    ) {
       return;
     }
 
     try {
-      const res = await fetch(`/api/admin/inquiries?id=${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `/api/admin/inquiries?id=${encodeURIComponent(id)}`,
+        {
+          method: "DELETE",
+        },
+      );
 
       if (res.ok) {
         loadInquiries();
       } else {
-        alert("삭제 중 오류가 발생했습니다.");
+        setError("보관 처리 중 오류가 발생했습니다.");
       }
     } catch (err) {
-      alert("삭제 중 오류가 발생했습니다.");
+      setError("보관 처리 중 오류가 발생했습니다.");
     }
   };
 
@@ -120,7 +142,7 @@ export default function AdminInquiriesPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#1a1a2e] flex items-center justify-center p-4">
+      <div className="inquiries-admin min-h-screen bg-[#1a1a2e] flex items-center justify-center p-4">
         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 md:p-12 max-w-md w-full">
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">
             관리자 로그인
@@ -158,31 +180,35 @@ export default function AdminInquiriesPage() {
 
   const handleToggleComplete = async (id, currentStatus) => {
     try {
-      const res = await fetch(`/api/admin/inquiries?id=${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ completed: !currentStatus }),
-      });
+      const res = await fetch(
+        `/api/admin/inquiries?id=${encodeURIComponent(id)}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ completed: !currentStatus }),
+        },
+      );
 
       if (res.ok) {
         loadInquiries();
       } else {
-        alert("완료 상태 변경 중 오류가 발생했습니다.");
+        setError("완료 상태 변경 중 오류가 발생했습니다.");
       }
     } catch (err) {
-      alert("완료 상태 변경 중 오류가 발생했습니다.");
+      setError("완료 상태 변경 중 오류가 발생했습니다.");
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#1a1a2e] text-white p-4 md:p-8 pt-24 md:pt-32">
+    <div className="inquiries-admin min-h-screen bg-[#1a1a2e] text-white p-4 md:p-8 pt-24 md:pt-32">
       <div className="container mx-auto max-w-6xl">
         {/* 헤더 */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold">문의사항 관리</h1>
           <div className="flex gap-4">
             <button
-              onClick={loadInquiries}
+              onClick={() => loadInquiries()}
+              disabled={fetching}
               className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm cursor-pointer"
             >
               새로고침
@@ -198,7 +224,7 @@ export default function AdminInquiriesPage() {
 
         {/* 통계 */}
         <div className="mb-6 text-white/60">
-          총 {inquiries.length}건의 문의사항
+          불러온 문의 {inquiries.length}건
           {inquiries.filter((inq) => inq.completed).length > 0 && (
             <span className="ml-2">
               (완료: {inquiries.filter((inq) => inq.completed).length}건)
@@ -206,8 +232,18 @@ export default function AdminInquiriesPage() {
           )}
         </div>
 
+        <p className="mailbox-note">
+          Gmail로 접수된 문의를 표시합니다. 전환 이전의 DB 문의는 자동으로
+          이동하지 않습니다.
+        </p>
+        {error && (
+          <div role="alert" className="mailbox-error">
+            {error}
+          </div>
+        )}
+        {fetching && <p role="status">메일함에서 문의를 불러오고 있습니다…</p>}
         {/* 문의사항 목록 */}
-        {inquiries.length === 0 ? (
+        {inquiries.length === 0 && !fetching && !error && hasLoaded ? (
           <div className="text-center py-20 text-white/60">
             문의사항이 없습니다.
           </div>
@@ -271,7 +307,7 @@ export default function AdminInquiriesPage() {
                     onClick={() => handleDelete(inquiry.id)}
                     className="text-red-400 hover:text-red-300 text-sm px-3 py-1 rounded hover:bg-red-500/10 transition-colors flex-shrink-0 cursor-pointer"
                   >
-                    삭제
+                    보관
                   </button>
                 </div>
 
@@ -331,6 +367,16 @@ export default function AdminInquiriesPage() {
               </div>
             ))}
           </div>
+        )}
+        {nextCursor && (
+          <button
+            className="mailbox-more"
+            type="button"
+            disabled={fetching}
+            onClick={() => loadInquiries({ append: true })}
+          >
+            이전 문의 더 보기
+          </button>
         )}
       </div>
     </div>

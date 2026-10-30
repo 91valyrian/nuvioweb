@@ -1,16 +1,9 @@
 "use client";
-import { SITE_URL } from "@/lib/site";
+import { useRef, useState } from "react";
+import { SITE_URL, jsonLd } from "@/lib/site";
 import { trackLead } from "@/lib/analytics";
-import { useEffect, useState } from "react";
-import Input from "./_components/Input";
-import Textarea from "./_components/Textarea";
-import Checkbox from "./_components/Checkbox";
-import Radiobox from "./_components/Radiobox";
-import SubVisual from "@/components/SubVisual";
-import Modal from "@/components/Modal";
-import Policy from "./_components/Policy";
-
-const SERVICE_OPTIONS = [
+import "./contact.css";
+const SERVICES = [
   "브랜딩 홈페이지",
   "랜딩 페이지",
   "온라인 쇼핑몰",
@@ -18,393 +11,391 @@ const SERVICE_OPTIONS = [
   "검색엔진 최적화",
   "웹 접근성 최적화",
   "사이트 유지 관리",
+  "아직 정하지 못했어요",
 ];
-
-const BUDGET_OPTIONS = [
+const BUDGETS = [
   "100만원 이하",
   "200만원 이하",
   "300만원 이하",
   "500만원 이하",
   "1,000만원 이하",
-  "5,000만원 이하",
+  "상담 후 결정",
 ];
-
+function Field({
+  name,
+  label,
+  required = false,
+  type = "text",
+  hint,
+  ...props
+}) {
+  return (
+    <div className="contact-field">
+      <label htmlFor={`contact-${name}`}>
+        {label}{" "}
+        {required ? (
+          <span className="contact-required">필수</span>
+        ) : (
+          <span className="contact-optional">선택</span>
+        )}
+      </label>
+      <input
+        id={`contact-${name}`}
+        name={name}
+        type={type}
+        required={required}
+        aria-describedby={hint ? `contact-${name}-hint` : undefined}
+        {...props}
+      />
+      {hint && (
+        <p id={`contact-${name}-hint`} className="contact-field-hint">
+          {hint}
+        </p>
+      )}
+    </div>
+  );
+}
 export default function ContactPage() {
-  const [ok, setOk] = useState(false);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [policyOpen, setPolicyOpen] = useState(false);
-  // 결과 모달 상태
-  const [result, setResult] = useState({
-    open: false,
-    type: "success",
-    message: "",
-  });
-  const openResult = (type, message) =>
-    setResult({ open: true, type, message });
-  const closeResult = () => setResult((prev) => ({ ...prev, open: false }));
-
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape") {
-        setPolicyOpen(false);
-        setResult((prev) => ({ ...prev, open: false }));
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  async function onSubmit(e) {
-    e.preventDefault();
-    setLoading(true);
-    setOk(false);
+  const [status, setStatus] = useState("idle"),
+    [error, setError] = useState("");
+  const busy = useRef(false),
+    resultRef = useRef(null),
+    policyRef = useRef(null);
+  async function onSubmit(event) {
+    event.preventDefault();
+    if (busy.current) return;
+    busy.current = true;
+    setStatus("sending");
     setError("");
-
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-
-    const services = Array.from(
-      form.querySelectorAll('input[name="services"]:checked'),
-    ).map((el) => el.value);
-    const budgets = Array.from(
-      form.querySelectorAll('input[name="budget"]:checked'),
-    ).map((el) => el.value);
-
-    const rawPhone = (fd.get("phone") || "").toString();
-    const phone = rawPhone.replace(/\D/g, "");
-
-    const payload = {
-      services,
-      name: fd.get("name"),
-      company: fd.get("company"),
-      position: fd.get("position"),
-      phone,
-      email: fd.get("email"),
-      url: fd.get("url"),
-      budget: budgets,
-      message: fd.get("message"),
-      consent: fd.get("consent") ? true : false,
-    };
-
+    const form = event.currentTarget,
+      fd = new FormData(form);
+    const payload = Object.fromEntries(
+      [
+        "name",
+        "email",
+        "phone",
+        "company",
+        "url",
+        "message",
+        "websiteTrap",
+      ].map((key) => [key, String(fd.get(key) || "")]),
+    );
+    payload.services = fd.getAll("services");
+    payload.budget = fd.getAll("budget");
+    payload.consent = fd.get("consent") === "on";
     try {
-      const res = await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(45000),
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data.ok) {
-        setError(data?.error || "전송 중 오류가 발생했습니다.");
-        openResult(
-          "error",
-          data?.error ||
-            "전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.",
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.ok !== true)
+        throw new Error(
+          data.error ||
+            "전송을 완료하지 못했습니다. 잠시 후 다시 시도해 주세요.",
         );
-      } else {
-        trackLead("contact");
-        setOk(true);
-        openResult(
-          "success",
-          "문의가 접수되었습니다. 확인 후 연락드리겠습니다.",
-        );
-        form.reset();
-      }
-    } catch (err) {
-      setError("네트워크 오류가 발생했습니다.");
-      openResult(
-        "error",
-        "네트워크 오류가 발생했습니다. 연결 상태를 확인해 주세요.",
+      trackLead("contact");
+      form.reset();
+      setStatus("success");
+    } catch (cause) {
+      setStatus("error");
+      setError(
+        cause.name === "TimeoutError"
+          ? "응답이 지연되고 있습니다. 작성 내용은 유지됩니다. 잠시 후 메일 수신 여부를 확인하거나 직접 연락해 주세요."
+          : cause.message || "연결 상태를 확인한 뒤 다시 시도해 주세요.",
       );
     } finally {
-      setLoading(false);
+      busy.current = false;
+      requestAnimationFrame(() => resultRef.current?.focus());
     }
   }
-
   return (
-    <main>
-      <SubVisual value="Contact" image="/images/contact/visual.webp" />
-
-      <section className="">
-        <div className="container py-[150px]">
-          <form onSubmit={onSubmit}>
-            {/* Services (multiple) */}
-            <fieldset className="flex flex-wrap md:flex-nowrap gap-[50px] md:gap-[20px]">
-              <h2 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
-                <legend className="text-[52px] md:text-[39px] leading-[62px] md:leading-[49px] font-bold rotate-x-up">
-                  필요한 서비스를
-                  <br />
-                  선택해주세요.
-                  <span className="block text-[28px] md:text-[20px] text-neutral-500 mt-[10px] font-medium">
-                    중복 선택 가능
-                  </span>
-                </legend>
-              </h2>
-              <div className="w-full flex flex-wrap gap-[20px]">
-                {SERVICE_OPTIONS.map((label) => (
-                  <Checkbox
-                    key={label}
-                    name="services"
-                    value={label}
-                    label={label}
-                    className="w-[calc(50%_-_10px)] md:w-[calc(33.3333%_-_13.4px)] rotate-x-up"
-                  />
-                ))}
+    <main className="contact-inquiry">
+      <section className="contact-heading">
+        <p className="contact-eyebrow">CONTACT NUVIO</p>
+        <h1>
+          어떤 홈페이지를
+          <br />
+          만들고 싶으신가요?
+        </h1>
+        <p>
+          정리된 기획안이 없어도 괜찮습니다.
+          <br />
+          필요한 내용을 남겨주시면 함께 방향을 찾아드릴게요.
+        </p>
+      </section>
+      <div className="contact-layout">
+        <aside className="contact-guide">
+          <h2>문의 후 이렇게 진행돼요</h2>
+          <ol>
+            <li>
+              <span>01</span>
+              <div>
+                <strong>문의 내용 확인</strong>
+                <p>목적과 필요한 기능을 살펴봅니다.</p>
               </div>
-            </fieldset>
-
-            {/* Budget (multiple) */}
-            <fieldset className="flex flex-wrap md:flex-nowrap gap-[50px] md:gap-[20px] mt-[150px]">
-              <h2 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
-                <legend className="text-[52px] md:text-[39px] leading-[62px] md:leading-[49px] font-bold rotate-x-up">
-                  프로젝트 예산을
-                  <br />
-                  선택해주세요.
-                </legend>
-              </h2>
-              <div className="w-full flex flex-wrap gap-[20px]">
-                {BUDGET_OPTIONS.map((label) => (
-                  <Radiobox
-                    key={label}
-                    name="budget"
-                    value={label}
-                    label={label}
-                    className="w-[calc(50%_-_10px)] md:w-[calc(33.3333%_-_13.4px)] rotate-x-up"
-                  />
-                ))}
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <strong>방향과 범위 상담</strong>
+                <p>프로젝트에 맞는 구성과 일정을 논의합니다.</p>
               </div>
-            </fieldset>
-
-            {/* Two-column grid for basics */}
-            <fieldset className="flex flex-wrap md:flex-nowrap gap-[50px] md:gap-[20px] mt-[150px]">
-              <h2 className="w-full md:w-[335px] xl:w-[465px] shrink-0">
-                <legend className="text-[52px] md:text-[39px] leading-[62px] md:leading-[49px] font-bold rotate-x-up">
-                  기본 정보를
-                  <br />
-                  입력해주세요.
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <strong>견적 및 진행 안내</strong>
+                <p>합의한 범위를 바탕으로 제안드립니다.</p>
+              </div>
+            </li>
+          </ol>
+          <div className="contact-direct">
+            <p>바로 이야기하고 싶다면</p>
+            <a href="mailto:91.valyrian@gmail.com">91.valyrian@gmail.com ↗</a>
+            <a href="tel:01099286110">010-9928-6110 ↗</a>
+            <a
+              href="https://pf.kakao.com/_Rhhcn/chat"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              카카오톡으로 문의하기 ↗
+            </a>
+          </div>
+        </aside>
+        <div className="contact-form-card">
+          {status === "success" ? (
+            <section
+              className="contact-success"
+              ref={resultRef}
+              tabIndex={-1}
+              role="status"
+            >
+              <span className="contact-success-icon" aria-hidden="true">
+                ✓
+              </span>
+              <h2>문의가 전송되었습니다.</h2>
+              <p>
+                남겨주신 내용을 확인한 뒤 입력하신 연락처로 연락드리겠습니다.
+              </p>
+              <button type="button" onClick={() => setStatus("idle")}>
+                새 문의 작성하기
+              </button>
+            </section>
+          ) : (
+            <form onSubmit={onSubmit} aria-busy={status === "sending"}>
+              <div className="contact-form-heading">
+                <h2>프로젝트 문의</h2>
+                <p>
+                  <span className="contact-required">필수</span> 표시만
+                  입력하셔도 문의할 수 있습니다.
+                </p>
+              </div>
+              <fieldset disabled={status === "sending"}>
+                <legend>
+                  <span>01</span> 어떤 도움이 필요하신가요?
                 </legend>
-              </h2>
-
-              <div className="w-full">
-                <div className="grid grid-cols-2 gap-[15px]">
-                  <Input
+                <p className="contact-hint">
+                  여러 개 선택할 수 있어요. 아직 정하지 못하셔도 괜찮습니다.
+                </p>
+                <div className="contact-choices">
+                  {SERVICES.map((label) => (
+                    <label className="contact-choice" key={label}>
+                      <input type="checkbox" name="services" value={label} />
+                      <span>{label}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+              <fieldset disabled={status === "sending"}>
+                <legend>
+                  <span>02</span> 연락받으실 정보를 알려주세요.
+                </legend>
+                <div className="contact-fields">
+                  <Field
                     name="name"
-                    label="Full name"
+                    label="이름 / 담당자명"
                     required
-                    placeholder="Full name"
-                    className="rotate-x-up"
+                    autoComplete="name"
+                    maxLength={100}
+                    placeholder="성함을 입력해 주세요"
                   />
-                  <Input
-                    name="company"
-                    label="Company"
-                    placeholder="Company"
-                    className="rotate-x-up"
-                  />
-
-                  <Input
-                    name="position"
-                    label="Position"
-                    placeholder="Position"
-                    className="mt-[40px] rotate-x-up"
-                  />
-                  <Input
-                    name="phone"
-                    label="Phone Number"
-                    required
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    placeholder="Phone Number"
-                    className="mt-[40px] rotate-x-up"
-                    onChange={(e) => {
-                      e.target.value = e.target.value.replace(/\D/g, "");
-                    }}
-                  />
-
-                  <Input
+                  <Field
                     name="email"
+                    label="이메일"
                     type="email"
-                    label="E-mail"
                     required
-                    placeholder="E-mail"
-                    className="mt-[40px] rotate-x-up"
+                    autoComplete="email"
+                    maxLength={254}
+                    placeholder="답변받으실 이메일 주소"
                   />
-                  <Input
-                    name="url"
-                    type="url"
-                    label="Url"
-                    placeholder="Url"
-                    className="mt-[40px] rotate-x-up"
+                  <Field
+                    name="phone"
+                    label="연락처"
+                    type="tel"
+                    autoComplete="tel"
+                    maxLength={40}
+                    placeholder="010-0000-0000"
+                  />
+                  <Field
+                    name="company"
+                    label="회사 / 브랜드명"
+                    autoComplete="organization"
+                    maxLength={200}
+                    placeholder="회사명 또는 브랜드명"
+                  />
+                  <div className="contact-full">
+                    <Field
+                      name="url"
+                      label="기존 홈페이지"
+                      type="url"
+                      autoComplete="url"
+                      maxLength={1000}
+                      placeholder="https://"
+                      hint="현재 운영 중인 홈페이지가 있다면 알려주세요."
+                    />
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset disabled={status === "sending"}>
+                <legend>
+                  <span>03</span> 프로젝트를 간단히 소개해 주세요.
+                </legend>
+                <div className="contact-field">
+                  <label htmlFor="contact-message">
+                    문의 내용 <span className="contact-required">필수</span>
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    required
+                    rows={6}
+                    maxLength={8000}
+                    placeholder={
+                      "예) 회사 소개와 제작 사례를 보여주는 홈페이지가 필요해요.\n원하는 일정, 필요한 기능, 참고 사이트 등을 자유롭게 적어 주세요."
+                    }
                   />
                 </div>
-
-                <Textarea
-                  name="message"
-                  label="Message"
-                  placeholder="Message"
-                  className="mt-[40px] rotate-x-up"
-                  rows={6}
+                <p className="contact-budget-title">
+                  예상 예산 <span className="contact-optional">선택</span>
+                </p>
+                <div className="contact-choices contact-budget">
+                  {BUDGETS.map((label) => (
+                    <label className="contact-choice" key={label}>
+                      <input
+                        type="radio"
+                        name="budget"
+                        value={label}
+                        defaultChecked={label === "상담 후 결정"}
+                      />
+                      <span>{label}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+              <div className="contact-trap" aria-hidden="true">
+                <label htmlFor="contact-website-trap">
+                  이 항목은 비워 두세요
+                </label>
+                <input
+                  id="contact-website-trap"
+                  name="websiteTrap"
+                  tabIndex={-1}
+                  autoComplete="off"
                 />
-
-                <div className="mt-[50px] mb-[10px] flex items-center gap-4 rotate-x-up">
-                  <label className="inline-flex items-center gap-2 cursor-pointer select-none ">
-                    {/* ✅ peer는 반드시 먼저 와야 함 */}
-                    <input
-                      type="checkbox"
-                      name="consent"
-                      required
-                      className="peer sr-only"
-                    />
-
-                    {/* ✅ 체크박스 UI: svg는 기본 숨김, span에서 peer-checked로 자식 svg 토글 */}
-                    <span
-                      aria-hidden="true"
-                      className="
-          relative grid place-items-center
-          w-[36px] h-[36px]
-          md:w-[26px] md:h-[26px]
-          border-3 border-white/90 bg-transparent
-          transition-colors
-          peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-white/60
-          peer-checked:[&>svg]:opacity-100
-        "
-                    >
-                      <svg
-                        viewBox="0 0 20 20"
-                        className="w-[26px] h-[26px] md:w-[16px] md:h-[16px] text-white opacity-0 transition-opacity duration-150 pointer-events-none"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M4 10l4 4 8-8" />
-                      </svg>
-                    </span>
-
-                    <span className="text-[30px] md:text-[20px] leading-none text-white decoration-white/70">
-                      <b className="underline underline-offset-[3px] ">
-                        개인정보 처리방침
-                      </b>
-                      에 동의합니다.
-                    </span>
-                  </label>
-
-                  {/* 우측: 보기 버튼 */}
-                  <button
-                    type="button"
-                    onClick={() => setPolicyOpen(true)}
-                    className="rotate-x-up text-[28px] md:text-[18px] px-4 py-2 border border-white/30 rounded-[9999px] hover:border-white/80 hover:bg-white/5 transition cursor-pointer"
-                    aria-haspopup="dialog"
-                    aria-controls="policy-dialog"
-                    aria-expanded={policyOpen}
-                  >
-                    내용 보기
-                  </button>
-
-                  <a
-                    href="https://pf.kakao.com/_Rhhcn/chat" // 실제 카카오 채널 URL로 변경
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hidden md:inline-flex items-center px-4 py-2 rounded-[9999px] bg-[#FEE500] text-black font-semibold text-[28px] md:text-[18px] shadow-[0_0_30px_rgba(255,229,0,0.4)] hover:shadow-[0_0_60px_rgba(255,229,0,0.6)] transition-all duration-300"
-                  >
-                    카카오톡으로 문의하기
+              </div>
+              <div className="contact-consent">
+                <label>
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    required
+                    disabled={status === "sending"}
+                  />
+                  <span>
+                    상담을 위한 개인정보 수집·이용에 동의합니다. <b>필수</b>
+                  </span>
+                </label>
+                <button
+                  type="button"
+                  onClick={() => policyRef.current.showModal()}
+                >
+                  수집 항목 확인
+                </button>
+              </div>
+              {status === "error" && (
+                <div
+                  className="contact-error"
+                  role="alert"
+                  ref={resultRef}
+                  tabIndex={-1}
+                >
+                  <strong>아직 전송되지 않았어요.</strong>
+                  <p>{error}</p>
+                  <a href="mailto:91.valyrian@gmail.com">
+                    메일로 직접 문의하기 ↗
                   </a>
                 </div>
-
-                <a
-                  href="https://pf.kakao.com/_Rhhcn/chat" // 실제 카카오 채널 URL로 변경
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex md:hidden items-center px-4 py-2 rounded-[9999px] bg-[#FEE500] text-black font-semibold text-[28px] md:text-[18px] shadow-[0_0_30px_rgba(255,229,0,0.4)] hover:shadow-[0_0_60px_rgba(255,229,0,0.6)] transition-all duration-300"
-                >
-                  카카오톡으로 문의하기
-                </a>
-
-                <div className="flex justify-end mt-[50px] rotate-x-up">
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="btn text-[34px] md:text-[31px] w-[160px] h-[160px] rounded-[9999px] border-2"
-                  >
-                    {loading ? "Sending..." : "Send"}
-                  </button>
-                </div>
-              </div>
-            </fieldset>
-          </form>
+              )}
+              <button
+                className="contact-submit"
+                type="submit"
+                disabled={status === "sending"}
+              >
+                {status === "sending"
+                  ? "문의를 보내고 있어요…"
+                  : "프로젝트 문의 보내기"}
+                <span aria-hidden="true">↗</span>
+              </button>
+              <p className="contact-submit-note" aria-live="polite">
+                {status === "sending"
+                  ? "전송이 끝날 때까지 잠시만 기다려 주세요."
+                  : "전송이 완료되면 접수 결과를 이 화면에서 안내합니다."}
+              </p>
+            </form>
+          )}
         </div>
-      </section>
-
-      <Modal
-        open={policyOpen}
-        onClose={() => setPolicyOpen(false)}
-        title="개인정보 처리방침"
-        variant="default"
-        size="lg"
-        ariaLabelledby="policy-title"
+      </div>
+      <dialog
+        className="contact-policy"
+        ref={policyRef}
+        aria-labelledby="contact-policy-title"
       >
-        <Policy />
-        {/* footer */}
-        {(() => null)()}
-      </Modal>
-
-      <Modal
-        open={result.open}
-        onClose={closeResult}
-        title={result.type === "success" ? "전송 완료" : "전송 실패"}
-        variant={result.type === "success" ? "success" : "error"}
-        size="md"
-        ariaLabelledby="result-title"
-        footer={
-          result.type === "success" ? (
-            <button
-              type="button"
-              onClick={closeResult}
-              className="px-4 py-2 rounded-lg border border-main text-main hover:border-main text-[28px] md:text-[18px] cursor-pointer"
-            >
-              확인
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={closeResult}
-              className="px-4 py-2 rounded-lg border border-white/20 hover:border-white/60 hover:bg-white/5 text-[28px] md:text-[18px] cursor-pointer"
-            >
-              닫기
-            </button>
-          )
-        }
-      >
-        <p className="text-[28px] md:text-[18px]">{result.message}</p>
-      </Modal>
-
-      {/* JSON-LD: ContactPage + Organization */}
+        <h2 id="contact-policy-title">상담을 위한 개인정보 수집·이용</h2>
+        <p>입력하신 정보는 프로젝트 상담과 답변을 위해 이용합니다.</p>
+        <dl>
+          <dt>수집 항목</dt>
+          <dd>
+            이름, 이메일, 선택 입력한 연락처·회사명·홈페이지, 문의 내용과 선택한
+            서비스·예산
+          </dd>
+          <dt>이용 목적</dt>
+          <dd>문의 확인, 상담 및 견적 안내, 답변을 위한 연락</dd>
+          <dt>문의처</dt>
+          <dd>
+            <a href="mailto:91.valyrian@gmail.com">91.valyrian@gmail.com</a>
+          </dd>
+        </dl>
+        <p>
+          수집·이용에 동의하지 않을 수 있으나, 동의하지 않으면 이 양식으로
+          문의를 접수할 수 없습니다.
+        </p>
+        <button type="button" onClick={() => policyRef.current.close()}>
+          확인하고 닫기
+        </button>
+      </dialog>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
-            {
-              "@context": "https://schema.org",
-              "@type": "ContactPage",
-              name: "홈페이지 제작 문의 · 견적 요청",
-              url: `${SITE_URL}/contact`,
-              inLanguage: "ko",
-            },
-            {
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "nuvio",
-              url: SITE_URL,
-              contactPoint: [
-                {
-                  "@type": "ContactPoint",
-                  contactType: "customer support",
-                  availableLanguage: ["ko"],
-                  url: `${SITE_URL}/contact`,
-                },
-              ],
-            },
-          ]),
+          __html: jsonLd({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            name: "홈페이지 제작 문의 · 견적 요청",
+            url: `${SITE_URL}/contact`,
+            inLanguage: "ko",
+          }),
         }}
       />
     </main>

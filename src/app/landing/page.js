@@ -346,6 +346,7 @@ export default function LandingPage() {
       url: fd.get("website") || "",
       message: fd.get("inquiry") || "",
       budget: [],
+      consent: fd.get("privacy") === "on",
       services: plan ? [plan] : [],
     };
     setIsSubmitting(true);

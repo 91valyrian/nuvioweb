@@ -6,6 +6,8 @@ module.exports = {
       propList: ["*"],
       // The legacy site scales rem with viewport width. Keep editorial text readable.
       selectorBlackList: [
+        /\.inquiries-admin/,
+        /\.contact-inquiry/,
         /\.work-detail-content/,
         /\.column-article/,
         /\.column-card/,

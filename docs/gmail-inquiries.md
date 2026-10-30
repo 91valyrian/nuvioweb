@@ -1,0 +1,40 @@
+# Gmail 문의 접수와 관리자 목록
+
+문의 접수는 Supabase 저장 여부와 관계없이 Gmail SMTP가 수신자를 수락하면 성공합니다. DB를 새로 만들거나 별도 서버를 운영하지 않습니다. 수신 주소는 `91.valyrian@gmail.com`입니다. SMTP 수락은 메일함 최종 도착을 보장하지 않으므로 운영 메일함도 확인해야 합니다.
+
+## Vercel 환경 변수
+
+기존 운영 설정을 유지합니다.
+
+- `SMTP_HOST`: `smtp.gmail.com`
+- `SMTP_PORT`: `465`
+- `SMTP_USER`: `91.valyrian@gmail.com`
+- `SMTP_PASS`: 기존 Google 앱 비밀번호. 비밀번호를 코드나 문서에 적지 않습니다.
+- `MAIL_FROM`, `MAIL_TO`: 새 경로에서는 사용하지 않습니다. 발신자는 SMTP 계정, 수신자는 위 Gmail 주소로 고정합니다.
+- `IMAP_PASS`: 선택. SMTP 계정이 위 Gmail 계정이면 기존 `SMTP_PASS`를 재사용합니다.
+- `ADMIN_PASSWORD`: 관리자 비밀번호, 최소 12자.
+- `SESSION_SECRET`: 서명용 무작위 비밀값, 최소 32자. 관리자 비밀번호와 별개로 설정합니다.
+
+관리자 인증 설정이 없거나 조건을 충족하지 않으면 로그인을 차단합니다. 기존 서명 없는 로그인 쿠키는 무효가 되므로 다시 로그인해야 합니다. 환경 변수 변경 후에는 새 배포가 필요합니다.
+
+Google 2단계 인증과 앱 비밀번호를 사용합니다. 관리자 메일함 접근은 `imap.gmail.com:993`의 TLS 연결입니다. SMTP 수신 성공만으로 IMAP 연결 성공까지 확인된 것은 아닙니다. 조직 계정의 IMAP 제한이 있다면 계정 정책을 확인해야 합니다.
+
+## 보관과 조회
+
+새 문의 메일에는 `X-Nuvio-Inquiry: v1` 헤더와 `nuvio-inquiry.json` 첨부를 넣습니다. 관리자 목록은 받은편지함에서 이 형식의 메일만 읽습니다. JSON 첨부는 목록에 필요한 원본이며 삭제하거나 변경하지 않아야 합니다. 일반 메일은 목록이나 상태 변경 대상이 아닙니다.
+
+- 완료 처리: Gmail 별표를 켜거나 끕니다.
+- 보관 처리: `NUVIO-Inquiries-Archive` 폴더로 이동합니다. 영구 삭제하지 않습니다.
+- 받은편지함에서 직접 이동·삭제하면 관리자 목록에서도 빠집니다.
+- 메일함 연결 실패는 오류로 표시하며 빈 목록으로 위장하지 않습니다.
+- 이전 Supabase 문의와 기존 형식의 메일은 자동 이관하지 않습니다. 기존 DB 데이터는 삭제하지 않습니다.
+
+메일함 용량과 계정 접근은 계속 관리해야 합니다. 무료 메일함도 무제한 저장소는 아닙니다. 접수 내용은 메일 본문과 JSON 첨부에 저장됩니다. 분석 이벤트와 외부 알림에는 문의 개인정보를 보내지 않습니다.
+
+## 검증
+
+`node --test tests/inquiry.test.mjs`, `npm run test:seo`, `npm run check:content`, `npm run build`를 실행합니다. 테스트는 MIME 생성 및 가짜 SMTP/IMAP 연결만 사용합니다. 운영 테스트 문의는 자동으로 보내지 않습니다.
+
+문의 페이지는 전송 중 중복 클릭을 막고 실패 시 입력 내용을 유지합니다. 네트워크 시간 초과 시 실제 수신 여부가 불확실할 수 있으므로 메일함 확인 후 재시도합니다.
+
+공식 문서: [Gmail IMAP/SMTP](https://developers.google.com/workspace/gmail/imap/imap-smtp), [Google 앱 비밀번호](https://support.google.com/accounts/answer/185833?hl=ko).

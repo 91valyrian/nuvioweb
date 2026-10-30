@@ -1,0 +1,32 @@
+.inquiries-admin .mailbox-note {
+  color: #b9c1d8;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.inquiries-admin .mailbox-error {
+  padding: 18px;
+  border: 1px solid #d98888;
+  border-radius: 12px;
+  background: #52252c;
+  color: #ffe0e0;
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.inquiries-admin .mailbox-more {
+  margin: 24px auto;
+  display: block;
+  padding: 14px 24px;
+  font-size: 16px;
+  background: #343d66;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+.inquiries-admin button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+.inquiries-admin input[type="password"] {
+  font-size: 16px;
+}
