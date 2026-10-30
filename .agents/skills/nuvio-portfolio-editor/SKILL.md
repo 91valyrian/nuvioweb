@@ -1,54 +1,62 @@
 ---
 name: nuvio-portfolio-editor
-description: Create or revise a nuvioweb portfolio from a user-provided completed website URL, inspecting desktop and mobile and creating fresh screenshot-based presentation layouts in the existing work MDX format. Use for nuvio portfolio, 제작 사례, and URL-to-portfolio requests; not for column writing or copying a website's code.
+description: Create or revise nuvio portfolio entries from a completed website URL, generate coordinated thumbnail and cover images, and integrate only user-provided images into the detail body. Use for nuvio portfolio, 제작 사례, and portfolio image updates; not for columns or copying website code.
 ---
 
 # Nuvio portfolio editor
 
-Create the actual portfolio entry and its image assets in the nuvioweb repository. Read [references/work-format.md](references/work-format.md) for the current data/rendering contract and [references/capture-and-layout.md](references/capture-and-layout.md) before inspecting and presenting a site.
+Work in the resolved nuvioweb repository and read its `AGENTS.md`. Read [references/work-format.md](references/work-format.md) for the renderer contract and [references/capture-and-layout.md](references/capture-and-layout.md) for source inspection, concept images and user-supplied body integration.
 
-Locate the repository from the current working directory or this skill's resolved symlink location. Read its `AGENTS.md`. If invoked outside the project, work in the resolved nuvioweb repository rather than creating `content/work` in the unrelated current directory.
+## Default delivery: current SUNNY pattern
+
+The user supplies a completed website URL and the final detail-body image(s). Deliver a repository-ready case: factual Korean metadata and overview, one newly generated list thumbnail, a coordinated wide cover, and optimized supplied body image(s). Use `content/work/sunnyrf.mdx` and its **current referenced assets** as an integration example, not its obsolete boards, historical evidence or literal copy. Match its delivery structure, while adapting content and visual direction to the supplied business.
+
+Inspect the URL and supplied images before writing. Derive the brand name, audience, offering, visible information hierarchy, design character and inquiry path from observed evidence. Write a natural, specific title, concise summary, overview, SEO title/description/keywords and accurate image alt text. Explain what visitors can find and how the page supports the site's purpose. Avoid generic praise, keyword repetition and claims about unverified implementation or results. The current work renderer displays frontmatter and body images, not a long MDX article: put the introduction in the supported fields.
+
+Complete routine choices autonomously when both inputs are present; do not ask for approval of every generated asset. Missing scope/year/results must stay omitted or conservative. Missing URL/body assets should only block the work that depends on them.
+
+## Choose the requested scope
+
+For a new case, inspect the user's completed website URL, write the work MDX and generate a project-specific thumbnail and coordinated wide cover. **The detail body uses only images supplied by the user.** Do not capture, generate, compose or insert extra body images, screenshot boards, mobile montages, decorative artwork or placeholders.
+
+For an existing case's body-image update, use exactly the files and order requested. Preserve its slug, original registration date, thumbnail, cover and other unrelated metadata unless asked to change them. Do not re-inspect the source or generate concept art for a body-only replacement. Explicit limits such as “only this image” determine the final body image count.
+
+If body images have not been supplied for a new case, finish independent copy and thumbnail/cover work, report the missing body assets and request them. Do not keep an old board or invent a substitute. Do not claim the case's body is complete until supplied files are integrated.
 
 ## Inspect the supplied website
 
-Treat the user's supplied URL as the source of the case study. In an Orca session, use Orca's built-in browser through the `orca-cli` skill for site inspection, interaction, screenshots and local UI previews. Load that skill and its version-matched `references/browser.md` before driving a tab; follow its executable resolution and documented commands. Do not default to Chrome or the ChatGPT in-app browser in this environment. Honor an explicitly requested browser instead.
+Use the URL as the factual source: identify the public brand, audience, information structure, design and inquiry path. In Orca, load `orca-cli` and its version-matched `references/browser.md`, then use the built-in browser. Outside Orca, use available authorized browser tools; honor an explicitly requested browser.
 
-Inspect the public site, its desktop navigation and meaningful subpages, and its actual responsive mobile rendering. Follow the Orca workflow in [references/capture-and-layout.md](references/capture-and-layout.md). Outside Orca, use available authorized browser tools. Record the final source URL, inspection date, viewport dimensions and which pages/screens were actually observed. Use documented capture/viewport capabilities; do not invent APIs or bypass an access denial.
+Inspect actual desktop/mobile rendering where available and record final URL, date, observed pages and viewport sizes. This inspection informs copy and concept-image direction; it does not authorize publishing browser captures as body images. A desktop crop is not evidence of a mobile rendering. If access or mobile inspection is unavailable, report the exact limitation rather than implying verification.
 
-Read what the business offers, identify its public brand name, audience, main information structure and visible inquiry/reservation path. Describe observable design and usability choices. A user saying they made the site establishes it as their project, but does not establish a particular tech stack, project year, SEO implementation, division of work or measured results. Use supplied facts; omit unconfirmed optional details, and ask only if a missing fact materially blocks the requested entry.
+Use supplied or verified work scope and project year. A URL does not establish a tech stack, SEO work, roles, client outcome or measured improvement. Preserve confirmed source facts during image-only updates. Never describe a supplied image as a public site capture if it shows something else.
 
-A URL or site summary alone is insufficient evidence for a finished visual portfolio. If access, capture or genuine mobile inspection is unavailable, continue independent content preparation, identify the exact missing evidence, and leave the affected imagery incomplete. Never substitute a desktop crop or old portfolio image and claim the mobile site was checked.
+## Generate thumbnail and cover
 
-## Keep the format; create new visuals
+Inspect two work MDX files/current renderers for integration and 2–4 list thumbnails for photographic mood, scale, lighting and crop. Do not copy their pixels, branding or old board layouts.
 
-Inspect two existing work MDX files and current renderers for data/integration. Inspect 2–4 representative existing **list thumbnails** to match the grid's photographic mood, subject scale, lighting, contrast and crop. Record the references used. Do not reuse their pixels, copy their subject/branding or imitate previous full portfolio-board layouts; existing case-body images remain excluded as presentation references.
+Use `imagegen` for one new industry/brand-matched conceptual list thumbnail. Keep a coherent photographic image: no website/device collages, headlines, badges, invented client products or client locations. Honor a user-selected photo/logo instead of generation when requested.
 
-Create a project-specific list thumbnail using the `imagegen` skill by default. Derive its subject from the real site's industry, audience and brand colors, and match the inspected grid's image-led photographic treatment. A product is optional: an appropriate symbolic object, material detail or industry setting may communicate the project better. Keep one coherent image without website/device collages, article-cover headlines, explanatory copy or badges. Do not invent client logos, product designs, results or an actual client location. Store that it is an AI-generated conceptual thumbnail, not project evidence. Use a supplied photograph/logo exactly when the user explicitly requests that instead. Persist the final image and generation prompt/provenance, preview its real list crop, and preserve actual source captures in the case board.
+Generate the coordinated wide cover using the approved thumbnail as reference: same subject family, palette and lighting, central crop-safe composition, no added headlines or UI collage. Record prompts and AI-concept provenance separately; concepts are not actual client or website evidence. Inspect final files and real card/hero crops. Save revised assets with versioned paths.
 
-Generate the detail hero (`cover`) with imagegen as a coordinated wide image based on the approved thumbnail. Match subject, brand palette, lighting and photographic mood; use the approved thumbnail as a visual reference where supported. Keep central crop-safe framing, no UI collage or added headlines. Save the hero as a versioned asset and record its AI-concept provenance separately. Both thumbnail and hero may be conceptual imagery; all website screens in the case board must remain authentic PC/mobile captures.
+## Integrate user-provided body images
 
-Build a fresh visual direction from the supplied website: its colors, type, composition, content density and responsive behavior. Create real screenshots of that site, then arrange them into a new detailed portfolio presentation with desktop/mobile and useful section/detail views. Keep the generated thumbnail and hero separate from these authentic captures. Follow the capture/layout reference. A new presentation layout is expected; a single unchanged full-page screenshot is not the completed portfolio.
+Inspect each supplied file. Copy it into `public/images/work/<slug>/` using a versioned directory when updating. Preserve its aspect ratio, content, order and original crop. Optimize file size as described in the image reference; do not redraw, crop, frame, composite, add labels or apply generative edits unless requested.
 
-Use real source pixels for all website UI. Prefer deterministic HTML/CSS, SVG framing or an image compositor to assemble screenshot boards. Do not use generative AI to redraw website text, logos, layouts, responsive states or results. Use generated thumbnail/concept artwork separately from authentic screen captures; it must never stand in for observed desktop/mobile UI.
+Use Markdown image references matching the live renderer. The main body and landing modal must show the supplied content, without appending previous boards or concept art. Preserve `portfolio.webp`/`portfolio.png` integration: for one image use an optimized versioned `portfolio.webp`; for multiple images see the format reference. Never compose multiple supplied files into a new board without permission.
 
-## Write and integrate
+Reject fully transparent, blank or corrupt inputs before replacing a working image. Ask for a valid source instead of publishing an empty body.
 
-Create `content/work/<slug>.mdx` and new assets under `public/images/work/<slug>/`. Preserve an existing entry's slug and original registration date when updating it; replace imagery non-destructively with versioned files when needed. Keep new entry dates accurate and its year factual.
+Keep existing list thumbnail, hero and `thumbnail2` unchanged for body-only updates. For new cases, `thumbnail2` may use the supplied appropriate image or fall back to `thumbnail`; do not create a screenshot asset just to fill that field.
 
-Write Korean `seoTitle`, `seoDesc`, industry-appropriate `seoKeywords`, `client`, `summary`, a concise observed project overview, the source `href`, and the actual confirmed work scope. Never copy another project's metadata or keyword list. Distinguish design intent from measured outcomes. Match metadata to the real site rather than inserting generic conversion claims.
+Keep detail content within the current readable body widths (1200 physical pixels, prose 1000) with responsive gutters. Hero width follows the site's current layout.
 
-Respect the MDX image extraction and `portfolio.webp` API contract in the format reference. Link the case to relevant existing services/columns where the current integration supports it. The portfolio is hosted at `https://nuvio-web.com/work/<slug>`; the supplied client URL goes in `href`, not in the portfolio canonical. `nuvio.kr` is an unrelated third-party domain.
+## Write and verify
 
-## Readable detail body and supporting imagery
+Use the established `content/work/<slug>.mdx` schema, factual Korean metadata and overview. Canonical portfolio origin is `https://nuvio-web.com`; source URL goes in `href`. Preserve `inputDate`, set `updated` only for a substantive edit. Do not infer project year from the current date.
 
-Keep detail text, related links and image boards within the project's readable body width (currently 1200 physical pixels; prose section 1000 pixels), with responsive side gutters. The hero may remain wide. Keep these selectors excluded from legacy viewport-scaled px-to-rem conversion so the maximum width is real.
+Record original/output dimensions, byte sizes, encoding settings and source file alongside source inspection, unknown facts, concept-image provenance and supplied-body provenance in `content/work-evidence/<slug>.json`. Explicitly supplied admin/internal screenshots may be used as directed, but do not discover or publish additional private screens. Check supplied images for accidental credentials or personal data before publication.
 
-When adding supporting AI artwork, use a few coordinated brand/material details between captured-screen sections, outside the actual UI pixels. Do not fill every section or repeat the same hero. Record conceptual artwork separately from capture evidence. Preserve a complete `portfolio.webp` image for the modal; use a versioned asset directory when revising the full board.
+Run `npm run check:content` and `npm run build`, plus relevant regression checks if a shared renderer changes. Validate the exact body image count/order, files, preserved image ratio and modal output. Preview local desktop/mobile UI through Orca CLI when in Orca; report unavailable checks honestly. Do not submit live inquiries.
 
-## Verify and deliver
-
-Inspect the finished image files at useful scale: no stretched UI, clipped headlines, hidden mobile navigation, accidental duplicated screens, fabricated charts or unreadable all-page miniatures. Confirm that the visible mobile layout actually came from a mobile viewport. Save an evidence manifest without credentials or private data.
-
-Run `npm run check:content` and `npm run build`, plus appropriate site checks when changing a renderer. Check the work list card, portfolio detail, cover crop, landing thumbnail and modal image, sitemap/RSS, metadata and related service links. In Orca, preview desktop/mobile UI through Orca CLI using the same inspection and capture workflow; outside Orca, use available authorized browser tools. Report any unavailable visual checks honestly.
-
-Report the entry path, asset folder, inspected URL/viewports, visual direction, confirmed vs omitted facts, checks and deployment status. A URL-to-portfolio request authorizes local creation and preview, not automatically a live contact submission or production deployment. Preserve explicit authorization already given in the conversation.
+Report entry/assets, what changed and stayed unchanged, missing source/body evidence, validation and deployment status. Local writing/preview does not independently authorize production deployment; preserve explicit authorization already given in the conversation.

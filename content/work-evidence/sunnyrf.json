@@ -433,5 +433,31 @@
       }
     ],
     "promptFile": "content/work-evidence/sunnyrf-body-prompts.json"
-  }
+  },
+  "bodyRevision": {
+    "date": "2026-10-30",
+    "source": "User attachment orca-paste-1793332461230-753ca6de-d38e-4284-8067-ebac0c85f683.png",
+    "image": "/images/work/sunnyrf/user-provided-v4/portfolio.webp",
+    "count": 1,
+    "description": "User-provided SUNNY full page image",
+    "treatment": "WebP quality 88, original 2241×11152 dimensions and crop preserved; optimized at user request.",
+    "originalBytes": 6314435,
+    "optimizedBytes": 642356,
+    "sha256": "25820d515598b4fcde386c377b5bbd3a760673bd5bcfb0845f7248e6eee18a6a",
+    "thumbnailAndCover": "unchanged",
+    "modalImage": "same user-provided image"
+  },
+  "bodyRevisionHistory": [
+    {
+      "date": "2026-10-30",
+      "source": "User attachment orca-paste-1793331408068-dd48b4b9-3f27-47e2-a382-0f526298880e.png",
+      "image": "/images/work/sunnyrf/user-provided-v3/portfolio.webp",
+      "count": 1,
+      "treatment": "Lossless WebP encoding; original pixels, dimensions and crop preserved. All prior body boards removed from MDX references, original assets retained.",
+      "description": "User-supplied page management UI screenshot; not a captured SUNNY public page. User explicitly selected this as the only detail body image.",
+      "sha256": "8eb073f81ad52d64ed9853ee23da846a817fd73b8165ed1e7feed372d2c47a97",
+      "thumbnailAndCover": "unchanged",
+      "modalImage": "same single user-supplied image"
+    }
+  ]
 }
