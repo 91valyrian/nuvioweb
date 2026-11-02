@@ -49,7 +49,7 @@ tags:
 </Figure>
 ```
 
-Use `thumbnail.webp`, then descriptive body names. Target thumbnail ≤300KB and body image ≤250KB where quality allows; optimize without damaging Korean text. Keep essential text within generous margins. Do not use a different article's thumbnail as a new article's own identity. Save image prompts in a supporting project reference when needed for reproducibility, outside public article prose.
+Use `thumbnail.webp` for a new thumbnail, versioned names for revised assets, then descriptive body names. Target thumbnail ≤300KB and body image ≤250KB where quality allows; optimize without damaging Korean text. Keep essential text within generous margins. Do not use a different article's thumbnail as a new article's own identity. Save image prompts in a supporting project reference when needed for reproducibility, outside public article prose.
 
 ## Evidence and internal links
 
@@ -60,3 +60,7 @@ Existing service routes: `/service/corporate`, `/service/hospital`, `/service/la
 Only link real portfolios from `content/work`. For example Hyundai Autonics is an industrial company site, Hanzzim a franchise, Kim Gunhyo a law office. A link to a design case does not establish a measured SEO improvement; describe only what the underlying case supports.
 
 For site moves and crawling use Google Search Central / Google crawling documentation; for Naver use Search Advisor. Link the precise official supporting page. No fabricated examples passed off as company experience and no undocumented numerical growth claims.
+
+## Image art direction
+
+The white reading card and blue inline links describe the page UI, not a required image palette. Recent navy 3D thumbnails are examples, not a fixed brand template. Keep Korean headline legibility and a discreet nuvio identity, and let the subject guide color, material and composition. Compare the latest three thumbnails together before selecting a direction so new entries do not all look interchangeable. Judge variety by the overall visual treatment rather than a mechanical color rotation.

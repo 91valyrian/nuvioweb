@@ -1,0 +1,74 @@
+{
+  "slug": "website-inquiry-form-checklist",
+  "created": "2026-11-02",
+  "primaryReaderQuestion": "홈페이지 문의폼에 어떤 항목을 받고 실제 접수 성공과 오류를 어떻게 확인해야 하는가?",
+  "primaryService": "/service/corporate",
+  "secondaryService": "/service/renewal",
+  "opportunityBasis": "기존 47개 글은 일반 CTA, 검색 유입, 리뉴얼 등에 집중한다. 문의폼의 입력 항목과 접수 상태를 독립적으로 설명하는 글은 없어 선정했다. 검색량이나 Search Console 실적으로 검증된 수요가 아니다.",
+  "sources": [
+    {
+      "url": "https://www.w3.org/WAI/tutorials/forms/labels/",
+      "supports": "입력 요소와 레이블 연결"
+    },
+    {
+      "url": "https://www.w3.org/WAI/tutorials/forms/notifications/",
+      "supports": "이해 가능한 오류 및 완료 안내, 보조 기술 상태 알림"
+    },
+    {
+      "url": "https://www.w3.org/WAI/tutorials/forms/validation/",
+      "supports": "서버 측 검증 필요"
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch",
+      "supports": "HTTP 오류 상태에서 fetch promise가 자동 reject되지 않음"
+    }
+  ],
+  "images": {
+    "tool": "built-in image_gen.imagegen",
+    "format": "WebP",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "provenance": "AI concept imagery; not actual client workspace, UI or results",
+    "assets": [
+      {
+        "file": "thumbnail-v2.webp",
+        "prompt": "Create a finished Korean editorial blog thumbnail, exact landscape 16:9 target1600x900, for nuvio web agency article about simple inquiry forms and reliable delivery. Completely depart from generic navy/blue tech thumbnails. Art direction: bold warm print-editorial paper-cut poster, warm ivory #fff2db background, terracotta #e56845 and coral red accents, deep warm charcoal #302524 typography, one tiny chartreuse accent. Matte tactile paper, delicate ink grain and strong asymmetrical layout, NO glossy 3D, NO blue or purple gradient, NO laptop/browser mockup. Left 55% is large black/dark charcoal impeccably spelled Korean sans-serif headline in 3 lines exactly '홈페이지 문의폼' / '입력은 간단하게' / '접수는 확실하게'. Small lowercase dark 'nuvio' wordmark upper left. Right 45% features an oversized coral paper envelope, a cream message sheet with only three minimalist dark horizontal lines, and a large warm charcoal checkmark, arranged as expressive flat cut-paper collage shapes. Small understated bottom caption exactly '필수 항목 · 접수 오류 점검'. Clear safe margins, thoughtful negative space, crisp high contrast Korean type readable at small card size. Confident contemporary magazine cover, intelligent and playful, polished not childish. No metrics, no screenshots, no UI text, no watermark. Return only the final single thumbnail.",
+        "artDirection": "Warm ivory, terracotta and coral; matte paper collage with dark Korean headline. Recent three thumbnails reviewed for repetition."
+      },
+      {
+        "file": "essential-fields-desk.webp",
+        "prompt": "Generate one photographic editorial illustration for a Korean agency article explaining how to simplify website inquiry forms. Wide exact16:9, target1600x900. Overhead authentic editorial still life on a warm off-white designer desk: two physical paper stacks, left cluttered oversized stack of numerous blank form strips with many gray lines, right three neat pale-blue cards with simple hand-drawn icons for person, contact envelope, message bubble. A real person's hand moves an unnecessary paper strip aside. Mechanical pencil, one blue binder clip, natural window sunlight, tactile paper fibers, subtle deep-indigo accents. Sophisticated magazine photography, not a 3D clay render, not a glossy browser mockup. Physical conceptual scene only, no screen UI and no claim of actual client workspace. NO readable text, NO letters, NO numbers, NO logos, NO charts, NO personal information. Crisp but calm composition, enough negative space, clear visual comparison of too many fields versus only necessary fields. Only this final image."
+      },
+      {
+        "file": "delivery-status-flow.webp",
+        "prompt": "Create one flat editorial information graphic for a website inquiry-form article. Exact wide16:9 target1600x900. Contemporary Swiss editorial vector-like visual, crisp simple shapes, NO 3D, NO photorealism. Light icy-blue background, charcoal-indigo and vivid cobalt linework with small coral and mint accents. Show an intuitive left-to-right process with four large clearly separated outlined symbols: a form sheet with three short lines, a secure server cabinet, an envelope arriving in a tray, then a speech bubble containing a check. Connect with flowing arrows. Between server and envelope a separate small coral dashed branch goes down to an alert triangle and loops back toward the form, clearly illustrating an error and retry route, with no misleading success path. Large generous spacing, rounded cards with thin borders, minimal grid texture, accessible strong contrast. NO text, NO letters, NO numbers, NO logos, NO UI screenshot, NO analytics. Conceptual explanatory infographic only. It must look distinctly different from magazine photography and 3D thumbnails. Only final image."
+      }
+    ],
+    "supersededThumbnails": [
+      {
+        "file": "thumbnail.webp",
+        "prompt": "Create one final editorial thumbnail for Korean web agency nuvio, wide landscape exact 16:9 composition, 1600x900 target. Deep navy to indigo gradient with controlled electric blue light, premium glossy 3D browser contact-form panel and envelope with a small mint confirmation check on the right. Left has huge crisply spelled bold white Korean headline exactly in 3 lines: '홈페이지 문의폼' / '입력은 간단하게' / '접수는 확실하게'. Small white lowercase wordmark 'nuvio' top left. Bottom left two outlined capsule labels exactly '필수 항목' and '접수 오류'. Large safe margins, text and art balance, restrained polished brand editorial style, clear readable lettering. No statistics, no actual user information, no fake dashboard, no watermark. Produce only the finished thumbnail.",
+        "status": "Discarded initial direction; not included in public article assets."
+      }
+    ]
+  },
+  "validation": {
+    "content": "passed: 48 columns, 8 portfolios, 6 services",
+    "build": "passed with Node.js 22",
+    "metadata": "canonical, Article and Breadcrumb JSON-LD checked on local HTML",
+    "discovery": "slug found in local sitemap.xml and rss.xml; HTTP 200",
+    "browser": "desktop 1440px and mobile 393px; both body images loaded, mobile body 18px, no page overflow",
+    "deployment": "Checks performed locally before publication; deployment status is verified separately."
+  },
+  "thumbnailReview": {
+    "reviewed": [
+      "website-inquiry-form-checklist initial thumbnail",
+      "claude-code-homepage-guide",
+      "website-renewal-seo-checklist"
+    ],
+    "finding": "All used navy/blue gradients with white type and glossy 3D UI subjects.",
+    "change": "Current post thumbnail changed to a warm paper collage; body imagery preserved."
+  }
+}
