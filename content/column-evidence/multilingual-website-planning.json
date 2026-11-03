@@ -1,0 +1,82 @@
+{
+  "slug": "multilingual-website-planning",
+  "created": "2026-11-02",
+  "primaryReaderQuestion": "영문·다국어 기업 홈페이지를 만들 때 URL, 번역 범위와 수정·문의 운영을 어떻게 정해야 하는가?",
+  "primaryService": "/service/corporate",
+  "secondaryService": "/service/renewal",
+  "opportunityBasis": "Existing 48 columns cover general SEO, renewal and inquiry flows, but no dedicated multilingual planning guide. This is a reasoned content opportunity, not verified search volume or Search Console performance.",
+  "sources": [
+    {
+      "url": "https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites",
+      "supports": "Distinct language URLs, user-controlled language switching; URL structure context"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/specialty/international/localized-versions",
+      "supports": "hreflang identifies alternate versions; self references and reciprocal references"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "supports": "Canonical role and same-language canonical guidance with hreflang"
+    }
+  ],
+  "artDirection": {
+    "recentThumbnailsReviewed": [
+      "website-inquiry-form-checklist/thumbnail-v2.webp",
+      "claude-code-homepage-guide/thumbnail.webp",
+      "website-renewal-seo-checklist/thumbnail.webp"
+    ],
+    "thumbnail": "Forest green and acid-lime graphic. Third revision uses a moderate headline scale between existing coral and blue examples, increasing the undersized second revision while preserving color and illustration.",
+    "body": "A daylight concept photograph and a flat lavender/green page-correspondence graphic. Both conceptual, not actual client assets or SEO performance evidence."
+  },
+  "images": {
+    "tool": "built-in image_gen.imagegen",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "format": "WebP",
+    "assets": [
+      {
+        "file": "thumbnail-v3.webp",
+        "prompt": "Edit IMAGE 1 (green nuvio multilingual thumbnail). IMAGE 2 (coral inquiry thumbnail) and IMAGE 3 (blue Claude Code thumbnail) are references ONLY for headline type scale. The user says IMAGE 1 now has text too small. Increase all three headline lines by approximately 25–30% relative to IMAGE 1; target a scale midway between the headline glyph sizes in IMAGE 2 and IMAGE 3. On a1600x900 canvas target roughly120px bold Korean type, with actual glyph height near105px. This is a controlled moderate increase, NOT the original oversized monumental poster typography. Keep ALL three lines at the SAME font size: '다국어 홈페이지' / '번역 전에' / '구조부터'. Do not enlarge the shorter last lines disproportionately, do not stretch them to the width of the first. Place the headline left aligned near x70, with the three-line block centered vertically, total height about400–430px and generous top/bottom margins. First line must fit fully with a small gap before the globe, no collision or clipping. Retain exact headline wording, forest green background, acid lime and cream text colors, texture, nuvio wordmark, footer '언어별 URL · 번역 범위 · 운영', and the globe/speech-bubble graphics. You may move the right graphic a tiny amount right only if needed for text breathing room; no change to illustration style or palette. Do not copy colors/content from references. Exact16:9. Output one corrected final thumbnail.",
+        "references": [
+          "thumbnail-v2.webp edit target",
+          "website-inquiry-form-checklist/thumbnail-v2.webp and claude-code-homepage-guide/thumbnail.webp for midpoint headline scale"
+        ]
+      },
+      {
+        "file": "translation-scope-planning.webp",
+        "prompt": "Generate one elegant editorial concept photograph about multilingual website content planning. Exact landscape16:9 target1600x900. Three-quarter close-up camera angle, calm daylight on a dark oak table in a creative studio. Three upright thin booklets with simple paper tabs exactly labeled 'KO', 'EN', 'JA' in small clean black type, open white pages with only anonymous gray text-like horizontal strokes, one green highlighter, a large pale cream folded sheet with an abstract branching content map made of fine pencil lines and blank rectangles, a hand holding one page as if selecting what needs translation. Natural film photograph, rich forest-green fabric accent, muted butter-yellow bookmark, softly blurred background, tactile realistic paper and restrained art direction. The emphasis is prioritizing content in different languages, no laptop or browser screen, no glossy 3D icons. No identifiable people, no logos, no actual client data, no readable body text or statistics. Conceptual staged scene, not client evidence. All key subjects within safe margins. Only a single finished photographic image."
+      },
+      {
+        "file": "language-page-pairs.webp",
+        "prompt": "Create one clear flat editorial concept infographic showing multilingual page correspondence, exact landscape16:9 target1600x900. Refined geometric diagram on very pale lavender background with charcoal, forest green, lilac and butter-yellow accents. Two horizontal lanes: upper lane has three generously spaced rectangular page tiles, lower lane has three matching page tiles vertically aligned. Every tile has a dark simple header strip, one short rule and two tiny generic shapes; use only language labels 'KO' on upper tiles and 'EN' on lower tiles. Connect each vertically matching pair with TWO thin opposed arrows showing reciprocal language alternatives; green arrows with generous whitespace between lanes. Small circular language-selector icon to the left, a thin bracket for each lane, subtle editorial grid. Pages correspond one-to-one, no arrows from every page to a single home tile. A highly legible explanatory diagram with minimal hand-drawn ink texture, not 3D, not a screenshot, not photorealistic, no real websites, no claim of results. No Korean text, no URLs, no statistics, no flags, no logos, no fake dashboard. Only one final image."
+      }
+    ],
+    "supersededThumbnails": [
+      {
+        "file": "thumbnail.webp",
+        "prompt": "Design one finished Korean blog thumbnail for nuvio on multilingual website planning. Exact landscape16:9 target1600x900. Bold experimental Swiss typographic screen-print poster, saturated forest green background #164b35, acid-lime #dcf560 oversized type, warm white small accents, tiny black stipple texture. NOT navy, NOT coral, NOT 3D browser panels. Main headline impeccable Korean exactly in three lines '다국어 홈페이지' / '번역 전에' / '구조부터'. The first line can be smaller than the monumental last two lines; left two-thirds typography, right third abstract intersecting round speech-symbols, globe longitude arcs and thin branching routes, all flat risograph graphic marks. Small 'nuvio' wordmark in warm white top left. Tiny footer exactly '언어별 URL · 번역 범위 · 운영'. Thoughtful asymmetric editorial composition, serious creative studio quality, crisp type high contrast at small sizes, generous safe margins, no country flags, no stats, no charts, no fake client UI, no device mockups, no watermark. Return a single finished image.",
+        "status": "Discarded generation direction; excluded from public assets. Original generated PNG remains outside repository."
+      },
+      {
+        "file": "thumbnail-v2.webp",
+        "prompt": "Edit IMAGE 1, the green multilingual nuvio thumbnail. IMAGE 2 (coral inquiry-form thumbnail) is ONLY a reference for established headline scale and balanced whitespace; do not copy its colors, art or text. Preserve IMAGE 1's exact forest-green and acid-lime palette, screen-print texture, globe, speech bubbles, route curves, wordmark and footer copy. Correct only the oversized headline hierarchy and its placement. Keep the exact three lines: '다국어 홈페이지' / '번역 전에' / '구조부터'. All THREE lines should use one consistent moderate bold Korean font size, approximately 100–110 pixels when the canvas is 1600x900. In particular shrink the currently monumental second and third lines by about 45%, bringing them down to the scale of the first line and to the established headline scale in IMAGE 2. Do not stretch short lines to fill the column. Keep the three-line headline block around 350–390px tall total instead of dominating the full height, positioned around the vertical center of the left half with generous blank green space above and below. Preserve a comfortable left margin and adequate gap before the right-side globe. Keep typography clean, Korean spelling exact, no new words. Maintain landscape16:9 and overall layout. No other design changes. Produce only the corrected thumbnail.",
+        "references": [
+          "Initial green thumbnail as edit target",
+          "website-inquiry-form-checklist/thumbnail-v2.webp for established headline scale only"
+        ],
+        "status": "Discarded generation direction; excluded from public assets. Original generated PNG remains outside repository."
+      }
+    ]
+  },
+  "validation": {
+    "content": "passed: 49 columns, 8 portfolios, 6 services",
+    "build": "passed with Node.js 22",
+    "browser": "Article desktop 1440/1280 and mobile 393; list desktop 1280 and mobile 393. Body images loaded, 20px/18px body type, no page overflow, two tables, CTA and source links verified.",
+    "metadata": "Local canonical and Article/Breadcrumb JSON-LD match slug and publication date.",
+    "discovery": "New slug present in local sitemap.xml and RSS; both HTTP 200.",
+    "deployment": "Local checks completed before publication; deployed commit and live HTTP responses are verified separately.",
+    "thumbnailRevision": "Approved v3: glyph heights 109/123/120px on 1600x900; preserves palette and illustration. Compared in list alongside blue and coral reference thumbnails. User approved 2026-11-03."
+  }
+}

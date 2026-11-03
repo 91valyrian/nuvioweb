@@ -63,4 +63,9 @@ For site moves and crawling use Google Search Central / Google crawling document
 
 ## Image art direction
 
-The white reading card and blue inline links describe the page UI, not a required image palette. Recent navy 3D thumbnails are examples, not a fixed brand template. Keep Korean headline legibility and a discreet nuvio identity, and let the subject guide color, material and composition. Compare the latest three thumbnails together before selecting a direction so new entries do not all look interchangeable. Judge variety by the overall visual treatment rather than a mechanical color rotation.
+The white reading card and blue inline links describe the page UI, not a required image palette. Recent navy 3D thumbnails are examples, not a fixed brand template. Keep Korean headline legibility and a discreet nuvio identity, and let the subject guide color, material and composition. Preserve the established headline scale and spacing when experimenting with color or medium; compare images at the same dimensions rather than making shorter titles disproportionately large. Compare the latest three thumbnails together before selecting a direction so new entries do not all look interchangeable. Judge variety by the overall visual treatment rather than a mechanical color rotation.
+
+
+### Approved thumbnail headline scale
+
+Use `public/images/columns/multilingual-website-planning/thumbnail-v3.webp` as the user-approved headline-size reference (approved 2026-11-03). At a 1600×900 canvas, its Korean glyphs are roughly 110–125px high. This is a visual reference, not an exact font-metric requirement for every typeface. Keep a similar apparent size and line spacing when shown at the same list-card width. For longer titles, shorten or rewrap the thumbnail headline before shrinking it dramatically; do not enlarge short lines independently to fill the available width. Color, illustration medium and composition remain flexible. This approved version supersedes the oversized initial green thumbnail and the undersized v2.
