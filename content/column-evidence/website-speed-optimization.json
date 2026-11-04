@@ -1,0 +1,78 @@
+{
+  "slug": "website-speed-optimization",
+  "created": "2026-11-04",
+  "primaryReaderQuestion": "느린 기업 홈페이지를 부분 개선할지 리뉴얼할지, 무엇을 측정하고 어떤 자원부터 점검해야 하는가?",
+  "primaryService": "/service/renewal",
+  "secondaryService": "/service/corporate",
+  "opportunityBasis": "Existing 49 columns mention mobile UX, SEO or renewal generally but do not provide a dedicated speed diagnosis and scope guide. Reasoned editorial opportunity; no search-volume or Search Console evidence claimed.",
+  "sources": [
+    {
+      "url": "https://web.dev/articles/vitals",
+      "supports": "LCP/INP/CLS meanings and good thresholds, 75th percentile and device segmentation"
+    },
+    {
+      "url": "https://developers.google.com/speed/docs/insights/v5/about",
+      "supports": "Lab versus field data, rolling 28 days, origin-level fallback and insufficient data"
+    },
+    {
+      "url": "https://web.dev/learn/performance/image-performance",
+      "supports": "Appropriately sized image delivery, DPR and format choices"
+    },
+    {
+      "url": "https://web.dev/articles/optimize-lcp",
+      "supports": "Do not lazy-load the LCP image; priority depends on importance"
+    },
+    {
+      "url": "https://web.dev/learn/performance/video-performance",
+      "supports": "Autoplay downloads, poster/preload hints and third-party-player resource impact"
+    },
+    {
+      "url": "https://web.dev/articles/font-best-practices",
+      "supports": "Font loading and font swap can affect visible text timing and CLS"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/page-experience",
+      "supports": "Good Core Web Vitals scores do not guarantee high ranking"
+    }
+  ],
+  "artDirection": {
+    "recentReferences": [
+      "multilingual-website-planning/thumbnail-v3.webp",
+      "website-inquiry-form-checklist/thumbnail-v2.webp",
+      "claude-code-homepage-guide/thumbnail.webp"
+    ],
+    "thumbnail": "Charcoal/amber photographed stopwatch and media metaphor, with approved headline scale. Stopwatch has no numeric timing claim.",
+    "body": "Watercolor/ink metric storyboard and tactile paper-craft responsive-image metaphor; distinct treatments, captioned as conceptual AI artwork."
+  },
+  "images": {
+    "tool": "built-in image_gen.imagegen",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "format": "WebP",
+    "assets": [
+      {
+        "file": "thumbnail.webp",
+        "prompt": "Create a finished Korean editorial thumbnail for nuvio article on website loading speed. IMAGE1 is ONLY the approved headline-size reference; preserve its apparent Korean glyph size roughly110–125px at a1600x900 canvas and similar three-line spacing, do not copy its palette or graphics. New composition: exact16:9 target1600x900. Rich charcoal #262522 background, amber-yellow #ffc64b and warm ivory typography, restrained silver photography. Left55% carries exactly three bold Korean lines at consistent moderate scale: '느린 홈페이지' / '리뉴얼 전에' / '속도부터 점검'. Do NOT make shorter lines extra large or shrink the whole heading. Small discreet ivory lowercase 'nuvio' upper left, much smaller than main title. Bottom-left small caption exactly '이미지 · 영상 · 폰트'. Right45% contains an elegant macro editorial photograph of a real analog stopwatch with plain tick marks and NO digits, resting against a stack of translucent photographic sheets and an abstract filmstrip, sculptural shadows, one amber line tracing a path. Matte premium magazine still-life, realistic photographed materials, no 3D browser objects, no fake score dashboard, no charts or numerical performance claims, no green/coral/navy palette, no watermark. Generous safe margins and clear headline/art separation. Only the final thumbnail."
+      },
+      {
+        "file": "responsive-image-payload.webp",
+        "prompt": "Generate one tactile editorial paper-engineering illustration explaining responsive website images and media payload. Wide16:9 target1600x900, pale warm-gray studio background, burgundy paper edges with amber and off-white accents. On the left a very oversized layered paper photograph of a simple scenic mountain and sun is being trimmed to several carefully proportioned versions on the right: one wide desktop frame and one slim vertical mobile frame. Both still clearly show the SAME mountain and sun illustration with deliberate content composition, no real UI, no phones or device mockups, no file names or letters. Small paper scissors and a neat stack of discarded excess paper symbolize reducing unnecessary weight, but no person or hand required. Beautiful real cut-paper material with soft natural shadows, sophisticated magazine art direction, restrained dimensional paper craft, not glossy3D software icons or a flat flowchart. Communicate that different displays need appropriately sized source images, not that all images must be cropped. No measurements, no charts, no analytics, no client evidence. NO text, logos or numerals. Conceptual explanatory art only. Only one final image."
+      },
+      {
+        "file": "loading-interaction-stability.webp",
+        "prompt": "Create a refined editorial three-panel illustrated storyboard for a website performance explainer, wide16:9 target1600x900. Flat hand-inked line art with restrained watercolor washes on ivory, charcoal outlines, amber, soft slate and muted burgundy accents. Three equally sized conceptual browser panels across the page. Panel1 labeled only 'LCP' shows a large main photograph region becoming visible, with little sun icon, no spinner; panel2 labeled only 'INP' shows a pointing cursor pressing a large button and a small immediate ripple, clearly interaction responsiveness; panel3 labeled only 'CLS' shows neatly aligned text blocks and an image box within stable dotted guidelines, with subtle vertical double arrow in margin to represent layout movement being checked. Give each panel generous empty space and the acronym in consistent modest type, not a dashboard. Distinctly editorial drawing, not a software screenshot or generic shiny3D. No numbers, scores, graphs, charts, fabricated analytics or client claims. No other text or logos. The image explains loading, interaction, and stability as DIFFERENT qualities, not before/after performance evidence. Only final single image."
+      }
+    ]
+  },
+  "validation": {
+    "content": "passed: 50 columns, 8 portfolios, 6 services",
+    "build": "passed with Node.js 22",
+    "metadata": "Local title, canonical, Article/Breadcrumb JSON-LD and 2026-11-04 publication date verified.",
+    "discovery": "New slug found in local sitemap.xml and rss.xml; both HTTP 200.",
+    "browser": "Real article/list opened at desktop1280 and mobile393 widths. Article body20px/18px, two tables, two body figures, CTA, loaded images and no page overflow verified through DOM. Desktop article heading/thumbnail visually inspected. Further Orca captures returned black images, limiting full body/list visual verification.",
+    "headlineScale": "Measured Korean glyph bands111/114/118px at1600x900, within approved roughly110–125px scale.",
+    "deployment": "Local checks completed before publication; deployment commit and live responses verified separately."
+  }
+}
