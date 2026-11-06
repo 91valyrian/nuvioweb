@@ -1,0 +1,57 @@
+{
+  "slug": "nuvio-design-feedback",
+  "created": "2026-11-06",
+  "category": "누비오 이야기",
+  "primaryReaderQuestion": "홈페이지 시안에 대한 막연한 느낌과 여러 담당자의 의견을 어떻게 실행·검토 가능한 수정 요청으로 정리하는가?",
+  "primaryService": "/service/corporate",
+  "secondaryService": "/service/renewal",
+  "opportunityBasis": "51 existing columns inventoried. Existing preparation and agency-contract posts mention planning or revision terms but do not answer the design-review communication question. Reasoned editorial opportunity, no search-volume data claimed.",
+  "editorialScope": "Brand viewpoint and proposed collaboration practices, not a report of actual clients or guaranteed standard contract workflow. All sample feedback explicitly hypothetical. Portfolio link used only for visual reference; no performance outcomes claimed.",
+  "sources": [
+    {
+      "url": "https://www.w3.org/WAI/tips/designing/",
+      "supports": "Contrast, identifiable interactive elements, grouping through headings/spacing, varied viewport sizes; no claim of complete accessibility conformance."
+    }
+  ],
+  "images": {
+    "tool": "built-in image_gen.imagegen",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "recentReferences": [
+      "manufacturing-product-detail/thumbnail.webp",
+      "website-speed-optimization/thumbnail.webp",
+      "multilingual-website-planning/thumbnail-v3.webp"
+    ],
+    "assets": [
+      {
+        "file": "thumbnail.webp",
+        "bytes": 83228,
+        "prompt": "Use case: ads-marketing. Generate finished Korean article thumbnail,16:9 target1600x900. Input is ONLY approved type-size reference: main Korean glyphs110–125px high at1600x900, uniform size across lines, similar line spacing. Never enlarge short lines independently. New art direction warm dusty rose #eab3bb background with dark wine #531b35 type and butter ivory accents. Left60% exactly three lines '시안 피드백' / '느낌을' / '기준으로'. Small discreet lowercase 'nuvio' at upper left, bottom small caption '관찰 · 이유 · 확인'. Right40% large elegant cream speech-bubble shape made of lightly textured paper, containing a loose magenta pencil scribble that gradually becomes three neat aligned editorial marks, with a wine-red pencil pointing at the final mark. Premium analog art-direction collage, vivid but sophisticated, no browsers, no glossy3D, no blue/navy/green gradients. Generous margins. Exact Korean spelling, clear at small list-card size. No people or client evidence, no data. Final one image."
+      },
+      {
+        "file": "annotated-design-review.webp",
+        "bytes": 128106,
+        "prompt": "Use case: photorealistic-natural. Wide16:9 target1600x900 editorial still-life about reviewing website design feedback. Close overhead natural photo on a warm sand desk: one paper with abstract typographic blocks and a rectangular image area, a sheet of translucent tracing paper laid over it bearing only hand-drawn circles and arrows in burgundy pencil, a sharpened pencil, a small terracotta paper clip. Soft daylight, realistic paper fibers, off-white, sand and burgundy, calm human-scale creative work. No hands, no people, no devices, no actual readable text or numbers, no logos, no fake charts or performance claims. It must be an imagined review workspace, not a real studio/client screenshot. Final single image."
+      },
+      {
+        "file": "shared-review-criteria.webp",
+        "bytes": 119624,
+        "prompt": "Use case: stylized-concept. Wide16:9 target1600x900, conceptual editorial textile art on muted powder pink ground. Four loose burgundy and raspberry wool threads enter from left as a tangled soft knot, then gently run through three ivory ceramic guide rings in the middle, emerging on right as parallel carefully aligned threads leading toward one small rectangular woven swatch. Photograph-like tactile fiber details and soft studio shadows, sophisticated restrained sculptural still-life. Metaphor for gathering different opinions into a shared review criterion, not suppressing disagreement. No words, arrows, numerals, UI, logos, hands or people. No data/analytics/results. Warm restrained color, distinct from flat infographic and from office photo. Final single image."
+      }
+    ],
+    "thumbnailRevision": {
+      "reason": "Initial glyphs larger than approved scale; generated uniform reduction and compared at480x270 alongside approved reference.",
+      "prompt": "Edit IMAGE1 (pink thumbnail). IMAGE2 is ONLY the approved Korean headline size reference. Keep IMAGE1 art, palette, speech bubble and pencil. Reduce all three headline lines UNIFORMLY about20% so actual Korean glyphs are around110–125px high on1600x900, matching IMAGE2 apparent size at same canvas size. Keep main text verbatim '시안 피드백' / '느낌을' / '기준으로', consistent font size across lines, similar comfortable line spacing. Main heading should occupy y240–640 approximately, left margin75. Do not make '느낌을' disproportionately large, do not spread short lines to full width. Make small nuvio identity slightly smaller and quieter than currently, preserve bottom caption '관찰 · 이유 · 확인'. Do not change other artwork or composition; keep16:9 and generous margins. Final edited thumbnail only."
+    }
+  },
+  "validation": {
+    "content": "passed:52 columns,8 portfolios,6 services",
+    "build": "passed Node22 Next production build",
+    "metadata": "Canonical production origin;Article and BreadcrumbList JSONLD;publication2026-11-06 verified locally",
+    "discovery": "Local article,list,sitemap,RSS HTTP200 and new slug present",
+    "browser": "Desktop1280 article heading/thumbnail and list visually inspected. Approved headline-scale compared side by side at480x270. Mobile393 DOM:18px body,313px table,both body images loaded,no page/list overflow;CTA,services/case and recommendations present. Mobile screenshots repeatedly returned black images, so full mobile/body visual QA remains limited by capture tool.",
+    "deployment": "Local validation completed before publication. Commit and production deployment verification are reported separately."
+  }
+}

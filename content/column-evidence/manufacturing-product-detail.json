@@ -1,0 +1,59 @@
+{
+  "slug": "manufacturing-product-detail",
+  "created": "2026-11-06",
+  "primaryReaderQuestion": "제조업 제품 상세페이지에 PDF 외에 무엇을 담고 어떤 제작·운영 범위를 정해야 하는가?",
+  "primaryService": "/service/corporate",
+  "opportunityBasis": "50 existing columns inventoried; corporate article addresses company-site necessity, speed/forms/multilingual address other decisions. Product-specific specifications, files, model structure and handoff scope are a distinct reasoned opportunity. No Search Console or search-volume data claimed.",
+  "sources": [
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+      "supports": "HTML links with href for discoverable product pages"
+    },
+    {
+      "url": "https://www.w3.org/WAI/tutorials/tables/",
+      "supports": "Header and data relationships in accessible tables"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/google-images",
+      "supports": "Nearby context, descriptive alt and avoid keyword stuffing"
+    }
+  ],
+  "images": {
+    "tool": "built-in image_gen.imagegen",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "recentReferences": [
+      "website-speed-optimization/thumbnail.webp",
+      "multilingual-website-planning/thumbnail-v3.webp",
+      "website-inquiry-form-checklist/thumbnail-v2.webp"
+    ],
+    "approvedScaleComparison": "Side-by-side at480x270; consistent moderate glyph scale and spacing; short lines not enlarged to fill width.",
+    "assets": [
+      {
+        "file": "thumbnail.webp",
+        "bytes": 228764,
+        "prompt": "Use case: ads-marketing. Create a finished Korean editorial thumbnail, exact 16:9 1600x900. Reference image is ONLY approved typography SCALE, not content or color. Keep three-line bold Korean glyph height around110–125px at1600x900 and balanced line spacing as reference. New art: pale icy cyan background, deep petrol black text, vermilion tiny accents. Sophisticated Swiss industrial editorial print meets technical cutaway collage. Left60% headline exactly '제품 소개' / '카탈로그만' / '올리면 될까?'. All lines same moderate type scale; do not enlarge short words to fill width. Small lowercase 'nuvio' top left. Small bottom caption '사양 · 비교 · 견적 문의'. Right40% a crisp cutaway illustration of an anonymous industrial metal coupling, exploded components aligned vertically with fine technical guide lines, no actual branded product, no numbers, no certification badges. Flat silkscreen/technical engraving aesthetic, subtle paper texture, generous margins. No glossy3D browser, no navy gradient, no dashboard, no charts, no client evidence. Final thumbnail only."
+      },
+      {
+        "file": "product-specification-materials.webp",
+        "bytes": 146318,
+        "prompt": "Use case: photorealistic-natural. Editorial concept photograph for an article about planning B2B product detail pages. Exact16:9 landscape1600x900. Overhead shot of a pale lilac workshop desk with an unbranded brushed metal mechanical coupling and a caliper, two neatly arranged off-white specification cards showing abstract lines only, a small material swatch, and a closed technical catalog. Daylight and believable metal, restrained plum and lilac tones, beautiful magazine composition. No human, no text, no numbers, no logos, no certification marks, no fake analytics. Conceptual anonymous props, not a real client product or test. No website screens or floating browser frames. Final single image only."
+      },
+      {
+        "file": "product-selection-to-inquiry.webp",
+        "bytes": 79352,
+        "prompt": "Use case: illustration-story. Wide16:9 1600x900 editorial isometric line drawing, not a data chart. Explain B2B product selection journey using four clear visual stations across one soft apricot ground: first a shelf of three distinct anonymous mechanical parts, second a single selected part beside a short specifications card with abstract horizontal rules, third a closed PDF booklet beside a drawing sheet, fourth an open envelope carrying a small card with the silhouette of that SAME selected part. A single winding teal path connects stations left to right. Fine petrol ink outlines, sparse burnt orange and teal risograph fills, generous whitespace, purposeful restrained illustration. No letters or numbers, no logos, no invented statistics or promises. Does not show an actual website or client interface. No glossy3D, no navy gradients. Final image only."
+      }
+    ]
+  },
+  "validation": {
+    "content": "passed:51 columns,8 portfolios,6 services",
+    "build": "passed:Next production build with Node22",
+    "metadata": "Canonical https://nuvio-web.com/columns/manufacturing-product-detail; Article/Breadcrumb JSONLD with publication2026-11-06 verified locally",
+    "discovery": "Local article/list/sitemap/RSS HTTP200 and new slug present",
+    "browser": "Article and list reviewed visually at desktop1280/mobile393 widths; thumbnail scale compared alongside approved reference at480x270;body20px/18px;mobile table313px;both body images loaded;no mobile page overflow;captions,contextual CTA,related service/case and recommendation links verified. One initial list capture was black; subsequent captures succeeded.",
+    "deployment": "Local validation completed before publication. Commit and production deployment verification are reported separately."
+  }
+}
