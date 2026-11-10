@@ -1,0 +1,63 @@
+{
+  "slug": "geo-ai-search-website",
+  "created": "2026-11-10",
+  "primaryReaderQuestion": "GEO란 무엇이며 기업 홈페이지 담당자가 AI 검색의 접근·콘텐츠·성과를 어떤 순서로 준비하고 확인해야 하는가?",
+  "primaryService": "/service/corporate",
+  "secondaryService": "/service/renewal",
+  "opportunityBasis": "52 existing posts inventoried. Existing information architecture article covers page roles/internal links; new article specifically covers generative-search readiness, search versus training crawlers, unsupported file/schema shortcuts and observation design. Reasoned topic opportunity, no Search Console/search-volume evidence claimed.",
+  "sources": [
+    {
+      "url": "https://arxiv.org/abs/2311.09735",
+      "supports": "GEO expansion and generative-response visibility framing; no experimental uplift generalized to actual services"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/ai-features",
+      "supports": "Existing SEO applies;indexed/snippet eligibility;no special AI text files/schema;Googlebot controls;Search Console Web reporting;no inclusion guarantee"
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/bots",
+      "supports": "Independent search/training controls,OAI-SearchBot/GPTBot/ChatGPT-User roles and published IP allow guidance"
+    }
+  ],
+  "images": {
+    "tool": "built-in image_gen.imagegen",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "recentReferences": [
+      "nuvio-design-feedback/thumbnail.webp",
+      "manufacturing-product-detail/thumbnail.webp",
+      "website-speed-optimization/thumbnail.webp"
+    ],
+    "assets": [
+      {
+        "file": "thumbnail.webp",
+        "bytes": 76748,
+        "prompt": "Use case: ads-marketing. Finished Korean nuvio editorial thumbnail, exact16:9 target1600x900. Input reference is ONLY for approved headline glyph scale and line spacing: actual Korean glyphs roughly110–125px high at1600x900. Match this moderate size, no oversized poster typography, consistent size for all lines. New art: pale lavender #e7ddff background, dark aubergine black type, small warm apricot accent. Left58% has exactly three lines 'AI 검색 시대' / 'GEO 준비는' / '답과 근거부터'. Discreet small lowercase 'nuvio' upper left, bottom-left small text '접근 · 콘텐츠 · 측정'. Right42% an editorial collage of ivory index cards and translucent violet acrylic tabs, selected source card under a clear magnifying lens, small typographic quotation marks as shapes, fine black connecting lines, precise premium Swiss magazine look, subtle material texture. This represents checking source evidence, not an actual AI app UI. No robots, chat logos, browsers, scores, analytics or invented citations. Main headline left margin70 and y230–650. Generous margins. Final image only."
+      },
+      {
+        "file": "answer-source-review.webp",
+        "bytes": 172422,
+        "prompt": "Use case: photorealistic-natural. Wide16:9 target1600x900 conceptual editorial still-life about evidence behind answers. Overhead close photograph on warm white desk: an open off-white research notebook with abstract gray rules but NO readable text, three cream reference cards with small cobalt blue page tabs, magnifying glass revealing a crisp plain line on one card, small terracotta ceramic paperweight. Carefully composed sunlight and soft real shadows, tactile paper fibers, clean sophisticated editorial photography. No computer, no people, no actual book titles, no letters/numbers, logos or client evidence. Metaphor: inspect original evidence rather than repeat unverified claims. Final single image."
+      },
+      {
+        "file": "citation-visit-inquiry.webp",
+        "bytes": 200626,
+        "prompt": "Use case: illustration-story. Wide16:9 target1600x900 editorial cut-paper and ink illustration of THREE DIFFERENT observation windows for AI search, not a dashboard. On pale mint paper ground, three well-spaced vignettes: left a quotation mark above a page card (answer citation), middle a shoeprint path leading through a doorway (actual visit), right a letter placed in an inbox tray (business inquiry). Thin burnt-orange separator strokes and dark forest ink details, subtle cut-paper shadows. Each vignette has only a small English label exactly 'CITATION' / 'VISIT' / 'INQUIRY'. The three are separate observations, no connecting arrow or implied guaranteed funnel, no percentages/numbers/charts/trophies. No website screenshot, no real analytics/client claims, no robots or app logos. Clear explanatory editorial art, distinguish from glossy3D and from photographic first body image. Final one image."
+      }
+    ],
+    "thumbnailRevision": {
+      "prompt": "Edit IMAGE1 lavender GEO thumbnail; IMAGE2 ONLY approved main headline scale. Preserve all IMAGE1 graphics, palette, exact Korean text, all three lines and layout. Increase main three-line headline UNIFORMLY by20 percent, actual Korean glyph height110–125px at1600x900, matching IMAGE2 when both rendered480px wide. Heading line1 'AI 검색 시대', line2 'GEO 준비는', line3 '답과 근거부터'; constant type size all lines, similar comfortable spacing. Keep left margin65, the text can fill left roughly55percent with no overlap on artwork. Move artwork slightly right only if needed. Keep nuvio small and bottom '접근 · 콘텐츠 · 측정' unchanged. Do not enlarge short lines independently, no other additions. Exact16:9. Final edited image only.",
+      "reason": "Initial headline slightly smaller than approved reference;uniform20percent increase requested,keeping palette/art. Compare at equal rendered card size."
+    }
+  },
+  "validation": {
+    "content": "passed:53 columns,8 portfolios,6 services",
+    "build": "passed Node22 production build",
+    "metadata": "Local canonical and Article/BreadcrumbList JSONLD with2026-11-10 publication date verified",
+    "discovery": "Local article,list,sitemap,RSS HTTP200 and slug present",
+    "browser": "Desktop1280 article header/thumbnail and mobile393 body figures/captions visually reviewed. Body20px/18px,two313px mobile tables,both body images loaded,no mobile article overflow;CTA,related services and recommendations present. List opened at1280/393;captures have intermittent black/resizing artifacts,limiting full list visual QA;DOM card/image presence verified. Final thumbnail compared side by side at480x270 with approved scale.",
+    "deployment": "Local validation completed before publication; commit and production deployment verified separately."
+  }
+}
