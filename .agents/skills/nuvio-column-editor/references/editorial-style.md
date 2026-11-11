@@ -35,6 +35,8 @@ tags:
 
 ## Body image contract
 
+Every new or substantially revised column has **three to seven distinct body images plus one separate thumbnail (four to eight images total)**. The thumbnail and recommendation cards do not satisfy the three-body-image minimum. Plan each image against a section and an explanatory purpose before generation; record the mapping in the article evidence. Use relevant people, objects and environments rather than repeatedly illustrating abstract concepts with the same props. Human scenes must relate to the reader's task; generated people or places are illustrative and must not be presented as real nuvio staff, clients or locations. Distribute images with their sections, each with its own alt text and caption. Do not change older articles solely to satisfy this rule unless asked to revise them.
+
 ```mdx
 <Figure>
   <Img
@@ -52,6 +54,8 @@ tags:
 Use `thumbnail.webp` for a new thumbnail, versioned names for revised assets, then descriptive body names. Target thumbnail ≤300KB and body image ≤250KB where quality allows; optimize without damaging Korean text. Keep essential text within generous margins. Do not use a different article's thumbnail as a new article's own identity. Save image prompts in a supporting project reference when needed for reproducibility, outside public article prose.
 
 ## Evidence and internal links
+
+All categories, including 누비오 이야기, stay within website creation and improvement. State the website task, intended reader and related real service in the article evidence. Secondary topics such as SEO, GEO, AI, branding or images must lead to concrete planning, design, development, launch, renewal or operating decisions throughout the article. General business essays and standalone tool, photography or marketing tutorials are outside scope even if they end with a website consultation CTA.
 
 A helpful article normally includes a concise answer, actionable details, a concrete example or checklist, limitations, relevant sources and a suitable next step. This is a flexible writing pattern, not mandatory repeated section titles.
 

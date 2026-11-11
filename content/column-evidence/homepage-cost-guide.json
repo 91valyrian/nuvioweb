@@ -1,0 +1,92 @@
+{
+  "slug": "homepage-cost-guide",
+  "revised": "2026-11-11",
+  "preservedPublicationDate": "2026-01-11",
+  "intent": "처음 홈페이지를 의뢰하는 담당자의 제작 방법·초기/운영 예산·업체 탐색 결정",
+  "strategy": "Revise existing cost-guide URL rather than duplicate competing article. User-provided outline fulfilled.",
+  "priceMethod": "Not measured market averages or nuvio quote. Envelopes across Saleswell published tool/direct-development categories; Poemora full-custom band used as contextual member/custom reference, not membership-only price. Source dates shown; VAT unspecified and current quote to confirm. No fabricated responsive/adaptive surcharge.",
+  "sources": [
+    [
+      "https://saleswell.co.kr/company-website-production-cost",
+      "2024-12-20; published initial cost categories and exclusions"
+    ],
+    [
+      "https://poemora.com/blog/small-business-website-cost-guide",
+      "2026-02-25; full-custom cost example"
+    ],
+    [
+      "https://www.imweb.me/price",
+      "subscription/features separate from production labor; no unverified numeric subscription price copied"
+    ],
+    [
+      "https://wordpress.org/about/",
+      "open-source foundation"
+    ],
+    [
+      "https://wordpress.org/documentation/article/hosting-wordpress/",
+      "hosting required"
+    ],
+    [
+      "https://docs.github.com/en/copilot/responsible-use/inline-suggestions",
+      "AI generated code limitations/review"
+    ],
+    [
+      "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design",
+      "responsive flexible layout"
+    ],
+    [
+      "https://support.wishket.com/customer-support/client/use-guide/",
+      "platform project registration-to-contract flow"
+    ]
+  ],
+  "images": {
+    "tool": "built-in image_gen.imagegen",
+    "thumbnail": 1,
+    "body": 3,
+    "total": 4,
+    "dimensions": [
+      1600,
+      900
+    ],
+    "assets": [
+      {
+        "file": "thumbnail-v2.webp",
+        "prompt": "Use case: ads-marketing. Korean nuvio website column thumbnail, exact16:9 landscape1600x900. Editorial two-color screenprint collage in butter yellow background,ink charcoal type,cobalt-blue accent. Left60%: small nuvio upper-left; three uniform bold Korean headline lines EXACT '홈페이지 제작' / '방법과 비용' / '한눈에 정리'. Korean glyph height110–120px at1600x900,consistent moderate scale,not huge poster type; margin70px,line spacing similar approved business blog thumbnails. Small bottom text '방식 비교 · 예산 · 업체 선택'. Right40% whimsical flat cut-paper architectural website made from stacked modular page panels and a small calculator,not glossy3D,no currency amounts,no brandtool logos,no statistics. Crisp legible Korean typography, balanced professional composition.",
+        "source": "/Users/lhs/.codex/generated_images/01a1863f-07b0-73f2-b739-495d0c900702/exec-756b39ac-3278-46fb-bd97-152638d65bb8.png",
+        "section": "Thumbnail",
+        "bytes": 170866
+      },
+      {
+        "file": "build-methods-comparison.webp",
+        "prompt": "Use case: illustration-story. Wide16:9 landscape1600x900 editorial cut-paper illustration explaining four website creation approaches. Four panels integrated in one clean scene, no text: modular page blocks snapped together by hand (builder),person writing simple code at workstation (custom development),interlocking community blocks (open-source CMS),person using a glowing pencil to sketch a website but checking its structure (AI-assisted). Warm ivory,powder-blue,red and charcoal,sophisticated flat illustration with paper grain. No logos,no robot,no fake client UI,no numbers,no claims of automation replacing review. Distinct symbolic paths lead to a small coherent website at bottom. Illustrative fictional scene.",
+        "source": "/Users/lhs/.codex/generated_images/01a1863f-07b0-73f2-b739-495d0c900702/exec-e5db333d-1bda-44cf-982d-57040f85ee0d.png",
+        "section": "Four creation methods",
+        "bytes": 205542
+      },
+      {
+        "file": "website-budget-components.webp",
+        "prompt": "Use case: photorealistic-natural. Wide16:9 landscape1600x900 editorial overhead still life illustrating website project cost breakdown. Dark walnut tabletop,closed neutral project folder,blank page wireframe sheets,calculator with blank display,small generic server-shaped metal object and a calendar with blank pages. Distinct clusters suggest one-time design/build and recurring operation,without any numbers,currency amounts,words or price charts. Directional sunlight,rich shadows,real materials,olive and beige accent. No coins,no fake bills,no logos. Conceptual objects,not real quote evidence.",
+        "source": "/Users/lhs/.codex/generated_images/01a1863f-07b0-73f2-b739-495d0c900702/exec-98255e6b-1b92-4229-aa93-dfb278e5ea67.png",
+        "section": "Initial/recurring budget",
+        "bytes": 241164
+      },
+      {
+        "file": "agency-project-consultation.webp",
+        "prompt": "Use case: photorealistic-natural. Wide16:9 landscape1600x900 environmental editorial image of a fictional small web studio consultation. Wide view from doorway shows two Korean adult professionals sitting opposite each other discussing website scope;one listens,other points toward a wall board of simple grayscale page layouts with no readable text. Dark navy jacket,off-white clothes,window light,restrained blue-gray space. A laptop and one paper brief on table,not staged handshake,not posed stockphoto smile. Natural anatomy. No logos,no client brand,no numbers or statistics. Generated conceptual environment,not actual nuvio staff/client/office.",
+        "source": "/Users/lhs/.codex/generated_images/01a1863f-07b0-73f2-b739-495d0c900702/exec-e568200c-5c77-49bd-b1a8-785a32fbc9f3.png",
+        "section": "Agency selection",
+        "bytes": 112232
+      }
+    ],
+    "scaleCheck": "Compared at480x270 alongside approved multilingual v3; similar apparent glyph size; new butter-yellow/cobalt collage direction. All four images visually inspected; fictional/non-evidentiary captions."
+  },
+  "validation": {
+    "content": "passed54 columns,8 portfolios,6 services",
+    "build": "passed Node22 Next production build84routes",
+    "browser": "Reloaded actual article: named vendor mentions absent, three figures and four tables intact. MDX contains zero external URLs; renderer-owned nuvio Kakao consultation action preserved. Content check and production build passed after edit.",
+    "metadata": "HTTP200, canonical production original URL, Article published2026-01-11/modified2026-11-11; sitemap/RSS contain slug.",
+    "deployment": "User authorized dev/main push and production deployment. Pre-deployment content/build verification passed; live deployment confirmation to be reported separately."
+  },
+  "editorialPreference": "User requests no named third-party vendors/platforms or outbound links in public article. Generic categories used; source names/URLs retained only in non-rendered evidence for fact checking. Original sourced cost envelopes retained with limitations; no invented replacement prices.",
+  "captionPreference": "Removed repetitive AI-generation disclaimers from public captions. Retained short illustrative-scene wording for fictional consultation photo; generation provenance remains in evidence."
+}

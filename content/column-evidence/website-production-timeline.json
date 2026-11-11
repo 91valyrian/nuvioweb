@@ -1,0 +1,91 @@
+{
+  "slug": "website-production-timeline",
+  "created": "2026-11-11",
+  "primaryReaderQuestion": "홈페이지 제작을 검토하는 담당자가 원하는 오픈일에서 기획·승인·개발·검수를 어떻게 역산하고 제작사에 기간을 문의해야 하는가?",
+  "websiteTask": "Define website scope,content readiness,approval dates and launch acceptance before agreeing delivery dates",
+  "primaryService": "/service/corporate",
+  "secondaryService": "/service/landing-page",
+  "opportunityBasis": "53 existing columns inventoried. Cost,vendor,preparation and feedback articles are adjacent;none provides dedicated website delivery scheduling and reverse-planning guidance. Reasoned commercial-intent opportunity,no measured search volume or Search Console query data claimed.",
+  "scope": "All copy and examples concern commissioning,building,reviewing and launching a website. Six-week table is explicitly hypothetical,not market average,nuvio SLA or actual client result.",
+  "sources": [
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes",
+      "supports": "URL mapping,redirects and monitoring add migration scope"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl",
+      "supports": "Crawl processing may take days/weeks and no instant inclusion guarantee"
+    },
+    {
+      "url": "https://www.w3.org/WAI/test-evaluate/preliminary/",
+      "supports": "Title,alt,keyboard,form checks are preliminary,not full accessibility conformance"
+    }
+  ],
+  "images": {
+    "tool": "built-in image_gen.imagegen",
+    "bodyCount": 3,
+    "thumbnailCount": 1,
+    "total": 4,
+    "dimensions": [
+      1600,
+      900
+    ],
+    "recentReferences": [
+      "geo-ai-search-website/thumbnail.webp",
+      "nuvio-design-feedback/thumbnail.webp",
+      "manufacturing-product-detail/thumbnail.webp"
+    ],
+    "plan": [
+      {
+        "file": "website-scope-approval-meeting.webp",
+        "section": "Scope and decisions",
+        "subject": "fictional adults reviewing website wireframes",
+        "purpose": "Show scope/approval responsibilities",
+        "treatment": "natural collaboration concept photo"
+      },
+      {
+        "file": "production-stage-dependencies.webp",
+        "section": "Phase completion conditions",
+        "subject": "folder,pencil,code,review objects",
+        "purpose": "Explain dependencies without duration claim",
+        "treatment": "tactile tabletop still-life"
+      },
+      {
+        "file": "responsive-launch-review.webp",
+        "section": "Prelaunch review",
+        "subject": "fictional responsive website testing environment",
+        "purpose": "Demonstrate review context,not evidence of passed tests",
+        "treatment": "wide workstation photograph"
+      }
+    ],
+    "assets": [
+      {
+        "file": "thumbnail.webp",
+        "bytes": 60462,
+        "prompt": "Use case: ads-marketing. Finished Korean nuvio editorial thumbnail, exact16:9 target1600x900. Input reference is ONLY approved headline scale: Korean glyphs110–125px high at1600x900,uniform font size every line,similar three-line spacing. New art direction saturated burnt orange #c85028 backdrop,creamy ivory type,deep dark-brown small accents. Left60% exactly three bold lines '홈페이지 제작' / '얼마나 걸릴까?' / '오픈일 역산법'. Main type not huge poster scale, do not expand short lines to fill width. Small 'nuvio' upper left, small bottom caption '준비 · 승인 · 개발 · 검수'. Right40% premium photographic still-life of a real cream-colored perpetual flip-calendar apparatus with BLANK pages and a tiny terracotta pencil beside it; thin physical ribbons connect four blank cards descending diagonally as a planning metaphor,real shadows,quiet studio materials. No dates,numbers,time guarantees,charts,fake analytics,logos,robot,browser or3D app icons. Typography and photo separate with generous margins. Final single image only."
+      },
+      {
+        "file": "website-scope-approval-meeting.webp",
+        "bytes": 118020,
+        "prompt": "Use case: photorealistic-natural. Editorial concept photo,wide16:9 target1600x900. Two fictional Korean adult business colleagues and a web designer at a bright small meeting table reviewing printed website wireframe pages and agreeing priorities. One points to a simple page layout,another holds a closed content folder,the third listens; natural realistic expressions and anatomy,not posed for camera. Side-angle medium-wide view,daylight,warm white interior,clothing in soft charcoal and muted red. Printed pages show abstract gray rectangles and lines only,no words or numbers. No logos,no actual client interface,no handshake,no fake performance stats. This illustrates website scope and approval planning,not real nuvio staff/client work. Final image only."
+      },
+      {
+        "file": "production-stage-dependencies.webp",
+        "bytes": 67648,
+        "prompt": "Use case: stylized-concept. Landscape16:9 target1600x900 editorial tabletop object photograph. Four distinct upright matte ceramic rectangular blocks stand left to right on pale apricot surface,each with a small simple embossed symbol: folder (content preparation),pencil (design approval),brackets (development),checkmark (review). A thin physical dark-green cord links the blocks with visible slack between each to symbolize dependencies and review allowance. No arrows,numbers,dates,letters,charts or duration claims. Carefully lit sculptural still-life with realistic tactile surfaces,not glossy software icons,not a browser mockup. Avoid suggesting all projects have same fixed stages/durations. Four symbols only, no text. Conceptual planning image. Final one image."
+      },
+      {
+        "file": "responsive-launch-review.webp",
+        "bytes": 97170,
+        "prompt": "Use case: photorealistic-natural. Wide16:9 target1600x900 editorial environmental photo of a fictional website testing workstation in a quiet sunlit office. Wide eye-level framing shows a desktop monitor,tablet and smartphone with simple consistent anonymous grayscale website wireframes (header,image block,body text rules,plain button;no legible words),a paper checklist with blank squares and a pencil. Include only a person's forearm naturally checking the phone from side,face not visible. Cool gray,sage and warm white colors,realistic proportions,clear spatial context. No branding or analytics,no actual website,no completed-client-work claim,no logos or false test pass stats. Represents checking responsive layouts before launch,not proof of functionality. Final image only."
+      }
+    ],
+    "headlineScale": "Compared at480x270 beside user-approved multilingual v3;consistent moderate scale/spacing"
+  },
+  "validation": {
+    "content": "passed54 columns,8 portfolios,6 services",
+    "build": "passed Node22 Next production build,84 routes",
+    "browser": "Passed article/list desktop1280 and mobile393 previews; final title refreshed, no page overflow, three distinct body figures/captions, tables and CTA checked. Article/list/sitemap/RSS HTTP200; canonical and Article/Breadcrumb JSON-LD verified.",
+    "deployment": "User authorized dev/main push and production deployment. Pre-deployment content/build verification passed; live deployment confirmation to be reported separately."
+  }
+}
