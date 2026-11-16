@@ -1,0 +1,95 @@
+{
+  "slug": "claude-code-homepage-tutorial",
+  "article": "content/columns/claude-code-homepage-tutorial.mdx",
+  "date": "2026-11-16",
+  "primaryIntent": "클로드 코드로 원하는 회사 홈페이지 화면을 만드는 요청 방법과 공개를 위해 제작사에 맡길 범위",
+  "reader": "직접 작은 회사 소개 페이지를 만들려는 비개발자·사업 담당자",
+  "websiteTask": "회사 소개 한 페이지의 초안 제작과 화면 수정",
+  "service": "/service/landing-page",
+  "overlapDecision": "기존 가이드는 준비·검수 판단 기준을 다루고, 이 글은 구체적인 요청·화면 수정 방법을 설명한 뒤 실제 홈페이지 제작 상담으로 연결한다. 기존 slug와 date 보존.",
+  "searchData": "Search Console 데이터 없음. 확인된 검색량이나 성과를 주장하지 않음.",
+  "scope": "실제 Claude Code 사용 후기·납품 결과 아님. 공식 문서에 근거한 따라 하기 예제. 기사 안내 프롬프트를 실제 Claude Code로 실행했다고 주장하지 않음.",
+  "sources": [
+    {
+      "url": "https://code.claude.com/docs/en/quickstart",
+      "supports": "설치·버전 확인·폴더에서 CLI 실행·로그인"
+    },
+    {
+      "url": "https://code.claude.com/docs/en/common-workflows#work-with-images",
+      "supports": "이미지 경로를 통한 화면 분석"
+    },
+    {
+      "url": "https://code.claude.com/docs/en/memory",
+      "supports": "프로젝트 CLAUDE.md 지침"
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Tools_and_setup/set_up_a_local_testing_server",
+      "supports": "파일 주소의 제약과 로컬 서버"
+    }
+  ],
+  "images": {
+    "mode": "built-in image_gen",
+    "folder": "public/images/columns/claude-code-homepage-tutorial",
+    "thumbnailCount": 1,
+    "distinctEmbeddedBodyCount": 3,
+    "total": 4,
+    "dimensions": "1600x900 WebP",
+    "plan": [
+      {
+        "file": "thumbnail-v2.webp",
+        "section": "목록 및 기사 상단",
+        "meaning": "클로드 코드 홈페이지 제작 요청 방법",
+        "subject": "터미널에서 페이지로 이어지는 종이 그래픽",
+        "treatment": "아이보리·머스터드·차콜 종이 콜라주",
+        "prompt": "Edit the supplied nuvio Korean column thumbnail. Preserve the existing warm ivory and mustard paper collage palette, charcoal terminal-to-webpage drawing on the right, 16:9 composition, texture, discreet nuvio identity at top left, generous margins and refined editorial style. Replace ALL main headline text with exactly three lines: \"클로드 코드\" / \"홈페이지 제작\" / \"요청 방법\". Keep the same consistent Korean glyph size roughly 110–125px high at 1600x900, do not enlarge short lines to fill width. Replace bottom subtitle with exactly \"첫 화면부터 공개 준비까지\". Remove every occurrence of \"실습\", \"2탄\", \"만들기\". No additional text. Excellent Korean spelling, maintain small list-card readability. Do not change illustration.",
+        "bytes": 112290
+      },
+      {
+        "file": "service-brief.webp",
+        "section": "2. 첫 요청",
+        "meaning": "회사 원고와 구성 순서 정리",
+        "subject": "원고 카드와 손",
+        "treatment": "위에서 내려다본 준비 장면",
+        "prompt": "Use case: illustration-story. Wide 16:9 1600x900 Korean website-production editorial illustration. Hands of a person arranging three service content cards and a tall homepage outline on a warm ivory table. Service topic: office organization, show tiny tasteful sketches of shelves, labeled boxes, folder placement on the cards. Distinct overhead composition, hand-drawn charcoal lines, muted mustard and forest green cut paper, warm tactile paper, quiet professional atmosphere. The layout outline shows hero then 3 service blocks then steps. No readable text, no logos, no terminal, no robots, no glossy 3D. Explain preparation of factual website content, not a real company scene. Safe crop margins.",
+        "bytes": 197718
+      },
+      {
+        "file": "layout-feedback.webp",
+        "section": "5. 구체적인 화면 수정",
+        "meaning": "줄바꿈·버튼·간격을 특정해 피드백",
+        "subject": "주석을 단 종이 시안",
+        "treatment": "가까운 구도의 편집 콜라주",
+        "prompt": "Use case: illustration-story. Wide 16:9 1600x900 editorial collage about refining a company homepage with specific feedback. A single large flat paper page mockup on ivory backdrop, cropped close from a slight angle, charcoal and muted forest-green typesetting represented by abstract bars, one prominent headline split across two lines, clear button below, three service cards. Mustard pencil circles and thin arrows point precisely at headline line break, button placement, equal card spacing; two small blank sticky notes on edges. Restrained mature Swiss print collage, tactile but mostly flat, NOT 3D device, NOT real browser or Claude interface screenshot. No readable text, no logos, no metrics. Illustration meant to explain what to ask when revising a homepage.",
+        "bytes": 99776
+      },
+      {
+        "file": "mobile-review.webp",
+        "section": "6. 모바일 확인",
+        "meaning": "모바일의 읽기와 버튼 동작 확인",
+        "subject": "휴대전화와 손",
+        "treatment": "손과 모바일 화면을 강조한 일러스트",
+        "prompt": "Use case: illustration-story. Wide 16:9 1600x900 editorial illustration. Close-up side view of a hand holding a smartphone and another finger about to tap a clearly separated green button in a simple office-organization service homepage. Phone dominates center right; screen shows one-column responsive service cards, readable visual hierarchy but abstract bars instead of actual text, warm offwhite screen and forest green accents. At left, subtle charcoal narrow and wide rectangular crop guides on mustard paper suggest responsive width checking without another browser frame. Quiet natural window light interpreted in textured cut paper and ink, refined muted mustard/ivory/forest green palette. No logos, no words, no robots, no desk clutter, no fake test results. Clearly conceptual illustration not photograph or screenshot.",
+        "bytes": 218296
+      }
+    ],
+    "archivedVariants": [
+      "초기 썸네일은 생성 원본에만 보존하며 공개 자산에는 포함하지 않음"
+    ]
+  },
+  "validation": {
+    "content": "PASS: 55 columns, 8 portfolios, 6 services",
+    "build": "PASS: final revised title/copy and thumbnail; 85 static pages",
+    "seoRegression": "PASS: 9/9",
+    "serverRenderedMetadata": "PASS: revised title, canonical, Article JSON-LD and thumbnail-v2.webp",
+    "feeds": "HTTP 200; new production URL verified in local sitemap.xml and rss.xml",
+    "browser": "PASS: desktop 1440x1000 and mobile 390x844; revised header, thumbnail, closing table and consultation links; no article horizontal overflow",
+    "imageReview": "Edited thumbnail visually inspected, Korean text correct; body 3 images retained; 4 selected assets exist",
+    "inquiries": "No inquiry submitted",
+    "deployment": "2026-11-16 사용자 운영 배포 승인. 배포 전 check:content, test:seo 9/9, build 통과. 운영 검증 결과는 배포 완료 응답에서 별도 보고."
+  },
+  "limitations": [
+    "Claude Code 실행 기록이 아닌 공식 문서 기반의 실습용 안내.",
+    "생성 이미지는 실제 실행 결과나 고객 프로젝트 증거가 아님"
+  ],
+  "editorialRevision": "실습·2탄 표현 제거. 제작사 관점의 도입부, 정보 구성 상담 연결, 남은 제작 범위 표와 상담에 전달할 자료 추가. 구체적인 방법 설명 유지."
+}
