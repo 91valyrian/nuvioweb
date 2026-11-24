@@ -2,7 +2,8 @@
 import "./globals.css";
 import { SITE_URL, isPreview, jsonLd } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next";
-import Script from "next/script";
+import AnalyticsScripts from "@/components/AnalyticsScripts";
+import DeferredFonts from "@/components/DeferredFonts";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import ConditionalLayout from "@/components/ConditionalLayout";
 
@@ -92,62 +93,6 @@ export default function RootLayout({ children }) {
           title="누비오 칼럼과 제작 사례"
           href={`${SITE_URL}/rss.xml`}
         />
-        {/* ✅ Google Analytics (GA4) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XS0LDTNCMH"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XS0LDTNCMH', {
-              send_page_view: false,
-            });
-            window.dispatchEvent(new Event('nuvio:analytics-ready'));
-          `}
-        </Script>
-        {/* End Google Analytics */}
-        {/* Facebook / Meta Pixel */}
-        <Script id="facebook-pixel" strategy="afterInteractive">
-          {`
-            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1532252177885828');
-            fbq('track', 'PageView');
-          `}
-        </Script>
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1532252177885828&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
-        {/* End Facebook Pixel */}
-        <Script
-          id="beusable-rum"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(w, d, a){
-              w.__beusablerumclient__ = {
-                  load : function(src){
-                      var b = d.createElement("script");
-                      b.src = src; b.async=true; b.type = "text/javascript";
-                      d.getElementsByTagName("head")[0].appendChild(b);
-                  }
-              };
-              w.__beusablerumclient__.load(a + "?url=" + encodeURIComponent(d.URL));
-          })(window, document, "//rum.beusable.net/load/b251031e102356u405");`,
-          }}
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-        />
-        <link rel="stylesheet" href="https://use.typekit.net/qql5rly.css" />
       </head>
       <body className="text-white site-wide-layout">
         <script
@@ -177,6 +122,8 @@ export default function RootLayout({ children }) {
             }),
           }}
         />
+        <DeferredFonts />
+        <AnalyticsScripts />
         <AnalyticsTracker />
         <ConditionalLayout>{children}</ConditionalLayout>
         <Analytics />

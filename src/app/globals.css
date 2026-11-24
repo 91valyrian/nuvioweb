@@ -398,7 +398,10 @@ body {
 
 /* Miller Banner 기본 */
 .font-miller {
-  font-family: "miller-banner", serif;
+  font-family: Georgia, "Times New Roman", serif;
+}
+.brand-font-ready .font-miller {
+  font-family: "miller-banner", Georgia, serif;
 }
 
 [data-reveal] {

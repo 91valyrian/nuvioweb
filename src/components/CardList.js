@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { stripHtml } from "@/lib/site";
+import { workCardSizes } from "@/lib/image-delivery";
 import Link from "next/link";
 import { useState, useCallback, useRef, useEffect } from "react";
 
@@ -158,9 +159,9 @@ export default function CardList({
                 src={item.thumbnail || "/images/work/placeholder-thum.png"}
                 alt={item.thumbnailAlt || stripHtml(item.seoTitle || item.title)}
                 fill
-                sizes="(min-width:768px) 50vw, 100vw"
+                sizes={workCardSizes(cols, horizontalOnMobile)}
                 style={{ objectFit: item.thumbnailFit === "contain" ? "contain" : "cover" }}
-                quality={90}
+                quality={60}
                 priority={false}
               />
             </div>

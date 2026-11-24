@@ -2,12 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { services } from "@/data/services";
-
-gsap.registerPlugin(ScrollTrigger);
-
 import { servicePresentation } from "@/data/servicePresentation";
 
 export default function ServicesOverview() {
@@ -18,8 +13,18 @@ export default function ServicesOverview() {
   const animationRef = useRef(null);
 
   useEffect(() => {
-    const media = gsap.matchMedia();
-    media.add("(prefers-reduced-motion: no-preference) and (min-height: 620px)", () => {
+    const eligible = window.matchMedia("(prefers-reduced-motion: no-preference) and (min-height: 620px)");
+    let disposed = false;
+    let media;
+    let observer;
+    let loading = false;
+    const start = async () => {
+      loading = true;
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
+      if (disposed) return;
+      gsap.registerPlugin(ScrollTrigger);
+      media = gsap.matchMedia();
+      media.add("(prefers-reduced-motion: no-preference) and (min-height: 620px)", () => {
       const section = sectionRef.current;
       const viewport = viewportRef.current;
       const track = trackRef.current;
@@ -46,14 +51,27 @@ export default function ServicesOverview() {
       });
       animationRef.current = animation;
       section.dataset.pinned = "true";
-      const resizeObserver = new ResizeObserver(() => {
-        if (active && section.isConnected) ScrollTrigger.refresh();
+      let refreshFrame;
+      let lastWidth = viewport.clientWidth;
+      const scheduleRefresh = () => {
+        if (refreshFrame || !active) return;
+        refreshFrame = requestAnimationFrame(() => {
+          refreshFrame = null;
+          if (active && section.isConnected) ScrollTrigger.refresh();
+        });
+      };
+      const resizeObserver = new ResizeObserver(entries => {
+        const width = entries[0]?.contentRect.width;
+        if (width === lastWidth) return;
+        lastWidth = width;
+        scheduleRefresh();
       });
       resizeObserver.observe(viewport);
-      document.fonts.ready.then(() => { if (active && section.isConnected) ScrollTrigger.refresh(); });
+      document.fonts.ready.then(scheduleRefresh);
       return () => {
         active = false;
         resizeObserver.disconnect();
+        cancelAnimationFrame(refreshFrame);
         animation.scrollTrigger?.kill(true);
         animation.kill();
         if (animationRef.current === animation) animationRef.current = null;
@@ -61,7 +79,27 @@ export default function ServicesOverview() {
         progress.style.transform = "";
       };
     }, sectionRef);
-    return () => media.revert();
+    };
+    // Keep links server-rendered, including short-height and reduced-motion fallbacks.
+    const observeWhenEligible = () => {
+      if (disposed || media || loading) return;
+      observer?.disconnect();
+      if (!eligible.matches) return;
+      observer = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        observer.disconnect();
+        void start();
+      }, { rootMargin: "100% 0px" });
+      if (sectionRef.current) observer.observe(sectionRef.current);
+    };
+    eligible.addEventListener("change", observeWhenEligible);
+    observeWhenEligible();
+    return () => {
+      disposed = true;
+      eligible.removeEventListener("change", observeWhenEligible);
+      observer?.disconnect();
+      media?.revert();
+    };
   }, []);
 
   function revealFocusedCard(event) {

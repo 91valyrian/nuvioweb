@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getAllColumns, getColumnBySlug } from "@/lib/columns";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
+import { imageSizes } from "@/lib/image-delivery";
 import {
   SITE_URL,
   indexableRobots,
@@ -117,7 +118,7 @@ const mdxComponents = {
         alt={alt || ""}
         width={Number(width)}
         height={Number(height)}
-        sizes="(min-width:1280px) 960px, (min-width:768px) 80vw, 100vw"
+        sizes={imageSizes.article}
         className={`w-full h-auto object-cover rounded-2xl ${className}`}
       />
     </span>
@@ -143,7 +144,7 @@ const mdxComponents = {
         alt={alt || ""}
         width={Number(width)}
         height={Number(height)}
-        sizes="(min-width:1280px) 960px, (min-width:768px) 80vw, 100vw"
+        sizes={imageSizes.article}
         className={`w-full h-auto object-cover rounded-2xl ${className}`}
       />
     </span>
@@ -236,7 +237,7 @@ export default async function ColumnDetail({ params }) {
               width={1600}
               height={900}
               className="w-full h-auto object-cover"
-              sizes="(min-width:1280px) 1000px, 100vw"
+              sizes={imageSizes.article}
               priority
             />
           </div>
@@ -332,7 +333,8 @@ export default async function ColumnDetail({ params }) {
                               src={p.thumbnail}
                               alt={p.thumbnailAlt || p.title}
                               fill
-                              sizes="(min-width:1280px) 400px, 100vw"
+                              sizes={imageSizes.relatedColumn}
+                              quality={60}
                               className="object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                           </div>

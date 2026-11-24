@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { imageSizes } from "@/lib/image-delivery";
 import Link from "next/link";
 import { columnListUrl } from "@/lib/column-pagination";
 export default function ColumnsList({
@@ -43,7 +44,8 @@ export default function ColumnsList({
                       src={post.thumbnail}
                       alt={post.thumbnailAlt || post.title}
                       fill
-                      sizes="(min-width: 1600px) 760px, (min-width: 768px) 46vw, 100vw"
+                      sizes={imageSizes.columnList}
+                      quality={60}
                       className="object-cover transition-transform group-hover:scale-105"
                     />
                   </div>

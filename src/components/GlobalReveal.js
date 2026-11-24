@@ -2,96 +2,66 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function GlobalReveal() {
   const pathname = usePathname();
-
   useEffect(() => {
-    // Own only these animations; preserve section-specific pinned timelines.
-    const context = gsap.context(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const animations = [];
+    const originals = new Map();
+    const observers = [];
+    let active = true;
+    let coverContext;
 
-    // 새 페이지의 fade-up 요소들 재등록
-    const fadeElements = gsap.utils.toArray(".fade-up");
-    const rotateElements = gsap.utils.toArray(".rotate-x-up");
-
-    fadeElements.forEach((el) => {
-      gsap.fromTo(
-        el,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
+    for (const [selector, margin, transform] of [
+      [".fade-up", "-15%", "translateY(40px)"],
+      [".rotate-x-up", "-5%", "translateY(40px) rotateX(90deg)"],
+    ]) {
+      const observer = new IntersectionObserver(entries => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const el = entry.target;
+          el.style.opacity = originals.get(el);
+          animations.push(el.animate([
+            { opacity: 0, transform },
+            { opacity: 1, transform: "none" },
+          ], { duration: 800, easing: "cubic-bezier(0.215, 0.61, 0.355, 1)" }));
+          observer.unobserve(el);
         }
-      );
-    });
+      }, { rootMargin: `0px 0px ${margin} 0px` });
+      for (const el of document.querySelectorAll(selector)) {
+        originals.set(el, el.style.opacity);
+        el.style.opacity = "0";
+        observer.observe(el);
+      }
+      observers.push(observer);
+    }
 
-    rotateElements.forEach((el) => {
-      gsap.fromTo(
-        el,
-        { y: 40, rotateX: "90deg" },
-        {
-          y: 0,
-          duration: 0.8,
-          rotateX: "0deg",
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 95%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-
-    ScrollTrigger.matchMedia({
-      // ✅ PC (768px 이상)
-      "(min-width: 769px)": function () {
-        gsap.to(".cover", {
-          y: -100,
-          width: "100%",
-          borderRadius: 0,
-          scrollTrigger: {
-            trigger: ".cover",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-            markers: false,
-          },
+    // Only the cover's scrub/pin behavior needs layout-aware ScrollTrigger.
+    // Ordinary reveal effects use the compositor, without per-element geometry reads.
+    if (document.querySelector(".cover")) {
+      Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(([{ gsap }, { ScrollTrigger }]) => {
+        if (!active) return;
+        gsap.registerPlugin(ScrollTrigger);
+        coverContext = gsap.context(() => {
+          gsap.to(".cover", {
+            y: -100, width: "100%", borderRadius: 0,
+            scrollTrigger: {
+              trigger: ".cover",
+              start: () => window.matchMedia("(min-width: 769px)").matches ? "top top" : "top 20%",
+              end: "bottom top", scrub: true,
+            },
+          });
         });
-      },
-
-      // ✅ 모바일 (768px 이하)
-      "(max-width: 768px)": function () {
-        gsap.to(".cover", {
-          y: -100,
-          width: "100%",
-          borderRadius: 0,
-          scrollTrigger: {
-            trigger: ".cover",
-            start: "top 20%", // ← 모바일용 다른 start 시점
-            end: "bottom top",
-            scrub: true,
-            markers: false,
-          },
-        });
-      },
-    });
-
-    });
-
-    return () => context.revert();
-  }, [pathname]); // ✅ 페이지 전환 시마다 다시 실행
-
+      });
+    }
+    return () => {
+      active = false;
+      observers.forEach(observer => observer.disconnect());
+      animations.forEach(animation => animation.cancel());
+      originals.forEach((opacity, el) => { el.style.opacity = opacity; });
+      coverContext?.revert();
+    };
+  }, [pathname]);
   return null;
 }

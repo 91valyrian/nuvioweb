@@ -1,6 +1,7 @@
 // src/components/ColumnsPreview.js
 import Link from "next/link";
 import Image from "next/image";
+import { imageSizes } from "@/lib/image-delivery";
 import { getAllColumns } from "@/lib/columns";
 
 export default function ColumnsPreview() {
@@ -67,7 +68,8 @@ export default function ColumnsPreview() {
                     src={col.thumbnail || col.cover}
                     alt={col.thumbnailAlt || col.title || ""}
                     fill
-                    sizes="(min-width:1280px) 33vw, 100vw"
+                    sizes={imageSizes.homeColumn}
+                      quality={60}
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     priority={false}
                   />

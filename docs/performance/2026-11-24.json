@@ -1,0 +1,113 @@
+{
+  "date": "2026-11-24",
+  "status": "local production build verified; not deployed",
+  "comparison": {
+    "context": "Homepage latest six column thumbnails, 1200 CSS px viewport, DPR 1; previous production requests w=1200&q=75 WebP versus local w=384&q=60 AVIF with matching Accept support",
+    "beforeBytes": 267612,
+    "afterBytes": 35807,
+    "reductionPercent": 86.6,
+    "samples": [
+      {
+        "slug": "php-website-security-update",
+        "beforeBytes": 62298,
+        "afterBytes": 6823,
+        "beforeType": "image/webp",
+        "afterType": "image/avif"
+      },
+      {
+        "slug": "claude-code-homepage-tutorial",
+        "beforeBytes": 39700,
+        "afterBytes": 6815,
+        "beforeType": "image/webp",
+        "afterType": "image/avif"
+      },
+      {
+        "slug": "website-production-timeline",
+        "beforeBytes": 30028,
+        "afterBytes": 4839,
+        "beforeType": "image/webp",
+        "afterType": "image/avif"
+      },
+      {
+        "slug": "geo-ai-search-website",
+        "beforeBytes": 33324,
+        "afterBytes": 5468,
+        "beforeType": "image/webp",
+        "afterType": "image/avif"
+      },
+      {
+        "slug": "manufacturing-product-detail",
+        "beforeBytes": 74150,
+        "afterBytes": 7452,
+        "beforeType": "image/webp",
+        "afterType": "image/avif"
+      },
+      {
+        "slug": "nuvio-design-feedback",
+        "beforeBytes": 28112,
+        "afterBytes": 4410,
+        "beforeType": "image/webp",
+        "afterType": "image/avif"
+      }
+    ]
+  },
+  "changes": [
+    "Shared responsive sizes and quality policy; AVIF with WebP fallback; original artwork unchanged",
+    "Removed unused Pretendard stylesheet; deferred licensed Adobe embed and applied swap to font-face rules",
+    "Deferred vendor analytics until load; preserved GA and Meta event queues",
+    "IntersectionObserver reveals and lazy GSAP for pinned services; requestAnimationFrame cursor and refresh scheduling",
+    "Project instructions and automated browser delivery checks for future columns"
+  ],
+  "checks": {
+    "unitTests": 22,
+    "content": {
+      "columns": 56,
+      "portfolios": 8,
+      "services": 6
+    },
+    "site": {
+      "sitemapUrls": 82,
+      "canonicalJsonLdPagination404308AdminNoindexRss": true
+    },
+    "imageDelivery": {
+      "cases": 10,
+      "viewports": [
+        390,
+        1200,
+        1440
+      ],
+      "dpr": [
+        1,
+        2
+      ],
+      "criteria": "Nonzero transferred bytes; correct DPR; selected width between 0.95 and 1.5 times required physical pixels, including cover crop aspect ratio",
+      "passed": true
+    },
+    "ui": {
+      "cursorHoverReset": true,
+      "servicePinAfterHeightChange": true,
+      "crawlableServiceLinks": 6,
+      "fontDisplayAfterResize": [
+        "swap",
+        "swap",
+        "swap",
+        "swap"
+      ]
+    },
+    "visualReview": [
+      "Home six column thumbnail Korean labels readable",
+      "Mobile PHP column readable without horizontal overflow",
+      "Portfolio detail and pinned services preserved"
+    ],
+    "productionBuild": {
+      "passed": true,
+      "generatedPages": 86
+    }
+  },
+  "limitations": [
+    "No post-deployment Lighthouse run or measured LCP claim",
+    "Third-party cache TTL and vendor compatibility code remain provider-controlled",
+    "Required first-party CSS and Next.js compatibility polyfills retained",
+    "No live test inquiries submitted"
+  ]
+}

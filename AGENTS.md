@@ -14,6 +14,12 @@ Detail body images must be supplied by the user. Use only the provided files in 
 
 Keep portfolio hosting/canonical on `https://nuvio-web.com`; use the supplied client URL in `href`. Preserve established slugs when updating. Only state work scope, project year and results that are supplied or verifiable; identify missing capture/access evidence instead of fabricating a finished case. Preserve the modal's `portfolio.webp` integration.
 
+## Image delivery checks
+
+- New column artwork keeps its 1600×900 master and existing alt/caption contract. Use the shared `src/lib/image-delivery.js` policies for thumbnails and article images, with card quality 60 and detail quality 75. Validate the selected browser request, not only the original WebP file size.
+- After adding or changing column thumbnails, run `node scripts/check-image-delivery.mjs http://127.0.0.1:3100` with the local server running. Review 390px, 1200px and 1440px layouts, thumbnail Korean text and selected image width. Check a high-DPR view as well. For cropped portfolio cards, account for the pixels needed to fill the height; preserve supplied content and aspect ratios.
+- A regenerated asset must use a versioned filename so an old optimized image is not reused. Do not increase card quality or declare `100vw` for a multi-column grid just to sharpen an incorrectly sized source. Record requested width, transfer bytes and visual checks with article evidence.
+
 ## Styling conventions
 
 - Across this project, use `rounded-[9999px]` for circular and pill shapes. Do not use the Tailwind `rounded-full` utility, including responsive or state variants. Keep deliberate finite corner radii on cards and panels.

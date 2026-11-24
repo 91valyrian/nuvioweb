@@ -165,7 +165,7 @@ export default function HeroSwiper() {
                   fetchPriority={idx === 0 ? "high" : "auto"}
                   loading={idx === 0 ? "eager" : "lazy"}
                   sizes="100vw"
-                  quality={90}
+                  quality={75}
                   style={{ objectFit: "cover" }}
                 />
                 {/* 상단→하단 그라데이션 오버레이 */}

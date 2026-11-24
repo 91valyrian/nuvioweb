@@ -1,0 +1,162 @@
+{
+  "slug": "website-speed-optimization",
+  "article": "content/columns/website-speed-optimization.mdx",
+  "date": "2026-11-04",
+  "updated": "2026-11-24",
+  "primaryIntent": "느린 기업 홈페이지에서 이미지 압축만으로 해결되지 않는 원인을 구분하고 부분 개선의 작업·검수 범위를 결정하기",
+  "reader": "홈페이지 운영을 맡은 대표·마케팅 담당자",
+  "websiteTask": "기존 사이트의 이미지 전송·폰트·분석 도구·상호작용 개선과 기기별 검수",
+  "service": "/service/renewal",
+  "overlapDecision": "동일 질문을 다룬 기존 글을 수정하고 URL과 발행일 유지",
+  "searchData": "Search Console 연결 근거 없음. 검색량 검증 또는 순위·전환 개선 주장 없음.",
+  "images": {
+    "mode": "built-in image_gen for two new assets; two existing original article body illustrations retained",
+    "folder": "public/images/columns/website-speed-optimization",
+    "thumbnailCount": 1,
+    "distinctEmbeddedBodyCount": 3,
+    "total": 4,
+    "dimensions": "1600x900 WebP",
+    "plan": [
+      {
+        "file": "thumbnail-v2.webp",
+        "section": "목록과 기사 상단",
+        "meaning": "이미지 용량뿐 아니라 홈페이지 자원 구성을 살피는 질문",
+        "subject": "이미지·문자·작동 부품을 분리해 보는 인쇄 콜라주",
+        "treatment": "밝은 시안·크림·검정의 편집 그래픽. 기존 차콜 스톱워치 썸네일 대체"
+      },
+      {
+        "file": "loading-interaction-stability.webp",
+        "section": "증상 구분",
+        "meaning": "표시·반응·배치 안정성은 다른 경험",
+        "subject": "세 가지 웹 경험을 나눈 설명 일러스트",
+        "treatment": "기존 자체 본문 이미지 유지"
+      },
+      {
+        "file": "responsive-image-payload.webp",
+        "section": "실제 전송 이미지 점검",
+        "meaning": "표시 크기와 기기 해상도에 맞는 이미지 선택",
+        "subject": "원본에서 여러 크기로 준비하는 종이 공예",
+        "treatment": "기존 자체 본문 이미지 유지"
+      },
+      {
+        "file": "device-review.webp",
+        "section": "개선 후 검수",
+        "meaning": "화질뿐 아니라 모바일 메뉴·입력·기기별 화면을 확인",
+        "subject": "휴대전화와 노트북으로 같은 기업 페이지를 확인하는 가상 담당자",
+        "treatment": "일상적인 자연광 사진. 실제 누비오 직원이나 고객으로 제시하지 않음"
+      }
+    ],
+    "files": [
+      {
+        "file": "thumbnail-v2.webp",
+        "bytes": 128134
+      },
+      {
+        "file": "loading-interaction-stability.webp",
+        "bytes": 117046
+      },
+      {
+        "file": "responsive-image-payload.webp",
+        "bytes": 158006
+      },
+      {
+        "file": "device-review.webp",
+        "bytes": 111336
+      }
+    ]
+  },
+  "measurementEvidence": "docs/performance/2026-11-24.json",
+  "deployment": "not requested; local only",
+  "validation": {
+    "content": "56 columns, 8 portfolios, 6 services; pass",
+    "build": "86 pages; pass",
+    "site": "82 sitemap URLs; canonical/JSON-LD/pagination/404/308/admin noindex/RSS; pass",
+    "imageDelivery": "shared 10 browser cases pass; revised thumbnail additionally checked in list at 1200px DPR1 and 390px DPR2",
+    "revisedThumbnailDelivery": [
+      {
+        "viewport": 1200,
+        "dpr": 1,
+        "rendered": 553,
+        "url": "http://127.0.0.1:3200/_next/image?url=%2Fimages%2Fcolumns%2Fwebsite-speed-optimization%2Fthumbnail-v2.webp&w=640&q=60&review=1795481333392",
+        "bytes": 13192
+      },
+      {
+        "viewport": 390,
+        "dpr": 2,
+        "rendered": 328,
+        "url": "http://127.0.0.1:3200/_next/image?url=%2Fimages%2Fcolumns%2Fwebsite-speed-optimization%2Fthumbnail-v2.webp&w=750&q=60&review=1795481333392&review=1795481333731",
+        "bytes": 15358
+      }
+    ],
+    "bodyImageCount": 3,
+    "totalSelectedImages": 4,
+    "bodyFonts": {
+      "desktop": "20px",
+      "mobile": "18px"
+    },
+    "horizontalOverflow": false,
+    "metadata": {
+      "canonical": "https://nuvio-web.com/columns/website-speed-optimization",
+      "datePublished": "2026-11-04",
+      "dateModified": "2026-11-24",
+      "sitemapLastmod": "2026-11-24",
+      "rssPubDate": "2026-11-04"
+    },
+    "visualReview": [
+      "1600x900 source assets inspected; Korean headline spelling verified",
+      "380px card comparison with approved multilingual thumbnail; apparent glyph scale and spacing checked",
+      "Desktop 1440px and mobile 390px article; body illustrations and captions readable",
+      "Desktop and mobile list thumbnail crop and headline readability checked",
+      "Mobile comparison table rewrapped explicitly by image width/format and byte units"
+    ]
+  },
+  "imagePrompts": {
+    "thumbnail": "Use case: stylized-concept. Create a premium Korean website editorial thumbnail, landscape 16:9, 1600x900 composition. Bright flat cyan background, warm ivory and black, restrained vermilion accent. Tactile screenprinted editorial cut-paper collage rather than shiny 3D. Left 60 percent contains exact Korean headline in three consistently sized lines: '홈페이지가 느릴 때' / '이미지만 줄이면' / '해결될까요?' Heavy clean Korean sans, glyph height around 110px on a 1600 canvas, generous line spacing, safe margins 80px. Discreet lowercase 'nuvio' top left. Right side: a small photographic image tile, metal movable-type letter block, and a restrained cable/gear assembly arranged as separated ingredients of a website, visually communicating that images are only one part. No dashboard, no stopwatch, no speed score or percentage. Avoid giant poster type, gradients, navy, tiny labels. Exact spelling required. This is an article illustration, not a real website screenshot.",
+    "body": "Use case: photorealistic-natural. Landscape 16:9 editorial photograph, 1600x900 framing. An ordinary Korean business website manager seated by a window, over-the-shoulder close view focusing on their hands holding a smartphone beside an open laptop, checking the same understated corporate product website across mobile and desktop. Phone held naturally, realistic hands and device proportions. Screen layouts show ivory backgrounds, restrained burgundy accents, product photo tiles and simple menu, no readable text, no browser scores, no metrics, no logos. The smartphone is a vertically reflowed version of the laptop content, not a shrunken desktop screen. Warm natural daylight, genuine everyday workspace, modest materials, no luxury staged office, no extra people, no robots, no holographic UI. Subject communicates checking readability and menu use across devices. Person is fictional illustrative, not a real employee or client. Composition keeps devices clear and usable within crop, premium documentary magazine photography with believable small details."
+  },
+  "sources": [
+    {
+      "url": "https://developers.google.com/speed/docs/insights/v5/about",
+      "supports": "실험실과 실제 사용자 데이터·28일 집계·LCP INP CLS 구분"
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images",
+      "supports": "srcset sizes와 화면·픽셀 밀도에 따른 이미지 선택"
+    },
+    {
+      "url": "https://web.dev/learn/performance/image-performance",
+      "supports": "이미지 크기와 전송 바이트 최적화"
+    },
+    {
+      "url": "https://web.dev/articles/font-best-practices",
+      "supports": "폰트 표시 지연과 교체 후 레이아웃 이동"
+    },
+    {
+      "url": "https://web.dev/articles/efficiently-load-third-party-javascript",
+      "supports": "외부 도구 가치 검토·제거 또는 로딩 방식 조정"
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching",
+      "supports": "HTTP 응답에 따른 캐시 정책"
+    },
+    {
+      "url": "https://web.dev/articles/avoid-large-complex-layouts-and-layout-thrashing",
+      "supports": "강제 동기 레이아웃과 반복 읽기·쓰기"
+    },
+    {
+      "url": "https://web.dev/articles/optimize-lcp",
+      "supports": "주요 이미지 지연 로딩의 문제와 전체 로딩 과정 점검"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/page-experience",
+      "supports": "좋은 지표만으로 검색 순위 보장 불가"
+    }
+  ],
+  "conversion": "진단 과정과 작업·검수 범위를 안내하고 부분 개선/리뉴얼 판단, 실제 서비스·상담으로 연결",
+  "caseEvidence": "누비오 자체 사이트의 운영 이미지 응답과 로컬 개선본 비교. docs/performance/2026-11-24.json. 써니는 디자인 참고 링크이며 성능 성과로 제시하지 않음.",
+  "limits": [
+    "운영 배포·배포 후 Lighthouse 재측정 미실시",
+    "전송량 약 86.6% 감소는 동일 썸네일 6개와 특정 요청 조건에 한함",
+    "실기기 검수 사진이 아닌 생성 설명 사진 사용"
+  ]
+}
